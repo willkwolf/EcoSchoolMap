@@ -1,0 +1,22 @@
+[project]
+name = "mapa-escuelas-politicas"
+version = "1.0.0"
+description = "Visualización de escuelas políticas y sus relaciones"
+requires-python = ">=3.11"
+
+dependencies = [
+    "matplotlib==3.9.2",
+    "numpy==1.26.4",
+    "plotly==5.24.1",
+    "jupyter==1.0.0",
+    "jupyterlab==4.3.2",
+    "notebook==7.3.1",
+    "ipykernel==6.29.5",
+    "pandas==2.2.3",
+    "scipy==1.15.3",
+]
+
+[project.optional-dependencies]
+dev = [
+    "ipython==8.24.0",
+]

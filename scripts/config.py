@@ -1,0 +1,223 @@
+"""
+config.py - Configuración de UI/UX para visualizaciones
+Versión 4.0: Esquema único de colores, sin acoplamiento a categorías
+
+Responsable: Information Architects / Diseñadores de Interacción
+
+Las posiciones vienen del JSON (decisión de Data Science)
+Los colores se asignan secuencialmente sin repetición
+Este archivo solo controla VISUALS (colores, tamaños, estilos)
+"""
+
+# ============================================================
+# PALETA DE COLORES ÚNICA (Klein Schema)
+# Fuente: https://python-graph-gallery.com/color-palette-finder/?palette=klein
+# 11 colores disponibles para 11 nodos + 1 paleta flexible
+# ============================================================
+KLEIN_SCHEMA = [
+    "#FF4D6F",  # 0 - Rojo brillante
+    "#579EA4",  # 1 - Azul-verde
+    "#DF7713",  # 2 - Naranja tostado
+    "#F9C000",  # 3 - Amarillo dorado
+    "#86AD34",  # 4 - Verde oliva
+    "#5D7298",  # 5 - Azul pizarra
+    "#81B28D",  # 6 - Verde salvia
+    "#7E1A2F",  # 7 - Rojo vino
+    "#2D2651",  # 8 - Púrpura oscuro
+    "#C8350D",  # 9 - Rojo naranja
+    "#BD777A",  # 10 - Rosa polvorienta
+]
+
+# ============================================================
+# DIMENSIONES DE FIGURA
+# ============================================================
+FIGURA_WIDTH = 20
+FIGURA_HEIGHT = 12
+DPI_SALIDA = 300
+FONT_FAMILY = 'sans-serif'
+
+# ============================================================
+# ASIGNACIÓN DE COLORES A NODOS
+# Se asignan secuencialmente sin repetición
+# Esta es una FUNCIÓN que genera el mapeo dinámicamente
+# ============================================================
+def asignar_colores_a_nodos(nodos_lista):
+    """
+    Asigna colores de KLEIN_SCHEMA a nodos secuencialmente.
+    
+    Args:
+        nodos_lista: lista de IDs de nodos en orden de aparición
+    
+    Returns:
+        dict: {nodo_id: color_hex}
+    """
+    mapeo = {}
+    for idx, nodo_id in enumerate(nodos_lista):
+        color_idx = idx % len(KLEIN_SCHEMA)  # Recicla si hay más nodos que colores
+        mapeo[nodo_id] = KLEIN_SCHEMA[color_idx]
+    return mapeo
+
+# ============================================================
+# COLORES PARA TIPOS Y CATEGORÍAS (SOLO REFERENCIA VISUAL)
+# Gris para indicar geometría, no diferenciación semántica
+# ============================================================
+TIPO_NODO_A_ESTILO = {
+    'tradicional': {
+        'marcador': 'o',
+        'tamaño': 180,
+        'borde_ancho': 2,
+        'borde_color': '#7f8c8d',      # Gris para indicar círculo
+        'opacidad': 0.85
+    },
+    'nuevo_paradigma': {
+        'marcador': 'D',
+        'tamaño': 220,
+        'borde_ancho': 3,
+        'borde_color': '#34495e',      # Gris más oscuro para indicar diamante
+        'opacidad': 0.90
+    },
+    'tradicion': {
+        'marcador': 's',
+        'tamaño': 200,
+        'borde_ancho': 2.5,
+        'borde_color': '#95a5a6',      # Gris para indicar cuadrado
+        'opacidad': 0.8
+    }
+}
+
+# ============================================================
+# MAPEO: Confianza de Transición → Estilo
+# ============================================================
+CONFIANZA_A_ESTILO = {
+    'muy_alta': {
+        'ancho_linea': 3.5,
+        'opacidad': 0.9,
+        'estilo_linea': 'solid',
+        'alpha_label': 0.85
+    },
+    'alta': {
+        'ancho_linea': 2.8,
+        'opacidad': 0.75,
+        'estilo_linea': 'solid',
+        'alpha_label': 0.75
+    },
+    'media': {
+        'ancho_linea': 2.0,
+        'opacidad': 0.6,
+        'estilo_linea': 'dashed',
+        'alpha_label': 0.65
+    },
+    'baja': {
+        'ancho_linea': 1.5,
+        'opacidad': 0.4,
+        'estilo_linea': 'dotted',
+        'alpha_label': 0.5
+    }
+}
+
+# ============================================================
+# COLORES DE FONDO (Cuadrantes)
+# ============================================================
+CUADRANTE_COLORES = {
+    'superior_izquierda': ('green', 0.05),
+    'superior_derecha': ('blue', 0.05),
+    'inferior_izquierda': ('orange', 0.05),
+    'inferior_derecha': ('purple', 0.05)
+}
+
+# ============================================================
+# MAPEO DE CUADRANTES (agrupa escuelas por cuadrante y etiqueta)
+# El usuario puede personalizar los identificadores de escuela
+# ============================================================
+CUADRANTES = {
+    "q1": {
+        "nombre": "Estado fuerte + Equidad",
+        "escuelas": ["marxista", "feminista", "ecologica", "tradicion_desarrollista"],
+        "color": "#FF4D6F"  # color por defecto, se puede ajustar
+    },
+    "q2": {
+        "nombre": "Estado fuerte + Crecimiento",
+        "escuelas": ["keynesiana", "institucionalista", "estado_emprendedor"],
+        "color": "#579EA4"
+    },
+    "q3": {
+        "nombre": "Estado Débil + Equidad",
+        "escuelas": ["conductista"],
+        "color": "#DF7713"
+    },
+    "q4": {
+        "nombre": "Estado Débil + Crecimiento",
+        "escuelas": ["clasica", "neoclasica", "austriaca", "schumpeteriana"],
+        "color": "#F9C000"
+    }
+}
+
+# ============================================================
+# ETIQUETAS DE EJES
+# ============================================================
+EJE_X_LABEL = 'Enfoque de Desarrollo: ←   Individualismo Económico  |  Colectivismo Económico   →'
+EJE_Y_LABEL = 'Control del Estado: ←   Prioridad en Eficiencia  |  Prioridad Distributiva   →'
+TITULO_PRINCIPAL = 'Escuelas Políticas Económicas: Espacio Posicional 2D'
+
+# ============================================================
+# ESTILOS DE TEXTO
+# ============================================================
+TAMAÑO_TITULO = 18
+TAMAÑO_ETIQUETA_EJE = 13
+TAMAÑO_NOMBRE_NODO = 8.5
+TAMAÑO_LABEL_TRANSICION = 8.0
+PESO_TEXTO_NODO = 'bold'
+PESO_ETIQUETA_TRANSICION = 'bold'
+
+# ============================================================
+# RUTAS (relativas a raíz del proyecto)
+# ============================================================
+RUTA_DATOS = 'data/escuelas.json'
+RUTA_SALIDA_PNG = 'output/mapa_escuelas.png'
+RUTA_SALIDA_HTML = 'docs/mapa_escuelas.html'
+
+# ============================================================
+# PARÁMETROS DE TRANSICIÓN
+# ============================================================
+TRANSICION_COLOR = '#2c3e50'          # Gris oscuro neutro
+TRANSICION_CURVATURA = 0.3
+TRANSICION_MUTATION_SCALE = 25
+POSICION_LABEL_OFFSET = 0.15
+
+# ============================================================
+# AJUSTES DE LEYENDA
+# ============================================================
+POSICION_LEYENDA = 'center left'
+LEYENDA_BBOX_ANCHOR = (1.02, 0.5)
+LEYENDA_FONTSIZE = 11
+MOSTRAR_LEYENDA = True
+
+# ============================================================
+# RANGO DE EJES (fijo para reproducibilidad)
+# ============================================================
+EJE_X_MIN = -1.2
+EJE_X_MAX = 1.2
+EJE_Y_MIN = -1.1
+EJE_Y_MAX = 1.1
+
+# ============================================================
+# CONFIGURACIÓN DE SCORING METHODOLOGY (v5.0)
+# ============================================================
+# Método de normalización para cálculo de posiciones
+# Opciones: 'none', 'percentile', 'zscore', 'minmax'
+NORMALIZATION_METHOD = 'zscore'
+
+# Rango de valores para posiciones (evita puntos en los bordes)
+POSITION_MIN = -0.9
+POSITION_MAX = 0.9
+
+# Zona de ambigüedad para posiciones intermedias
+AMBIGUITY_ZONE_MIN = -0.45
+AMBIGUITY_ZONE_MAX = 0.45
+
+# ============================================================
+# VALIDACIÓN
+# ============================================================
+print(f"[OK] config.py cargado exitosamente")
+print(f"[OK] Paleta Klein con {len(KLEIN_SCHEMA)} colores disponibles")
+print(f"[OK] Configuracion de scoring: {NORMALIZATION_METHOD}")
