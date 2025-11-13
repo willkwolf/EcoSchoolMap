@@ -35,7 +35,7 @@ EJE X: Grado de Control Estatal (de fuerte negativo a débil positivo)
 EJE Y: Prioridad Equidad vs Crecimiento (equidad positivo, crecimiento negativo)
 
 Rango de valores: [-0.9, 0.9] para evitar puntos en los bordes extremos
-Zona de ambigüedad: [-0.45, 0.45] para posiciones intermedias
+Zona de ambigüedad: [-0.25, 0.25] para posiciones intermedias
 """
 
 import numpy as np

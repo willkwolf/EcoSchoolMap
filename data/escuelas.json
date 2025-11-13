@@ -3,12 +3,12 @@
     "version": "3.0",
     "descripcion": "Escuelas y tradiciones político-económicas como grafo de nodos con posicionamiento explícito",
     "ultima_actualizacion": "2025-10-14",
-    "autor": "Data Scientists",
+    "autor": "William Camilo Artundauga Viana",
     "notas": {
-      "posicionamiento": "Cada nodo tiene coordenadas (x, y) explícitas decididas por Data Scientists",
+      "posicionamiento": "Cada nodo tiene coordenadas (x, y) basadas por criterios en scoring methodology.",
       "eje_x": "Control del Estado: -1 (FUERTE/izquierda) a +1 (DÉBIL/derecha)",
       "eje_y": "Enfoque: -1 (CRECIMIENTO/abajo) a +1 (EQUIDAD/arriba)",
-      "metodo": "Laboratorio de Data Science: análisis de características → posición"
+      "metodo": "Posición cualitativa, luego cuantificada y normalizada entre -1 y +1."
     }
   },
   "nodos": [
@@ -136,8 +136,7 @@
       },
       "referentes_históricos": [
         "Jean-Baptiste Colbert",
-        "Raúl Prebisch",
-        "Ha-Joon Chang"
+        "Raúl Prebisch"
       ],
       "relacion_historica_con": [
         "keynesiana",
@@ -484,5 +483,104 @@
         ]
       }
     }
+  },
+  "leyenda_pedagogica": {
+    "nota": "Información pedagógica para la leyenda del mapa",
+    "siglas_escuelas": {
+      "A": {
+        "id_nodo": "austriaca",
+        "nombre_completo": "Austríaca"
+      },
+      "Co": {
+        "id_nodo": "conductista",
+        "nombre_completo": "Conductista"
+      },
+      "C": {
+        "id_nodo": "clasica",
+        "nombre_completo": "Clásica"
+      },
+      "D": {
+        "id_nodo": "tradicion_desarrollista",
+        "nombre_completo": "Desarrollista"
+      },
+      "I": {
+        "id_nodo": "institucionalista",
+        "nombre_completo": "Institucionalista"
+      },
+      "K": {
+        "id_nodo": "keynesiana",
+        "nombre_completo": "Keynesiana"
+      },
+      "M": {
+        "id_nodo": "marxista",
+        "nombre_completo": "Marxista"
+      },
+      "N": {
+        "id_nodo": "neoclasica",
+        "nombre_completo": "Neoclásica"
+      },
+      "S": {
+        "id_nodo": "schumpeteriana",
+        "nombre_completo": "Schumpeteriana"
+      }
+    },
+    "guia_tematica": [
+      {
+        "titulo": "Vitalidad y visibilidad del capitalismo",
+        "descripcion": "Si desean conocer opiniones divergentes sobre la vitalidad y la visibilidad del capitalismo",
+        "siglas": ["C", "M", "S", "I"]
+      },
+      {
+        "titulo": "Defensa del libre mercado",
+        "descripcion": "Si buscan una manera de defender libre mercado",
+        "siglas": ["C", "A", "N"]
+      },
+      {
+        "titulo": "Conceptualización de lo individual",
+        "descripcion": "Para descubrir diferentes maneras de conceptualizar lo individual",
+        "siglas": ["N", "A", "Co"]
+      },
+      {
+        "titulo": "Necesidad de intervención estatal",
+        "descripcion": "Para saber por qué a veces es necesaria la intervención estatal",
+        "siglas": ["N", "D", "K"]
+      },
+      {
+        "titulo": "Teorías sobre grupos y clases",
+        "descripcion": "Si quieres conocer teorías sobre los grupos, especialmente sobre las clases",
+        "siglas": ["C", "M", "K", "I"]
+      },
+      {
+        "titulo": "Economía más allá de mercados",
+        "descripcion": "Para aprender que la economía es mucho más que los mercados",
+        "siglas": ["M", "I", "Co"]
+      },
+      {
+        "titulo": "Sistemas económicos completos",
+        "descripcion": "Para comprender los sistemas económicos en su conjunto en vez de limitarse a sus componentes",
+        "siglas": ["M", "D", "K", "I"]
+      },
+      {
+        "titulo": "Desarrollo tecnológico y productividad",
+        "descripcion": "Para comprender el desarrollo de las tecnologías y el aumento de la productividad",
+        "siglas": ["C", "M", "D", "S"]
+      },
+      {
+        "titulo": "Interacción individuo-sociedad",
+        "descripcion": "Si desean estudiar la interacción de los individuos y la sociedad",
+        "siglas": ["A", "N", "I", "Co"]
+      },
+      {
+        "titulo": "Corporaciones y su funcionamiento",
+        "descripcion": "Si quieren averiguar por qué existen las corporaciones y cómo funcionan",
+        "siglas": ["S", "I", "Co"]
+      },
+      {
+        "titulo": "Desempleo y recesión",
+        "descripcion": "Para debates sobre desempleo y recesión",
+        "siglas": ["C", "K"]
+      }
+    ],
+    "advertencia": "Con advertencia sana que dogmatizarse puede causar visión de túnel, arrogancia, y muerte cerebral"
   }
 }
