@@ -31,8 +31,8 @@ KLEIN_SCHEMA = [
 # ============================================================
 # DIMENSIONES DE FIGURA
 # ============================================================
-FIGURA_WIDTH = 20
-FIGURA_HEIGHT = 12
+FIGURA_WIDTH = 26  # Aumentado para acomodar leyenda pedagógica
+FIGURA_HEIGHT = 14  # Aumentado proporcionalmente
 DPI_SALIDA = 300
 FONT_FAMILY = 'sans-serif'
 
@@ -119,10 +119,10 @@ CONFIANZA_A_ESTILO = {
 # COLORES DE FONDO (Cuadrantes)
 # ============================================================
 CUADRANTE_COLORES = {
-    'superior_izquierda': ('green', 0.05),
-    'superior_derecha': ('blue', 0.05),
-    'inferior_izquierda': ('orange', 0.05),
-    'inferior_derecha': ('purple', 0.05)
+    'superior_izquierda':  ('#7E1A2F', 0.15),  # Rojo oscuro para Estado Fuerte + Equidad
+    'superior_derecha':    ('#579EA4', 0.15),  # Azul verdoso para Estado Débil + Equidad
+    'inferior_izquierda':  ('#86AD34', 0.15),  # Verde oliva para Estado Fuerte + Crecimiento
+    'inferior_derecha':    ('#DF7713', 0.15),  # Naranja para Estado Débil + Crecimiento
 }
 
 # ============================================================
@@ -131,31 +131,39 @@ CUADRANTE_COLORES = {
 # ============================================================
 CUADRANTES = {
     "q1": {
-        "nombre": "Estado fuerte + Equidad",
-        "escuelas": ["marxista", "feminista", "ecologica", "tradicion_desarrollista"],
-        "color": "#FF4D6F"  # color por defecto, se puede ajustar
+        "nombre": "Estado Fuerte + Equidad",
+        "descripcion": "Intervención estatal radical para equidad",
+        "escuelas": ["marxista", "feminista", "ecologica"],
+        "color": "#7E1A2F",
+        "caracteristicas": ["Redistribución radical", "Crítica del capitalismo", "Equidad social"]
     },
     "q2": {
-        "nombre": "Estado fuerte + Crecimiento",
-        "escuelas": ["keynesiana", "institucionalista", "estado_emprendedor"],
-        "color": "#579EA4"
+        "nombre": "Estado Fuerte + Crecimiento",
+        "descripcion": "Control estatal para desarrollo económico",
+        "escuelas": ["keynesiana", "institucionalista", "estado_emprendedor", "tradicion_desarrollista"],
+        "color": "#579EA4",
+        "caracteristicas": ["Intervención estatal", "Gestión económica", "Desarrollo industrial"]
     },
     "q3": {
         "nombre": "Estado Débil + Equidad",
+        "descripcion": "Incentivos y diseño conductual",
         "escuelas": ["conductista"],
-        "color": "#DF7713"
+        "color": "#86AD34",
+        "caracteristicas": ["Nudges conductuales", "Equidad vía diseño", "Mínima intervención"]
     },
     "q4": {
         "nombre": "Estado Débil + Crecimiento",
+        "descripcion": "Mercado libre y crecimiento espontáneo",
         "escuelas": ["clasica", "neoclasica", "austriaca", "schumpeteriana"],
-        "color": "#F9C000"
+        "color": "#DF7713",
+        "caracteristicas": ["Libre mercado", "Mínima intervención", "Innovación privada"]
     }
 }
 
 # ============================================================
 # ETIQUETAS DE EJES
 # ============================================================
-EJE_X_LABEL = 'Enfoque de Desarrollo: ←   Individualismo Económico  |  Colectivismo Económico   →'
+EJE_X_LABEL = 'Enfoque de Desarrollo: ←   Colectivismo Económico  |  Individualismo Económico   →'
 EJE_Y_LABEL = 'Control del Estado: ←   Prioridad en Eficiencia  |  Prioridad Distributiva   →'
 TITULO_PRINCIPAL = 'Escuelas Políticas Económicas: Espacio Posicional 2D'
 
@@ -205,15 +213,15 @@ EJE_Y_MAX = 1.1
 # ============================================================
 # Método de normalización para cálculo de posiciones
 # Opciones: 'none', 'percentile', 'zscore', 'minmax'
-NORMALIZATION_METHOD = 'zscore'
+NORMALIZATION_METHOD = 'percentile'
 
 # Rango de valores para posiciones (evita puntos en los bordes)
-POSITION_MIN = -0.9
-POSITION_MAX = 0.9
+POSITION_MIN = -0.99
+POSITION_MAX = 0.99
 
 # Zona de ambigüedad para posiciones intermedias
-AMBIGUITY_ZONE_MIN = -0.45
-AMBIGUITY_ZONE_MAX = 0.45
+AMBIGUITY_ZONE_MIN = -0.34
+AMBIGUITY_ZONE_MAX = 0.34
 
 # ============================================================
 # VALIDACIÓN
