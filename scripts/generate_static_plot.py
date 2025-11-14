@@ -279,7 +279,7 @@ class StaticPlotGenerator:
 
                 # Etiqueta del nodo; si hubo desplazamiento, ajustar la etiqueta hacia afuera
                 nombre = nodo.get('nombre') or nodo.get('id')
-                label_offset_y = -0.12
+                label_offset_y = -0.08
                 if offsets[idx] != (0.0, 0.0):
                     # empujar la etiqueta ligeramente en la dirección del offset
                     ox, oy = offsets[idx]
@@ -339,7 +339,7 @@ class StaticPlotGenerator:
                                    linestyle=estilo['estilo_linea'],
                                    alpha=estilo['opacidad'],
                                    connectionstyle='arc3,rad=0.2',
-                                   zorder=2)  # Sobre cuadrantes, bajo nodos
+                                   zorder=3)  # Sobre cuadrantes, bajo nodos
             ax.add_patch(arrow)
 
             # Agregar etiqueta a la transición
@@ -412,7 +412,9 @@ class StaticPlotGenerator:
         advertencia_texto = f"\n⚠ ADVERTENCIA:\n{self.advertencia}"
 
         # Combinar todo el texto
-        texto_completo = siglas_texto + transiciones_texto + guia_texto + advertencia_texto
+        #Original: texto_completo = siglas_texto + transiciones_texto + guia_texto + advertencia_texto
+        
+        texto_completo = transiciones_texto
 
         # Crear cuadro de texto con la leyenda pedagógica (usando constantes de config)
         props = dict(boxstyle=f'round,pad={LEYENDA_PADDING}',

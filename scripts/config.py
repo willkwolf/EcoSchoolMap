@@ -64,21 +64,21 @@ def asignar_colores_a_nodos(nodos_lista):
 TIPO_NODO_A_ESTILO = {
     'tradicional': {
         'marcador': 'o',
-        'tamaño': 320,
+        'tamaño': 400,
         'borde_ancho': 2.5,
         'borde_color': '#7f8c8d',      # Gris para indicar círculo
         'opacidad': 0.85
     },
     'nuevo_paradigma': {
         'marcador': 'D',
-        'tamaño': 400,
+        'tamaño': 440,
         'borde_ancho': 3.5,
         'borde_color': '#34495e',      # Gris más oscuro para indicar diamante
         'opacidad': 0.90
     },
     'tradicion': {
         'marcador': 's',
-        'tamaño': 340,
+        'tamaño': 400,
         'borde_ancho': 3,
         'borde_color': '#95a5a6',      # Gris para indicar cuadrado
         'opacidad': 0.8
@@ -170,10 +170,10 @@ TITULO_PRINCIPAL = 'Escuelas Políticas Económicas: Espacio Posicional 2D'
 # ============================================================
 # ESTILOS DE TEXTO
 # ============================================================
-TAMAÑO_TITULO = 18
-TAMAÑO_ETIQUETA_EJE = 13
-TAMAÑO_NOMBRE_NODO = 11.5
-TAMAÑO_LABEL_TRANSICION = 8.0
+TAMAÑO_TITULO = 32
+TAMAÑO_ETIQUETA_EJE = 24
+TAMAÑO_NOMBRE_NODO = 16
+TAMAÑO_LABEL_TRANSICION = 12
 PESO_TEXTO_NODO = 'bold'
 PESO_ETIQUETA_TRANSICION = 'bold'
 
@@ -197,14 +197,14 @@ POSICION_LABEL_OFFSET = 0.15
 # ============================================================
 POSICION_LEYENDA = 'center left'
 LEYENDA_BBOX_ANCHOR = (1.02, 0.5)
-LEYENDA_FONTSIZE = 11
+LEYENDA_FONTSIZE = 14
 MOSTRAR_LEYENDA = True
 
 # ============================================================
 # RANGO DE EJES (fijo para reproducibilidad)
 # ============================================================
-EJE_X_MIN = -1.2
-EJE_X_MAX = 1.2
+EJE_X_MIN = -1.1
+EJE_X_MAX = 1.1
 EJE_Y_MIN = -1.1
 EJE_Y_MAX = 1.1
 
@@ -216,8 +216,8 @@ EJE_Y_MAX = 1.1
 NORMALIZATION_METHOD = 'percentile'
 
 # Rango de valores para posiciones (evita puntos en los bordes)
-POSITION_MIN = -0.99
-POSITION_MAX = 0.99
+POSITION_MIN = -0.90
+POSITION_MAX = 0.90
 
 # Zona de ambigüedad para posiciones intermedias
 AMBIGUITY_ZONE_MIN = -0.34
@@ -227,7 +227,7 @@ AMBIGUITY_ZONE_MAX = 0.34
 # CONFIGURACIÓN DE ETIQUETAS DE TRANSICIONES
 # ============================================================
 MOSTRAR_LABELS_TRANSICIONES = True
-TAMAÑO_FONT_LABEL_TRANSICION = 9.5
+TAMAÑO_FONT_LABEL_TRANSICION = 12
 OFFSET_LABEL_TRANSICION_Y = 0.03  # Offset vertical desde el punto medio
 LABEL_TRANSICION_BGCOLOR = 'white'
 LABEL_TRANSICION_ALPHA = 0.85
@@ -245,7 +245,7 @@ LABEL_OVERLAP_ADJUSTMENTS = {
 # ============================================================
 # CONFIGURACIÓN DE LEYENDA PEDAGÓGICA
 # ============================================================
-LEYENDA_FONTSIZE = 11.5  # Incrementado para mejor legibilidad
+LEYENDA_FONTSIZE = 16  # Incrementado para mejor legibilidad
 LEYENDA_LINEHEIGHT = 1.7  # Aumentado para mejor espaciado
 LEYENDA_PADDING = 1.4  # Aumentado para más relleno interno
 LEYENDA_POSICION_X = 1.03  # Posición horizontal relativa
