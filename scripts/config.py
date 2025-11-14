@@ -31,8 +31,8 @@ KLEIN_SCHEMA = [
 # ============================================================
 # DIMENSIONES DE FIGURA
 # ============================================================
-FIGURA_WIDTH = 26  # Aumentado para acomodar leyenda pedagógica
-FIGURA_HEIGHT = 14  # Aumentado proporcionalmente
+FIGURA_WIDTH = 30  # Aumentado para acomodar leyenda pedagógica vertical
+FIGURA_HEIGHT = 15.5  # Incrementado para mejor proporción con nodos más grandes
 DPI_SALIDA = 300
 FONT_FAMILY = 'sans-serif'
 
@@ -64,22 +64,22 @@ def asignar_colores_a_nodos(nodos_lista):
 TIPO_NODO_A_ESTILO = {
     'tradicional': {
         'marcador': 'o',
-        'tamaño': 180,
-        'borde_ancho': 2,
+        'tamaño': 320,
+        'borde_ancho': 2.5,
         'borde_color': '#7f8c8d',      # Gris para indicar círculo
         'opacidad': 0.85
     },
     'nuevo_paradigma': {
         'marcador': 'D',
-        'tamaño': 220,
-        'borde_ancho': 3,
+        'tamaño': 400,
+        'borde_ancho': 3.5,
         'borde_color': '#34495e',      # Gris más oscuro para indicar diamante
         'opacidad': 0.90
     },
     'tradicion': {
         'marcador': 's',
-        'tamaño': 200,
-        'borde_ancho': 2.5,
+        'tamaño': 340,
+        'borde_ancho': 3,
         'borde_color': '#95a5a6',      # Gris para indicar cuadrado
         'opacidad': 0.8
     }
@@ -163,8 +163,8 @@ CUADRANTES = {
 # ============================================================
 # ETIQUETAS DE EJES
 # ============================================================
-EJE_X_LABEL = 'Enfoque de Desarrollo: ←   Colectivismo Económico  |  Individualismo Económico   →'
-EJE_Y_LABEL = 'Control del Estado: ←   Prioridad en Eficiencia  |  Prioridad Distributiva   →'
+EJE_X_LABEL = 'Arquitectura Económica: ← Economía Dirigida (Estado Fuerte) | Economía de Mercado (Estado Limitado) →'
+EJE_Y_LABEL = 'Objetivo Socioeconómico: ← Productividad y Crecimiento | Equidad y Sostenibilidad →'
 TITULO_PRINCIPAL = 'Escuelas Políticas Económicas: Espacio Posicional 2D'
 
 # ============================================================
@@ -172,7 +172,7 @@ TITULO_PRINCIPAL = 'Escuelas Políticas Económicas: Espacio Posicional 2D'
 # ============================================================
 TAMAÑO_TITULO = 18
 TAMAÑO_ETIQUETA_EJE = 13
-TAMAÑO_NOMBRE_NODO = 8.5
+TAMAÑO_NOMBRE_NODO = 11.5
 TAMAÑO_LABEL_TRANSICION = 8.0
 PESO_TEXTO_NODO = 'bold'
 PESO_ETIQUETA_TRANSICION = 'bold'
@@ -224,8 +224,41 @@ AMBIGUITY_ZONE_MIN = -0.34
 AMBIGUITY_ZONE_MAX = 0.34
 
 # ============================================================
+# CONFIGURACIÓN DE ETIQUETAS DE TRANSICIONES
+# ============================================================
+MOSTRAR_LABELS_TRANSICIONES = True
+TAMAÑO_FONT_LABEL_TRANSICION = 9.5
+OFFSET_LABEL_TRANSICION_Y = 0.03  # Offset vertical desde el punto medio
+LABEL_TRANSICION_BGCOLOR = 'white'
+LABEL_TRANSICION_ALPHA = 0.85
+
+# Ajustes manuales para evitar superposiciones de etiquetas de transiciones
+# Formato: {transition_id: (offset_x, offset_y)}
+LABEL_OVERLAP_ADJUSTMENTS = {
+    'crisis_2008': (0, -0.08),        # Desplazar hacia abajo (evita inflacion_2022)
+    'inflacion_2022': (0, 0.08),      # Desplazar hacia arriba (evita crisis_2008)
+    'crisis_desigualdad': (0.05, 0),  # Desplazar hacia derecha
+    'pandemia_covid': (-0.05, 0),     # Desplazar hacia izquierda
+    'crisis_climatica': (0, 0)        # Sin ajuste necesario (vertical, aislada)
+}
+
+# ============================================================
+# CONFIGURACIÓN DE LEYENDA PEDAGÓGICA
+# ============================================================
+LEYENDA_FONTSIZE = 11.5  # Incrementado para mejor legibilidad
+LEYENDA_LINEHEIGHT = 1.7  # Aumentado para mejor espaciado
+LEYENDA_PADDING = 1.4  # Aumentado para más relleno interno
+LEYENDA_POSICION_X = 1.03  # Posición horizontal relativa
+LEYENDA_POSICION_Y = 0.65  # Posición vertical (más arriba)
+LEYENDA_BGCOLOR = '#f8f9fa'
+LEYENDA_EDGECOLOR = '#2c3e50'
+LEYENDA_EDGEWIDTH = 2
+LEYENDA_ALPHA = 0.95
+
+# ============================================================
 # VALIDACIÓN
 # ============================================================
 print(f"[OK] config.py cargado exitosamente")
 print(f"[OK] Paleta Klein con {len(KLEIN_SCHEMA)} colores disponibles")
 print(f"[OK] Configuracion de scoring: {NORMALIZATION_METHOD}")
+print(f"[OK] Leyenda pedagógica: font={LEYENDA_FONTSIZE}pt, labels_transiciones={MOSTRAR_LABELS_TRANSICIONES}")

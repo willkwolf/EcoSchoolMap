@@ -32,8 +32,47 @@ from config import (
     EJE_X_MIN, EJE_X_MAX, EJE_Y_MIN, EJE_Y_MAX,
     TAMAÑO_TITULO, TAMAÑO_ETIQUETA_EJE, TAMAÑO_NOMBRE_NODO,
     TIPO_NODO_A_ESTILO, CUADRANTE_COLORES, CONFIANZA_A_ESTILO,
-    RUTA_DATOS, RUTA_SALIDA_PNG
+    RUTA_DATOS, RUTA_SALIDA_PNG,
+    # Nuevas constantes para transiciones y leyenda
+    MOSTRAR_LABELS_TRANSICIONES, TAMAÑO_FONT_LABEL_TRANSICION,
+    OFFSET_LABEL_TRANSICION_Y, LABEL_TRANSICION_BGCOLOR, LABEL_TRANSICION_ALPHA,
+    LABEL_OVERLAP_ADJUSTMENTS,
+    LEYENDA_FONTSIZE, LEYENDA_LINEHEIGHT, LEYENDA_PADDING,
+    LEYENDA_POSICION_X, LEYENDA_POSICION_Y, LEYENDA_BGCOLOR,
+    LEYENDA_EDGECOLOR, LEYENDA_EDGEWIDTH, LEYENDA_ALPHA
 )
+
+
+def calcular_punto_medio_arco(x1, y1, x2, y2, rad=0.2):
+    """
+    Calcula el punto medio de un arco Bezier cuadrático (arc3).
+
+    Los arcos con connectionstyle='arc3,rad=0.2' en matplotlib crean
+    una curva Bezier cuadrática. El punto medio del arco está desplazado
+    perpendicularmente al punto medio de la línea recta.
+
+    Args:
+        x1, y1: Coordenadas del punto inicial
+        x2, y2: Coordenadas del punto final
+        rad: Radio de curvatura (0.2 por defecto, debe coincidir con el usado en FancyArrowPatch)
+
+    Returns:
+        tuple: (arc_mid_x, arc_mid_y) - Coordenadas del punto medio del arco curvo
+    """
+    # Vector dirección
+    dx = x2 - x1
+    dy = y2 - y1
+
+    # Punto medio de línea recta
+    mid_x = (x1 + x2) / 2
+    mid_y = (y1 + y2) / 2
+
+    # Offset perpendicular (rad/2 para punto medio de Bezier cuadrático)
+    # La perpendicular a (dx, dy) es (-dy, dx)
+    arc_mid_x = mid_x - dy * rad / 2
+    arc_mid_y = mid_y + dx * rad / 2
+
+    return arc_mid_x, arc_mid_y
 
 
 class StaticPlotGenerator:
@@ -152,6 +191,28 @@ class StaticPlotGenerator:
                         alpha=CUADRANTE_COLORES['inferior_derecha'][1],
                         label=self.leyenda_cuadrantes.get('q4', {}).get('nombre', 'Estado débil + Crecimiento'))
 
+        # Agregar etiquetas de texto visibles en cada cuadrante
+        cuadrante_labels = [
+            ('ESTADO FUERTE + Equidad/Sostenibilidad', -0.6, 0.75, CUADRANTE_COLORES['superior_izquierda'][0]),
+            ('ESTADO DÉBIL + Equidad/Sostenibilidad', 0.6, 0.75, CUADRANTE_COLORES['superior_derecha'][0]),
+            ('ESTADO FUERTE + Crecimiento/Innovación', -0.6, -0.75, CUADRANTE_COLORES['inferior_izquierda'][0]),
+            ('ESTADO DÉBIL + Crecimiento/Innovación', 0.6, -0.75, CUADRANTE_COLORES['inferior_derecha'][0]),
+        ]
+
+        for texto, x, y, color in cuadrante_labels:
+            ax.text(x, y, texto,
+                   fontsize=13,
+                   ha='center', va='center',
+                   fontweight='bold',
+                   color=color,
+                   alpha=0.6,
+                   bbox=dict(boxstyle='round,pad=0.8',
+                            facecolor='white',
+                            edgecolor=color,
+                            alpha=0.3,
+                            linewidth=1.5),
+                   zorder=1)
+
         # Líneas de ejes en el origen
         ax.axhline(y=0, color='gray', linestyle='--', linewidth=0.8, alpha=0.6)
         ax.axvline(x=0, color='gray', linestyle='--', linewidth=0.8, alpha=0.6)
@@ -218,12 +279,12 @@ class StaticPlotGenerator:
 
                 # Etiqueta del nodo; si hubo desplazamiento, ajustar la etiqueta hacia afuera
                 nombre = nodo.get('nombre') or nodo.get('id')
-                label_offset_y = -0.08
+                label_offset_y = -0.12
                 if offsets[idx] != (0.0, 0.0):
                     # empujar la etiqueta ligeramente en la dirección del offset
                     ox, oy = offsets[idx]
-                    label_offset_x = ox * 0.8
-                    label_offset_y = oy - 0.06
+                    label_offset_x = ox * 1.2
+                    label_offset_y = oy - 0.10
                 else:
                     label_offset_x = 0.0
 
@@ -281,6 +342,38 @@ class StaticPlotGenerator:
                                    zorder=2)  # Sobre cuadrantes, bajo nodos
             ax.add_patch(arrow)
 
+            # Agregar etiqueta a la transición
+            if MOSTRAR_LABELS_TRANSICIONES:
+                # Calcular punto medio del arco curvo (no de la línea recta)
+                arc_mid_x, arc_mid_y = calcular_punto_medio_arco(x1, y1, x2, y2, rad=0.2)
+
+                # Aplicar ajustes manuales para evitar superposiciones
+                trans_id = trans.get('id')
+                offset_x, offset_y = LABEL_OVERLAP_ADJUSTMENTS.get(trans_id, (0, 0))
+
+                # Posición final con offsets
+                mid_x = arc_mid_x + offset_x
+                mid_y = arc_mid_y + offset_y + OFFSET_LABEL_TRANSICION_Y
+
+                # Obtener información de la transición
+                evento = trans.get('evento_disparador', '')
+                año = trans.get('año', '')
+
+                # Crear etiqueta corta: "Crisis 2008"
+                label_texto = f"{evento.split()[0]} {año}" if evento and año else str(año)
+
+                # Dibujar etiqueta con fondo
+                ax.text(mid_x, mid_y, label_texto,
+                       fontsize=TAMAÑO_FONT_LABEL_TRANSICION,
+                       ha='center', va='center',
+                       fontweight='bold',
+                       bbox=dict(boxstyle='round,pad=0.3',
+                                facecolor=LABEL_TRANSICION_BGCOLOR,
+                                edgecolor='gray',
+                                alpha=LABEL_TRANSICION_ALPHA,
+                                linewidth=0.5),
+                       zorder=2.5)  # Entre flechas y nodos
+
     def _crear_leyenda(self, ax):
         """
         Crea la leyenda pedagógica del gráfico organizada por temáticas.
@@ -308,7 +401,7 @@ class StaticPlotGenerator:
         # ============================================================
         # SECCIÓN 3: GUÍA TEMÁTICA PEDAGÓGICA (desde JSON)
         # ============================================================
-        guia_texto = "\n\nGUÍA TEMÁTICA PEDAGÓGICA:\n"
+        guia_texto = "\n\nGUIA POR TEMAS:\n"
         for idx, tema in enumerate(self.guia_tematica, 1):
             siglas_str = ", ".join(tema['siglas'])
             guia_texto += f"{idx}. {tema['titulo']}: {siglas_str}\n"
@@ -321,17 +414,20 @@ class StaticPlotGenerator:
         # Combinar todo el texto
         texto_completo = siglas_texto + transiciones_texto + guia_texto + advertencia_texto
 
-        # Crear cuadro de texto con la leyenda pedagógica
-        props = dict(boxstyle='round,pad=0.8', facecolor='#f8f9fa',
-                    edgecolor='#2c3e50', linewidth=2, alpha=0.95)
+        # Crear cuadro de texto con la leyenda pedagógica (usando constantes de config)
+        props = dict(boxstyle=f'round,pad={LEYENDA_PADDING}',
+                    facecolor=LEYENDA_BGCOLOR,
+                    edgecolor=LEYENDA_EDGECOLOR,
+                    linewidth=LEYENDA_EDGEWIDTH,
+                    alpha=LEYENDA_ALPHA)
 
-        ax.text(1.02, 0.5, texto_completo,
+        ax.text(LEYENDA_POSICION_X, LEYENDA_POSICION_Y, texto_completo,
                transform=ax.transAxes,
-               fontsize=8,
-               verticalalignment='center',
+               fontsize=LEYENDA_FONTSIZE,
+               verticalalignment='top',  # Anclaje superior para mejor control
                bbox=props,
                family='monospace',
-               linespacing=1.4)
+               linespacing=LEYENDA_LINEHEIGHT)
 
     def generar(self) -> bool:
         """
@@ -385,6 +481,79 @@ class StaticPlotGenerator:
             return False
 
 
+def process_batch(batch_dir: str, output_dir: str, dpi: int) -> dict:
+    """
+    Procesa múltiples archivos JSON en modo batch.
+
+    Args:
+        batch_dir: Directorio con archivos JSON
+        output_dir: Directorio de salida para PNGs
+        dpi: Resolución DPI
+
+    Returns:
+        Dict con estadísticas de procesamiento
+    """
+    import glob
+
+    # Buscar archivos JSON
+    json_files = glob.glob(os.path.join(batch_dir, '*.json'))
+
+    if not json_files:
+        print(f"[ERROR] No se encontraron archivos JSON en {batch_dir}")
+        return {'processed': 0, 'failed': 0, 'total': 0}
+
+    # Crear directorio de salida
+    os.makedirs(output_dir, exist_ok=True)
+
+    stats = {'processed': [], 'failed': [], 'total': len(json_files)}
+
+    print("\n" + "=" * 80)
+    print(f"PROCESAMIENTO BATCH: {len(json_files)} archivos")
+    print("=" * 80)
+
+    for json_file in sorted(json_files):
+        basename = os.path.basename(json_file)
+        variant_name = os.path.splitext(basename)[0]
+        output_file = os.path.join(output_dir, f"mapa_{variant_name}.png")
+
+        print(f"\n📊 Procesando: {basename}")
+        print("-" * 80)
+
+        try:
+            generator = StaticPlotGenerator(
+                data_path=json_file,
+                output_path=output_file,
+                dpi=dpi
+            )
+
+            if generator.cargar_datos() and generator.generar():
+                stats['processed'].append(variant_name)
+                file_size_mb = os.path.getsize(output_file) / (1024 * 1024)
+                print(f"✓ Generado: {output_file} ({file_size_mb:.2f} MB)")
+            else:
+                stats['failed'].append(variant_name)
+                print(f"❌ Falló: {variant_name}")
+
+        except Exception as e:
+            stats['failed'].append(variant_name)
+            print(f"❌ Error en {variant_name}: {e}")
+            import traceback
+            traceback.print_exc()
+
+    # Resumen
+    print("\n" + "=" * 80)
+    print("RESUMEN DE BATCH")
+    print("=" * 80)
+    print(f"✓ Procesados exitosamente: {len(stats['processed'])}/{stats['total']}")
+
+    if stats['failed']:
+        print(f"❌ Fallidos: {len(stats['failed'])}")
+        for name in stats['failed']:
+            print(f"  • {name}")
+
+    return stats
+
+
 def main():
     """
     Función principal con CLI.
@@ -394,9 +563,13 @@ def main():
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Ejemplos:
+  # Generar un solo gráfico
   python scripts/generate_static_plot.py
   python scripts/generate_static_plot.py --output mi_grafico.png
   python scripts/generate_static_plot.py --dpi 600 --data data/escuelas.json
+
+  # Procesar múltiples variantes en batch
+  python scripts/generate_static_plot.py --batch-dir data/variants --batch-output output/variants
         """
     )
 
@@ -413,10 +586,31 @@ Ejemplos:
                        default=DPI_SALIDA,
                        help=f'Resolución en DPI (default: {DPI_SALIDA})')
 
+    parser.add_argument('--batch-dir',
+                       help='Directorio con archivos JSON para procesamiento batch')
+
+    parser.add_argument('--batch-output',
+                       default='output/variants',
+                       help='Directorio de salida para modo batch (default: output/variants)')
+
     args = parser.parse_args()
 
-    # Crear generador
-    print("[*] Generador de Visualizacion Estatica - v5.0")
+    # Modo batch
+    if args.batch_dir:
+        print("[*] Generador de Visualizacion Estatica - v6.0 (BATCH MODE)")
+        print("=" * 80)
+
+        stats = process_batch(args.batch_dir, args.batch_output, args.dpi)
+
+        if stats['failed']:
+            print("\n⚠️  Algunas visualizaciones fallaron")
+            return 1
+        else:
+            print("\n✨ Todas las visualizaciones generadas exitosamente")
+            return 0
+
+    # Modo single file (original)
+    print("[*] Generador de Visualizacion Estatica - v6.0")
     print("=" * 60)
 
     generator = StaticPlotGenerator(
