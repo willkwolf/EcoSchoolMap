@@ -30,7 +30,7 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 60px 20px;
+            padding: 40px 15px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             position: relative;
@@ -51,7 +51,7 @@
         .scroll-indicator { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); animation: bounce 2s infinite; }
         .scroll-indicator svg { width: 30px; height: 30px; stroke: white; }
 
-        .guide-section { background: white; padding: 80px 20px; }
+        .guide-section { background: white; padding: 50px 15px; }
         .guide-content { max-width: 1200px; margin: 0 auto; }
         .guide-section h2 { font-size: 2.5em; color: #2c3e50; margin-bottom: 40px; text-align: center; }
         .guide-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-bottom: 50px; }
@@ -74,14 +74,17 @@
         .variant-btn.active { background: #667eea; color: white; }
         .current-variant-info { text-align: center; padding: 15px; background: white; border-radius: 8px; margin-top: 20px; }
 
-        .container { max-width: 100%; margin: 0 auto; background: white; padding: 40px 20px; }
-        .visualization-header { text-align: center; margin-bottom: 30px; }
+        .container { max-width: 100%; margin: 0 auto; background: white; padding: 20px 10px; }
+        .visualization-header { text-align: center; margin-bottom: 20px; }
         .visualization-header h2 { font-size: 2.2em; color: #2c3e50; margin-bottom: 10px; }
 
-        .main-content { display: flex; gap: 20px; align-items: flex-start; max-width: 1800px; margin: 0 auto; }
-        .plot-container { flex: 1; min-width: 0; }
+        .main-content { max-width: 1800px; margin: 0 auto; }
+        .plot-container { width: 100%; margin-bottom: 15px; }
 
-        .pedagogical-legend { flex: 0 0 380px; background: #f8f9fa; border: 2px solid #2c3e50; border-radius: 8px; padding: 20px; max-height: 800px; overflow-y: auto; font-size: 16px; line-height: 1.6; position: sticky; top: 20px; }
+        /* Make Plotly text labels bold */
+        .plotly .scatterlayer .textpoint { font-weight: bold !important; }
+
+        .pedagogical-legend { background: #f8f9fa; border: 2px solid #2c3e50; border-radius: 8px; padding: 20px; max-width: 1200px; margin: 0 auto; font-size: 16px; line-height: 1.6; }
         .pedagogical-legend h3 { color: #2c3e50; margin-top: 0; margin-bottom: 15px; border-bottom: 2px solid #2c3e50; padding-bottom: 10px; }
         .pedagogical-legend h4 { color: #34495e; margin-top: 20px; margin-bottom: 10px; font-size: 14px; }
         .siglas-list { font-family: 'Courier New', monospace; font-size: 14px; line-height: 1.8; }
@@ -97,15 +100,12 @@
         @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); } 40% { transform: translateX(-50%) translateY(-10px); } 60% { transform: translateX(-50%) translateY(-5px); } }
 
         @media (max-width: 1200px) {
-            .main-content { flex-direction: column; }
-            .pedagogical-legend { flex: 1 1 auto; max-height: none; position: static; }
+            .pedagogical-legend { max-width: 100%; }
         }
         @media (max-width: 768px) {
             .hero h1 { font-size: 2.5em; }
             .hero .subtitle { font-size: 1.2em; }
             .guide-grid { grid-template-columns: 1fr; }
-            .variant-buttons { flex-direction: column; }
-            .variant-btn { width: 100%; }
         }
     </style>
 
@@ -120,7 +120,7 @@
             <p class="description">
                 Explora cómo diferentes escuelas de pensamiento económico se posicionan en un espacio bidimensional,
                 basado en su visión sobre el rol del Estado y sus objetivos socioeconómicos.
-                Una herramienta pedagógica inspirada en la metodología de Ha-Joon Chang.
+                Una herramienta pedagógica inspirada en la investigación de Ha-Joon Chang (Economics: The User's Guide, 2015).
             </p>
             <div class="hero-buttons">
                 <a href="#guide" class="btn btn-primary">Cómo Funciona</a>
@@ -159,10 +159,10 @@
                     <h3>🎯 Cuadrantes</h3>
                     <p>El mapa se divide en 4 cuadrantes principales:</p>
                     <ul>
-                        <li><strong>Q1:</strong> Estado Fuerte + Equidad (Marxista, Feminista)</li>
-                        <li><strong>Q2:</strong> Estado Débil + Equidad (Conductista)</li>
-                        <li><strong>Q3:</strong> Estado Fuerte + Crecimiento (Desarrollista)</li>
-                        <li><strong>Q4:</strong> Estado Débil + Crecimiento (Clásica, Austriaca)</li>
+                        <li><strong>Q1:</strong> Estado Fuerte + Equidad Y Sostenibilidad</li>
+                        <li><strong>Q2:</strong> Estado Débil + Equidad Y Sostenibilidad</li>
+                        <li><strong>Q3:</strong> Estado Fuerte + Crecimiento y Productividad</li>
+                        <li><strong>Q4:</strong> Estado Débil + Crecimiento y Productividad</li>
                     </ul>
                 </div>
 
@@ -189,8 +189,8 @@
                 </div>
 
                 <div class="guide-card">
-                    <h3>📚 Metodología</h3>
-                    <p>Basado en el enfoque de <strong>Ha-Joon Chang</strong>:</p>
+                    <h3>📚 Metodología de Visualización</h3>
+                    <p>Basado en el capitulo 4 (Economics: The User's Guide), de <strong>Ha-Joon Chang</strong>:</p>
                     <ul>
                         <li>Análisis multidimensional de escuelas económicas</li>
                         <li>Posicionamiento cualitativo cuantificado</li>
@@ -200,7 +200,7 @@
                 </div>
 
                 <div class="guide-card">
-                    <h3>⚠️ Advertencia Importante</h3>
+                    <h3>⚠️ Advertencia</h3>
                     <p style="color: #d63031; font-weight: bold;">
                         Basarse sólo en una escuela para explorar un tema tiene riesgo de:
                     </p>
@@ -216,40 +216,43 @@
     </section>
 
 
-    <!-- VARIANT SELECTOR SECTION -->
-    <section class="variant-selector-section" id="variant-selector">
-        <div class="variant-selector-content">
-            <h3>🔀 Selecciona una Variante de Visualización</h3>
-            <p class="variant-description">
-                Cada variante aplica diferentes pesos a los descriptores, ofreciendo perspectivas únicas sobre el posicionamiento de las escuelas.
-            </p>
-
-            <div class="variant-buttons">
-                <button class="variant-btn active" data-variant="base">Base (Balanceada)</button>
-                <button class="variant-btn" data-variant="balanced">Balanced</button>
-                <button class="variant-btn" data-variant="state-emphasis">State Emphasis</button>
-                <button class="variant-btn" data-variant="equity-emphasis">Equity Emphasis</button>
-                <button class="variant-btn" data-variant="market-emphasis">Market Emphasis</button>
-                <button class="variant-btn" data-variant="growth-emphasis">Growth Emphasis</button>
-                <button class="variant-btn" data-variant="historical-emphasis">Historical Emphasis</button>
-                <button class="variant-btn" data-variant="pragmatic-emphasis">Pragmatic Emphasis</button>
-            </div>
-
-            <div class="current-variant-info">
-                <strong>Variante Actual:</strong> <span id="current-variant-name">Base (Balanceada)</span>
-                <br>
-                <span id="current-variant-description">Pesos equilibrados en todos los descriptores</span>
-            </div>
-        </div>
-    </section>
-
-
     <!-- VISUALIZATION SECTION -->
     <section class="container" id="visualization">
         <div class="visualization-header">
             <h2>Mapa Interactivo</h2>
             <div class="info">
                 Metodología basada en Ha-Joon Chang • Visualización interactiva • Versión 5.0
+            </div>
+
+            <!-- DOUBLE DROPDOWN SELECTOR -->
+            <div style="margin-top: 25px; text-align: center;">
+                <div style="display: inline-block; margin-right: 30px; margin-bottom: 15px;">
+                    <label for="preset-dropdown" style="font-weight: 600; color: #2c3e50; margin-right: 10px; font-size: 0.95em;">
+                        Perspectiva de Peso:
+                    </label>
+                    <select id="preset-dropdown" style="padding: 10px 20px; font-size: 1em; border: 2px solid #667eea; border-radius: 8px; background: white; color: #667eea; cursor: pointer; font-weight: 600; min-width: 200px;">
+                        <option value="base" selected>Base (Original)</option>
+                        <option value="balanced">Balanceado</option>
+                        <option value="state-emphasis">Enfoque Estado</option>
+                        <option value="equity-emphasis">Enfoque Equidad</option>
+                        <option value="market-emphasis">Enfoque Mercado</option>
+                        <option value="growth-emphasis">Enfoque Crecimiento</option>
+                        <option value="historical-emphasis">Enfoque Historico</option>
+                        <option value="pragmatic-emphasis">Enfoque Pragmatico</option>
+                    </select>
+                </div>
+
+                <div style="display: inline-block; margin-bottom: 15px;">
+                    <label for="normalization-dropdown" style="font-weight: 600; color: #2c3e50; margin-right: 10px; font-size: 0.95em;">
+                        Metodo de Normalizacion:
+                    </label>
+                    <select id="normalization-dropdown" style="padding: 10px 20px; font-size: 1em; border: 2px solid #764ba2; border-radius: 8px; background: white; color: #764ba2; cursor: pointer; font-weight: 600; min-width: 220px;">
+                        <option value="percentile" selected>Percentil (Distribucion Uniforme)</option>
+                        <option value="zscore">Puntaje-Z (Centrado Estadistico)</option>
+                        <option value="minmax">Min-Max (Rango Completo)</option>
+                        <option value="none">Crudo (Sin Normalizacion)</option>
+                    </select>
+                </div>
             </div>
         </div>
 
@@ -259,7 +262,7 @@
 <head><meta charset="utf-8" /></head>
 <body>
     <div>                        <script type="text/javascript">window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
-        <script charset="utf-8" src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>                <div id="96f4bb06-eca5-4276-85b0-ee04f0b34234" class="plotly-graph-div" style="height:700px; width:1200px;"></div>            <script type="text/javascript">                                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("96f4bb06-eca5-4276-85b0-ee04f0b34234")) {                    Plotly.newPlot(                        "96f4bb06-eca5-4276-85b0-ee04f0b34234",                        [{"hovertemplate":"%{hovertext}\u003cextra\u003e\u003c\u002fextra\u003e","hovertext":["\u003cb\u003eMarxista\u003c\u002fb\u003e\u003cbr\u003e\u003ci\u003eIzquierda Redistribuci\u00f3n\u003c\u002fi\u003e\u003cbr\u003e\u003cbr\u003eA\u00f1o: 1867\u003cbr\u003eAutores: Karl Marx, Friedrich Engels\u003cbr\u003e\u003cbr\u003eEnfoque basado en lucha de clases y redistribuci\u00f3n radical\u003cbr\u003e\u003cbr\u003e\u003cb\u003eCaracteristicas:\u003c\u002fb\u003e\u003cbr\u003e\u2022 Concepcion Economia: Clases Sociales\u003cbr\u003e\u2022 Concepcion Humano: Condicionado Clase\u003cbr\u003e\u2022 Naturaleza Mundo: Complejo Incierto\u003cbr\u003e\u2022 Ambito Economico: Distribucion\u003cbr\u003e\u2022 Motor Cambio: Lucha Clases\u003cbr\u003e\u2022 Politicas Preferidas: Redistribucion","\u003cb\u003eFeminista\u003c\u002fb\u003e\u003cbr\u003e\u003ci\u003eIzquierda Redistribuci\u00f3n\u003c\u002fi\u003e\u003cbr\u003e\u003cbr\u003eA\u00f1o: 1980\u003cbr\u003eAutores: Silvia Federici, Diane Elson\u003cbr\u003e\u003cbr\u003eAn\u00e1lisis econ\u00f3mico desde perspectiva de g\u00e9nero\u003cbr\u003e\u003cbr\u003e\u003cb\u003eCaracteristicas:\u003c\u002fb\u003e\u003cbr\u003e\u2022 Concepcion Economia: Clases Sociales\u003cbr\u003e\u2022 Concepcion Humano: Condicionado Clase\u003cbr\u003e\u2022 Naturaleza Mundo: Complejo Incierto\u003cbr\u003e\u2022 Ambito Economico: Distribucion\u003cbr\u003e\u2022 Motor Cambio: Instituciones\u003cbr\u003e\u2022 Politicas Preferidas: Redistribucion","\u003cb\u003eKeynesiana\u003c\u002fb\u003e\u003cbr\u003e\u003ci\u003eRegulacionista Coordinaci\u00f3n\u003c\u002fi\u003e\u003cbr\u003e\u003cbr\u003eA\u00f1o: 1936\u003cbr\u003eAutores: John Maynard Keynes\u003cbr\u003e\u003cbr\u003eIntervenci\u00f3n estatal para estabilizar ciclos econ\u00f3micos\u003cbr\u003e\u003cbr\u003e\u003cb\u003eCaracteristicas:\u003c\u002fb\u003e\u003cbr\u003e\u2022 Concepcion Economia: Estructuras\u003cbr\u003e\u2022 Concepcion Humano: Racionalidad Limitada\u003cbr\u003e\u2022 Naturaleza Mundo: Complejo Incierto\u003cbr\u003e\u2022 Ambito Economico: Consumo\u003cbr\u003e\u2022 Motor Cambio: Instituciones\u003cbr\u003e\u2022 Politicas Preferidas: Intervencion Estatal","\u003cb\u003eInstitucionalista\u003c\u002fb\u003e\u003cbr\u003e\u003ci\u003eRegulacionista Coordinaci\u00f3n\u003c\u002fi\u003e\u003cbr\u003e\u003cbr\u003eA\u00f1o: 1920\u003cbr\u003eAutores: Douglass North, Elinor Ostrom\u003cbr\u003e\u003cbr\u003eLas instituciones moldean el comportamiento econ\u00f3mico\u003cbr\u003e\u003cbr\u003e\u003cb\u003eCaracteristicas:\u003c\u002fb\u003e\u003cbr\u003e\u2022 Concepcion Economia: Estructuras\u003cbr\u003e\u2022 Concepcion Humano: Racionalidad Limitada\u003cbr\u003e\u2022 Naturaleza Mundo: Complejo Incierto\u003cbr\u003e\u2022 Ambito Economico: Comercio\u003cbr\u003e\u2022 Motor Cambio: Instituciones\u003cbr\u003e\u2022 Politicas Preferidas: Intervencion Estatal","\u003cb\u003eConductista\u003c\u002fb\u003e\u003cbr\u003e\u003ci\u003eIncentivos Nudges\u003c\u002fi\u003e\u003cbr\u003e\u003cbr\u003eA\u00f1o: 2008\u003cbr\u003eAutores: Richard Thaler, Daniel Kahneman\u003cbr\u003e\u003cbr\u003eModifica comportamiento a trav\u00e9s de incentivos y contexto (sin intervenci\u00f3n estatal directa)\u003cbr\u003e\u003cbr\u003e\u003cb\u003eCaracteristicas:\u003c\u002fb\u003e\u003cbr\u003e\u2022 Concepcion Economia: Individuos\u003cbr\u003e\u2022 Concepcion Humano: Racionalidad Limitada\u003cbr\u003e\u2022 Naturaleza Mundo: Complejo Incierto\u003cbr\u003e\u2022 Ambito Economico: Consumo\u003cbr\u003e\u2022 Motor Cambio: Decisiones Individuales\u003cbr\u003e\u2022 Politicas Preferidas: Ambiguas","\u003cb\u003eCl\u00e1sica\u003c\u002fb\u003e\u003cbr\u003e\u003ci\u003eLiberal Mercado Libre\u003c\u002fi\u003e\u003cbr\u003e\u003cbr\u003eA\u00f1o: 1776\u003cbr\u003eAutores: Adam Smith, David Ricardo\u003cbr\u003e\u003cbr\u003eMercado autorregulado por la mano invisible\u003cbr\u003e\u003cbr\u003e\u003cb\u003eCaracteristicas:\u003c\u002fb\u003e\u003cbr\u003e\u2022 Concepcion Economia: Individuos\u003cbr\u003e\u2022 Concepcion Humano: Racional Egoista\u003cbr\u003e\u2022 Naturaleza Mundo: Cierto Predecible\u003cbr\u003e\u2022 Ambito Economico: Produccion\u003cbr\u003e\u2022 Motor Cambio: Acumulacion Capital\u003cbr\u003e\u2022 Politicas Preferidas: Libre Mercado","\u003cb\u003eNeocl\u00e1sica\u003c\u002fb\u003e\u003cbr\u003e\u003ci\u003eLiberal Mercado Libre\u003c\u002fi\u003e\u003cbr\u003e\u003cbr\u003eA\u00f1o: 1870\u003cbr\u003eAutores: L\u00e9on Walras, Vilfredo Pareto\u003cbr\u003e\u003cbr\u003eMaximizaci\u00f3n de utilidad individual en mercados competitivos\u003cbr\u003e\u003cbr\u003e\u003cb\u003eCaracteristicas:\u003c\u002fb\u003e\u003cbr\u003e\u2022 Concepcion Economia: Individuos\u003cbr\u003e\u2022 Concepcion Humano: Racional Egoista\u003cbr\u003e\u2022 Naturaleza Mundo: Cierto Predecible\u003cbr\u003e\u2022 Ambito Economico: Comercio\u003cbr\u003e\u2022 Motor Cambio: Decisiones Individuales\u003cbr\u003e\u2022 Politicas Preferidas: Libre Mercado","\u003cb\u003eAustr\u00edaca\u003c\u002fb\u003e\u003cbr\u003e\u003ci\u003eLiberal Mercado Libre\u003c\u002fi\u003e\u003cbr\u003e\u003cbr\u003eA\u00f1o: 1920\u003cbr\u003eAutores: Ludwig von Mises, Friedrich Hayek\u003cbr\u003e\u003cbr\u003eRechazo de intervenci\u00f3n estatal, \u00e9nfasis en acci\u00f3n individual\u003cbr\u003e\u003cbr\u003e\u003cb\u003eCaracteristicas:\u003c\u002fb\u003e\u003cbr\u003e\u2022 Concepcion Economia: Individuos\u003cbr\u003e\u2022 Concepcion Humano: Racional Egoista\u003cbr\u003e\u2022 Naturaleza Mundo: Complejo Incierto\u003cbr\u003e\u2022 Ambito Economico: Comercio\u003cbr\u003e\u2022 Motor Cambio: Decisiones Individuales\u003cbr\u003e\u2022 Politicas Preferidas: Libre Mercado","\u003cb\u003eSchumpeteriana\u003c\u002fb\u003e\u003cbr\u003e\u003ci\u003eLiberal Innovacion\u003c\u002fi\u003e\u003cbr\u003e\u003cbr\u003eA\u00f1o: 1942\u003cbr\u003eAutores: Joseph Schumpeter\u003cbr\u003e\u003cbr\u003eInnovaci\u00f3n disruptiva y destrucci\u00f3n creativa impulsan crecimiento\u003cbr\u003e\u003cbr\u003e\u003cb\u003eCaracteristicas:\u003c\u002fb\u003e\u003cbr\u003e\u2022 Concepcion Economia: Individuos\u003cbr\u003e\u2022 Concepcion Humano: Racional Egoista\u003cbr\u003e\u2022 Naturaleza Mundo: Complejo Incierto\u003cbr\u003e\u2022 Ambito Economico: Produccion\u003cbr\u003e\u2022 Motor Cambio: Innovacion Tecnologica\u003cbr\u003e\u2022 Politicas Preferidas: Libre Mercado"],"marker":{"color":["#FF4D6F","#579EA4","#86AD34","#5D7298","#7E1A2F","#2D2651","#C8350D","#BD777A","#FF4D6F"],"line":{"color":"#555555","width":2},"size":15,"symbol":"circle"},"mode":"markers+text","name":"Escuelas Establecidas","showlegend":true,"text":["Marxista","Feminista","Keynesiana","Institucionalista","Conductista","Cl\u00e1sica","Neocl\u00e1sica","Austr\u00edaca","Schumpeteriana"],"textfont":{"family":"Arial, sans-serif","size":11},"textposition":"bottom center","x":[-0.9,-0.9,-0.4,-0.4,0.37,0.85,0.9,0.69,0.6],"y":[0.9,0.75,0.04,0.25,-0.42,-0.9,-0.59,-0.59,-0.73],"type":"scatter"},{"hovertemplate":"%{hovertext}\u003cextra\u003e\u003c\u002fextra\u003e","hovertext":["\u003cb\u003eEcol\u00f3gica (Raworth)\u003c\u002fb\u003e\u003cbr\u003e\u003ci\u003eNuevo Paradigma Sostenibilidad\u003c\u002fi\u003e\u003cbr\u003e\u003cbr\u003eA\u00f1o: 2012\u003cbr\u003eAutores: Kate Raworth\u003cbr\u003e\u003cbr\u003eDoughnut Economics: econom\u00eda dentro de l\u00edmites planetarios\u003cbr\u003e\u003cbr\u003e\u003cb\u003eCaracteristicas:\u003c\u002fb\u003e\u003cbr\u003e\u2022 Concepcion Economia: Estructuras\u003cbr\u003e\u2022 Concepcion Humano: Racionalidad Limitada\u003cbr\u003e\u2022 Naturaleza Mundo: Complejo Incierto\u003cbr\u003e\u2022 Ambito Economico: Distribucion\u003cbr\u003e\u2022 Motor Cambio: Instituciones\u003cbr\u003e\u2022 Politicas Preferidas: Intervencion Estatal","\u003cb\u003eEstado Emprendedor (Mazzucato)\u003c\u002fb\u003e\u003cbr\u003e\u003ci\u003eNuevo Paradigma Innovacion\u003c\u002fi\u003e\u003cbr\u003e\u003cbr\u003eA\u00f1o: 2013\u003cbr\u003eAutores: Mariana Mazzucato\u003cbr\u003e\u003cbr\u003eEstado como inversor en innovaci\u00f3n disruptiva\u003cbr\u003e\u003cbr\u003e\u003cb\u003eCaracteristicas:\u003c\u002fb\u003e\u003cbr\u003e\u2022 Concepcion Economia: Estructuras\u003cbr\u003e\u2022 Concepcion Humano: Racionalidad Limitada\u003cbr\u003e\u2022 Naturaleza Mundo: Complejo Incierto\u003cbr\u003e\u2022 Ambito Economico: Produccion\u003cbr\u003e\u2022 Motor Cambio: Innovacion Tecnologica\u003cbr\u003e\u2022 Politicas Preferidas: Intervencion Estatal"],"marker":{"color":["#DF7713","#81B28D"],"line":{"color":"#555555","width":2},"size":18,"symbol":"diamond"},"mode":"markers+text","name":"Paradigmas Emergentes","showlegend":true,"text":["Ecol\u00f3gica (Raworth)","Estado Emprendedor (Mazzucato)"],"textfont":{"family":"Arial, sans-serif","size":11},"textposition":"bottom center","x":[-0.4,-0.26],"y":[0.5,-0.35],"type":"scatter"},{"hovertemplate":"%{hovertext}\u003cextra\u003e\u003c\u002fextra\u003e","hovertext":["\u003cb\u003eTradici\u00f3n Desarrollista\u003c\u002fb\u003e\u003cbr\u003e\u003ci\u003eRealpolitik Hist\u00f3rica\u003c\u002fi\u003e\u003cbr\u003e\u003cbr\u003eA\u00f1o: 1600\u003cbr\u003eAutores: Sin fundadores unificados (evoluciona hist\u00f3ricamente)\u003cbr\u003e\u003cbr\u003eCorriente de pol\u00edtica econ\u00f3mica que busca fortalecer la producci\u00f3n nacional, industria y poder estatal como motores del desarrollo. Evoluciona desde e...\u003cbr\u003e\u003cbr\u003e\u003cb\u003eCaracteristicas:\u003c\u002fb\u003e\u003cbr\u003e\u2022 Concepcion Economia: Estructuras\u003cbr\u003e\u2022 Concepcion Humano: Racionalidad Limitada\u003cbr\u003e\u2022 Naturaleza Mundo: Complejo Incierto\u003cbr\u003e\u2022 Ambito Economico: Produccion\u003cbr\u003e\u2022 Motor Cambio: Acumulacion Capital\u003cbr\u003e\u2022 Politicas Preferidas: Intervencion Estatal"],"marker":{"color":["#555555"],"line":{"color":"#555555","width":2},"size":15,"symbol":"square"},"mode":"markers+text","name":"Realpolitik Hist\u00f3rica","showlegend":true,"text":["Tradici\u00f3n Desarrollista"],"textfont":{"family":"Arial, sans-serif","size":11},"textposition":"bottom center","x":[-0.21],"y":[-0.52],"type":"scatter"}],                        {"template":{"data":{"barpolar":[{"marker":{"line":{"color":"white","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"white","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"#C8D4E3","linecolor":"#C8D4E3","minorgridcolor":"#C8D4E3","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"#C8D4E3","linecolor":"#C8D4E3","minorgridcolor":"#C8D4E3","startlinecolor":"#2a3f5f"},"type":"carpet"}],"choropleth":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"choropleth"}],"contourcarpet":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"contourcarpet"}],"contour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"contour"}],"heatmapgl":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmapgl"}],"heatmap":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmap"}],"histogram2dcontour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2dcontour"}],"histogram2d":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2d"}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"mesh3d":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"mesh3d"}],"parcoords":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"parcoords"}],"pie":[{"automargin":true,"type":"pie"}],"scatter3d":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatter3d"}],"scattercarpet":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattercarpet"}],"scattergeo":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergeo"}],"scattergl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergl"}],"scattermapbox":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermapbox"}],"scatterpolargl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolargl"}],"scatterpolar":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolar"}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"scatterternary":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterternary"}],"surface":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"surface"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}]},"layout":{"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"autotypenumbers":"strict","coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]],"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]},"colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"geo":{"bgcolor":"white","lakecolor":"white","landcolor":"white","showlakes":true,"showland":true,"subunitcolor":"#C8D4E3"},"hoverlabel":{"align":"left"},"hovermode":"closest","mapbox":{"style":"light"},"paper_bgcolor":"white","plot_bgcolor":"white","polar":{"angularaxis":{"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":""},"bgcolor":"white","radialaxis":{"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":""}},"scene":{"xaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"},"yaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"},"zaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"ternary":{"aaxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""},"baxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""},"bgcolor":"white","caxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""}},"title":{"x":0.05},"xaxis":{"automargin":true,"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":"","title":{"standoff":15},"zerolinecolor":"#EBF0F8","zerolinewidth":2},"yaxis":{"automargin":true,"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":"","title":{"standoff":15},"zerolinecolor":"#EBF0F8","zerolinewidth":2}}},"shapes":[{"fillcolor":"rgba(0,255,0,0.05)","layer":"below","line":{"width":0},"name":"Q1: Estado fuerte + Equidad","type":"rect","x0":-1.2,"x1":0,"y0":0,"y1":1.1},{"fillcolor":"rgba(0,0,255,0.05)","layer":"below","line":{"width":0},"name":"Q2: Estado d\u00e9bil + Equidad","type":"rect","x0":0,"x1":1.2,"y0":0,"y1":1.1},{"fillcolor":"rgba(255,165,0,0.05)","layer":"below","line":{"width":0},"name":"Q3: Estado fuerte + Crecimiento","type":"rect","x0":-1.2,"x1":0,"y0":-1.1,"y1":0},{"fillcolor":"rgba(128,0,128,0.05)","layer":"below","line":{"width":0},"name":"Q4: Estado d\u00e9bil + Crecimiento","type":"rect","x0":0,"x1":1.2,"y0":-1.1,"y1":0}],"annotations":[{"arrowcolor":"rgba(0,0,0,0.7)","arrowhead":2,"arrowsize":1,"arrowwidth":3,"ax":0.9,"axref":"x","ay":-0.59,"ayref":"y","opacity":0.7,"showarrow":true,"x":-0.4,"xref":"x","y":0.04,"yref":"y"},{"bgcolor":"rgba(255,255,255,0.9)","bordercolor":"gray","borderpad":3,"borderwidth":1,"font":{"color":"#2c3e50","family":"Arial","size":9},"hoverlabel":{"bgcolor":"white","font":{"size":12}},"hovertext":"\u003cb\u003eCrisis financiera 2008\u003c\u002fb\u003e\u003cbr\u003eDel laissez-faire a regulaci\u00f3n y rescates estatales\u003cbr\u003eA\u00f1o: 2008","opacity":0.7,"showarrow":false,"text":"\u003cb\u003eCrisis 2008\u003c\u002fb\u003e","x":0.25,"y":-0.24499999999999997},{"arrowcolor":"rgba(0,0,0,0.7)","arrowhead":2,"arrowsize":1,"arrowwidth":3,"ax":-0.4,"axref":"x","ay":0.04,"ayref":"y","opacity":0.7,"showarrow":true,"x":-0.4,"xref":"x","y":0.5,"yref":"y"},{"bgcolor":"rgba(255,255,255,0.9)","bordercolor":"gray","borderpad":3,"borderwidth":1,"font":{"color":"#2c3e50","family":"Arial","size":9},"hoverlabel":{"bgcolor":"white","font":{"size":12}},"hovertext":"\u003cb\u003eCrisis clim\u00e1tica y sostenibilidad\u003c\u002fb\u003e\u003cbr\u003eIncorporaci\u00f3n de l\u00edmites planetarios al modelo econ\u00f3mico\u003cbr\u003eA\u00f1o: 2015","opacity":0.7,"showarrow":false,"text":"\u003cb\u003eCrisis 2015\u003c\u002fb\u003e","x":-0.4,"y":0.30000000000000004},{"arrowcolor":"rgba(0,0,0,0.5)","arrowhead":2,"arrowsize":1,"arrowwidth":2,"ax":0.37,"axref":"x","ay":-0.42,"ayref":"y","opacity":0.5,"showarrow":true,"x":-0.9,"xref":"x","y":0.9,"yref":"y"},{"bgcolor":"rgba(255,255,255,0.9)","bordercolor":"gray","borderpad":3,"borderwidth":1,"font":{"color":"#2c3e50","family":"Arial","size":9},"hoverlabel":{"bgcolor":"white","font":{"size":12}},"hovertext":"\u003cb\u003eCrisis de desigualdad y precarizaci\u00f3n\u003c\u002fb\u003e\u003cbr\u003eLos nudges resultan insuficientes, se demanda redistribuci\u00f3n radical\u003cbr\u003eA\u00f1o: 2020","opacity":0.5,"showarrow":false,"text":"\u003cb\u003eCrisis 2020\u003c\u002fb\u003e","x":-0.265,"y":0.27},{"arrowcolor":"rgba(0,0,0,0.7)","arrowhead":2,"arrowsize":1,"arrowwidth":3,"ax":0.69,"axref":"x","ay":-0.59,"ayref":"y","opacity":0.7,"showarrow":true,"x":-0.26,"xref":"x","y":-0.35,"yref":"y"},{"bgcolor":"rgba(255,255,255,0.9)","bordercolor":"gray","borderpad":3,"borderwidth":1,"font":{"color":"#2c3e50","family":"Arial","size":9},"hoverlabel":{"bgcolor":"white","font":{"size":12}},"hovertext":"\u003cb\u003ePandemia COVID-19\u003c\u002fb\u003e\u003cbr\u003eNecesidad de innovaci\u00f3n acelerada en vacunas y tecnolog\u00eda\u003cbr\u003eA\u00f1o: 2020","opacity":0.7,"showarrow":false,"text":"\u003cb\u003ePandemia 2020\u003c\u002fb\u003e","x":0.21499999999999997,"y":-0.43999999999999995},{"arrowcolor":"rgba(0,0,0,0.7)","arrowhead":2,"arrowsize":1,"arrowwidth":3,"ax":-0.4,"axref":"x","ay":0.04,"ayref":"y","opacity":0.7,"showarrow":true,"x":0.9,"xref":"x","y":-0.59,"yref":"y"},{"bgcolor":"rgba(255,255,255,0.9)","bordercolor":"gray","borderpad":3,"borderwidth":1,"font":{"color":"#2c3e50","family":"Arial","size":9},"hoverlabel":{"bgcolor":"white","font":{"size":12}},"hovertext":"\u003cb\u003eCrisis inflacionaria post-pandemia\u003c\u002fb\u003e\u003cbr\u003eRetorno a ortodoxia monetarista y ajuste fiscal\u003cbr\u003eA\u00f1o: 2022","opacity":0.7,"showarrow":false,"text":"\u003cb\u003eCrisis 2022\u003c\u002fb\u003e","x":0.25,"y":-0.24499999999999997}],"title":{"font":{"size":20,"family":"Arial, sans-serif"},"text":"Escuelas Pol\u00edticas Econ\u00f3micas: Espacio Posicional 2D","x":0.5,"xanchor":"center"},"xaxis":{"title":{"text":"Arquitectura Econ\u00f3mica: \u2190 Econom\u00eda Dirigida (Estado Fuerte) | Econom\u00eda de Mercado (Estado Limitado) \u2192"},"range":[-1.2,1.2],"zeroline":true,"zerolinewidth":2,"zerolinecolor":"gray","gridcolor":"rgba(128,128,128,0.2)","showgrid":true},"yaxis":{"title":{"text":"Objetivo Socioecon\u00f3mico: \u2190 Productividad y Crecimiento | Equidad y Sostenibilidad \u2192"},"range":[-1.1,1.1],"zeroline":true,"zerolinewidth":2,"zerolinecolor":"gray","gridcolor":"rgba(128,128,128,0.2)","showgrid":true},"legend":{"x":1.02,"y":0.5,"xanchor":"left","yanchor":"middle","bgcolor":"rgba(255,255,255,0.9)","bordercolor":"gray","borderwidth":1},"margin":{"l":60,"r":100,"t":60,"b":60},"hovermode":"closest","showlegend":true,"width":1200,"height":700},                        {"responsive": true, "displayModeBar": true, "displaylogo": false, "modeBarButtonsToRemove": ["lasso2d", "select2d"], "toImageButtonOptions": {"format": "png", "filename": "mapa_escuelas", "height": 1000, "width": 1600, "scale": 2}}                    )                };                            </script>        </div>
+        <script charset="utf-8" src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>                <div id="4b77171c-fdbb-4758-89b5-aac9a6dd807b" class="plotly-graph-div" style="height:700px; width:1200px;"></div>            <script type="text/javascript">                                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("4b77171c-fdbb-4758-89b5-aac9a6dd807b")) {                    Plotly.newPlot(                        "4b77171c-fdbb-4758-89b5-aac9a6dd807b",                        [{"hovertemplate":"%{hovertext}\u003cextra\u003e\u003c\u002fextra\u003e","hovertext":["\u003cb\u003eMarxista\u003c\u002fb\u003e\u003cbr\u003e\u003ci\u003eIzquierda Redistribuci\u00f3n\u003c\u002fi\u003e\u003cbr\u003e\u003cbr\u003eA\u00f1o: 1867\u003cbr\u003eAutores: Karl Marx, Friedrich Engels\u003cbr\u003e\u003cbr\u003eEnfoque basado en lucha de clases y redistribuci\u00f3n radical\u003cbr\u003e\u003cbr\u003e\u003cb\u003eCaracteristicas:\u003c\u002fb\u003e\u003cbr\u003e\u2022 Concepcion Economia: Clases Sociales\u003cbr\u003e\u2022 Concepcion Humano: Condicionado Clase\u003cbr\u003e\u2022 Naturaleza Mundo: Complejo Incierto\u003cbr\u003e\u2022 Ambito Economico: Distribucion\u003cbr\u003e\u2022 Motor Cambio: Lucha Clases\u003cbr\u003e\u2022 Politicas Preferidas: Redistribucion","\u003cb\u003eFeminista\u003c\u002fb\u003e\u003cbr\u003e\u003ci\u003eIzquierda Redistribuci\u00f3n\u003c\u002fi\u003e\u003cbr\u003e\u003cbr\u003eA\u00f1o: 1980\u003cbr\u003eAutores: Silvia Federici, Diane Elson\u003cbr\u003e\u003cbr\u003eAn\u00e1lisis econ\u00f3mico desde perspectiva de g\u00e9nero\u003cbr\u003e\u003cbr\u003e\u003cb\u003eCaracteristicas:\u003c\u002fb\u003e\u003cbr\u003e\u2022 Concepcion Economia: Clases Sociales\u003cbr\u003e\u2022 Concepcion Humano: Condicionado Clase\u003cbr\u003e\u2022 Naturaleza Mundo: Complejo Incierto\u003cbr\u003e\u2022 Ambito Economico: Distribucion\u003cbr\u003e\u2022 Motor Cambio: Instituciones\u003cbr\u003e\u2022 Politicas Preferidas: Redistribucion","\u003cb\u003eKeynesiana\u003c\u002fb\u003e\u003cbr\u003e\u003ci\u003eRegulacionista Coordinaci\u00f3n\u003c\u002fi\u003e\u003cbr\u003e\u003cbr\u003eA\u00f1o: 1936\u003cbr\u003eAutores: John Maynard Keynes\u003cbr\u003e\u003cbr\u003eIntervenci\u00f3n estatal para estabilizar ciclos econ\u00f3micos\u003cbr\u003e\u003cbr\u003e\u003cb\u003eCaracteristicas:\u003c\u002fb\u003e\u003cbr\u003e\u2022 Concepcion Economia: Estructuras\u003cbr\u003e\u2022 Concepcion Humano: Racionalidad Limitada\u003cbr\u003e\u2022 Naturaleza Mundo: Complejo Incierto\u003cbr\u003e\u2022 Ambito Economico: Consumo\u003cbr\u003e\u2022 Motor Cambio: Instituciones\u003cbr\u003e\u2022 Politicas Preferidas: Intervencion Estatal","\u003cb\u003eInstitucionalista\u003c\u002fb\u003e\u003cbr\u003e\u003ci\u003eRegulacionista Coordinaci\u00f3n\u003c\u002fi\u003e\u003cbr\u003e\u003cbr\u003eA\u00f1o: 1920\u003cbr\u003eAutores: Douglass North, Elinor Ostrom\u003cbr\u003e\u003cbr\u003eLas instituciones moldean el comportamiento econ\u00f3mico\u003cbr\u003e\u003cbr\u003e\u003cb\u003eCaracteristicas:\u003c\u002fb\u003e\u003cbr\u003e\u2022 Concepcion Economia: Estructuras\u003cbr\u003e\u2022 Concepcion Humano: Racionalidad Limitada\u003cbr\u003e\u2022 Naturaleza Mundo: Complejo Incierto\u003cbr\u003e\u2022 Ambito Economico: Comercio\u003cbr\u003e\u2022 Motor Cambio: Instituciones\u003cbr\u003e\u2022 Politicas Preferidas: Intervencion Estatal","\u003cb\u003eConductista\u003c\u002fb\u003e\u003cbr\u003e\u003ci\u003eIncentivos Nudges\u003c\u002fi\u003e\u003cbr\u003e\u003cbr\u003eA\u00f1o: 2008\u003cbr\u003eAutores: Richard Thaler, Daniel Kahneman\u003cbr\u003e\u003cbr\u003eModifica comportamiento a trav\u00e9s de incentivos y contexto (sin intervenci\u00f3n estatal directa)\u003cbr\u003e\u003cbr\u003e\u003cb\u003eCaracteristicas:\u003c\u002fb\u003e\u003cbr\u003e\u2022 Concepcion Economia: Individuos\u003cbr\u003e\u2022 Concepcion Humano: Racionalidad Limitada\u003cbr\u003e\u2022 Naturaleza Mundo: Complejo Incierto\u003cbr\u003e\u2022 Ambito Economico: Consumo\u003cbr\u003e\u2022 Motor Cambio: Decisiones Individuales\u003cbr\u003e\u2022 Politicas Preferidas: Ambiguas","\u003cb\u003eCl\u00e1sica\u003c\u002fb\u003e\u003cbr\u003e\u003ci\u003eLiberal Mercado Libre\u003c\u002fi\u003e\u003cbr\u003e\u003cbr\u003eA\u00f1o: 1776\u003cbr\u003eAutores: Adam Smith, David Ricardo\u003cbr\u003e\u003cbr\u003eMercado autorregulado por la mano invisible\u003cbr\u003e\u003cbr\u003e\u003cb\u003eCaracteristicas:\u003c\u002fb\u003e\u003cbr\u003e\u2022 Concepcion Economia: Individuos\u003cbr\u003e\u2022 Concepcion Humano: Racional Egoista\u003cbr\u003e\u2022 Naturaleza Mundo: Cierto Predecible\u003cbr\u003e\u2022 Ambito Economico: Produccion\u003cbr\u003e\u2022 Motor Cambio: Acumulacion Capital\u003cbr\u003e\u2022 Politicas Preferidas: Libre Mercado","\u003cb\u003eNeocl\u00e1sica\u003c\u002fb\u003e\u003cbr\u003e\u003ci\u003eLiberal Mercado Libre\u003c\u002fi\u003e\u003cbr\u003e\u003cbr\u003eA\u00f1o: 1870\u003cbr\u003eAutores: L\u00e9on Walras, Vilfredo Pareto\u003cbr\u003e\u003cbr\u003eMaximizaci\u00f3n de utilidad individual en mercados competitivos\u003cbr\u003e\u003cbr\u003e\u003cb\u003eCaracteristicas:\u003c\u002fb\u003e\u003cbr\u003e\u2022 Concepcion Economia: Individuos\u003cbr\u003e\u2022 Concepcion Humano: Racional Egoista\u003cbr\u003e\u2022 Naturaleza Mundo: Cierto Predecible\u003cbr\u003e\u2022 Ambito Economico: Comercio\u003cbr\u003e\u2022 Motor Cambio: Decisiones Individuales\u003cbr\u003e\u2022 Politicas Preferidas: Libre Mercado","\u003cb\u003eAustr\u00edaca\u003c\u002fb\u003e\u003cbr\u003e\u003ci\u003eLiberal Mercado Libre\u003c\u002fi\u003e\u003cbr\u003e\u003cbr\u003eA\u00f1o: 1920\u003cbr\u003eAutores: Ludwig von Mises, Friedrich Hayek\u003cbr\u003e\u003cbr\u003eRechazo de intervenci\u00f3n estatal, \u00e9nfasis en acci\u00f3n individual\u003cbr\u003e\u003cbr\u003e\u003cb\u003eCaracteristicas:\u003c\u002fb\u003e\u003cbr\u003e\u2022 Concepcion Economia: Individuos\u003cbr\u003e\u2022 Concepcion Humano: Racional Egoista\u003cbr\u003e\u2022 Naturaleza Mundo: Complejo Incierto\u003cbr\u003e\u2022 Ambito Economico: Comercio\u003cbr\u003e\u2022 Motor Cambio: Decisiones Individuales\u003cbr\u003e\u2022 Politicas Preferidas: Libre Mercado","\u003cb\u003eSchumpeteriana\u003c\u002fb\u003e\u003cbr\u003e\u003ci\u003eLiberal Innovacion\u003c\u002fi\u003e\u003cbr\u003e\u003cbr\u003eA\u00f1o: 1942\u003cbr\u003eAutores: Joseph Schumpeter\u003cbr\u003e\u003cbr\u003eInnovaci\u00f3n disruptiva y destrucci\u00f3n creativa impulsan crecimiento\u003cbr\u003e\u003cbr\u003e\u003cb\u003eCaracteristicas:\u003c\u002fb\u003e\u003cbr\u003e\u2022 Concepcion Economia: Individuos\u003cbr\u003e\u2022 Concepcion Humano: Racional Egoista\u003cbr\u003e\u2022 Naturaleza Mundo: Complejo Incierto\u003cbr\u003e\u2022 Ambito Economico: Produccion\u003cbr\u003e\u2022 Motor Cambio: Innovacion Tecnologica\u003cbr\u003e\u2022 Politicas Preferidas: Libre Mercado"],"marker":{"color":["#FF4D6F","#579EA4","#86AD34","#5D7298","#7E1A2F","#2D2651","#C8350D","#BD777A","#FF4D6F"],"line":{"color":"#555555","width":2},"size":15,"symbol":"circle"},"mode":"markers+text","name":"Escuelas Establecidas","showlegend":true,"text":["Marxista","Feminista","Keynesiana","Institucionalista","Conductista","Cl\u00e1sica","Neocl\u00e1sica","Austr\u00edaca","Schumpeteriana"],"textfont":{"color":"#2c3e50","family":"Arial, sans-serif","size":12},"textposition":"bottom center","x":[-0.9,-0.9,-0.4,-0.4,0.37,0.85,0.9,0.69,0.6],"y":[0.9,0.75,0.04,0.25,-0.42,-0.9,-0.59,-0.59,-0.73],"type":"scatter"},{"hovertemplate":"%{hovertext}\u003cextra\u003e\u003c\u002fextra\u003e","hovertext":["\u003cb\u003eEcol\u00f3gica (Raworth)\u003c\u002fb\u003e\u003cbr\u003e\u003ci\u003eNuevo Paradigma Sostenibilidad\u003c\u002fi\u003e\u003cbr\u003e\u003cbr\u003eA\u00f1o: 2012\u003cbr\u003eAutores: Kate Raworth\u003cbr\u003e\u003cbr\u003eDoughnut Economics: econom\u00eda dentro de l\u00edmites planetarios\u003cbr\u003e\u003cbr\u003e\u003cb\u003eCaracteristicas:\u003c\u002fb\u003e\u003cbr\u003e\u2022 Concepcion Economia: Estructuras\u003cbr\u003e\u2022 Concepcion Humano: Racionalidad Limitada\u003cbr\u003e\u2022 Naturaleza Mundo: Complejo Incierto\u003cbr\u003e\u2022 Ambito Economico: Distribucion\u003cbr\u003e\u2022 Motor Cambio: Instituciones\u003cbr\u003e\u2022 Politicas Preferidas: Intervencion Estatal","\u003cb\u003eEstado Emprendedor (Mazzucato)\u003c\u002fb\u003e\u003cbr\u003e\u003ci\u003eNuevo Paradigma Innovacion\u003c\u002fi\u003e\u003cbr\u003e\u003cbr\u003eA\u00f1o: 2013\u003cbr\u003eAutores: Mariana Mazzucato\u003cbr\u003e\u003cbr\u003eEstado como inversor en innovaci\u00f3n disruptiva\u003cbr\u003e\u003cbr\u003e\u003cb\u003eCaracteristicas:\u003c\u002fb\u003e\u003cbr\u003e\u2022 Concepcion Economia: Estructuras\u003cbr\u003e\u2022 Concepcion Humano: Racionalidad Limitada\u003cbr\u003e\u2022 Naturaleza Mundo: Complejo Incierto\u003cbr\u003e\u2022 Ambito Economico: Produccion\u003cbr\u003e\u2022 Motor Cambio: Innovacion Tecnologica\u003cbr\u003e\u2022 Politicas Preferidas: Intervencion Estatal"],"marker":{"color":["#DF7713","#81B28D"],"line":{"color":"#555555","width":2},"size":18,"symbol":"diamond"},"mode":"markers+text","name":"Paradigmas Emergentes","showlegend":true,"text":["Ecol\u00f3gica (Raworth)","Estado Emprendedor (Mazzucato)"],"textfont":{"color":"#2c3e50","family":"Arial, sans-serif","size":12},"textposition":"bottom center","x":[-0.4,-0.26],"y":[0.5,-0.35],"type":"scatter"},{"hovertemplate":"%{hovertext}\u003cextra\u003e\u003c\u002fextra\u003e","hovertext":["\u003cb\u003eTradici\u00f3n Desarrollista\u003c\u002fb\u003e\u003cbr\u003e\u003ci\u003eRealpolitik Hist\u00f3rica\u003c\u002fi\u003e\u003cbr\u003e\u003cbr\u003eA\u00f1o: 1600\u003cbr\u003eAutores: Sin fundadores unificados (evoluciona hist\u00f3ricamente)\u003cbr\u003e\u003cbr\u003eCorriente de pol\u00edtica econ\u00f3mica que busca fortalecer la producci\u00f3n nacional, industria y poder estatal como motores del desarrollo. Evoluciona desde e...\u003cbr\u003e\u003cbr\u003e\u003cb\u003eCaracteristicas:\u003c\u002fb\u003e\u003cbr\u003e\u2022 Concepcion Economia: Estructuras\u003cbr\u003e\u2022 Concepcion Humano: Racionalidad Limitada\u003cbr\u003e\u2022 Naturaleza Mundo: Complejo Incierto\u003cbr\u003e\u2022 Ambito Economico: Produccion\u003cbr\u003e\u2022 Motor Cambio: Acumulacion Capital\u003cbr\u003e\u2022 Politicas Preferidas: Intervencion Estatal"],"marker":{"color":["#555555"],"line":{"color":"#555555","width":2},"size":15,"symbol":"square"},"mode":"markers+text","name":"Realpolitik Hist\u00f3rica","showlegend":true,"text":["Tradici\u00f3n Desarrollista"],"textfont":{"color":"#2c3e50","family":"Arial, sans-serif","size":12},"textposition":"bottom center","x":[-0.21],"y":[-0.52],"type":"scatter"}],                        {"template":{"data":{"barpolar":[{"marker":{"line":{"color":"white","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"white","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"#C8D4E3","linecolor":"#C8D4E3","minorgridcolor":"#C8D4E3","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"#C8D4E3","linecolor":"#C8D4E3","minorgridcolor":"#C8D4E3","startlinecolor":"#2a3f5f"},"type":"carpet"}],"choropleth":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"choropleth"}],"contourcarpet":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"contourcarpet"}],"contour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"contour"}],"heatmapgl":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmapgl"}],"heatmap":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmap"}],"histogram2dcontour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2dcontour"}],"histogram2d":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2d"}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"mesh3d":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"mesh3d"}],"parcoords":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"parcoords"}],"pie":[{"automargin":true,"type":"pie"}],"scatter3d":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatter3d"}],"scattercarpet":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattercarpet"}],"scattergeo":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergeo"}],"scattergl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergl"}],"scattermapbox":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermapbox"}],"scatterpolargl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolargl"}],"scatterpolar":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolar"}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"scatterternary":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterternary"}],"surface":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"surface"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}]},"layout":{"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"autotypenumbers":"strict","coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]],"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]},"colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"geo":{"bgcolor":"white","lakecolor":"white","landcolor":"white","showlakes":true,"showland":true,"subunitcolor":"#C8D4E3"},"hoverlabel":{"align":"left"},"hovermode":"closest","mapbox":{"style":"light"},"paper_bgcolor":"white","plot_bgcolor":"white","polar":{"angularaxis":{"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":""},"bgcolor":"white","radialaxis":{"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":""}},"scene":{"xaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"},"yaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"},"zaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"ternary":{"aaxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""},"baxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""},"bgcolor":"white","caxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""}},"title":{"x":0.05},"xaxis":{"automargin":true,"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":"","title":{"standoff":15},"zerolinecolor":"#EBF0F8","zerolinewidth":2},"yaxis":{"automargin":true,"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":"","title":{"standoff":15},"zerolinecolor":"#EBF0F8","zerolinewidth":2}}},"shapes":[{"fillcolor":"rgba(0,255,0,0.05)","layer":"below","line":{"width":0},"name":"Q1: Estado fuerte + Equidad","type":"rect","x0":-1.1,"x1":0,"y0":0,"y1":1.1},{"fillcolor":"rgba(0,0,255,0.05)","layer":"below","line":{"width":0},"name":"Q2: Estado d\u00e9bil + Equidad","type":"rect","x0":0,"x1":1.1,"y0":0,"y1":1.1},{"fillcolor":"rgba(255,165,0,0.05)","layer":"below","line":{"width":0},"name":"Q3: Estado fuerte + Crecimiento","type":"rect","x0":-1.1,"x1":0,"y0":-1.1,"y1":0},{"fillcolor":"rgba(128,0,128,0.05)","layer":"below","line":{"width":0},"name":"Q4: Estado d\u00e9bil + Crecimiento","type":"rect","x0":0,"x1":1.1,"y0":-1.1,"y1":0}],"annotations":[{"arrowcolor":"rgba(0,0,0,0.7)","arrowhead":2,"arrowsize":1,"arrowwidth":3,"ax":0.9,"axref":"x","ay":-0.59,"ayref":"y","opacity":0.7,"showarrow":true,"x":-0.4,"xref":"x","y":0.04,"yref":"y"},{"bgcolor":"rgba(255,255,255,0.9)","bordercolor":"gray","borderpad":3,"borderwidth":1,"font":{"color":"#2c3e50","family":"Arial","size":9},"hoverlabel":{"bgcolor":"white","font":{"size":12}},"hovertext":"\u003cb\u003eCrisis financiera 2008\u003c\u002fb\u003e\u003cbr\u003eDel laissez-faire a regulaci\u00f3n y rescates estatales\u003cbr\u003eA\u00f1o: 2008","opacity":0.7,"showarrow":false,"text":"\u003cb\u003eCrisis 2008\u003c\u002fb\u003e","x":0.25,"y":-0.24499999999999997},{"arrowcolor":"rgba(0,0,0,0.7)","arrowhead":2,"arrowsize":1,"arrowwidth":3,"ax":-0.4,"axref":"x","ay":0.04,"ayref":"y","opacity":0.7,"showarrow":true,"x":-0.4,"xref":"x","y":0.5,"yref":"y"},{"bgcolor":"rgba(255,255,255,0.9)","bordercolor":"gray","borderpad":3,"borderwidth":1,"font":{"color":"#2c3e50","family":"Arial","size":9},"hoverlabel":{"bgcolor":"white","font":{"size":12}},"hovertext":"\u003cb\u003eCrisis clim\u00e1tica y sostenibilidad\u003c\u002fb\u003e\u003cbr\u003eIncorporaci\u00f3n de l\u00edmites planetarios al modelo econ\u00f3mico\u003cbr\u003eA\u00f1o: 2015","opacity":0.7,"showarrow":false,"text":"\u003cb\u003eCrisis 2015\u003c\u002fb\u003e","x":-0.4,"y":0.30000000000000004},{"arrowcolor":"rgba(0,0,0,0.5)","arrowhead":2,"arrowsize":1,"arrowwidth":2,"ax":0.37,"axref":"x","ay":-0.42,"ayref":"y","opacity":0.5,"showarrow":true,"x":-0.9,"xref":"x","y":0.9,"yref":"y"},{"bgcolor":"rgba(255,255,255,0.9)","bordercolor":"gray","borderpad":3,"borderwidth":1,"font":{"color":"#2c3e50","family":"Arial","size":9},"hoverlabel":{"bgcolor":"white","font":{"size":12}},"hovertext":"\u003cb\u003eCrisis de desigualdad y precarizaci\u00f3n\u003c\u002fb\u003e\u003cbr\u003eLos nudges resultan insuficientes, se demanda redistribuci\u00f3n radical\u003cbr\u003eA\u00f1o: 2020","opacity":0.5,"showarrow":false,"text":"\u003cb\u003eCrisis 2020\u003c\u002fb\u003e","x":-0.265,"y":0.27},{"arrowcolor":"rgba(0,0,0,0.7)","arrowhead":2,"arrowsize":1,"arrowwidth":3,"ax":0.69,"axref":"x","ay":-0.59,"ayref":"y","opacity":0.7,"showarrow":true,"x":-0.26,"xref":"x","y":-0.35,"yref":"y"},{"bgcolor":"rgba(255,255,255,0.9)","bordercolor":"gray","borderpad":3,"borderwidth":1,"font":{"color":"#2c3e50","family":"Arial","size":9},"hoverlabel":{"bgcolor":"white","font":{"size":12}},"hovertext":"\u003cb\u003ePandemia COVID-19\u003c\u002fb\u003e\u003cbr\u003eNecesidad de innovaci\u00f3n acelerada en vacunas y tecnolog\u00eda\u003cbr\u003eA\u00f1o: 2020","opacity":0.7,"showarrow":false,"text":"\u003cb\u003ePandemia 2020\u003c\u002fb\u003e","x":0.21499999999999997,"y":-0.43999999999999995},{"arrowcolor":"rgba(0,0,0,0.7)","arrowhead":2,"arrowsize":1,"arrowwidth":3,"ax":-0.4,"axref":"x","ay":0.04,"ayref":"y","opacity":0.7,"showarrow":true,"x":0.9,"xref":"x","y":-0.59,"yref":"y"},{"bgcolor":"rgba(255,255,255,0.9)","bordercolor":"gray","borderpad":3,"borderwidth":1,"font":{"color":"#2c3e50","family":"Arial","size":9},"hoverlabel":{"bgcolor":"white","font":{"size":12}},"hovertext":"\u003cb\u003eCrisis inflacionaria post-pandemia\u003c\u002fb\u003e\u003cbr\u003eRetorno a ortodoxia monetarista y ajuste fiscal\u003cbr\u003eA\u00f1o: 2022","opacity":0.7,"showarrow":false,"text":"\u003cb\u003eCrisis 2022\u003c\u002fb\u003e","x":0.25,"y":-0.24499999999999997}],"title":{"font":{"size":20,"family":"Arial, sans-serif"},"text":"Escuelas Pol\u00edticas Econ\u00f3micas: Espacio Posicional 2D","x":0.5,"xanchor":"center"},"xaxis":{"title":{"text":"Arquitectura Econ\u00f3mica: \u2190 Econom\u00eda Dirigida (Estado Fuerte) | Econom\u00eda de Mercado (Estado Limitado) \u2192"},"range":[-1.1,1.1],"zeroline":true,"zerolinewidth":2,"zerolinecolor":"gray","gridcolor":"rgba(128,128,128,0.2)","showgrid":true},"yaxis":{"title":{"text":"Objetivo Socioecon\u00f3mico: \u2190 Productividad y Crecimiento | Equidad y Sostenibilidad \u2192"},"range":[-1.1,1.1],"zeroline":true,"zerolinewidth":2,"zerolinecolor":"gray","gridcolor":"rgba(128,128,128,0.2)","showgrid":true},"legend":{"x":1.02,"y":0.5,"xanchor":"left","yanchor":"middle","bgcolor":"rgba(255,255,255,0.9)","bordercolor":"gray","borderwidth":1},"margin":{"l":60,"r":100,"t":60,"b":60},"hovermode":"closest","showlegend":true,"width":1200,"height":700},                        {"responsive": true, "displayModeBar": true, "displaylogo": false, "modeBarButtonsToRemove": ["lasso2d", "select2d"], "toImageButtonOptions": {"format": "png", "filename": "mapa_escuelas", "height": 1000, "width": 1600, "scale": 2}}                    )                };                            </script>        </div>
 </body>
 </html>
             </div>
@@ -282,9 +285,9 @@
 
                 <h4>TRANSICIONES (flechas):</h4>
                 <div>
-                    <div>━━━ Muy alta confianza</div>
+                    <div>--- Muy alta confianza</div>
                     <div>- - - Confianza media</div>
-                    <div>··· Baja confianza</div>
+                    <div>... Baja confianza</div>
                 </div>
 
                 <h4>GUÍA TEMÁTICA:</h4>
@@ -301,7 +304,7 @@
 <div class="guia-item"><strong>11. Desempleo y recesión:</strong> C, K</div>
 
                 <div class="advertencia">
-                    ⚠ Basarse sólo en una escuela para explorar un tema, tiene riesgo de polarizarse, causar visión de túnel, arrogancia, y muerte cerebral
+                    ADVERTENCIA: Basarse sólo en una escuela para explorar un tema, tiene riesgo de polarizarse, causar visión de túnel, arrogancia, y muerte cerebral
                 </div>
             </div>
 
@@ -312,11 +315,18 @@
     <footer class="footer">
         <p>
             Generado con <a href="https://github.com/plotly/plotly.py" target="_blank">Plotly</a>
-            • Metodología: Ha-Joon Chang
-            • 12 escuelas económicas • 8 variantes disponibles
+            • Metodología inspirada en Ha-Joon Chang
+            • 12 escuelas económicas • 
         </p>
         <p style="margin-top: 10px; font-size: 0.85em;">
-            Proyecto: Mapa de Escuelas Políticas Económicas • Versión 5.0 • 2025
+            Proyecto: Mapa de Escuelas Políticas Económicas • 2025
+        </p>
+        <p style="margin-top: 10px; font-size: 0.85em;">
+            <strong>Autor:</strong> William Camilo Artunduaga Viana (Propio de Autor)
+        </p>
+        <p style="margin-top: 5px; font-size: 0.85em;">
+            📜 Licencia: <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" style="color: #667eea; text-decoration: underline;">Creative Commons BY-SA 4.0</a>
+            • Código abierto para mejoras comunitarias
         </p>
     </footer>
 
@@ -353,6 +363,10 @@
             'tradicion': 'Realpolitik Histórica'
         };
 
+        // Global data stores
+        let baseData = null;  // Source of truth from escuelas.json
+        let currentVariantData = null;  // Current variant positions
+
         // Transition confidence styles
         const CONFIDENCE_STYLES = {
             'muy_alta': { width: 3, dash: 'solid', opacity: 0.9 },
@@ -361,102 +375,116 @@
             'baja': { width: 1.5, dash: 'dot', opacity: 0.4 }
         };
 
-        // Variant selector
-        const variantDescriptions = {
-            'base': {
-                name: 'Base (Balanceada)',
-                description: 'Pesos equilibrados en todos los descriptores'
-            },
-            'balanced': {
-                name: 'Balanced',
-                description: 'Configuración balanceada alternativa'
-            },
-            'state-emphasis': {
-                name: 'State Emphasis',
-                description: 'Énfasis en el rol del Estado en la economía'
-            },
-            'equity-emphasis': {
-                name: 'Equity Emphasis',
-                description: 'Énfasis en equidad y redistribución'
-            },
-            'market-emphasis': {
-                name: 'Market Emphasis',
-                description: 'Énfasis en libre mercado y autonomía'
-            },
-            'growth-emphasis': {
-                name: 'Growth Emphasis',
-                description: 'Énfasis en crecimiento y productividad'
-            },
-            'historical-emphasis': {
-                name: 'Historical Emphasis',
-                description: 'Énfasis en contexto histórico de desarrollo'
-            },
-            'pragmatic-emphasis': {
-                name: 'Pragmatic Emphasis',
-                description: 'Énfasis en pragmatismo y eficacia'
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', async () => {
+            console.log('Initializing application...');
+
+            // Load base data (source of truth)
+            try {
+                const response = await fetch('data/escuelas.json');
+                if (!response.ok) {
+                    throw new Error('HTTP error! status: ' + response.status);
+                }
+                baseData = await response.json();
+                console.log('Base data loaded from escuelas.json:', baseData);
+            } catch (error) {
+                console.error('CRITICAL: Failed to load base data:', error);
+                showNotification('Error critico: No se pudo cargar escuelas.json', 'error');
+                return;
             }
-        };
 
-        const variantButtons = document.querySelectorAll('.variant-btn');
-        const currentVariantName = document.getElementById('current-variant-name');
-        const currentVariantDescription = document.getElementById('current-variant-description');
+            // Setup dropdown event listeners
+            const presetDropdown = document.getElementById('preset-dropdown');
+            const normalizationDropdown = document.getElementById('normalization-dropdown');
 
-        variantButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                const variant = this.getAttribute('data-variant');
+            presetDropdown.addEventListener('change', loadCurrentVariant);
+            normalizationDropdown.addEventListener('change', loadCurrentVariant);
 
-                // Update active button
-                variantButtons.forEach(btn => btn.classList.remove('active'));
-                this.classList.add('active');
-
-                // Update info
-                const info = variantDescriptions[variant];
-                currentVariantName.textContent = info.name;
-                currentVariantDescription.textContent = info.description;
-
-                // Load new variant data
-                loadVariant(variant);
-            });
+            // Load initial variant (base-percentile)
+            await loadCurrentVariant();
         });
 
-        async function loadVariant(variantName) {
-            // Show loading notification
-            showNotification(`📊 Cargando variante: <strong>${variantDescriptions[variantName].name}</strong>`, 'info');
+        async function loadCurrentVariant() {
+            const preset = document.getElementById('preset-dropdown').value;
+            const normalization = document.getElementById('normalization-dropdown').value;
+            const variantName = preset + '-' + normalization;
+
+            console.log('Loading variant: ' + variantName);
+            showNotification('Cargando variante: <strong>' + variantName + '</strong>', 'info');
 
             try {
-                console.log(`Fetching: data/variants/${variantName}.json`);
-                console.log('Current location:', window.location.href);
-
-                // Fetch variant JSON
-                const response = await fetch(`data/variants/${variantName}.json`);
-                console.log('Response status:', response.status);
+                // Fetch variant position data
+                const response = await fetch('data/variants/' + variantName + '.json');
 
                 if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
+                    throw new Error('HTTP error! status: ' + response.status);
                 }
 
-                const data = await response.json();
-                console.log('Data loaded:', data);
+                const variantData = await response.json();
+                console.log('Variant data loaded:', variantData);
+
+                currentVariantData = variantData;
+
+                // Merge variant positions with base data
+                const mergedData = mergeVariantWithBase(variantData, baseData);
 
                 // Update the Plotly chart
-                updatePlotlyChart(data);
+                updatePlotlyChart(mergedData);
 
-                showNotification(`✅ Variante cargada: <strong>${variantDescriptions[variantName].name}</strong>`, 'success');
+                showNotification('Variante cargada: <strong>' + variantName + '</strong>', 'success');
             } catch (error) {
                 console.error('Error loading variant:', error);
-                console.error('Error type:', error.name);
-                console.error('Error message:', error.message);
 
-                let errorMsg = `❌ Error al cargar la variante: ${error.message}`;
+                let errorMsg = 'Error al cargar variante ' + variantName + ': ' + error.message;
                 if (error.message.includes('Failed to fetch') || window.location.protocol === 'file:') {
-                    errorMsg = `❌ CORS Error: Debes abrir este archivo desde un servidor HTTP. Usa: python -m http.server 8000`;
+                    errorMsg = 'CORS Error: Debes abrir desde servidor HTTP. Usa: python -m http.server 8000';
                 }
 
                 showNotification(errorMsg, 'error');
             }
         }
 
-        function showNotification(message, type = 'info') {
+        function mergeVariantWithBase(variantData, baseData) {
+            // Merges variant position data with base descriptive data.
+            // Variant contains only positions, base contains descriptions, colors, transitions.
+            const merged = {
+                metadata: variantData.metadata || {},
+                nodos: [],
+                transiciones: baseData.transiciones || [],  // Transitions from base
+                mapeo_visual: baseData.mapeo_visual || {}
+            };
+
+            // Create lookup map for base nodes
+            const baseNodesMap = {};
+            (baseData.nodos || []).forEach(node => {
+                baseNodesMap[node.id] = node;
+            });
+
+            // Merge each variant node with its base data
+            (variantData.nodos || []).forEach(variantNode => {
+                const baseNode = baseNodesMap[variantNode.id];
+
+                if (!baseNode) {
+                    console.warn('Base data missing for node: ' + variantNode.id);
+                    merged.nodos.push(variantNode);  // Use variant data as fallback
+                    return;
+                }
+
+                // Merge: take position from variant, everything else from base
+                const mergedNode = {
+                    ...baseNode,  // All base data (descriptions, color, tipo, etc.)
+                    posicion: variantNode.posicion  // Position from variant
+                };
+
+                merged.nodos.push(mergedNode);
+            });
+
+            console.log('Merged data:', merged);
+            return merged;
+        }
+
+        function showNotification(message, type) {
+            type = type || 'info';
             const colors = {
                 'info': '#667eea',
                 'success': '#48bb78',
@@ -464,13 +492,22 @@
             };
 
             const notification = document.createElement('div');
-            notification.style.cssText = `position: fixed; top: 20px; right: 20px; background: ${colors[type]}; color: white; padding: 15px 25px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); z-index: 9999; animation: fadeInUp 0.5s ease-out;`;
+            notification.style.position = 'fixed';
+            notification.style.top = '20px';
+            notification.style.right = '20px';
+            notification.style.background = colors[type];
+            notification.style.color = 'white';
+            notification.style.padding = '15px 25px';
+            notification.style.borderRadius = '8px';
+            notification.style.boxShadow = '0 4px 12px rgba(0,0,0,0.2)';
+            notification.style.zIndex = '9999';
+            notification.style.animation = 'fadeInUp 0.5s ease-out';
             notification.innerHTML = message;
             document.body.appendChild(notification);
 
-            setTimeout(() => {
+            setTimeout(function() {
                 notification.style.animation = 'fadeOut 0.5s ease-out';
-                setTimeout(() => notification.remove(), 500);
+                setTimeout(function() { notification.remove(); }, 500);
             }, 2500);
         }
 
@@ -481,8 +518,10 @@
             // Assign colors to nodes
             const nodeColors = {};
             nodos.forEach((node, idx) => {
-                // Use grayscale for 'tradicion' type nodes, colorful for others
-                if (node.tipo === 'tradicion') {
+                // Use node color if available, otherwise use Klein schema
+                if (node.color) {
+                    nodeColors[node.id] = node.color;
+                } else if (node.tipo === 'tradicion') {
                     nodeColors[node.id] = '#555555';  // Dark gray
                 } else {
                     nodeColors[node.id] = KLEIN_COLORS[idx % KLEIN_COLORS.length];
@@ -510,6 +549,24 @@
 
                 const style = NODE_STYLES[tipo] || NODE_STYLES['tradicional'];
 
+                // Build hover templates with full descriptions
+                const hoverTexts = nodes.map(node => {
+                    let hoverText = '<b>' + node.nombre + '</b><br>';
+                    hoverText += '<i>' + (node.descripcion_corta || '') + '</i><br><br>';
+
+                    // Add descriptor information if available
+                    if (node.descriptores) {
+                        const desc = node.descriptores;
+                        hoverText += '<b>Descriptores:</b><br>';
+                        if (desc.rol_estado !== undefined) hoverText += '• Rol Estado: ' + desc.rol_estado.toFixed(2) + '<br>';
+                        if (desc.prioridad_equidad !== undefined) hoverText += '• Equidad: ' + desc.prioridad_equidad.toFixed(2) + '<br>';
+                        if (desc.enfoque_crecimiento !== undefined) hoverText += '• Crecimiento: ' + desc.enfoque_crecimiento.toFixed(2) + '<br>';
+                    }
+
+                    hoverText += '<br><b>Posicion:</b> (' + node.posicion.x.toFixed(2) + ', ' + node.posicion.y.toFixed(2) + ')';
+                    return hoverText;
+                });
+
                 const trace = {
                     x: nodes.map(n => n.posicion.x),
                     y: nodes.map(n => n.posicion.y),
@@ -517,13 +574,14 @@
                     type: 'scatter',
                     name: LEGEND_NAMES[tipo] || tipo.replace('_', ' ').toUpperCase(),
                     text: nodes.map(n => n.nombre),
-                    textposition: 'auto',
+                    textposition: 'bottom center',  // Position labels below nodes
                     cliponaxis: false,
                     showlegend: true,
                     textfont: {
-                        size: 11,
-                        family: 'sans-serif',
-                        color: '#2c3e50'
+                        size: 12,
+                        family: 'Arial, sans-serif',
+                        color: '#2c3e50',
+                        weight: 'bold'  // Make labels bold
                     },
                     marker: {
                         size: style.size,
@@ -534,7 +592,7 @@
                             width: style.lineWidth
                         }
                     },
-                    hovertemplate: '<b>%{text}</b><br>x: %{x:.2f}<br>y: %{y:.2f}<extra></extra>'
+                    hovertemplate: hoverTexts.map(ht => ht + '<extra></extra>')
                 };
 
                 traces.push(trace);
@@ -642,12 +700,7 @@
 
         // Add animations
         const style = document.createElement('style');
-        style.textContent = `
-            @keyframes fadeOut {
-                from { opacity: 1; transform: translateY(0); }
-                to { opacity: 0; transform: translateY(-20px); }
-            }
-        `;
+        style.textContent = '@keyframes fadeOut { from { opacity: 1; transform: translateY(0); } to { opacity: 0; transform: translateY(-20px); } }';
         document.head.appendChild(style);
     </script>
 
