@@ -3,22 +3,24 @@
     "version": "3.0",
     "descripcion": "Escuelas y tradiciones político-económicas como grafo de nodos con posicionamiento explícito",
     "ultima_actualizacion": "2025-10-14",
-    "autor": "Data Scientists",
+    "autor": "William Camilo Artundauga Viana",
     "notas": {
-      "posicionamiento": "Cada nodo tiene coordenadas (x, y) explícitas decididas por Data Scientists",
+      "posicionamiento": "Cada nodo tiene coordenadas (x, y) basadas por criterios en scoring methodology.",
       "eje_x": "Control del Estado: -1 (FUERTE/izquierda) a +1 (DÉBIL/derecha)",
       "eje_y": "Enfoque: -1 (CRECIMIENTO/abajo) a +1 (EQUIDAD/arriba)",
-      "metodo": "Laboratorio de Data Science: análisis de características → posición"
+      "metodo": "Posición cualitativa, luego cuantificada y normalizada entre -1 y +1."
     }
   },
-
   "nodos": [
     {
       "id": "marxista",
       "nombre": "Marxista",
       "categoria": "izquierda_redistribución",
       "descripcion": "Enfoque basado en lucha de clases y redistribución radical",
-      "autores": ["Karl Marx", "Friedrich Engels"],
+      "autores": [
+        "Karl Marx",
+        "Friedrich Engels"
+      ],
       "año_origen": 1867,
       "caracteristicas": [
         "Estado fuerte",
@@ -35,8 +37,8 @@
         "politicas_preferidas": "redistribucion"
       },
       "posicion": {
-        "x": -0.85,
-        "y": 0.70,
+        "x": -0.9,
+        "y": 0.9,
         "justificacion": "Estado fuerte (izq) + Equidad máxima (arriba)"
       },
       "escuela_relacionada_similar": null
@@ -46,7 +48,10 @@
       "nombre": "Feminista",
       "categoria": "izquierda_redistribución",
       "descripcion": "Análisis económico desde perspectiva de género",
-      "autores": ["Silvia Federici", "Diane Elson"],
+      "autores": [
+        "Silvia Federici",
+        "Diane Elson"
+      ],
       "año_origen": 1980,
       "caracteristicas": [
         "Estado fuerte",
@@ -63,8 +68,8 @@
         "politicas_preferidas": "redistribucion"
       },
       "posicion": {
-        "x": -0.50,
-        "y": 0.45,
+        "x": -0.9,
+        "y": 0.75,
         "justificacion": "Estado fuerte (izq) + Equidad social (arriba medio)"
       },
       "escuela_relacionada_similar": "ecologica"
@@ -74,7 +79,9 @@
       "nombre": "Ecológica (Raworth)",
       "categoria": "nuevo_paradigma_sostenibilidad",
       "descripcion": "Doughnut Economics: economía dentro de límites planetarios",
-      "autores": ["Kate Raworth"],
+      "autores": [
+        "Kate Raworth"
+      ],
       "año_origen": 2012,
       "caracteristicas": [
         "Estado regulador",
@@ -92,8 +99,8 @@
         "politicas_preferidas": "intervencion_estatal"
       },
       "posicion": {
-        "x": -0.65,
-        "y": 0.50,
+        "x": -0.4,
+        "y": 0.5,
         "justificacion": "Estado fuerte pero regulador (izq) + Equidad y sostenibilidad (arriba)"
       },
       "escuela_relacionada_similar": "institucionalista"
@@ -101,9 +108,11 @@
     {
       "id": "tradicion_desarrollista",
       "nombre": "Tradición Desarrollista",
-      "categoria": "tradicion_histórica",
+      "categoria": "realpolitik_histórica",
       "descripcion": "Corriente de política económica que busca fortalecer la producción nacional, industria y poder estatal como motores del desarrollo. Evoluciona desde el mercantilismo (s. XVII) al estructuralismo latinoamericano.",
-      "autores": ["Sin fundadores unificados (evoluciona históricamente)"],
+      "autores": [
+        "Sin fundadores unificados (evoluciona históricamente)"
+      ],
       "año_origen_aproximado": 1600,
       "caracteristicas": [
         "Estado promotor del desarrollo",
@@ -121,14 +130,13 @@
         "politicas_preferidas": "intervencion_estatal"
       },
       "posicion": {
-        "x": -0.40,
-        "y": 0.65,
-        "justificacion": "Estado fuerte pero con énfasis industrial (izq) + Crecimiento + Equidad balanceado (arriba)"
+        "x": -0.21,
+        "y": -0.52,
+        "justificacion": "Estado fuerte promotor industrial (izquierda) + Énfasis en crecimiento y productividad (abajo)"
       },
       "referentes_históricos": [
         "Jean-Baptiste Colbert",
-        "Raúl Prebisch",
-        "Ha-Joon Chang"
+        "Raúl Prebisch"
       ],
       "relacion_historica_con": [
         "keynesiana",
@@ -141,7 +149,9 @@
       "nombre": "Keynesiana",
       "categoria": "regulacionista_coordinación",
       "descripcion": "Intervención estatal para estabilizar ciclos económicos",
-      "autores": ["John Maynard Keynes"],
+      "autores": [
+        "John Maynard Keynes"
+      ],
       "año_origen": 1936,
       "caracteristicas": [
         "Estado regulador",
@@ -158,8 +168,8 @@
         "politicas_preferidas": "intervencion_estatal"
       },
       "posicion": {
-        "x": 0.25,
-        "y": 0.70,
+        "x": -0.4,
+        "y": 0.04,
         "justificacion": "Estado moderado (centro-izq) + Equidad y crecimiento balanceados (arriba)"
       },
       "escuela_relacionada_similar": "institucionalista"
@@ -169,7 +179,10 @@
       "nombre": "Institucionalista",
       "categoria": "regulacionista_coordinación",
       "descripcion": "Las instituciones moldean el comportamiento económico",
-      "autores": ["Douglass North", "Elinor Ostrom"],
+      "autores": [
+        "Douglass North",
+        "Elinor Ostrom"
+      ],
       "año_origen": 1920,
       "caracteristicas": [
         "Estado coordinador",
@@ -186,8 +199,8 @@
         "politicas_preferidas": "intervencion_estatal"
       },
       "posicion": {
-        "x": 0.50,
-        "y": 0.55,
+        "x": -0.4,
+        "y": 0.25,
         "justificacion": "Estado moderado coordinador (centro) + Énfasis institucional (arriba-medio)"
       },
       "escuela_relacionada_similar": "keynesiana"
@@ -197,7 +210,9 @@
       "nombre": "Estado Emprendedor (Mazzucato)",
       "categoria": "nuevo_paradigma_innovacion",
       "descripcion": "Estado como inversor en innovación disruptiva",
-      "autores": ["Mariana Mazzucato"],
+      "autores": [
+        "Mariana Mazzucato"
+      ],
       "año_origen": 2013,
       "caracteristicas": [
         "Estado innovador e inversor",
@@ -214,8 +229,8 @@
         "politicas_preferidas": "intervencion_estatal"
       },
       "posicion": {
-        "x": 0.35,
-        "y": 0.20,
+        "x": -0.26,
+        "y": -0.35,
         "justificacion": "Estado moderado pero emprendedor (centro-izq) + Crecimiento e innovación (arriba-bajo)"
       },
       "escuela_relacionada_similar": "keynesiana"
@@ -225,7 +240,10 @@
       "nombre": "Conductista",
       "categoria": "incentivos_nudges",
       "descripcion": "Modifica comportamiento a través de incentivos y contexto (sin intervención estatal directa)",
-      "autores": ["Richard Thaler", "Daniel Kahneman"],
+      "autores": [
+        "Richard Thaler",
+        "Daniel Kahneman"
+      ],
       "año_origen": 2008,
       "caracteristicas": [
         "Estado mínimo pero estratégico",
@@ -242,9 +260,9 @@
         "politicas_preferidas": "ambiguas"
       },
       "posicion": {
-        "x": -0.65,
-        "y": -0.55,
-        "justificacion": "Estado mínimo indirecto (izq paradoja) + Equidad mediante incentivos (abajo)"
+        "x": 0.37,
+        "y": -0.42,
+        "justificacion": "Estado mínimo indirecto (derecha) + Eficiencia vía nudges conductuales (énfasis en crecimiento)"
       },
       "escuela_relacionada_similar": null
     },
@@ -253,7 +271,10 @@
       "nombre": "Clásica",
       "categoria": "liberal_mercado_libre",
       "descripcion": "Mercado autorregulado por la mano invisible",
-      "autores": ["Adam Smith", "David Ricardo"],
+      "autores": [
+        "Adam Smith",
+        "David Ricardo"
+      ],
       "año_origen": 1776,
       "caracteristicas": [
         "Estado mínimo",
@@ -270,8 +291,8 @@
         "politicas_preferidas": "libre_mercado"
       },
       "posicion": {
-        "x": 0.80,
-        "y": -0.20,
+        "x": 0.85,
+        "y": -0.9,
         "justificacion": "Estado débil (derecha) + Énfasis en crecimiento (abajo-medio)"
       },
       "escuela_relacionada_similar": "neoclasica"
@@ -281,7 +302,10 @@
       "nombre": "Neoclásica",
       "categoria": "liberal_mercado_libre",
       "descripcion": "Maximización de utilidad individual en mercados competitivos",
-      "autores": ["Léon Walras", "Vilfredo Pareto"],
+      "autores": [
+        "Léon Walras",
+        "Vilfredo Pareto"
+      ],
       "año_origen": 1870,
       "caracteristicas": [
         "Estado mínimo",
@@ -298,8 +322,8 @@
         "politicas_preferidas": "libre_mercado"
       },
       "posicion": {
-        "x": 0.90,
-        "y": -0.45,
+        "x": 0.9,
+        "y": -0.59,
         "justificacion": "Estado muy débil (derecha extrema) + Crecimiento puro (abajo)"
       },
       "escuela_relacionada_similar": "austriaca"
@@ -309,7 +333,10 @@
       "nombre": "Austríaca",
       "categoria": "liberal_mercado_libre",
       "descripcion": "Rechazo de intervención estatal, énfasis en acción individual",
-      "autores": ["Ludwig von Mises", "Friedrich Hayek"],
+      "autores": [
+        "Ludwig von Mises",
+        "Friedrich Hayek"
+      ],
       "año_origen": 1920,
       "caracteristicas": [
         "Estado mínimo (casi nulo)",
@@ -326,8 +353,8 @@
         "politicas_preferidas": "libre_mercado"
       },
       "posicion": {
-        "x": 0.75,
-        "y": -0.75,
+        "x": 0.69,
+        "y": -0.59,
         "justificacion": "Estado débil (derecha) + Crecimiento sin regulación (abajo extrema)"
       },
       "escuela_relacionada_similar": "neoclasica"
@@ -337,7 +364,9 @@
       "nombre": "Schumpeteriana",
       "categoria": "liberal_innovacion",
       "descripcion": "Innovación disruptiva y destrucción creativa impulsan crecimiento",
-      "autores": ["Joseph Schumpeter"],
+      "autores": [
+        "Joseph Schumpeter"
+      ],
       "año_origen": 1942,
       "caracteristicas": [
         "Mercado con emprendimiento",
@@ -354,14 +383,13 @@
         "politicas_preferidas": "libre_mercado"
       },
       "posicion": {
-        "x": 0.55,
-        "y": -0.55,
+        "x": 0.6,
+        "y": -0.73,
         "justificacion": "Estado débil-moderado (derecha) + Énfasis en crecimiento disruptivo (abajo)"
       },
       "escuela_relacionada_similar": "austriaca"
     }
   ],
-
   "transiciones": [
     {
       "id": "crisis_2008",
@@ -409,7 +437,6 @@
       "confianza": "alta"
     }
   ],
-
   "mapeo_visual": {
     "nota": "Este bloque es SOLO para referencia. El script consume 'posicion' de cada nodo.",
     "sistema_coordenadas": {
@@ -425,20 +452,183 @@
     "cuadrantes": {
       "q1": {
         "nombre": "Estado Fuerte + Equidad",
-        "escuelas": ["marxista", "feminista", "ecologica", "tradicion_desarrollista"]
+        "escuelas": [
+          "marxista",
+          "feminista",
+          "ecologica",
+          "tradicion_desarrollista"
+        ]
       },
       "q2": {
         "nombre": "Estado Fuerte + Crecimiento",
-        "escuelas": ["keynesiana", "institucionalista", "estado_emprendedor"]
+        "escuelas": [
+          "keynesiana",
+          "institucionalista",
+          "estado_emprendedor"
+        ]
       },
       "q3": {
         "nombre": "Estado Débil + Equidad",
-        "escuelas": ["conductista"]
+        "escuelas": [
+          "conductista"
+        ]
       },
       "q4": {
         "nombre": "Estado Débil + Crecimiento",
-        "escuelas": ["clasica", "neoclasica", "austriaca", "schumpeteriana"]
+        "escuelas": [
+          "clasica",
+          "neoclasica",
+          "austriaca",
+          "schumpeteriana"
+        ]
       }
     }
+  },
+  "leyenda_pedagogica": {
+    "nota": "Información pedagógica para la leyenda del mapa",
+    "siglas_escuelas": {
+      "A": {
+        "id_nodo": "austriaca",
+        "nombre_completo": "Austríaca"
+      },
+      "Co": {
+        "id_nodo": "conductista",
+        "nombre_completo": "Conductista"
+      },
+      "C": {
+        "id_nodo": "clasica",
+        "nombre_completo": "Clásica"
+      },
+      "D": {
+        "id_nodo": "tradicion_desarrollista",
+        "nombre_completo": "Desarrollista"
+      },
+      "I": {
+        "id_nodo": "institucionalista",
+        "nombre_completo": "Institucionalista"
+      },
+      "K": {
+        "id_nodo": "keynesiana",
+        "nombre_completo": "Keynesiana"
+      },
+      "M": {
+        "id_nodo": "marxista",
+        "nombre_completo": "Marxista"
+      },
+      "N": {
+        "id_nodo": "neoclasica",
+        "nombre_completo": "Neoclásica"
+      },
+      "S": {
+        "id_nodo": "schumpeteriana",
+        "nombre_completo": "Schumpeteriana"
+      }
+    },
+    "guia_tematica": [
+      {
+        "titulo": "Vitalidad y visibilidad del capitalismo",
+        "descripcion": "Si desean conocer opiniones divergentes sobre la vitalidad y la visibilidad del capitalismo",
+        "siglas": [
+          "C",
+          "M",
+          "S",
+          "I"
+        ]
+      },
+      {
+        "titulo": "Defensa del libre mercado",
+        "descripcion": "Si buscan una manera de defender libre mercado",
+        "siglas": [
+          "C",
+          "A",
+          "N"
+        ]
+      },
+      {
+        "titulo": "Conceptualización de lo individual",
+        "descripcion": "Para descubrir diferentes maneras de conceptualizar lo individual",
+        "siglas": [
+          "N",
+          "A",
+          "Co"
+        ]
+      },
+      {
+        "titulo": "Necesidad de intervención estatal",
+        "descripcion": "Para saber por qué a veces es necesaria la intervención estatal",
+        "siglas": [
+          "N",
+          "D",
+          "K"
+        ]
+      },
+      {
+        "titulo": "Teorías sobre grupos y clases",
+        "descripcion": "Si quieres conocer teorías sobre los grupos, especialmente sobre las clases",
+        "siglas": [
+          "C",
+          "M",
+          "K",
+          "I"
+        ]
+      },
+      {
+        "titulo": "Economía más allá de mercados",
+        "descripcion": "Para aprender que la economía es mucho más que los mercados",
+        "siglas": [
+          "M",
+          "I",
+          "Co"
+        ]
+      },
+      {
+        "titulo": "Sistemas económicos completos",
+        "descripcion": "Para comprender los sistemas económicos en su conjunto en vez de limitarse a sus componentes",
+        "siglas": [
+          "M",
+          "D",
+          "K",
+          "I"
+        ]
+      },
+      {
+        "titulo": "Desarrollo tecnológico y productividad",
+        "descripcion": "Para comprender el desarrollo de las tecnologías y el aumento de la productividad",
+        "siglas": [
+          "C",
+          "M",
+          "D",
+          "S"
+        ]
+      },
+      {
+        "titulo": "Interacción individuo-sociedad",
+        "descripcion": "Si desean estudiar la interacción de los individuos y la sociedad",
+        "siglas": [
+          "A",
+          "N",
+          "I",
+          "Co"
+        ]
+      },
+      {
+        "titulo": "Corporaciones y su funcionamiento",
+        "descripcion": "Si quieren averiguar por qué existen las corporaciones y cómo funcionan",
+        "siglas": [
+          "S",
+          "I",
+          "Co"
+        ]
+      },
+      {
+        "titulo": "Desempleo y recesión",
+        "descripcion": "Para debates sobre desempleo y recesión",
+        "siglas": [
+          "C",
+          "K"
+        ]
+      }
+    ],
+    "advertencia": "Basarse sólo en una escuela para explorar un tema, tiene riesgo de polarizarse, causar visión de túnel, arrogancia, y muerte cerebral"
   }
 }

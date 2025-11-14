@@ -37,8 +37,8 @@
         "politicas_preferidas": "redistribucion"
       },
       "posicion": {
-        "x": -0.9,
-        "y": 0.9,
+        "x": -0.43,
+        "y": 0.51,
         "justificacion": "Estado fuerte (izq) + Equidad máxima (arriba)"
       },
       "escuela_relacionada_similar": null
@@ -68,8 +68,8 @@
         "politicas_preferidas": "redistribucion"
       },
       "posicion": {
-        "x": -0.9,
-        "y": 0.75,
+        "x": -0.43,
+        "y": 0.51,
         "justificacion": "Estado fuerte (izq) + Equidad social (arriba medio)"
       },
       "escuela_relacionada_similar": "ecologica"
@@ -99,8 +99,8 @@
         "politicas_preferidas": "intervencion_estatal"
       },
       "posicion": {
-        "x": -0.4,
-        "y": 0.5,
+        "x": -0.19,
+        "y": 0.31,
         "justificacion": "Estado fuerte pero regulador (izq) + Equidad y sostenibilidad (arriba)"
       },
       "escuela_relacionada_similar": "institucionalista"
@@ -108,7 +108,7 @@
     {
       "id": "tradicion_desarrollista",
       "nombre": "Tradición Desarrollista",
-      "categoria": "realpolitik_histórica",
+      "categoria": "tradicion_histórica",
       "descripcion": "Corriente de política económica que busca fortalecer la producción nacional, industria y poder estatal como motores del desarrollo. Evoluciona desde el mercantilismo (s. XVII) al estructuralismo latinoamericano.",
       "autores": [
         "Sin fundadores unificados (evoluciona históricamente)"
@@ -130,9 +130,9 @@
         "politicas_preferidas": "intervencion_estatal"
       },
       "posicion": {
-        "x": -0.21,
-        "y": -0.52,
-        "justificacion": "Estado fuerte promotor industrial (izquierda) + Énfasis en crecimiento y productividad (abajo)"
+        "x": -0.1,
+        "y": -0.2,
+        "justificacion": "Estado fuerte pero con énfasis industrial (izq) + Crecimiento + Equidad balanceado (arriba)"
       },
       "referentes_históricos": [
         "Jean-Baptiste Colbert",
@@ -168,8 +168,8 @@
         "politicas_preferidas": "intervencion_estatal"
       },
       "posicion": {
-        "x": -0.4,
-        "y": 0.04,
+        "x": -0.19,
+        "y": 0.08,
         "justificacion": "Estado moderado (centro-izq) + Equidad y crecimiento balanceados (arriba)"
       },
       "escuela_relacionada_similar": "institucionalista"
@@ -199,8 +199,8 @@
         "politicas_preferidas": "intervencion_estatal"
       },
       "posicion": {
-        "x": -0.4,
-        "y": 0.25,
+        "x": -0.19,
+        "y": 0.19,
         "justificacion": "Estado moderado coordinador (centro) + Énfasis institucional (arriba-medio)"
       },
       "escuela_relacionada_similar": "keynesiana"
@@ -229,8 +229,8 @@
         "politicas_preferidas": "intervencion_estatal"
       },
       "posicion": {
-        "x": -0.26,
-        "y": -0.35,
+        "x": -0.12,
+        "y": -0.11,
         "justificacion": "Estado moderado pero emprendedor (centro-izq) + Crecimiento e innovación (arriba-bajo)"
       },
       "escuela_relacionada_similar": "keynesiana"
@@ -260,9 +260,9 @@
         "politicas_preferidas": "ambiguas"
       },
       "posicion": {
-        "x": 0.37,
-        "y": -0.42,
-        "justificacion": "Estado mínimo indirecto (derecha) + Eficiencia vía nudges conductuales (énfasis en crecimiento)"
+        "x": 0.18,
+        "y": -0.15,
+        "justificacion": "Estado mínimo indirecto (izq paradoja) + Equidad mediante incentivos (abajo)"
       },
       "escuela_relacionada_similar": null
     },
@@ -291,8 +291,8 @@
         "politicas_preferidas": "libre_mercado"
       },
       "posicion": {
-        "x": 0.85,
-        "y": -0.9,
+        "x": 0.41,
+        "y": -0.39,
         "justificacion": "Estado débil (derecha) + Énfasis en crecimiento (abajo-medio)"
       },
       "escuela_relacionada_similar": "neoclasica"
@@ -322,8 +322,8 @@
         "politicas_preferidas": "libre_mercado"
       },
       "posicion": {
-        "x": 0.9,
-        "y": -0.59,
+        "x": 0.43,
+        "y": -0.23,
         "justificacion": "Estado muy débil (derecha extrema) + Crecimiento puro (abajo)"
       },
       "escuela_relacionada_similar": "austriaca"
@@ -353,8 +353,8 @@
         "politicas_preferidas": "libre_mercado"
       },
       "posicion": {
-        "x": 0.69,
-        "y": -0.59,
+        "x": 0.33,
+        "y": -0.23,
         "justificacion": "Estado débil (derecha) + Crecimiento sin regulación (abajo extrema)"
       },
       "escuela_relacionada_similar": "neoclasica"
@@ -383,8 +383,8 @@
         "politicas_preferidas": "libre_mercado"
       },
       "posicion": {
-        "x": 0.6,
-        "y": -0.73,
+        "x": 0.29,
+        "y": -0.3,
         "justificacion": "Estado débil-moderado (derecha) + Énfasis en crecimiento disruptivo (abajo)"
       },
       "escuela_relacionada_similar": "austriaca"
