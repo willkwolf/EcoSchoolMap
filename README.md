@@ -1,15 +1,14 @@
-# Mapa de Escuelas Politicas Economicas - v5.0
+# Mapa de Escuelas Politicas Economicas
 
 Visualizacion interactiva de escuelas politicas economicas con:
-- **Arquitectura modular refactorizada**
-- **Metodologia de scoring basada en Ha-Joon Chang**
+- **Visualización con métodos de scoring basada en investigación de Ha-Joon Chang**
 - **Descriptores cualitativos para posicionamiento fundamentado**
 - **Generadores separados para PNG estatico y HTML interactivo**
 
-## Arquitectura v5.0
+## Arquitectura
 
 ```
-data/escuelas.json                      (Data Scientists)
+data/escuelas.json                      (Investigación)
     ↓ Descriptores cualitativos + Posiciones
 scripts/scoring_methodology.py          (Metodologia de puntuacion)
     ↓ Calcula posiciones desde descriptores
@@ -22,12 +21,12 @@ scripts/config.py                       (Configuracion visual)
 output/ + docs/                         (Salidas)
 ```
 
-### Novedades v5.0
+### Novedades
 
 - **Metodologia fundamentada**: Scoring basado en 6 descriptores de Ha-Joon Chang
 - **Modulos separados**: PNG estatico e HTML interactivo en scripts independientes
 - **Descriptores semanticos**: Cada escuela con caracteristicas cualitativas explícitas
-- **Mejor diferenciacion**: Posiciones calculadas algoritmicamente, no arbitrarias
+- **Mejor diferenciacion**: Posiciones calculadas algoritmicamente
 - **Tooltips enriquecidos**: HTML interactivo muestra descriptores completos
 - **Scripts utilitarios**: Herramienta para recalcular posiciones automaticamente
 - **Paleta Klein Schema**: 11 colores unicos, sin repeticion
@@ -78,7 +77,7 @@ La posicion de cada escuela economica se calcula a partir de **6 descriptores cu
 ### Calculos y Normalizacion
 
 - **Eje X (Control Estatal)**: Valores negativos = Estado fuerte, positivos = Estado debil
-- **Eje Y (Equidad vs Crecimiento)**: Positivo = Equidad, negativo = Crecimiento
+- **Eje Y (Equidad vs Crecimiento)**: Positivo = Equidad Y Sostenibilidad, negativo = Crecimiento y Productividad
 - **Rango**: [-0.9, 0.9] para evitar puntos en bordes
 - **Normalizacion**: Opciones de 'none', 'percentile', 'zscore', 'minmax'
 
@@ -102,11 +101,11 @@ Fuente: https://python-graph-gallery.com/color-palette-finder/?palette=klein
 
 Si hay más nodos que colores, recicla la paleta.
 
-## Responsabilidades por Rol
+## Responsabilidades por Roles ejemplo:
 
 | Rol | Archivos | Tareas |
 |-----|----------|--------|
-| **Data Scientist** | `data/escuelas.json`<br/>`scripts/scoring_methodology.py` | - Definir descriptores cualitativos de escuelas<br/>- Ajustar pesos y valores de scoring<br/>- Validar posiciones calculadas |
+| **Investigador** | `data/escuelas.json`<br/>`scripts/scoring_methodology.py` | - Definir descriptores cualitativos de escuelas<br/>- Ajustar pesos y valores de scoring<br/>- Validar posiciones calculadas |
 | **Viz Engineer** | `scripts/generate_static_plot.py`<br/>`scripts/generate_interactive_plot.py` | - Generar visualizaciones PNG e HTML<br/>- Personalizar graficos y tooltips<br/>- Agregar nuevos formatos de salida |
 | **Architect** | `scripts/config.py` | - Definir paletas de colores<br/>- Configurar estilos visuales<br/>- Establecer constantes del sistema |
 | **DevOps/Utilities** | `scripts/recalculate_positions.py` | - Recalcular posiciones en batch<br/>- Validar integridad de datos<br/>- Automatizar flujos de trabajo |
@@ -153,13 +152,6 @@ python scripts/generate_interactive_plot.py
 
 **Salida:** `docs/mapa_escuelas.html` - Visualizacion interactiva con Plotly
 
-**Opciones avanzadas:**
-```bash
-# Tema oscuro
-python scripts/generate_interactive_plot.py --theme dark
-
-# Personalizar salida
-python scripts/generate_interactive_plot.py --output mi_mapa.html
 ```
 
 ### Opcion 3: Generar ambos
@@ -185,7 +177,7 @@ python scripts/recalculate_positions.py --validate-only
 
 **IMPORTANTE:** El script crea un backup automatico antes de modificar `escuelas.json`.
 
-## Estructura JSON (v5.0)
+## Estructura JSON 
 
 ### Nodos (con descriptores y posicion)
 ```json
@@ -226,66 +218,6 @@ Los **descriptores** son opcionales pero altamente recomendados. Si una escuela 
   "confianza": "muy_alta"
 }
 ```
-
-## 🔄 Ciclo de Desarrollo
-
-### Para Data Scientists: Agregar escuela
-
-1. Edita `data/escuelas.json`
-2. Agrega nodo con propiedades (id, nombre, posición)
-3. Ejecuta: `python scripts/generate_plot.py`
-4. Script asigna color automáticamente
-
-```bash
-python scripts/generate_plot.py
-```
-
-### Para Architects: Cambiar paleta de colores
-
-1. Edita `scripts/config.py`
-2. Modifica `KLEIN_SCHEMA` (o agrega nueva paleta)
-3. Ejecuta: `python scripts/generate_plot.py`
-
-```python
-# En config.py
-KLEIN_SCHEMA = [
-    "#FF4D6F",  # Tu nuevo color 1
-    "#579EA4",  # Tu nuevo color 2
-    ...
-]
-```
-
-### Para Viz Engineers: Agregar nuevo formato
-
-1. Edita `scripts/generate_plot.py`
-2. Agrega método (ej: `generar_svg()`)
-3. Script reutiliza colores asignados
-
-```python
-def generar_svg(self):
-    """Genera versión SVG con mismos colores"""
-    ...
-```
-
-## 📐 Sistemas de Coordenadas
-
-```
-       +1.0 (EQUIDAD)
-         ↑
-         |
--1.0 ← --+-- → +1.0 (CONTROL ESTATAL)
-(FUERTE) 0  (DÉBIL)
-         |
-         ↓
-       -1.0 (CRECIMIENTO)
-```
-
-**Cuadrantes:**
-- Q1 (arriba-izq): Estado fuerte + Equidad
-- Q2 (arriba-der): Estado fuerte + Crecimiento
-- Q3 (abajo-izq): Estado débil + Equidad
-- Q4 (abajo-der): Estado débil + Crecimiento
-
 ## 🎨 Tipos de Nodo (Geometría)
 
 | Tipo | Símbolo | Uso |
@@ -296,31 +228,10 @@ def generar_svg(self):
 
 Bordes grises indican geometría, **no significado semántico**.
 
-## 📈 Reporte de Validación
-
-Al ejecutar el script, genera reporte automático:
-
-```
-📊 REPORTE DE VALIDACIÓN
-================================================
-Versión JSON: 3.0
-Total de nodos: 12
-Total de transiciones: 5
-
-Nodos por categoría:
-  • izquierda_redistribución: 2
-  • regulacionista_coordinación: 2
-  • nuevo_paradigma_sostenibilidad: 1
-  • ...
-```
-
 ## 🌐 Ver en línea
 
 ### GitHub Pages (sin instalar)
-[![Ver gráfico](https://img.shields.io/badge/Ver%20gráfico-GitHub%20Pages-blue?style=for-the-badge)](https://tu-usuario.github.io/mapa-escuelas-politicas)
-
-### Google Colab (reproducible)
-[![Abrir en Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/tu-usuario/mapa-escuelas-politicas/blob/main/notebooks/mapa_escuelas.ipynb)
+[![Ver gráfico](https://img.shields.io/badge/Ver%20gráfico-GitHub%20Pages-blue?style=for-the-badge)](https://willkwolf.github.io/EcoSchoolMap/mapa_escuelas.html)
 
 ## 🛠️ Troubleshooting
 
