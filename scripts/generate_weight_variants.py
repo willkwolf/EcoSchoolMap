@@ -120,7 +120,7 @@ def generate_variant(source_data: dict, preset_name: str,
 
 def generate_all_variants(source_file: str, output_dir: str,
                          presets: List[str],
-                         normalization_method: str) -> dict:
+                         normalization_methods: List[str]) -> dict:
     """
     Genera todas las variantes especificadas.
 
@@ -128,72 +128,78 @@ def generate_all_variants(source_file: str, output_dir: str,
         source_file: Archivo JSON fuente
         output_dir: Directorio de salida
         presets: Lista de nombres de presets a generar
-        normalization_method: Método de normalización
+        normalization_methods: Lista de métodos de normalización a usar
 
     Returns:
         Dict con estadísticas de generación
     """
     # Cargar datos fuente
-    print(f"📂 Cargando datos desde: {source_file}")
+    print(f"Cargando datos desde: {source_file}")
     source_data = load_json(source_file)
     num_schools = len(source_data.get('nodos', []))
-    print(f"✓ Cargadas {num_schools} escuelas\n")
+    print(f"[OK] Cargadas {num_schools} escuelas\n")
 
     # Crear directorio de salida si no existe
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
-        print(f"✓ Directorio creado: {output_dir}\n")
+        print(f"[OK] Directorio creado: {output_dir}\n")
 
     # Generar cada variante
+    total_combinations = len(presets) * len(normalization_methods)
     stats = {
         'generated': [],
         'failed': [],
-        'total': len(presets)
+        'total': total_combinations
     }
 
     print("=" * 80)
     print("GENERANDO VARIANTES DE PESO")
     print("=" * 80)
+    print(f"Presets: {len(presets)} | Metodos: {len(normalization_methods)} | Total: {total_combinations}")
+    print()
 
     for preset_name in presets:
-        try:
-            print(f"\n📊 Generando variante: {preset_name}")
-            print("-" * 80)
+        for norm_method in normalization_methods:
+            try:
+                variant_id = f"{preset_name}-{norm_method}"
+                print(f"Generando: {variant_id}")
 
-            # Generar variante
-            variant_data = generate_variant(source_data, preset_name,
-                                           normalization_method)
+                # Generar variante
+                variant_data = generate_variant(source_data, preset_name, norm_method)
 
-            # Guardar en archivo
-            output_file = os.path.join(output_dir, f"{preset_name}.json")
-            save_json(output_file, variant_data)
+                # Guardar en archivo
+                output_file = os.path.join(output_dir, f"{variant_id}.json")
+                save_json(output_file, variant_data)
 
-            print(f"✓ Guardado en: {output_file}")
-            stats['generated'].append(preset_name)
+                print(f"  [OK] Guardado: {output_file}")
+                stats['generated'].append(variant_id)
 
-        except Exception as e:
-            print(f"❌ Error al generar {preset_name}: {e}")
-            stats['failed'].append(preset_name)
-            import traceback
-            traceback.print_exc()
+            except Exception as e:
+                print(f"  [ERROR] Fallo al generar {variant_id}: {e}")
+                stats['failed'].append(variant_id)
+                import traceback
+                traceback.print_exc()
 
     # Resumen
     print("\n" + "=" * 80)
-    print("RESUMEN DE GENERACIÓN")
+    print("RESUMEN DE GENERACION")
     print("=" * 80)
-    print(f"✓ Variantes generadas exitosamente: {len(stats['generated'])}/{stats['total']}")
+    print(f"[OK] Variantes generadas: {len(stats['generated'])}/{stats['total']}")
 
     if stats['generated']:
         print("\nVariantes generadas:")
+        total_size = 0
         for name in stats['generated']:
             output_file = os.path.join(output_dir, f"{name}.json")
             size_kb = os.path.getsize(output_file) / 1024
-            print(f"  • {name:<25} ({size_kb:.1f} KB)")
+            total_size += size_kb
+            print(f"  * {name:<35} ({size_kb:.1f} KB)")
+        print(f"\nTamano total: {total_size:.1f} KB ({total_size/1024:.2f} MB)")
 
     if stats['failed']:
-        print(f"\n⚠️  Variantes fallidas: {len(stats['failed'])}")
+        print(f"\n[!] Variantes fallidas: {len(stats['failed'])}")
         for name in stats['failed']:
-            print(f"  • {name}")
+            print(f"  * {name}")
 
     print("=" * 80)
 
@@ -239,6 +245,10 @@ Ejemplos:
                        default=NORMALIZATION_METHOD,
                        help=f'Método de normalización (default: {NORMALIZATION_METHOD})')
 
+    parser.add_argument('--all-normalizations',
+                       action='store_true',
+                       help='Generar variantes con TODOS los métodos de normalización (32 archivos)')
+
     parser.add_argument('--list-presets',
                        action='store_true',
                        help='Listar presets disponibles y salir')
@@ -257,22 +267,31 @@ Ejemplos:
         return 0
 
     # Banner
-    print("\n🎨 Generador de Variantes de Peso - v1.0")
+    print("\nGenerador de Variantes de Peso - v1.0")
     print("=" * 80)
 
     # Verificar archivo fuente
     if not os.path.exists(args.data):
-        print(f"❌ Error: No se encontró el archivo fuente {args.data}")
+        print(f"[ERROR] No se encontro el archivo fuente {args.data}")
         return 1
 
     # Determinar qué presets generar
     presets_to_generate = args.presets if args.presets else get_available_presets()
 
-    print(f"\n📝 Configuración:")
-    print(f"  • Archivo fuente: {args.data}")
-    print(f"  • Directorio salida: {args.output_dir}")
-    print(f"  • Método normalización: {args.method}")
-    print(f"  • Presets a generar: {len(presets_to_generate)}")
+    # Determinar qué métodos de normalización usar
+    if args.all_normalizations:
+        normalization_methods = ['none', 'percentile', 'zscore', 'minmax']
+    else:
+        normalization_methods = [args.method]
+
+    total_variants = len(presets_to_generate) * len(normalization_methods)
+
+    print(f"\nConfiguracion:")
+    print(f"  * Archivo fuente: {args.data}")
+    print(f"  * Directorio salida: {args.output_dir}")
+    print(f"  * Metodos normalizacion: {normalization_methods}")
+    print(f"  * Presets a generar: {len(presets_to_generate)}")
+    print(f"  * Total variantes: {total_variants}")
     print()
 
     # Generar variantes
@@ -281,18 +300,18 @@ Ejemplos:
             args.data,
             args.output_dir,
             presets_to_generate,
-            args.method
+            normalization_methods
         )
 
         if stats['failed']:
-            print("\n⚠️  Algunas variantes fallaron")
+            print("\n[!] Algunas variantes fallaron")
             return 1
         else:
-            print("\n✨ Todas las variantes generadas exitosamente")
+            print("\n[OK] Todas las variantes generadas exitosamente")
             return 0
 
     except Exception as e:
-        print(f"\n❌ Error fatal: {e}")
+        print(f"\n[ERROR] Error fatal: {e}")
         import traceback
         traceback.print_exc()
         return 1

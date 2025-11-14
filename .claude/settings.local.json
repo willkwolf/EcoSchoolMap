@@ -12,7 +12,10 @@
       "Bash(\"c:\\Users\\CAMILO\\OneDrive\\Documents\\PythonScripts\\mapa-escuelas-politicas\\venv\\Scripts\\python.exe\" -m http.server:*)",
       "Bash(uv run python -m http.server 8000)",
       "Bash(uv run:*)",
-      "Bash(timeout 2 cmd:*)"
+      "Bash(timeout 2 cmd:*)",
+      "Bash(NUL)",
+      "Bash(del base.json balanced.json state-emphasis.json equity-emphasis.json market-emphasis.json growth-emphasis.json historical-emphasis.json pragmatic-emphasis.json 2)",
+      "Bash(nul)"
     ],
     "deny": [],
     "ask": []
