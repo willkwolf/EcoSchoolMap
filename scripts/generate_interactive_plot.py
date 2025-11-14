@@ -598,7 +598,7 @@ class InteractivePlotGenerator:
     <footer class="footer">
         <p>
             Generado con <a href="https://github.com/plotly/plotly.py" target="_blank">Plotly</a>
-            • Metodología inspirada en Ha-Joon Chang
+            • Visualización inspirada en investigación de Ha-Joon Chang, de su libro (Economics: The User's Guide, 2015) •
             • {len(self.nodos)} escuelas económicas • 
         </p>
         <p style="margin-top: 10px; font-size: 0.85em;">
