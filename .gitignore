@@ -9,7 +9,6 @@ build/
 # Output (no subimos archivos generados)
 output/
 *.png
-*.html
 
 # IDEs
 .vscode/
