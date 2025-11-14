@@ -696,12 +696,153 @@ class InteractivePlotGenerator:
         /* Make Plotly text labels bold */
         .plotly .scatterlayer .textpoint { font-weight: bold !important; }
 
-        .pedagogical-legend { background: #f8f9fa; border: 2px solid #2c3e50; border-radius: 8px; padding: 20px; max-width: 1200px; margin: 0 auto; font-size: 16px; line-height: 1.6; }
-        .pedagogical-legend h3 { color: #2c3e50; margin-top: 0; margin-bottom: 15px; border-bottom: 2px solid #2c3e50; padding-bottom: 10px; }
-        .pedagogical-legend h4 { color: #34495e; margin-top: 20px; margin-bottom: 10px; font-size: 14px; }
-        .siglas-list { font-family: 'Courier New', monospace; font-size: 14px; line-height: 1.8; }
-        .guia-item { margin-bottom: 12px; padding-left: 10px; }
-        .advertencia { background: #fff3cd; border: 1px solid #ffc107; border-radius: 4px; padding: 15px; margin-top: 20px; color: #856404; font-weight: bold; }
+        /* Pedagogical Legend - Redesigned */
+        .pedagogical-legend {
+            background: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 40px;
+            max-width: 1200px;
+            margin: 30px auto;
+            font-size: 16px;
+            line-height: 1.8;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .pedagogical-legend h2 {
+            color: #2c3e50;
+            font-size: 2em;
+            margin-top: 0;
+            margin-bottom: 25px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .intro-text {
+            color: #555;
+            line-height: 1.9;
+            margin-bottom: 35px;
+            text-align: justify;
+            font-size: 1.05em;
+        }
+
+        .intro-text p {
+            margin-bottom: 15px;
+        }
+
+        .legend-sections {
+            margin-top: 30px;
+        }
+
+        .legend-section {
+            margin-top: 35px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .legend-section h3 {
+            color: #2c3e50;
+            font-size: 1.3em;
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .siglas-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px 20px;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            font-size: 15px;
+        }
+
+        .sigla-item {
+            color: #444;
+            padding: 8px 12px;
+            background: white;
+            border-radius: 4px;
+            border: 1px solid #e8e8e8;
+        }
+
+        .sigla-item strong {
+            color: #667eea;
+            font-weight: 700;
+        }
+
+        .guia-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .guia-item {
+            padding: 12px 15px;
+            background: white;
+            border-radius: 6px;
+            border-left: 3px solid #667eea;
+            line-height: 1.6;
+        }
+
+        .guia-item strong {
+            color: #2c3e50;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .guia-siglas {
+            color: #667eea;
+            font-weight: 600;
+            font-family: 'Courier New', monospace;
+        }
+
+        .transiciones-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .transicion-item {
+            padding: 10px 15px;
+            background: white;
+            border-radius: 4px;
+            color: #555;
+        }
+
+        .advertencia-box {
+            background: #fff9e6;
+            border: 2px solid #f4d03f;
+            border-radius: 8px;
+            padding: 20px 25px;
+            margin-top: 35px;
+            color: #856404;
+        }
+
+        .advertencia-box h4 {
+            color: #856404;
+            margin-top: 0;
+            margin-bottom: 12px;
+            font-size: 1.1em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .advertencia-box p {
+            margin: 0;
+            line-height: 1.7;
+            font-size: 0.95em;
+        }
+
+        @media (max-width: 768px) {
+            .pedagogical-legend { padding: 25px; }
+            .siglas-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 480px) {
+            .siglas-grid { grid-template-columns: 1fr; }
+        }
 
         .info { text-align: center; color: #7f8c8d; margin-bottom: 20px; font-size: 0.9em; }
         .footer { text-align: center; margin-top: 40px; padding: 30px 20px; background: #2c3e50; color: white; }
@@ -1190,49 +1331,99 @@ class InteractivePlotGenerator:
 
     def _generar_leyenda_pedagogica_html(self) -> str:
         """
-        Genera el HTML de la leyenda pedagógica a partir de los datos del JSON.
+        Genera el HTML de la leyenda pedagógica con diseño mejorado y texto introductorio.
 
         Returns:
-            HTML de la leyenda pedagógica
+            HTML de la leyenda pedagógica con estructura UX/UI optimizada
         """
-        # Sección de siglas
-        siglas_items = [
-            f"<div>{sigla} = {info['nombre_completo']}</div>"
-            for sigla, info in sorted(self.siglas_escuelas.items())
-        ]
-        siglas_html = "\n".join(siglas_items)
+        # Sección de siglas en grid
+        siglas_items = []
+        for sigla, info in sorted(self.siglas_escuelas.items()):
+            siglas_items.append(
+                f'<div class="sigla-item"><strong>{sigla}</strong> = {info["nombre_completo"]}</div>'
+            )
+        siglas_html = "\n                    ".join(siglas_items)
 
-        # Sección de guía temática
+        # Sección de guía temática mejorada
         guia_items = []
         for idx, tema in enumerate(self.guia_tematica, 1):
             siglas_str = ", ".join(tema['siglas'])
             guia_items.append(
-                f'<div class="guia-item"><strong>{idx}. {tema["titulo"]}:</strong> {siglas_str}</div>'
+                f'''<div class="guia-item">
+                        <strong>{idx}. {tema["titulo"]}</strong>
+                        <span class="guia-siglas">{siglas_str}</span>
+                    </div>'''
             )
-        guia_html = "\n".join(guia_items)
+        guia_html = "\n                    ".join(guia_items)
 
-        # Construir leyenda completa
+        # Texto introductorio elegante
+        intro_text = """
+            <div class="intro-text">
+                <p>
+                    Aunque existen buenas razones para conocer las diferencias entre escuelas economicas,
+                    es comprensible que la propuesta de explorar nueve enfoques distintos pueda sentirse
+                    abrumadora. Es como si te ofrecieran probar nueve sabores de helado cuando creias
+                    que solo existia la vainilla. Incluso quienes tienen curiosidad pueden pensar que
+                    nueve son demasiados.
+                </p>
+                <p>
+                    Por eso, en la guia tematica que sigue se proponen "cocteles": combinaciones de dos
+                    a cuatro escuelas aplicadas a temas concretos. La esperanza es que, tras degustar un
+                    par de estos cocteles, surja el deseo de recorrer todas las botellas de la estanteria.
+                    Y si no quieres probarlas todas, incluso uno o dos sabores bastan para mostrar que
+                    existen muchas maneras de pensar, hacer y aproximarse a la economia.
+                </p>
+            </div>
+        """
+
+        # Construir leyenda completa con nueva estructura
         leyenda = f"""
             <div class="pedagogical-legend">
-                <h3>Guía Pedagógica</h3>
+                <h2>¿Un buen coctel o todas las botellas de la estanteria?</h2>
 
-                <h4>SIGLAS:</h4>
-                <div class="siglas-list">
-{siglas_html}
-                </div>
+{intro_text}
 
-                <h4>TRANSICIONES (flechas):</h4>
-                <div>
-                    <div>--- Muy alta confianza</div>
-                    <div>- - - Confianza media</div>
-                    <div>... Baja confianza</div>
-                </div>
+                <div class="legend-sections">
+                    <!-- Seccion Siglas -->
+                    <div class="legend-section siglas-section">
+                        <h3>Siglas de las Escuelas</h3>
+                        <div class="siglas-grid">
+                    {siglas_html}
+                        </div>
+                    </div>
 
-                <h4>GUÍA TEMÁTICA:</h4>
-{guia_html}
+                    <!-- Seccion Guia Tematica -->
+                    <div class="legend-section guia-section">
+                        <h3>Guia Tematica: Cocteles Recomendados</h3>
+                        <div class="guia-list">
+                    {guia_html}
+                        </div>
+                    </div>
 
-                <div class="advertencia">
-                    ADVERTENCIA: {self.advertencia}
+                    <!-- Seccion Transiciones -->
+                    <div class="legend-section transiciones-section">
+                        <h3>Transiciones Historicas</h3>
+                        <div class="transiciones-list">
+                            <div class="transicion-item">
+                                <strong>Linea solida (—):</strong> Muy alta confianza historica
+                            </div>
+                            <div class="transicion-item">
+                                <strong>Linea discontinua (- -):</strong> Confianza media
+                            </div>
+                            <div class="transicion-item">
+                                <strong>Linea punteada (...):</strong> Baja confianza
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Advertencia -->
+                    <div class="advertencia-box">
+                        <h4>⚠ Advertencia Importante</h4>
+                        <p>
+                            Basarse unicamente en una escuela para explorar un tema aumenta el riesgo de
+                            polarizacion ideologica, vision de tunel, arrogancia intelectual y analisis incompleto.
+                        </p>
+                    </div>
                 </div>
             </div>
 """
