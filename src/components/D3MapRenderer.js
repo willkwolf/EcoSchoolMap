@@ -52,11 +52,17 @@ export class D3MapRenderer {
         // Setup zoom behavior
         this.zoom = d3.zoom()
             .scaleExtent([0.5, 4]) // Min and max zoom
+            .filter((event) => {
+                // Allow touch events and prevent default browser gestures from interfering
+                // Prevent zoom on double-click (better for mobile)
+                return !event.button && event.type !== 'dblclick';
+            })
             .on('zoom', (event) => {
                 this.zoomGroup.attr('transform', event.transform);
             });
 
-        this.svg.call(this.zoom);
+        this.svg.call(this.zoom)
+            .on('dblclick.zoom', null); // Disable double-click zoom for better mobile UX
 
         // Create scales
         const scales = createScales(this.options.width, this.options.height, {
