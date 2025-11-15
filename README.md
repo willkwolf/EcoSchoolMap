@@ -546,15 +546,6 @@ https://willkwolf.github.io/EcoSchoolMap/
 
 ---
 
-## 🙏 Agradecimientos
-
-- **Ha-Joon Chang** por su investigación fundamental sobre escuelas económicas
-- **D3.js Community** por la biblioteca de visualización
-- **Klein** por la paleta de colores
-- Todos los contribuidores del proyecto
-
----
-
 ## 📝 Changelog
 
 Ver [CHANGELOG.md](CHANGELOG.md) para el historial completo de versiones.
