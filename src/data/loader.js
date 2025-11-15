@@ -8,7 +8,7 @@
  */
 export async function loadBaseData() {
     try {
-        const response = await fetch('/data/escuelas.json');
+        const response = await fetch('./data/escuelas.json');
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -31,7 +31,7 @@ export async function loadVariant(preset, normalization) {
     const variantName = `${preset}-${normalization}`;
 
     try {
-        const response = await fetch(`/data/variants/${variantName}.json`);
+        const response = await fetch(`./data/variants/${variantName}.json`);
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }

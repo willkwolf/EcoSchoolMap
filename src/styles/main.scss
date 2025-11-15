@@ -238,11 +238,175 @@ h3 {
 
         h3 {
             color: $primary-color;
+            margin-bottom: 1rem;
         }
 
         p {
             font-size: 0.95rem;
             color: #666;
+            margin-bottom: 0.75rem;
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 0.5rem;
+
+            li {
+                padding: 0.4rem 0;
+                color: #555;
+                font-size: 0.9rem;
+
+                strong {
+                    color: $primary-color;
+                }
+            }
+        }
+    }
+}
+
+// ============================================================
+// Cocktails Section
+// ============================================================
+
+.cocktails-section {
+    padding: 4rem 2rem;
+    background-color: $bg-color;
+
+    @media (max-width: $mobile) {
+        padding: 2rem 1rem;
+    }
+
+    @media (max-width: $tablet) and (min-width: $mobile + 1) {
+        padding: 3rem 1.5rem;
+    }
+
+    .cocktails-container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    h2 {
+        text-align: center;
+        color: $primary-color;
+        margin-bottom: 2rem;
+    }
+
+    h3 {
+        color: $primary-color;
+        margin-top: 2.5rem;
+        margin-bottom: 1.5rem;
+        text-align: center;
+    }
+
+    .intro-text {
+        max-width: 900px;
+        margin: 0 auto 2.5rem;
+        line-height: 1.8;
+        color: #555;
+
+        p {
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+        }
+    }
+
+    .siglas-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.75rem 1.25rem;
+        margin: 1.5rem auto 2.5rem;
+        max-width: 800px;
+
+        @media (max-width: $tablet) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        @media (max-width: $mobile) {
+            grid-template-columns: 1fr;
+        }
+
+        .sigla-item {
+            padding: 0.75rem 1rem;
+            background-color: white;
+            border: 1px solid $border-color;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 0.95rem;
+
+            strong {
+                color: $secondary-color;
+                font-size: 1.1rem;
+            }
+        }
+    }
+
+    .cocktails-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+        margin-top: 2rem;
+
+        @media (max-width: $tablet) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        @media (max-width: $mobile) {
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+    }
+
+    .cocktail-card {
+        background-color: white;
+        border: 1px solid $border-color;
+        border-radius: 12px;
+        padding: 1.5rem;
+        position: relative;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+        &:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+        }
+
+        .cocktail-number {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1rem;
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.4);
+        }
+
+        h4 {
+            margin-top: 0.75rem;
+            margin-bottom: 1rem;
+            color: $primary-color;
+            font-size: 1.1rem;
+            line-height: 1.4;
+            min-height: 2.8rem;
+        }
+
+        .cocktail-schools {
+            font-size: 0.9rem;
+            color: #666;
+            margin: 0;
+            padding-top: 0.75rem;
+            border-top: 1px solid #f0f0f0;
+
+            strong {
+                color: $secondary-color;
+            }
         }
     }
 }
