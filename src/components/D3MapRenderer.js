@@ -6,6 +6,7 @@
 import * as d3 from 'd3';
 import { createScales, assignColorsToNodes, getConfidenceStyle } from '../utils/scales.js';
 import { getNodeSymbol, getNodeSize, getNodeBorderStyle, createArrowMarker, getLabelOffset } from '../utils/symbols.js';
+import { TooltipManager } from './TooltipManager.js';
 
 export class D3MapRenderer {
     constructor(containerSelector, data, options = {}) {
@@ -19,9 +20,12 @@ export class D3MapRenderer {
         };
 
         this.svg = null;
+        this.zoomGroup = null;
         this.xScale = null;
         this.yScale = null;
         this.colorMap = null;
+        this.tooltipManager = new TooltipManager();
+        this.zoom = null;
 
         this.init();
     }
@@ -42,6 +46,18 @@ export class D3MapRenderer {
             .attr('preserveAspectRatio', 'xMidYMid meet')
             .style('background-color', '#ffffff');
 
+        // Create zoom group (all content will be rendered here)
+        this.zoomGroup = this.svg.append('g').attr('class', 'zoom-group');
+
+        // Setup zoom behavior
+        this.zoom = d3.zoom()
+            .scaleExtent([0.5, 4]) // Min and max zoom
+            .on('zoom', (event) => {
+                this.zoomGroup.attr('transform', event.transform);
+            });
+
+        this.svg.call(this.zoom);
+
         // Create scales
         const scales = createScales(this.options.width, this.options.height, {
             padding: this.options.padding
@@ -52,10 +68,19 @@ export class D3MapRenderer {
         // Assign colors to nodes
         this.colorMap = assignColorsToNodes(this.data.nodos);
 
-        // Create arrow marker
+        // Create arrow marker (in defs, outside zoom group)
         createArrowMarker(this.svg);
 
         console.log('✅ D3MapRenderer initialized');
+    }
+
+    /**
+     * Reset zoom to initial state
+     */
+    resetZoom() {
+        this.svg.transition()
+            .duration(750)
+            .call(this.zoom.transform, d3.zoomIdentity);
     }
 
     /**
@@ -81,7 +106,7 @@ export class D3MapRenderer {
             { x: 0, y: -1.1, width: 1.1, height: 1.1, fill: 'rgba(128,0,128,0.05)', name: 'Q4' }
         ];
 
-        const quadrantGroup = this.svg.append('g').attr('class', 'quadrants');
+        const quadrantGroup = this.zoomGroup.append('g').attr('class', 'quadrants');
 
         quadrantGroup.selectAll('rect')
             .data(quadrants)
@@ -99,7 +124,7 @@ export class D3MapRenderer {
      * Render X and Y axes with zero lines
      */
     renderAxes() {
-        const axesGroup = this.svg.append('g').attr('class', 'axes');
+        const axesGroup = this.zoomGroup.append('g').attr('class', 'axes');
 
         // X axis (vertical line at x=0)
         axesGroup.append('line')
@@ -148,7 +173,7 @@ export class D3MapRenderer {
     renderTransitions() {
         if (!this.data.transiciones) return;
 
-        const transitionGroup = this.svg.append('g').attr('class', 'transitions');
+        const transitionGroup = this.zoomGroup.append('g').attr('class', 'transitions');
 
         this.data.transiciones.forEach(transition => {
             const fromNode = this.data.nodos.find(n => n.id === transition.desde_nodo);
@@ -205,7 +230,7 @@ export class D3MapRenderer {
      * Render school nodes
      */
     renderNodes() {
-        const nodesGroup = this.svg.append('g').attr('class', 'nodes');
+        const nodesGroup = this.zoomGroup.append('g').attr('class', 'nodes');
 
         this.data.nodos.forEach(node => {
             const x = this.xScale(node.posicion.x);
@@ -245,33 +270,31 @@ export class D3MapRenderer {
     }
 
     /**
-     * Node hover handler (placeholder)
+     * Node hover handler
      */
     onNodeHover(event, node) {
-        console.log('Node hover:', node.nombre);
-        // TODO: Show tooltip (FASE 2)
+        this.tooltipManager.showNodeTooltip(event, node);
     }
 
     /**
-     * Node leave handler (placeholder)
+     * Node leave handler
      */
     onNodeLeave() {
-        // TODO: Hide tooltip (FASE 2)
+        this.tooltipManager.hide();
     }
 
     /**
-     * Transition hover handler (placeholder)
+     * Transition hover handler
      */
     onTransitionHover(event, transition) {
-        console.log('Transition hover:', transition.evento_disparador);
-        // TODO: Show tooltip (FASE 2)
+        this.tooltipManager.showTransitionTooltip(event, transition);
     }
 
     /**
-     * Transition leave handler (placeholder)
+     * Transition leave handler
      */
     onTransitionLeave() {
-        // TODO: Hide tooltip (FASE 2)
+        this.tooltipManager.hide();
     }
 
     /**
@@ -282,9 +305,10 @@ export class D3MapRenderer {
         this.data = newData;
         this.colorMap = assignColorsToNodes(newData.nodos);
 
-        // Clear and re-render
-        this.svg.selectAll('*').remove();
-        createArrowMarker(this.svg);
+        // Clear only the zoom group content (preserve zoom behavior)
+        this.zoomGroup.selectAll('*').remove();
+
+        // Re-render
         this.render();
 
         console.log('✅ Variant updated');
