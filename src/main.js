@@ -14,8 +14,6 @@ import { ScrollController } from './scrollytelling/ScrollController.js';
 import { loadVariant, loadBaseData, mergeVariantWithBase } from './data/loader.js';
 
 console.log('🚀 Mapa de Escuelas Económicas - D3.js Version');
-console.log('D3 version:', d3.version);
-console.log('GSAP version:', gsap.version);
 
 let mapRenderer = null;
 let baseData = null;
