@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Mapa interactivo de escuelas políticas económicas con D3.js y scrollytelling">
+    <title>Mapa de Escuelas Económicas | Visualización Interactiva</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+</head>
+<body>
+    <!-- Hero Section -->
+    <section id="hero" class="hero-section">
+        <div class="hero-content">
+            <h1>Mapa de Escuelas Económicas</h1>
+            <p class="hero-subtitle">Una visualización interactiva del pensamiento económico</p>
+            <p class="hero-description">
+                Explora las 12 principales escuelas de pensamiento económico en un espacio bidimensional
+                que representa el rol del Estado y los objetivos socioeconómicos.
+            </p>
+            <div class="hero-actions">
+                <a href="#visualization" class="btn btn-primary">Explorar el Mapa</a>
+                <a href="https://github.com/willkwolf/EcoSchoolMap" class="btn btn-secondary" target="_blank">Ver en GitHub</a>
+            </div>
+            <div class="scroll-indicator">
+                <span>Scroll para explorar</span>
+                <svg width="20" height="20" viewBox="0 0 20 20">
+                    <polyline points="5,7 10,12 15,7" stroke="currentColor" fill="none" stroke-width="2"/>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- Guide Section -->
+    <section id="guide" class="guide-section">
+        <div class="guide-container">
+            <h2>Guía de Lectura</h2>
+            <div class="guide-grid">
+                <div class="guide-card">
+                    <h3>Eje X: Arquitectura Económica</h3>
+                    <p>Representa el grado de intervención estatal: desde economía dirigida (izquierda) hasta economía de mercado (derecha).</p>
+                </div>
+                <div class="guide-card">
+                    <h3>Eje Y: Objetivo Socioeconómico</h3>
+                    <p>Representa la prioridad entre productividad/crecimiento (abajo) y equidad/sostenibilidad (arriba).</p>
+                </div>
+                <div class="guide-card">
+                    <h3>Cuadrantes</h3>
+                    <p>Cada cuadrante agrupa escuelas con similar filosofía sobre el rol del Estado y objetivos económicos.</p>
+                </div>
+                <div class="guide-card">
+                    <h3>Transiciones Históricas</h3>
+                    <p>Flechas que muestran 8 eventos históricos que provocaron cambios de paradigma económico.</p>
+                </div>
+                <div class="guide-card">
+                    <h3>Perspectivas de Peso</h3>
+                    <p>8 configuraciones que enfatizan diferentes aspectos: Estado, Equidad, Mercado, Crecimiento, Historia, Pragmatismo.</p>
+                </div>
+                <div class="guide-card">
+                    <h3>Métodos de Normalización</h3>
+                    <p>4 técnicas estadísticas para procesar los descriptores: Percentil, Z-Score, Min-Max, y Crudo.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Visualization Section -->
+    <section id="visualization" class="visualization-section">
+        <div class="vis-container">
+            <h2>Mapa Interactivo</h2>
+
+            <!-- Controls -->
+            <div class="controls">
+                <div class="control-group">
+                    <label for="preset-dropdown">Perspectiva de Peso:</label>
+                    <select id="preset-dropdown">
+                        <option value="base" selected>Base (Original)</option>
+                        <option value="balanced">Balanceado</option>
+                        <option value="state-emphasis">Enfoque Estado</option>
+                        <option value="equity-emphasis">Enfoque Equidad</option>
+                        <option value="market-emphasis">Enfoque Mercado</option>
+                        <option value="growth-emphasis">Enfoque Crecimiento</option>
+                        <option value="historical-emphasis">Enfoque Historico</option>
+                        <option value="pragmatic-emphasis">Enfoque Pragmatico</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <label for="normalization-dropdown">Método de Normalización:</label>
+                    <select id="normalization-dropdown">
+                        <option value="percentile" selected>Percentil (Distribución Uniforme)</option>
+                        <option value="zscore">Puntaje-Z (Centrado Estadístico)</option>
+                        <option value="minmax">Min-Max (Rango Completo)</option>
+                        <option value="none">Crudo (Sin Normalización)</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- SVG Container -->
+            <div id="map-container" class="map-container">
+                <!-- D3.js will render here -->
+            </div>
+
+            <!-- Legend -->
+            <div id="legend-container" class="legend-container">
+                <!-- Will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Pedagogical Legend Section -->
+    <section id="pedagogical-legend" class="pedagogical-section">
+        <!-- Will be populated by JavaScript from escuelas.json -->
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>Desarrollado por William Camilo Artundauga Viana</p>
+            <p>Datos actualizados: Noviembre 2025 | Versión 3.1</p>
+            <div class="footer-links">
+                <a href="https://github.com/willkwolf/EcoSchoolMap" target="_blank">GitHub</a>
+                <a href="https://github.com/willkwolf/EcoSchoolMap/issues" target="_blank">Reportar Issue</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Vite Entry Point -->
+    <script type="module" src="/src/main.js"></script>
+</body>
+</html>
