@@ -10,8 +10,7 @@ import { saveSvgAsPng } from 'save-svg-as-png';
 
 // Import components
 import { D3MapRenderer } from './components/D3MapRenderer.js';
-// import { TooltipManager } from './components/TooltipManager.js';
-// import { ScrollController } from './scrollytelling/ScrollController.js';
+import { ScrollController } from './scrollytelling/ScrollController.js';
 import { loadVariant, loadBaseData, mergeVariantWithBase } from './data/loader.js';
 
 console.log('🚀 Mapa de Escuelas Económicas - D3.js Version');
@@ -20,6 +19,15 @@ console.log('GSAP version:', gsap.version);
 
 let mapRenderer = null;
 let baseData = null;
+let scrollController = null;
+
+// Define sections for scrollytelling
+const sections = [
+    { id: 'hero', name: 'Introducción' },
+    { id: 'guide', name: 'Guía de Lectura' },
+    { id: 'visualization', name: 'Mapa Interactivo' },
+    { id: 'pedagogical-legend', name: 'Leyenda Pedagógica' }
+];
 
 // Initialize app
 async function init() {
@@ -41,8 +49,8 @@ async function init() {
         // Setup variant selectors
         setupVariantControls();
 
-        // TODO: Initialize scrollytelling
-        // const scrollController = new ScrollController(mapRenderer);
+        // Initialize scrollytelling
+        scrollController = new ScrollController(sections);
 
         console.log('✅ App initialized successfully');
     } catch (error) {
