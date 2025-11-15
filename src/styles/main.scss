@@ -278,6 +278,40 @@ h3 {
                     border-color: $secondary-color;
                 }
             }
+
+            .control-btn {
+                padding: 0.75rem 1.5rem;
+                margin-right: 1rem;
+                border: 1px solid $secondary-color;
+                border-radius: 8px;
+                background-color: white;
+                color: $secondary-color;
+                font-size: 0.95rem;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.3s ease;
+
+                &:hover {
+                    background-color: $secondary-color;
+                    color: white;
+                    transform: translateY(-2px);
+                    box-shadow: 0 2px 8px rgba(52, 152, 219, 0.3);
+                }
+
+                &:active {
+                    transform: translateY(0);
+                }
+
+                &:last-child {
+                    margin-right: 0;
+                }
+
+                @media (max-width: $mobile) {
+                    width: 100%;
+                    margin-right: 0;
+                    margin-bottom: 0.5rem;
+                }
+            }
         }
     }
 

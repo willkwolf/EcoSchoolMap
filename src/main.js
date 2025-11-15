@@ -6,6 +6,7 @@
 import './styles/main.scss';
 import * as d3 from 'd3';
 import { gsap } from 'gsap';
+import { saveSvgAsPng } from 'save-svg-as-png';
 
 // Import components
 import { D3MapRenderer } from './components/D3MapRenderer.js';
@@ -53,6 +54,8 @@ async function init() {
 function setupVariantControls() {
     const presetDropdown = document.getElementById('preset-dropdown');
     const normalizationDropdown = document.getElementById('normalization-dropdown');
+    const resetZoomBtn = document.getElementById('reset-zoom-btn');
+    const downloadPngBtn = document.getElementById('download-png-btn');
 
     const loadAndUpdateVariant = async () => {
         const preset = presetDropdown.value;
@@ -71,6 +74,27 @@ function setupVariantControls() {
 
     presetDropdown.addEventListener('change', loadAndUpdateVariant);
     normalizationDropdown.addEventListener('change', loadAndUpdateVariant);
+
+    // Reset zoom button
+    resetZoomBtn.addEventListener('click', () => {
+        mapRenderer.resetZoom();
+    });
+
+    // Download PNG button
+    downloadPngBtn.addEventListener('click', () => {
+        const svg = document.querySelector('#map-container svg');
+        if (svg) {
+            const preset = presetDropdown.value;
+            const normalization = normalizationDropdown.value;
+            const filename = `mapa-escuelas-${preset}-${normalization}.png`;
+
+            saveSvgAsPng(svg, filename, {
+                scale: 2,
+                backgroundColor: 'white'
+            });
+            console.log(`✅ Downloaded: ${filename}`);
+        }
+    });
 }
 
 // Start app when DOM is ready
