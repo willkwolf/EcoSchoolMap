@@ -23,6 +23,7 @@ let scrollController = null;
 const sections = [
     { id: 'hero', name: 'Introducción' },
     { id: 'guide', name: 'Guía de Lectura' },
+    { id: 'cocktails', name: 'Cocteles Temáticos' },
     { id: 'visualization', name: 'Mapa Interactivo' },
     { id: 'pedagogical-legend', name: 'Leyenda Pedagógica' }
 ];
@@ -77,22 +78,40 @@ function setupVariantControls() {
 
             // Show loading indicator
             loadingIndicator.style.display = 'block';
+            loadingIndicator.style.color = '';
+            loadingIndicator.querySelector('p').textContent = 'Cargando variante...';
 
+            // Load variant data (await completes when fetch finishes)
             const variantData = await loadVariant(preset, normalization);
             const mergedData = mergeVariantWithBase(variantData, baseData);
+
+            // Update map (triggers 800ms D3 transition)
             mapRenderer.updateVariant(mergedData);
 
-            // Re-enable controls and hide indicator after transition completes
-            setTimeout(() => {
-                loadingIndicator.style.display = 'none';
-                presetDropdown.disabled = false;
-                normalizationDropdown.disabled = false;
-            }, 900);
-        } catch (error) {
-            console.error('Error loading variant:', error);
+            // Wait for D3 transition to complete (800ms) before re-enabling controls
+            await new Promise(resolve => setTimeout(resolve, 850));
+
+            // Hide indicator and re-enable controls
             loadingIndicator.style.display = 'none';
             presetDropdown.disabled = false;
             normalizationDropdown.disabled = false;
+        } catch (error) {
+            console.error('❌ Error loading variant:', error);
+
+            // Show error message to user
+            const errorText = loadingIndicator.querySelector('p');
+            errorText.textContent = 'Error al cargar variante. Intenta de nuevo.';
+            errorText.style.color = '#e74c3c';
+            loadingIndicator.querySelector('.spinner').style.display = 'none';
+
+            // Re-enable controls after 3 seconds
+            setTimeout(() => {
+                loadingIndicator.style.display = 'none';
+                loadingIndicator.querySelector('.spinner').style.display = 'block';
+                errorText.style.color = '';
+                presetDropdown.disabled = false;
+                normalizationDropdown.disabled = false;
+            }, 3000);
         }
     };
 
