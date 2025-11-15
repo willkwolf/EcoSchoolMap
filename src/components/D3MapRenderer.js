@@ -391,4 +391,58 @@ export class D3MapRenderer {
 
         console.log('✅ Variant updated with smooth transition');
     }
+
+    /**
+     * Set visibility of transition arrows based on filter mode
+     * @param {string} mode - Visibility mode: 'all', 'none', 'high', 'medium-high'
+     */
+    setTransitionVisibility(mode) {
+        const transitionGroup = this.zoomGroup.select('.transitions');
+
+        if (!transitionGroup || transitionGroup.empty()) {
+            console.warn('Transition group not found');
+            return;
+        }
+
+        switch (mode) {
+            case 'none':
+                // Hide all transitions
+                transitionGroup.style('display', 'none');
+                break;
+
+            case 'all':
+                // Show all transitions
+                transitionGroup.style('display', null);
+                transitionGroup.selectAll('.transition-arrow').style('display', null);
+                transitionGroup.selectAll('.transition-label').style('display', null);
+                break;
+
+            case 'high':
+                // Show only high confidence (muy_alta)
+                transitionGroup.style('display', null);
+                this.data.transiciones.forEach(transition => {
+                    const display = transition.confianza === 'muy_alta' ? null : 'none';
+                    transitionGroup.select(`.transition-arrow.${transition.id}`).style('display', display);
+                    transitionGroup.select(`.transition-label.${transition.id}`).style('display', display);
+                });
+                break;
+
+            case 'medium-high':
+                // Show high and medium confidence (muy_alta, alta, media)
+                transitionGroup.style('display', null);
+                this.data.transiciones.forEach(transition => {
+                    const showConfidence = ['muy_alta', 'alta', 'media'];
+                    const display = showConfidence.includes(transition.confianza) ? null : 'none';
+                    transitionGroup.select(`.transition-arrow.${transition.id}`).style('display', display);
+                    transitionGroup.select(`.transition-label.${transition.id}`).style('display', display);
+                });
+                break;
+
+            default:
+                console.warn(`Unknown transition visibility mode: ${mode}`);
+                transitionGroup.style('display', null);
+        }
+
+        console.log(`✅ Transition visibility set to: ${mode}`);
+    }
 }
