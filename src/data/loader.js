@@ -1,10 +1,30 @@
 /**
  * Data Loader - Manages loading and merging of JSON data
+ *
+ * This module provides functions to:
+ * - Load the base escuelas.json with complete school descriptions
+ * - Load variant JSON files with calculated positions
+ * - Merge variants with base data
+ * - Optionally preload all 32 variants for faster switching
+ *
+ * @module data/loader
  */
 
 /**
  * Load base escuelas.json with complete descriptive data
- * @returns {Promise<Object>} Base data object
+ *
+ * Contains full information for all schools:
+ * - Descriptive metadata (nombre, autores, descripcion)
+ * - Qualitative descriptors (6 core descriptors)
+ * - Historical transitions
+ * - Visual mapping (colors, types)
+ *
+ * @returns {Promise<Object>} Base data object with nodos and transiciones
+ * @throws {Error} If fetch fails or JSON parsing fails
+ *
+ * @example
+ * const baseData = await loadBaseData();
+ * console.log(baseData.nodos.length); // 12 schools
  */
 export async function loadBaseData() {
     try {
@@ -22,10 +42,27 @@ export async function loadBaseData() {
 }
 
 /**
- * Load specific variant JSON file
+ * Load specific variant JSON file with calculated positions
+ *
+ * Variants contain only:
+ * - Node IDs and calculated positions (x, y)
+ * - Metadata about preset and normalization method
+ *
+ * Available presets:
+ * - base, balanced, state-emphasis, equity-emphasis, market-emphasis,
+ *   growth-emphasis, historical-emphasis, pragmatic-emphasis
+ *
+ * Available normalizations:
+ * - percentile (default), zscore, minmax, none
+ *
  * @param {string} preset - Preset name (e.g., 'base', 'balanced')
  * @param {string} normalization - Normalization method (e.g., 'percentile', 'zscore')
- * @returns {Promise<Object>} Variant data object
+ * @returns {Promise<Object>} Variant data object with positions
+ * @throws {Error} If fetch fails or variant file doesn't exist
+ *
+ * @example
+ * const variant = await loadVariant('balanced', 'zscore');
+ * console.log(variant.metadata.variant_name); // 'balanced-zscore'
  */
 export async function loadVariant(preset, normalization) {
     const variantName = `${preset}-${normalization}`;
@@ -46,9 +83,22 @@ export async function loadVariant(preset, normalization) {
 
 /**
  * Merge variant position data with base descriptive data
- * @param {Object} variantData - Variant with calculated positions
- * @param {Object} baseData - Base with complete descriptions
- * @returns {Object} Merged data object
+ *
+ * Strategy:
+ * 1. Clone baseData to avoid mutations
+ * 2. Update node positions from variantData
+ * 3. Keep all descriptive metadata from baseData
+ * 4. Add variant metadata (preset, normalization)
+ *
+ * @param {Object} variantData - Variant with calculated positions (from loadVariant)
+ * @param {Object} baseData - Base with complete descriptions (from loadBaseData)
+ * @returns {Object} Merged data object with positions + descriptions
+ *
+ * @example
+ * const baseData = await loadBaseData();
+ * const variantData = await loadVariant('balanced', 'zscore');
+ * const merged = mergeVariantWithBase(variantData, baseData);
+ * // merged now has positions from variant + descriptions from base
  */
 export function mergeVariantWithBase(variantData, baseData) {
     // Deep clone baseData to avoid mutations
@@ -86,8 +136,21 @@ export function mergeVariantWithBase(variantData, baseData) {
 }
 
 /**
- * Preload all variants for faster switching (optional optimization)
- * @returns {Promise<Map>} Map of variant name to data
+ * Preload all 32 variants for instant switching (optional optimization)
+ *
+ * Loads all combinations of:
+ * - 8 presets × 4 normalizations = 32 variants
+ * - Total ~736KB (23KB per variant)
+ *
+ * Trade-off:
+ * - ✅ Instant variant switching (no network delay)
+ * - ❌ Initial load time increases by ~2-3 seconds
+ *
+ * @returns {Promise<Map<string, Object>>} Map of variant name (e.g., 'balanced-zscore') to data
+ *
+ * @example
+ * const variantsCache = await preloadAllVariants();
+ * const variant = variantsCache.get('balanced-zscore');
  */
 export async function preloadAllVariants() {
     const presets = [

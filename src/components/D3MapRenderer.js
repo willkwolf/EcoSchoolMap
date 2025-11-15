@@ -1,6 +1,21 @@
 /**
- * D3MapRenderer - Main visualization component
- * Renders economic schools map with D3.js
+ * D3MapRenderer - Main visualization component for economic schools map
+ *
+ * Renders an interactive 2D map of economic schools using D3.js with:
+ * - Zoom/pan functionality
+ * - Dynamic node rendering with custom shapes
+ * - Historical transitions between schools
+ * - Interactive tooltips with rich content
+ * - Smooth GSAP animations for variant transitions
+ *
+ * @class
+ * @example
+ * const renderer = new D3MapRenderer('#map-container', mergedData, {
+ *   width: 1200,
+ *   height: 700,
+ *   padding: 60
+ * });
+ * renderer.render();
  */
 
 import * as d3 from 'd3';
@@ -9,6 +24,18 @@ import { getNodeSymbol, getNodeSize, getNodeBorderStyle, createArrowMarker, getL
 import { TooltipManager } from './TooltipManager.js';
 
 export class D3MapRenderer {
+    /**
+     * Creates a new D3MapRenderer instance
+     *
+     * @param {string} containerSelector - CSS selector for container element (e.g., '#map-container')
+     * @param {Object} data - Merged data object with schools and transitions
+     * @param {Array<Object>} data.nodos - Array of school nodes
+     * @param {Array<Object>} data.transiciones - Array of historical transitions
+     * @param {Object} [options={}] - Configuration options
+     * @param {number} [options.width=1200] - SVG width in pixels
+     * @param {number} [options.height=700] - SVG height in pixels
+     * @param {number} [options.padding=60] - Padding around the plot area
+     */
     constructor(containerSelector, data, options = {}) {
         this.container = d3.select(containerSelector);
         this.data = data;
