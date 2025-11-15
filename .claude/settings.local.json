@@ -23,7 +23,9 @@
       "Bash(npm init:*)",
       "Bash(npm install:*)",
       "Bash(.gitignore)",
-      "Bash(timeout 10 npm run dev:*)"
+      "Bash(timeout 10 npm run dev:*)",
+      "Bash(npm run build:*)",
+      "Bash(git rm:*)"
     ],
     "deny": [],
     "ask": []
