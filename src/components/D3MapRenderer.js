@@ -298,6 +298,80 @@ export class D3MapRenderer {
     }
 
     /**
+     * Update nodes with smooth transition to new positions
+     * @param {Array} newNodos - New node data with updated positions
+     */
+    updateNodesWithTransition(newNodos) {
+        const duration = 800;
+        const easing = d3.easeCubicInOut;
+
+        newNodos.forEach(newNode => {
+            const nodeGroup = this.zoomGroup.select(`.node.${newNode.id}`);
+
+            if (!nodeGroup.empty()) {
+                const newX = this.xScale(newNode.posicion.x);
+                const newY = this.yScale(newNode.posicion.y);
+
+                // Animate node group position
+                nodeGroup
+                    .transition()
+                    .duration(duration)
+                    .ease(easing)
+                    .attr('transform', `translate(${newX},${newY})`);
+            }
+        });
+    }
+
+    /**
+     * Update transitions with animated path recalculation
+     * @param {Array} newTransiciones - New transition data
+     */
+    updateTransitionsWithAnimation(newTransiciones) {
+        const duration = 800;
+        const easing = d3.easeCubicInOut;
+
+        newTransiciones.forEach(transition => {
+            const fromNode = this.data.nodos.find(n => n.id === transition.desde_nodo);
+            const toNode = this.data.nodos.find(n => n.id === transition.hacia_nodo);
+
+            if (!fromNode || !toNode) return;
+
+            const x1 = this.xScale(fromNode.posicion.x);
+            const y1 = this.yScale(fromNode.posicion.y);
+            const x2 = this.xScale(toNode.posicion.x);
+            const y2 = this.yScale(toNode.posicion.y);
+
+            const dx = x2 - x1;
+            const dy = y2 - y1;
+            const cx = x1 + dx / 2;
+            const cy = y1 + dy / 2 - 30;
+
+            const newPath = `M ${x1},${y1} Q ${cx},${cy} ${x2},${y2}`;
+
+            // Animate arrow path
+            const arrow = this.zoomGroup.select(`.transition-arrow.${transition.id}`);
+            if (!arrow.empty()) {
+                arrow
+                    .transition()
+                    .duration(duration)
+                    .ease(easing)
+                    .attr('d', newPath);
+            }
+
+            // Animate label position
+            const label = this.zoomGroup.select(`.transition-label.${transition.id}`);
+            if (!label.empty()) {
+                label
+                    .transition()
+                    .duration(duration)
+                    .ease(easing)
+                    .attr('x', cx)
+                    .attr('y', cy);
+            }
+        });
+    }
+
+    /**
      * Update visualization with new data (for variant switching)
      * @param {Object} newData - New data object
      */
@@ -305,14 +379,10 @@ export class D3MapRenderer {
         this.data = newData;
         this.colorMap = assignColorsToNodes(newData.nodos);
 
-        // Clear only the zoom group content (preserve zoom behavior)
-        this.zoomGroup.selectAll('*').remove();
+        // Use smooth transitions instead of clear+render
+        this.updateNodesWithTransition(newData.nodos);
+        this.updateTransitionsWithAnimation(newData.transiciones);
 
-        // Re-render
-        this.render();
-
-        console.log('✅ Variant updated');
-
-        // TODO: Add smooth transitions (FASE 3)
+        console.log('✅ Variant updated with smooth transition');
     }
 }

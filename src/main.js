@@ -56,6 +56,7 @@ function setupVariantControls() {
     const normalizationDropdown = document.getElementById('normalization-dropdown');
     const resetZoomBtn = document.getElementById('reset-zoom-btn');
     const downloadPngBtn = document.getElementById('download-png-btn');
+    const loadingIndicator = document.getElementById('loading-indicator');
 
     const loadAndUpdateVariant = async () => {
         const preset = presetDropdown.value;
@@ -64,11 +65,28 @@ function setupVariantControls() {
         console.log(`Loading variant: ${preset}-${normalization}`);
 
         try {
+            // Disable controls during transition
+            presetDropdown.disabled = true;
+            normalizationDropdown.disabled = true;
+
+            // Show loading indicator
+            loadingIndicator.style.display = 'block';
+
             const variantData = await loadVariant(preset, normalization);
             const mergedData = mergeVariantWithBase(variantData, baseData);
             mapRenderer.updateVariant(mergedData);
+
+            // Re-enable controls and hide indicator after transition completes
+            setTimeout(() => {
+                loadingIndicator.style.display = 'none';
+                presetDropdown.disabled = false;
+                normalizationDropdown.disabled = false;
+            }, 900);
         } catch (error) {
             console.error('Error loading variant:', error);
+            loadingIndicator.style.display = 'none';
+            presetDropdown.disabled = false;
+            normalizationDropdown.disabled = false;
         }
     };
 
