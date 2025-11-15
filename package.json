@@ -1,0 +1,34 @@
+{
+  "name": "mapa-escuelas-politicas",
+  "version": "1.0.0",
+  "description": "Visualizacion interactiva de escuelas politicas economicas con: - **Visualización con métodos de scoring basada en investigación de Ha-Joon Chang** - **Descriptores cualitativos para posicionamiento fundamentado** - **Generadores separados para PNG estatico y HTML interactivo**",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/willkwolf/EcoSchoolMap.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/willkwolf/EcoSchoolMap/issues"
+  },
+  "homepage": "https://github.com/willkwolf/EcoSchoolMap#readme",
+  "devDependencies": {
+    "sass": "^1.94.0",
+    "vite": "^7.2.2"
+  },
+  "dependencies": {
+    "d3": "^7.9.0",
+    "gsap": "^3.13.0",
+    "save-svg-as-png": "^1.4.17"
+  }
+}
