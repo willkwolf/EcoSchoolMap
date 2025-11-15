@@ -1,8 +1,8 @@
 {
   "metadata": {
-    "version": "3.0",
+    "version": "3.1",
     "descripcion": "Escuelas y tradiciones político-económicas como grafo de nodos con posicionamiento explícito",
-    "ultima_actualizacion": "2025-10-14",
+    "ultima_actualizacion": "2025-11-14",
     "autor": "William Camilo Artundauga Viana",
     "notas": {
       "posicionamiento": "Cada nodo tiene coordenadas (x, y) basadas por criterios en scoring methodology.",
@@ -13,7 +13,7 @@
     "variant_name": "pragmatic-emphasis",
     "preset_name": "pragmatic-emphasis",
     "normalization_method": "none",
-    "generated_at": "2025-11-14T13:26:48.942089",
+    "generated_at": "2025-11-14T23:23:00.586004",
     "generator_version": "1.0",
     "generator_script": "generate_weight_variants.py"
   },
@@ -404,7 +404,11 @@
       "evento_disparador": "Crisis financiera 2008",
       "descripcion": "Del laissez-faire a regulación y rescates estatales",
       "año": 2008,
-      "confianza": "muy_alta"
+      "confianza": "muy_alta",
+      "referencia": {
+        "APA": "Stiglitz, J. E. (2010). Freefall: America, Free Markets, and the Sinking of the World Economy. W. W. Norton & Company.",
+        "DOI": null
+      }
     },
     {
       "id": "crisis_climatica",
@@ -413,7 +417,11 @@
       "evento_disparador": "Crisis climática y sostenibilidad",
       "descripcion": "Incorporación de límites planetarios al modelo económico",
       "año": 2015,
-      "confianza": "alta"
+      "confianza": "alta",
+      "referencia": {
+        "APA": "Raworth, K. (2017). Doughnut Economics: Seven Ways to Think Like a 21st-Century Economist. Chelsea Green Publishing.",
+        "DOI": "10.4337/9781786431462"
+      }
     },
     {
       "id": "crisis_desigualdad",
@@ -422,7 +430,11 @@
       "evento_disparador": "Crisis de desigualdad y precarización",
       "descripcion": "Los nudges resultan insuficientes, se demanda redistribución radical",
       "año": 2020,
-      "confianza": "media"
+      "confianza": "media",
+      "referencia": {
+        "APA": "Piketty, T. (2014). Capital in the Twenty-First Century. Harvard University Press.",
+        "DOI": "10.4159/9780674369542"
+      }
     },
     {
       "id": "pandemia_covid",
@@ -431,7 +443,11 @@
       "evento_disparador": "Pandemia COVID-19",
       "descripcion": "Necesidad de innovación acelerada en vacunas y tecnología",
       "año": 2020,
-      "confianza": "muy_alta"
+      "confianza": "muy_alta",
+      "referencia": {
+        "APA": "Mazzucato, M. (2021). Mission Economy: A Moonshot Guide to Changing Capitalism. Harper Business.",
+        "DOI": null
+      }
     },
     {
       "id": "inflacion_2022",
@@ -440,7 +456,50 @@
       "evento_disparador": "Crisis inflacionaria post-pandemia",
       "descripcion": "Retorno a ortodoxia monetarista y ajuste fiscal",
       "año": 2022,
-      "confianza": "alta"
+      "confianza": "alta",
+      "referencia": {
+        "APA": "Blanchard, O. (2022). Fiscal Policy Under Low Interest Rates. Peterson Institute for International Economics.",
+        "DOI": "10.2139/ssrn.4044626"
+      }
+    },
+    {
+      "id": "post_guerra_fria",
+      "desde_nodo": "tradicion_desarrollista",
+      "hacia_nodo": "neoclasica",
+      "evento_disparador": "Fin de la Guerra Fría y expansión neoliberal",
+      "descripcion": "Transición desde políticas de desarrollo estatal a liberalización y apertura global",
+      "año": 1991,
+      "confianza": "alta",
+      "referencia": {
+        "APA": "Williamson, J. (1990). What Washington Means by Policy Reform. In J. Williamson (Ed.), Latin American Adjustment: How Much Has Happened? Institute for International Economics.",
+        "DOI": "10.2139/ssrn.3971177"
+      }
+    },
+    {
+      "id": "reaccion_posglobalizacion",
+      "desde_nodo": "neoclasica",
+      "hacia_nodo": "institucionalista",
+      "evento_disparador": "Crisis de gobernanza y debilidad institucional ante globalización",
+      "descripcion": "Énfasis en fortalecimiento de reglas y buen gobierno tras fallas de mercado global",
+      "año": 2001,
+      "confianza": "alta",
+      "referencia": {
+        "APA": "North, D. C. (1999). Institutions, Institutional Change and Economic Performance. Cambridge University Press.",
+        "DOI": "10.1017/CBO9780511808678"
+      }
+    },
+    {
+      "id": "emergencia_feminista",
+      "desde_nodo": "marxista",
+      "hacia_nodo": "feminista",
+      "evento_disparador": "Movilización social feminista e integración de género en políticas económicas",
+      "descripcion": "El pensamiento marxista se amplía para incluir perspectiva de género y economía del cuidado",
+      "año": 1990,
+      "confianza": "alta",
+      "referencia": {
+        "APA": "Elson, D. (1998). The Economic, the Political and the Social: Economic Policy and the Women's Movement. In S. Razavi & C. Miller (Eds.), Gendered Poverty and Well-Being. Blackwell Publishers.",
+        "DOI": "10.1111/1467-7660.00106"
+      }
     }
   ],
   "mapeo_visual": {
