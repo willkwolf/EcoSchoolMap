@@ -6,6 +6,8 @@
     <meta name="description" content="Mapa interactivo de escuelas políticas económicas con D3.js y scrollytelling">
     <title>Mapa de Escuelas Económicas | Visualización Interactiva</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <script type="module" crossorigin src="./assets/main-BNQgNICg.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/main-CWc2xkvw.css">
 </head>
 <body>
     <!-- Hero Section -->
@@ -388,7 +390,7 @@
             <!-- Controls -->
             <div class="controls">
                 <div class="control-group">
-                    <label for="preset-dropdown">Perspectiva de Peso:</label>
+                    <label for="preset-dropdown" title="Las perspectivas de peso alteran las posiciones de las escuelas para mostrar diferentes enfoques económicos">Perspectiva de Peso:</label>
                     <select id="preset-dropdown">
                         <option value="base" selected>Base (Original)</option>
                         <option value="balanced">Balanceado</option>
@@ -401,7 +403,7 @@
                     </select>
                 </div>
                 <div class="control-group">
-                    <label for="normalization-dropdown">Método de Normalización:</label>
+                    <label for="normalization-dropdown" title="Los métodos de normalización cambian cómo se representan los valores en el mapa">Método de Normalización:</label>
                     <select id="normalization-dropdown">
                         <option value="percentile" selected>Percentil (Distribución Uniforme)</option>
                         <option value="zscore">Puntaje-Z (Centrado Estadístico)</option>
@@ -410,8 +412,17 @@
                     </select>
                 </div>
                 <div class="control-group">
-                    <button id="reset-zoom-btn" class="control-btn">↺ Restablecer Zoom</button>
-                    <button id="download-png-btn" class="control-btn">⬇ Descargar PNG</button>
+                    <label for="transitions-dropdown" title="Controla la visibilidad de las transiciones históricas entre escuelas">Transiciones Históricas:</label>
+                    <select id="transitions-dropdown">
+                        <option value="all" selected>Mostrar Todas</option>
+                        <option value="none">Ocultar Todas</option>
+                        <option value="high">Solo Alta Confianza</option>
+                        <option value="medium-high">Alta y Media</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <button id="reset-zoom-btn" class="control-btn" title="Vuelve a la vista inicial del mapa">↺ Restablecer Zoom</button>
+                    <button id="download-png-btn" class="control-btn" title="Descarga el mapa como imagen PNG">⬇ Descargar PNG</button>
                 </div>
             </div>
 
@@ -447,7 +458,7 @@
                 12 escuelas económicas
             </p>
             <p style="margin-top: 10px; font-size: 0.85em;">
-                Proyecto: Mapa de Escuelas Políticas Económicas • Noviembre 2025 • Versión 3.1
+                Proyecto: Mapa de Escuelas Políticas Económicas • Noviembre 2025 • Versión 3.2
             </p>
             <p style="margin-top: 10px; font-size: 0.85em;">
                 <strong>Autor:</strong> William Camilo Artunduaga Viana (Propio de Autor)
@@ -464,7 +475,6 @@
         </div>
     </footer>
 
-    <!-- Vite Entry Point -->
-    <script type="module" src="/src/main.js"></script>
+    <!-- Vite Entry Point -->
 </body>
 </html>
