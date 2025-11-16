@@ -923,6 +923,113 @@ h3 {
             p {
                 color: #666;
                 font-size: 0.9rem;
+
+// ============================================================
+// Pedagogical Legend - Final Reflection
+// ============================================================
+
+.pedagogical-section {
+    .pedagogical-legend {
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin: 2rem 0;
+
+            @media (max-width: $tablet) {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+
+        .principle-card {
+            background-color: white;
+            border: 1px solid $border-color;
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+            &:hover {
+                transform: translateY(-4px);
+                box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+            }
+
+            h4 {
+                color: $primary-color;
+                margin-bottom: 1rem;
+                font-size: 1.1rem;
+            }
+
+            p {
+                margin-bottom: 0.75rem;
+                line-height: 1.7;
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+
+                em {
+                    color: $secondary-color;
+                    font-style: italic;
+                    display: block;
+                    margin-bottom: 0.5rem;
+                    font-size: 0.95rem;
+                }
+            }
+        }
+
+        .final-message {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            margin-top: 2.5rem;
+            text-align: center;
+
+            h3 {
+                color: white;
+                margin-bottom: 1.5rem;
+            }
+
+            ul {
+                text-align: left;
+                max-width: 600px;
+                margin: 1.5rem auto;
+                list-style: none;
+                padding: 0;
+
+                li {
+                    padding: 0.5rem 0;
+                    padding-left: 1.5rem;
+                    position: relative;
+
+                    &:before {
+                        content: "→";
+                        position: absolute;
+                        left: 0;
+                        font-weight: bold;
+                    }
+
+                    strong {
+                        color: #ffd700;
+                    }
+                }
+            }
+
+            p {
+                margin: 1rem 0;
+                line-height: 1.8;
+
+                &:last-child {
+                    font-size: 1.1rem;
+                    margin-top: 2rem;
+                    padding-top: 1.5rem;
+                    border-top: 1px solid rgba(255, 255, 255, 0.3);
+                }
+            }
+        }
+    }
+}
                 line-height: 1.6;
                 margin: 0.4rem 0;
 
