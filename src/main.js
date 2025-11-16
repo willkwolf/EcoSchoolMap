@@ -19,7 +19,7 @@ let mapRenderer = null;
 let baseData = null;
 let scrollController = null;
 
-// Define sections for scrollytelling
+// Define sections for scrollytelling (5 secciones principales)
 const sections = [
     { id: 'hero', name: 'Introducción' },
     { id: 'guide', name: 'Guía de Lectura' },
