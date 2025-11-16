@@ -26,7 +26,7 @@ def load_json_file(filepath: Path) -> Dict:
         with open(filepath, 'r', encoding='utf-8') as f:
             return json.load(f)
     except Exception as e:
-        print(f"❌ Error loading {filepath}: {e}")
+        print(f"Error loading {filepath}: {e}")
         sys.exit(1)
 
 def extract_positions(data: Dict) -> Dict[str, Tuple[float, float]]:
@@ -80,33 +80,33 @@ def sync_file(source: Path, destination: Path, description: str) -> bool:
             differences = compare_positions(source_pos, dest_pos)
             
             if differences:
-                print(f"⚠️  {description}: Found {len(differences)} position differences:")
+                print(f"Warning {description}: Found {len(differences)} position differences:")
                 for school_id, (source_pos, dest_pos) in differences.items():
                     print(f"   • {school_id}: {dest_pos} → {source_pos}")
             else:
-                print(f"✓ {description}: No significant differences found")
-        
+                print(f"OK {description}: No significant differences found")
+
         # Copy file
         shutil.copy2(source, destination)
-        print(f"✓ {description}: Synced successfully")
+        print(f"OK {description}: Synced successfully")
         return True
-        
+
     except Exception as e:
-        print(f"❌ {description}: Error syncing - {e}")
+        print(f"Error {description}: Error syncing - {e}")
         return False
 
 def main():
     """Main sync function."""
-    print("🔄 Data Synchronization Script")
+    print("Data Synchronization Script")
     print("=" * 50)
     
     if not SOURCE_DATA.exists():
-        print(f"❌ Source file not found: {SOURCE_DATA}")
+        print(f"Error: Source file not found: {SOURCE_DATA}")
         sys.exit(1)
     
-    print(f"📁 Source: {SOURCE_DATA}")
-    print(f"📁 Public: {PUBLIC_DATA}")
-    print(f"📁 Docs:   {DOCS_DATA}")
+    print(f"Source: {SOURCE_DATA}")
+    print(f"Public: {PUBLIC_DATA}")
+    print(f"Docs:   {DOCS_DATA}")
     print()
     
     # Sync to public
@@ -117,10 +117,10 @@ def main():
     
     print()
     if success1 and success2:
-        print("✨ Sync completed successfully!")
+        print("Sync completed successfully!")
         sys.exit(0)
     else:
-        print("❌ Sync completed with errors")
+        print("Sync completed with errors")
         sys.exit(1)
 
 if __name__ == "__main__":
