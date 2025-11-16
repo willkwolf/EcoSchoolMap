@@ -23,6 +23,9 @@ let scrollController = null;
 const sections = [
     { id: 'hero', name: 'Introducción' },
     { id: 'guide', name: 'Guía de Lectura' },
+    { id: 'timeline', name: 'Línea de Tiempo' },
+    { id: 'learning-path', name: 'Ruta de Aprendizaje' },
+    { id: 'applications', name: 'Aplicaciones Prácticas' },
     { id: 'cocktails', name: 'Cocteles Temáticos' },
     { id: 'visualization', name: 'Mapa Interactivo' },
     { id: 'pedagogical-legend', name: 'Leyenda Pedagógica' }
@@ -61,6 +64,7 @@ async function init() {
 function setupVariantControls() {
     const presetDropdown = document.getElementById('preset-dropdown');
     const normalizationDropdown = document.getElementById('normalization-dropdown');
+    const transitionsDropdown = document.getElementById('transitions-dropdown');
     const resetZoomBtn = document.getElementById('reset-zoom-btn');
     const downloadPngBtn = document.getElementById('download-png-btn');
     const loadingIndicator = document.getElementById('loading-indicator');
@@ -117,6 +121,12 @@ function setupVariantControls() {
 
     presetDropdown.addEventListener('change', loadAndUpdateVariant);
     normalizationDropdown.addEventListener('change', loadAndUpdateVariant);
+
+    // Transitions visibility control
+    transitionsDropdown.addEventListener('change', () => {
+        const mode = transitionsDropdown.value;
+        mapRenderer.setTransitionVisibility(mode);
+    });
 
     // Reset zoom button
     resetZoomBtn.addEventListener('click', () => {
