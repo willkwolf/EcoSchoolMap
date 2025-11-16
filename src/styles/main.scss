@@ -653,6 +653,7 @@ h3 {
             }
         }
     }
+}
 
 // ============================================================
 // Timeline Section
@@ -923,12 +924,17 @@ h3 {
             p {
                 color: #666;
                 font-size: 0.9rem;
+                line-height: 1.6;
+                margin: 0.4rem 0;
 
-// ============================================================
-// Pedagogical Legend - Final Reflection
-// ============================================================
+                strong {
+                    color: $secondary-color;
+                    font-weight: 600;
+                }
+            }
+        }
+    }
 
-.pedagogical-section {
     .pedagogical-legend {
         .principles-grid {
             display: grid;
@@ -1029,18 +1035,6 @@ h3 {
             }
         }
     }
-}
-                line-height: 1.6;
-                margin: 0.4rem 0;
-
-                strong {
-                    color: $secondary-color;
-                    font-weight: 600;
-                }
-            }
-        }
-    }
-}
 }
 
 // ============================================================
