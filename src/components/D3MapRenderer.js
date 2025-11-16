@@ -1,21 +1,6 @@
 /**
- * D3MapRenderer - Main visualization component for economic schools map
- *
- * Renders an interactive 2D map of economic schools using D3.js with:
- * - Zoom/pan functionality
- * - Dynamic node rendering with custom shapes
- * - Historical transitions between schools
- * - Interactive tooltips with rich content
- * - Smooth GSAP animations for variant transitions
- *
- * @class
- * @example
- * const renderer = new D3MapRenderer('#map-container', mergedData, {
- *   width: 1200,
- *   height: 700,
- *   padding: 60
- * });
- * renderer.render();
+ * D3MapRenderer - Main visualization component
+ * Renders economic schools map with D3.js
  */
 
 import * as d3 from 'd3';
@@ -24,18 +9,6 @@ import { getNodeSymbol, getNodeSize, getNodeBorderStyle, createArrowMarker, getL
 import { TooltipManager } from './TooltipManager.js';
 
 export class D3MapRenderer {
-    /**
-     * Creates a new D3MapRenderer instance
-     *
-     * @param {string} containerSelector - CSS selector for container element (e.g., '#map-container')
-     * @param {Object} data - Merged data object with schools and transitions
-     * @param {Array<Object>} data.nodos - Array of school nodes
-     * @param {Array<Object>} data.transiciones - Array of historical transitions
-     * @param {Object} [options={}] - Configuration options
-     * @param {number} [options.width=1200] - SVG width in pixels
-     * @param {number} [options.height=700] - SVG height in pixels
-     * @param {number} [options.padding=60] - Padding around the plot area
-     */
     constructor(containerSelector, data, options = {}) {
         this.container = d3.select(containerSelector);
         this.data = data;
@@ -179,9 +152,9 @@ export class D3MapRenderer {
             .attr('stroke', 'gray')
             .attr('stroke-width', 2);
 
-        // Desktop axis labels (hidden on mobile)
+        // Axis labels
         axesGroup.append('text')
-            .attr('class', 'axis-label axis-label-x desktop-only')
+            .attr('class', 'axis-label axis-label-x')
             .attr('x', this.options.width / 2)
             .attr('y', this.options.height - 15)
             .attr('text-anchor', 'middle')
@@ -190,7 +163,7 @@ export class D3MapRenderer {
             .text('Arquitectura Económica: ← Economía Dirigida (Estado Fuerte) | Economía de Mercado (Estado Limitado) →');
 
         axesGroup.append('text')
-            .attr('class', 'axis-label axis-label-y desktop-only')
+            .attr('class', 'axis-label axis-label-y')
             .attr('x', -this.options.height / 2)
             .attr('y', 20)
             .attr('text-anchor', 'middle')
@@ -198,26 +171,6 @@ export class D3MapRenderer {
             .attr('fill', '#2c3e50')
             .attr('transform', `rotate(-90, 0, 0)`)
             .text('Objetivo Socioeconómico: ← Productividad y Crecimiento | Equidad y Sostenibilidad →');
-
-        // Mobile axis labels (hidden on desktop)
-        axesGroup.append('text')
-            .attr('class', 'axis-label axis-label-x mobile-only')
-            .attr('x', this.options.width / 2)
-            .attr('y', this.options.height - 5)
-            .attr('text-anchor', 'middle')
-            .attr('font-size', '12px')
-            .attr('fill', '#2c3e50')
-            .text('← Estado Fuerte | Estado Débil →');
-
-        axesGroup.append('text')
-            .attr('class', 'axis-label axis-label-y mobile-only')
-            .attr('x', -this.options.height / 2)
-            .attr('y', 12)
-            .attr('text-anchor', 'middle')
-            .attr('font-size', '12px')
-            .attr('fill', '#2c3e50')
-            .attr('transform', `rotate(-90, 0, 0)`)
-            .text('← Crecimiento | Equidad →');
     }
 
     /**

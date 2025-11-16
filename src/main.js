@@ -19,7 +19,7 @@ let mapRenderer = null;
 let baseData = null;
 let scrollController = null;
 
-// Define sections for scrollytelling (5 secciones principales)
+// Define sections for scrollytelling
 const sections = [
     { id: 'hero', name: 'Introducción' },
     { id: 'guide', name: 'Guía de Lectura' },
@@ -65,11 +65,6 @@ function setupVariantControls() {
     const downloadPngBtn = document.getElementById('download-png-btn');
     const loadingIndicator = document.getElementById('loading-indicator');
 
-    // Validate required elements exist
-    if (!loadingIndicator) {
-        console.error('❌ Loading indicator element not found');
-    }
-
     const loadAndUpdateVariant = async () => {
         const preset = presetDropdown.value;
         const normalization = normalizationDropdown.value;
@@ -81,15 +76,10 @@ function setupVariantControls() {
             presetDropdown.disabled = true;
             normalizationDropdown.disabled = true;
 
-            // Show loading indicator (with null check)
-            if (loadingIndicator) {
-                loadingIndicator.style.display = 'block';
-                loadingIndicator.style.color = '';
-                const loadingText = loadingIndicator.querySelector('p');
-                if (loadingText) {
-                    loadingText.textContent = 'Cargando variante...';
-                }
-            }
+            // Show loading indicator
+            loadingIndicator.style.display = 'block';
+            loadingIndicator.style.color = '';
+            loadingIndicator.querySelector('p').textContent = 'Cargando variante...';
 
             // Load variant data (await completes when fetch finishes)
             const variantData = await loadVariant(preset, normalization);
@@ -102,54 +92,31 @@ function setupVariantControls() {
             await new Promise(resolve => setTimeout(resolve, 850));
 
             // Hide indicator and re-enable controls
-            if (loadingIndicator) {
-                loadingIndicator.style.display = 'none';
-            }
+            loadingIndicator.style.display = 'none';
             presetDropdown.disabled = false;
             normalizationDropdown.disabled = false;
         } catch (error) {
             console.error('❌ Error loading variant:', error);
 
-            // Show error message to user (with null checks)
-            if (loadingIndicator) {
-                const errorText = loadingIndicator.querySelector('p');
-                const spinner = loadingIndicator.querySelector('.spinner');
+            // Show error message to user
+            const errorText = loadingIndicator.querySelector('p');
+            errorText.textContent = 'Error al cargar variante. Intenta de nuevo.';
+            errorText.style.color = '#e74c3c';
+            loadingIndicator.querySelector('.spinner').style.display = 'none';
 
-                if (errorText) {
-                    errorText.textContent = 'Error al cargar variante. Intenta de nuevo.';
-                    errorText.style.color = '#e74c3c';
-                }
-                if (spinner) {
-                    spinner.style.display = 'none';
-                }
-
-                // Re-enable controls after 3 seconds
-                setTimeout(() => {
-                    loadingIndicator.style.display = 'none';
-                    if (spinner) spinner.style.display = 'block';
-                    if (errorText) errorText.style.color = '';
-                    presetDropdown.disabled = false;
-                    normalizationDropdown.disabled = false;
-                }, 3000);
-            } else {
-                // If no loading indicator, just re-enable controls
+            // Re-enable controls after 3 seconds
+            setTimeout(() => {
+                loadingIndicator.style.display = 'none';
+                loadingIndicator.querySelector('.spinner').style.display = 'block';
+                errorText.style.color = '';
                 presetDropdown.disabled = false;
                 normalizationDropdown.disabled = false;
-            }
+            }, 3000);
         }
     };
 
     presetDropdown.addEventListener('change', loadAndUpdateVariant);
     normalizationDropdown.addEventListener('change', loadAndUpdateVariant);
-
-    // Transitions visibility control
-    const transitionsDropdown = document.getElementById('transitions-dropdown');
-    if (transitionsDropdown) {
-        transitionsDropdown.addEventListener('change', () => {
-            const visibility = transitionsDropdown.value;
-            mapRenderer.setTransitionVisibility(visibility);
-        });
-    }
 
     // Reset zoom button
     resetZoomBtn.addEventListener('click', () => {
