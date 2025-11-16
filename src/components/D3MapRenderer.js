@@ -179,9 +179,9 @@ export class D3MapRenderer {
             .attr('stroke', 'gray')
             .attr('stroke-width', 2);
 
-        // Axis labels
+        // Desktop axis labels (hidden on mobile)
         axesGroup.append('text')
-            .attr('class', 'axis-label axis-label-x')
+            .attr('class', 'axis-label axis-label-x desktop-only')
             .attr('x', this.options.width / 2)
             .attr('y', this.options.height - 15)
             .attr('text-anchor', 'middle')
@@ -190,7 +190,7 @@ export class D3MapRenderer {
             .text('Arquitectura Económica: ← Economía Dirigida (Estado Fuerte) | Economía de Mercado (Estado Limitado) →');
 
         axesGroup.append('text')
-            .attr('class', 'axis-label axis-label-y')
+            .attr('class', 'axis-label axis-label-y desktop-only')
             .attr('x', -this.options.height / 2)
             .attr('y', 20)
             .attr('text-anchor', 'middle')
@@ -198,6 +198,26 @@ export class D3MapRenderer {
             .attr('fill', '#2c3e50')
             .attr('transform', `rotate(-90, 0, 0)`)
             .text('Objetivo Socioeconómico: ← Productividad y Crecimiento | Equidad y Sostenibilidad →');
+
+        // Mobile axis labels (hidden on desktop)
+        axesGroup.append('text')
+            .attr('class', 'axis-label axis-label-x mobile-only')
+            .attr('x', this.options.width / 2)
+            .attr('y', this.options.height - 5)
+            .attr('text-anchor', 'middle')
+            .attr('font-size', '12px')
+            .attr('fill', '#2c3e50')
+            .text('← Estado Fuerte | Estado Débil →');
+
+        axesGroup.append('text')
+            .attr('class', 'axis-label axis-label-y mobile-only')
+            .attr('x', -this.options.height / 2)
+            .attr('y', 12)
+            .attr('text-anchor', 'middle')
+            .attr('font-size', '12px')
+            .attr('fill', '#2c3e50')
+            .attr('transform', `rotate(-90, 0, 0)`)
+            .text('← Crecimiento | Equidad →');
     }
 
     /**
