@@ -6,8 +6,6 @@
     <meta name="description" content="Mapa interactivo de escuelas políticas económicas con D3.js y scrollytelling">
     <title>Mapa de Escuelas Económicas | Visualización Interactiva</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-  <script type="module" crossorigin src="./assets/main-CNJGoErW.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/main-CWc2xkvw.css">
 </head>
 <body>
     <!-- Hero Section -->
@@ -103,6 +101,102 @@
                         <li>Arrogancia intelectual</li>
                         <li>Análisis incompleto</li>
                     </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Historical Timeline Section -->
+    <section id="timeline" class="timeline-section">
+        <div class="timeline-container">
+            <h2>📅 Línea de Tiempo Histórica</h2>
+            <p class="intro-text">
+                Explora los hitos más importantes en el desarrollo del pensamiento económico desde 1776 hasta 2013.
+                Cada evento marcó un punto de inflexión en cómo entendemos y analizamos la economía.
+            </p>
+            <div class="timeline-grid">
+                <div class="timeline-item">
+                    <div class="timeline-year">1776</div>
+                    <h4>Adam Smith y la Economía Clásica</h4>
+                    <p>Publicación de "La Riqueza de las Naciones" - Fundación del pensamiento económico moderno</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">1867</div>
+                    <h4>Marx y el Capital</h4>
+                    <p>Publicación de "El Capital" - Crítica radical al sistema capitalista</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">1870s</div>
+                    <h4>Revolución Neoclásica</h4>
+                    <p>Desarrollo del marginalismo y la teoría del equilibrio general</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">1936</div>
+                    <h4>Keynes y la Revolución Keynesiana</h4>
+                    <p>Publicación de "Teoría General" - Intervención estatal en crisis económicas</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">1940s</div>
+                    <h4>Escuela Austriaca en América</h4>
+                    <p>Exilio de economistas austriacos y expansión de sus ideas</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">1950s</div>
+                    <h4>Teoría del Desarrollo</h4>
+                    <p>Emergencia de la economía del desarrollo y el estructuralismo</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">1970s</div>
+                    <h4>Críticas al Keynesianismo</h4>
+                    <p>Estanflación y resurgimiento de ideas de libre mercado</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">1980s</div>
+                    <h4>Revolución Neoliberal</h4>
+                    <p>Consolidación del pensamiento de mercado bajo Reagan y Thatcher</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">1990s</div>
+                    <h4>Énfasis en Instituciones</h4>
+                    <p>Reconocimiento de la importancia de las instituciones en el desarrollo</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2013</div>
+                    <h4>Economía Feminista</h4>
+                    <p>Consolidación como escuela de pensamiento reconocida</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Learning Path Section -->
+    <section id="learning-path" class="learning-path-section">
+        <div class="learning-path-container">
+            <h2>🎓 Ruta de Aprendizaje</h2>
+            <p class="intro-text">
+                Sigue estos 4 pasos para dominar el mapa de escuelas económicas y aplicar sus conceptos
+                a situaciones reales.
+            </p>
+            <div class="path-grid">
+                <div class="path-step">
+                    <div class="step-number">1</div>
+                    <h4>Explora el Mapa</h4>
+                    <p>Comienza familiarizándote con las 12 escuelas y sus posiciones relativas. Usa el zoom y explora cada nodo.</p>
+                </div>
+                <div class="path-step">
+                    <div class="step-number">2</div>
+                    <h4>Comprende las Transiciones</h4>
+                    <p>Estudia las flechas históricas para entender cómo evolucionaron las ideas económicas con el tiempo.</p>
+                </div>
+                <div class="path-step">
+                    <div class="step-number">3</div>
+                    <h4>Experimenta con Variantes</h4>
+                    <p>Usa los controles para ver cómo diferentes perspectivas cambian las posiciones de las escuelas.</p>
+                </div>
+                <div class="path-step">
+                    <div class="step-number">4</div>
+                    <h4>Aplica a Casos Reales</h4>
+                    <p>Usa los cocteles temáticos para analizar problemas económicos actuales desde múltiples perspectivas.</p>
                 </div>
             </div>
         </div>
@@ -234,15 +328,6 @@
                     </select>
                 </div>
                 <div class="control-group">
-                    <label for="transitions-dropdown">Transiciones Históricas:</label>
-                    <select id="transitions-dropdown">
-                        <option value="all" selected>Mostrar Todas</option>
-                        <option value="none">Ocultar Todas</option>
-                        <option value="high">Solo Alta Confianza</option>
-                        <option value="medium-high">Alta y Media</option>
-                    </select>
-                </div>
-                <div class="control-group">
                     <button id="reset-zoom-btn" class="control-btn">↺ Restablecer Zoom</button>
                     <button id="download-png-btn" class="control-btn">⬇ Descargar PNG</button>
                 </div>
@@ -297,6 +382,7 @@
         </div>
     </footer>
 
-    <!-- Vite Entry Point -->
+    <!-- Vite Entry Point -->
+    <script type="module" src="/src/main.js"></script>
 </body>
 </html>
