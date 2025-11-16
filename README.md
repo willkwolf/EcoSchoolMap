@@ -177,48 +177,51 @@ python scripts/generate_static_plot.py --preset balanced --normalization zscore
 
 ## 🔧 Regeneración de Datos
 
-### Generar Variantes de Peso
+### ⚠️ Flujo de Trabajo de Datos (Crítico)
 
-Si modificas pesos o descriptores:
+**Fuente de Verdad Única:** `data/escuelas.json` (editado manualmente)
+
+El build sincroniza automáticamente:
+```bash
+npm run build  # → prebuild → sync data/ → public/ → docs/
+```
+
+**IMPORTANTE:** Nunca edites directamente `public/data/` o `docs/data/`. Siempre edita `data/` y ejecuta el build.
+
+### Generar Variantes
 
 ```bash
-# Genera las 32 variantes JSON (8 presets × 4 normalizaciones)
+# 32 variantes (8 presets × 4 normalizaciones)
 python scripts/generate_weight_variants.py
-
-# Las variantes se guardan en:
-# - data/variants/*.json (fuente)
-# - public/data/variants/*.json (Vite)
-# - docs/data/variants/*.json (build)
+# Output: data/variants/*.json (auto-copiado en build)
 ```
 
 ### Recalcular Posiciones
 
-Si cambias descriptores de escuelas en `data/escuelas.json`:
-
 ```bash
-# Ver cambios sin aplicar (dry-run)
+# Simular primero (recomendado)
 python scripts/recalculate_positions.py --dry-run
 
-# Aplicar recálculo con normalización por percentiles
+# Aplicar con normalización
 python scripts/recalculate_positions.py --method percentile
 
-# Solo validar descriptores
+# Validar descriptores
 python scripts/recalculate_positions.py --validate-only
 ```
 
-**IMPORTANTE:** El script crea un backup automático antes de modificar archivos.
+**Backup automático** antes de modificaciones.
 
 ### Validar Datos
 
 ```bash
-# Validar integridad de 32 variantes
+# Verificar consistencia entre data/, public/, docs/
+npm run validate-data
+
+# Validar variantes
 python scripts/validate_variants.py
 
-# Detectar solapamientos de nodos
+# Detectar solapamientos
 python scripts/detect_overlaps.py
-
-# Comparar resultados entre presets
-python scripts/compare_weight_results.py
 ```
 
 ---
@@ -531,7 +534,7 @@ https://willkwolf.github.io/EcoSchoolMap/
   title = {Mapa de Escuelas Políticas Económicas},
   year = {2025},
   url = {https://github.com/willkwolf/EcoSchoolMap},
-  note = {Basado en la metodología de Ha-Joon Chang}
+  note = {Basado en investigación de Ha-Joon Chang, 2015}
 }
 ```
 

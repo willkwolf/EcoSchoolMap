@@ -122,13 +122,16 @@ KLEIN_COLORS = [
 # Regenerar las 32 variantes de peso
 python scripts/generate_weight_variants.py
 
-# Copiar datos a public/ para Vite
-cp -r data/* public/data/
+# El build automático sincroniza datos a public/ y docs/
+npm run build
 ```
 
 ### 5. Validar Datos
 
 ```bash
+# Validar integridad de todos los datos
+npm run validate-data
+
 # Validar integridad de variantes
 python scripts/validate_variants.py
 
