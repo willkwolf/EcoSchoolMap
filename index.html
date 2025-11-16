@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Mapa interactivo de escuelas políticas económicas con D3.js y scrollytelling">
+    <title>Mapa de Escuelas Económicas | Visualización Interactiva</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+</head>
+<body>
+    <!-- Hero Section -->
+    <section id="hero" class="hero-section">
+        <div class="hero-content">
+            <h1>Mapa de Escuelas Económicas</h1>
+            <p class="hero-subtitle">Una visualización interactiva del pensamiento económico</p>
+            <p class="hero-description">
+                Explora las 12 principales escuelas de pensamiento económico en un espacio bidimensional
+                que representa el rol del Estado y los objetivos socioeconómicos.
+            </p>
+            <div class="hero-actions">
+                <a href="#visualization" class="btn btn-primary">Explorar el Mapa</a>
+                <a href="https://github.com/willkwolf/EcoSchoolMap" class="btn btn-secondary" target="_blank">Ver en GitHub</a>
+            </div>
+            <div class="scroll-indicator">
+                <span>Scroll para explorar</span>
+                <svg width="20" height="20" viewBox="0 0 20 20">
+                    <polyline points="5,7 10,12 15,7" stroke="currentColor" fill="none" stroke-width="2"/>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- Guide Section -->
+    <section id="guide" class="guide-section">
+        <div class="guide-container">
+            <h2>Guía de Lectura</h2>
+            <div class="guide-grid">
+                <div class="guide-card">
+                    <h3>📐 Ejes del Mapa</h3>
+                    <p><strong>Eje Horizontal (X):</strong> Arquitectura Económica</p>
+                    <ul>
+                        <li>← Izquierda: Estado Fuerte (Economía Dirigida)</li>
+                        <li>→ Derecha: Estado Limitado (Economía de Mercado)</li>
+                    </ul>
+                    <p><strong>Eje Vertical (Y):</strong> Objetivo Socioeconómico</p>
+                    <ul>
+                        <li>↑ Arriba: Equidad y Sostenibilidad</li>
+                        <li>↓ Abajo: Productividad y Crecimiento</li>
+                    </ul>
+                </div>
+                <div class="guide-card">
+                    <h3>🎯 Cuadrantes</h3>
+                    <p>El mapa se divide en 4 cuadrantes principales:</p>
+                    <ul>
+                        <li><strong>Q1:</strong> Estado Fuerte + Equidad y Sostenibilidad</li>
+                        <li><strong>Q2:</strong> Estado Débil + Equidad y Sostenibilidad</li>
+                        <li><strong>Q3:</strong> Estado Fuerte + Crecimiento y Productividad</li>
+                        <li><strong>Q4:</strong> Estado Débil + Crecimiento y Productividad</li>
+                    </ul>
+                </div>
+                <div class="guide-card">
+                    <h3>🔄 Transiciones</h3>
+                    <p>Las flechas representan cambios históricos entre escuelas:</p>
+                    <ul>
+                        <li><strong>Línea sólida:</strong> Alta confianza histórica</li>
+                        <li><strong>Línea punteada:</strong> Confianza media</li>
+                        <li><strong>Línea discontinua:</strong> Baja confianza</li>
+                    </ul>
+                    <p>Cada transición incluye el evento disparador y el año.</p>
+                </div>
+                <div class="guide-card">
+                    <h3>🎨 Variantes de Peso</h3>
+                    <p>Diferentes perspectivas cambian las posiciones:</p>
+                    <ul>
+                        <li><strong>Base:</strong> Balanceada y neutral</li>
+                        <li><strong>State Emphasis:</strong> Énfasis en rol del Estado</li>
+                        <li><strong>Equity Emphasis:</strong> Énfasis en equidad</li>
+                        <li><strong>Market Emphasis:</strong> Énfasis en mercado libre</li>
+                        <li><strong>Growth Emphasis:</strong> Énfasis en crecimiento</li>
+                        <li><strong>Historical Emphasis:</strong> Énfasis en evolución histórica</li>
+                    </ul>
+                </div>
+                <div class="guide-card">
+                    <h3>📚 Metodología de Visualización</h3>
+                    <p>Basado en el Capítulo 4 de <strong>Economics: The User's Guide</strong>, de <strong>Ha-Joon Chang</strong> (2015):</p>
+                    <ul>
+                        <li>Análisis multidimensional de escuelas económicas</li>
+                        <li>Posicionamiento cualitativo cuantificado</li>
+                        <li>Normalización mediante percentiles</li>
+                        <li>Visualización pedagógica interactiva</li>
+                    </ul>
+                </div>
+                <div class="guide-card">
+                    <h3>⚠️ Advertencia</h3>
+                    <p style="color: #c62828; font-weight: bold;">
+                        Basarse sólo en una escuela para explorar un tema tiene riesgo de:
+                    </p>
+                    <ul>
+                        <li>Polarización ideológica</li>
+                        <li>Visión de túnel</li>
+                        <li>Arrogancia intelectual</li>
+                        <li>Análisis incompleto</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Historical Timeline Section -->
+    <section id="timeline" class="timeline-section">
+        <div class="timeline-container">
+            <h2>📅 Línea de Tiempo Histórica</h2>
+            <p class="intro-text">
+                Explora los hitos más importantes en el desarrollo del pensamiento económico desde 1776 hasta 2013.
+                Cada evento marcó un punto de inflexión en cómo entendemos y analizamos la economía.
+            </p>
+            <div class="timeline-grid">
+                <div class="timeline-item">
+                    <div class="timeline-year">1776</div>
+                    <h4>Adam Smith y la Economía Clásica</h4>
+                    <p>Publicación de "La Riqueza de las Naciones" - Fundación del pensamiento económico moderno</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">1867</div>
+                    <h4>Marx y el Capital</h4>
+                    <p>Publicación de "El Capital" - Crítica radical al sistema capitalista</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">1870s</div>
+                    <h4>Revolución Neoclásica</h4>
+                    <p>Desarrollo del marginalismo y la teoría del equilibrio general</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">1936</div>
+                    <h4>Keynes y la Revolución Keynesiana</h4>
+                    <p>Publicación de "Teoría General" - Intervención estatal en crisis económicas</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">1940s</div>
+                    <h4>Escuela Austriaca en América</h4>
+                    <p>Exilio de economistas austriacos y expansión de sus ideas</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">1950s</div>
+                    <h4>Teoría del Desarrollo</h4>
+                    <p>Emergencia de la economía del desarrollo y el estructuralismo</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">1970s</div>
+                    <h4>Críticas al Keynesianismo</h4>
+                    <p>Estanflación y resurgimiento de ideas de libre mercado</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">1980s</div>
+                    <h4>Revolución Neoliberal</h4>
+                    <p>Consolidación del pensamiento de mercado bajo Reagan y Thatcher</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">1990s</div>
+                    <h4>Énfasis en Instituciones</h4>
+                    <p>Reconocimiento de la importancia de las instituciones en el desarrollo</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2013</div>
+                    <h4>Economía Feminista</h4>
+                    <p>Consolidación como escuela de pensamiento reconocida</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Learning Path Section -->
+    <section id="learning-path" class="learning-path-section">
+        <div class="learning-path-container">
+            <h2>🎓 Ruta de Aprendizaje</h2>
+            <p class="intro-text">
+                Sigue estos 4 pasos para dominar el mapa de escuelas económicas y aplicar sus conceptos
+                a situaciones reales.
+            </p>
+            <div class="path-grid">
+                <div class="path-step">
+                    <div class="step-number">1</div>
+                    <h4>Explora el Mapa</h4>
+                    <p>Comienza familiarizándote con las 12 escuelas y sus posiciones relativas. Usa el zoom y explora cada nodo.</p>
+                </div>
+                <div class="path-step">
+                    <div class="step-number">2</div>
+                    <h4>Comprende las Transiciones</h4>
+                    <p>Estudia las flechas históricas para entender cómo evolucionaron las ideas económicas con el tiempo.</p>
+                </div>
+                <div class="path-step">
+                    <div class="step-number">3</div>
+                    <h4>Experimenta con Variantes</h4>
+                    <p>Usa los controles para ver cómo diferentes perspectivas cambian las posiciones de las escuelas.</p>
+                </div>
+                <div class="path-step">
+                    <div class="step-number">4</div>
+                    <h4>Aplica a Casos Reales</h4>
+                    <p>Usa los cocteles temáticos para analizar problemas económicos actuales desde múltiples perspectivas.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Practical Applications Section -->
+    <section id="applications" class="applications-section">
+        <div class="applications-container">
+            <h2>🎯 Aplicaciones Prácticas</h2>
+            <p class="intro-text">
+                Aprende a aplicar las diferentes escuelas económicas a situaciones reales en tres ámbitos clave:
+                políticas públicas, empresariales y ciudadanas.
+            </p>
+            <div class="applications-grid">
+                <div class="application-category">
+                    <h3>🏛️ Políticas Públicas</h3>
+                    <div class="application-items">
+                        <div class="application-item">
+                            <h4>Política Fiscal</h4>
+                            <p><strong>Keynesiana:</strong> Aumentar gasto en recesión</p>
+                            <p><strong>Austriaca:</strong> Reducir impuestos y gasto</p>
+                            <p><strong>Neoclásica:</strong> Equilibrio presupuestario</p>
+                        </div>
+                        <div class="application-item">
+                            <h4>Política Monetaria</h4>
+                            <p><strong>Keynesiana:</strong> Control de tasas de interés</p>
+                            <p><strong>Monetarista:</strong> Reglas de crecimiento monetario</p>
+                            <p><strong>Desarrollista:</strong> Crédito dirigido a sectores estratégicos</p>
+                        </div>
+                        <div class="application-item">
+                            <h4>Comercio Internacional</h4>
+                            <p><strong>Clásica:</strong> Libre comercio (ventaja comparativa)</p>
+                            <p><strong>Desarrollista:</strong> Protección infantil industrial</p>
+                            <p><strong>Institucionalista:</strong> Acuerdos con estándares laborales</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="application-category">
+                    <h3>🏢 Empresas</h3>
+                    <div class="application-items">
+                        <div class="application-item">
+                            <h4>Estrategia Corporativa</h4>
+                            <p><strong>Schumpeteriana:</strong> Innovación disruptiva</p>
+                            <p><strong>Conductista:</strong> Nudging y decisiones irracionales</p>
+                            <p><strong>Institucionalista:</strong> Responsabilidad social empresarial</p>
+                        </div>
+                        <div class="application-item">
+                            <h4>Gestión de Recursos Humanos</h4>
+                            <p><strong>Neoclásica:</strong> Salarios por productividad marginal</p>
+                            <p><strong>Marxista:</strong> Explotación y plusvalía</p>
+                            <p><strong>Feminista:</strong> Economía del cuidado y brecha salarial</p>
+                        </div>
+                        <div class="application-item">
+                            <h4>Finanzas Corporativas</h4>
+                            <p><strong>Neoclásica:</strong> Maximización del valor para accionistas</p>
+                            <p><strong>Keynesiana:</strong> Preferencia por la liquidez</p>
+                            <p><strong>Austriaca:</strong> Cálculo económico y mercado de capitales</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="application-category">
+                    <h3>👥 Ciudadanía</h3>
+                    <div class="application-items">
+                        <div class="application-item">
+                            <h4>Decisiones de Consumo</h4>
+                            <p><strong>Neoclásica:</strong> Maximización de utilidad</p>
+                            <p><strong>Conductista:</strong> Sesgos cognitivos y heurísticas</p>
+                            <p><strong>Institucionalista:</strong> Hábitos y normas sociales</p>
+                        </div>
+                        <div class="application-item">
+                            <h4>Participación Política</h4>
+                            <p><strong>Clásica:</strong> Voto racional (costo-beneficio)</p>
+                            <p><strong>Marxista:</strong> Conciencia de clase y activismo</p>
+                            <p><strong>Feminista:</strong> Economía feminista del cuidado</p>
+                        </div>
+                        <div class="application-item">
+                            <h4>Ahorro e Inversión Personal</h4>
+                            <p><strong>Neoclásica:</strong> Elección intertemporal</p>
+                            <p><strong>Keynesiana:</strong> Propensión al consumo</p>
+                            <p><strong>Austriaca:</strong> Preferencia temporal</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cocktails Section -->
+    <section id="cocktails" class="cocktails-section">
+        <div class="cocktails-container">
+            <h2>🍸 ¿Un buen coctel o todas las botellas de la estantería?</h2>
+
+            <div class="intro-text">
+                <p>
+                    Aunque existen buenas razones para conocer las diferencias entre escuelas económicas,
+                    es comprensible que la propuesta de explorar nueve enfoques distintos pueda sentirse
+                    abrumadora. Es como si te ofrecieran probar nueve sabores de helado cuando creías
+                    que solo existía la vainilla. Incluso quienes tienen curiosidad pueden pensar que
+                    nueve son demasiados.
+                </p>
+                <p>
+                    Por eso, en la guía temática que sigue se proponen "cocteles": combinaciones de dos
+                    a cuatro escuelas aplicadas a temas concretos. La esperanza es que, tras degustar un
+                    par de estos cocteles, surja el deseo de recorrer todas las botellas de la estantería.
+                    Y si no quieres probarlas todas, incluso uno o dos sabores bastan para mostrar que
+                    existen muchas maneras de pensar, hacer y aproximarse a la economía.
+                </p>
+            </div>
+
+            <h3>Siglas de las Escuelas</h3>
+            <div class="siglas-grid">
+                <div class="sigla-item"><strong>A</strong> = Austriaca</div>
+                <div class="sigla-item"><strong>C</strong> = Clásica</div>
+                <div class="sigla-item"><strong>Co</strong> = Conductista</div>
+                <div class="sigla-item"><strong>D</strong> = Desarrollista</div>
+                <div class="sigla-item"><strong>I</strong> = Institucionalista</div>
+                <div class="sigla-item"><strong>K</strong> = Keynesiana</div>
+                <div class="sigla-item"><strong>M</strong> = Marxista</div>
+                <div class="sigla-item"><strong>N</strong> = Neoclásica</div>
+                <div class="sigla-item"><strong>S</strong> = Schumpeteriana</div>
+            </div>
+
+            <h3>Guía Temática: Cocteles Recomendados</h3>
+            <div class="cocktails-grid">
+                <div class="cocktail-card">
+                    <div class="cocktail-number">1</div>
+                    <h4>Vitalidad y visibilidad del capitalismo</h4>
+                    <p class="cocktail-schools"><strong>Escuelas:</strong> C, M, S, I</p>
+                </div>
+                <div class="cocktail-card">
+                    <div class="cocktail-number">2</div>
+                    <h4>Defensa del libre mercado</h4>
+                    <p class="cocktail-schools"><strong>Escuelas:</strong> C, A, N</p>
+                </div>
+                <div class="cocktail-card">
+                    <div class="cocktail-number">3</div>
+                    <h4>Conceptualización de lo individual</h4>
+                    <p class="cocktail-schools"><strong>Escuelas:</strong> N, A, Co</p>
+                </div>
+                <div class="cocktail-card">
+                    <div class="cocktail-number">4</div>
+                    <h4>Necesidad de intervención estatal</h4>
+                    <p class="cocktail-schools"><strong>Escuelas:</strong> N, D, K</p>
+                </div>
+                <div class="cocktail-card">
+                    <div class="cocktail-number">5</div>
+                    <h4>Teorías sobre grupos y clases</h4>
+                    <p class="cocktail-schools"><strong>Escuelas:</strong> C, M, K, I</p>
+                </div>
+                <div class="cocktail-card">
+                    <div class="cocktail-number">6</div>
+                    <h4>Economía más allá de mercados</h4>
+                    <p class="cocktail-schools"><strong>Escuelas:</strong> M, I, Co</p>
+                </div>
+                <div class="cocktail-card">
+                    <div class="cocktail-number">7</div>
+                    <h4>Sistemas económicos completos</h4>
+                    <p class="cocktail-schools"><strong>Escuelas:</strong> M, D, K, I</p>
+                </div>
+                <div class="cocktail-card">
+                    <div class="cocktail-number">8</div>
+                    <h4>Desarrollo tecnológico y productividad</h4>
+                    <p class="cocktail-schools"><strong>Escuelas:</strong> C, M, D, S</p>
+                </div>
+                <div class="cocktail-card">
+                    <div class="cocktail-number">9</div>
+                    <h4>Interacción individuo-sociedad</h4>
+                    <p class="cocktail-schools"><strong>Escuelas:</strong> A, N, I, Co</p>
+                </div>
+                <div class="cocktail-card">
+                    <div class="cocktail-number">10</div>
+                    <h4>Corporaciones y su funcionamiento</h4>
+                    <p class="cocktail-schools"><strong>Escuelas:</strong> S, I, Co</p>
+                </div>
+                <div class="cocktail-card">
+                    <div class="cocktail-number">11</div>
+                    <h4>Desempleo y recesión</h4>
+                    <p class="cocktail-schools"><strong>Escuelas:</strong> C, K</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Visualization Section -->
+    <section id="visualization" class="visualization-section">
+        <div class="vis-container">
+            <h2>Mapa Interactivo</h2>
+
+            <!-- Controls -->
+            <div class="controls">
+                <div class="control-group">
+                    <label for="preset-dropdown" title="Las perspectivas de peso alteran las posiciones de las escuelas para mostrar diferentes enfoques económicos">Perspectiva de Peso:</label>
+                    <select id="preset-dropdown">
+                        <option value="base" selected>Base (Original)</option>
+                        <option value="balanced">Balanceado</option>
+                        <option value="state-emphasis">Enfoque Estado</option>
+                        <option value="equity-emphasis">Enfoque Equidad</option>
+                        <option value="market-emphasis">Enfoque Mercado</option>
+                        <option value="growth-emphasis">Enfoque Crecimiento</option>
+                        <option value="historical-emphasis">Enfoque Historico</option>
+                        <option value="pragmatic-emphasis">Enfoque Pragmatico</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <label for="normalization-dropdown" title="Los métodos de normalización cambian cómo se representan los valores en el mapa">Método de Normalización:</label>
+                    <select id="normalization-dropdown">
+                        <option value="percentile" selected>Percentil (Distribución Uniforme)</option>
+                        <option value="zscore">Puntaje-Z (Centrado Estadístico)</option>
+                        <option value="minmax">Min-Max (Rango Completo)</option>
+                        <option value="none">Crudo (Sin Normalización)</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <label for="transitions-dropdown" title="Controla la visibilidad de las transiciones históricas entre escuelas">Transiciones Históricas:</label>
+                    <select id="transitions-dropdown">
+                        <option value="all" selected>Mostrar Todas</option>
+                        <option value="none">Ocultar Todas</option>
+                        <option value="high">Solo Alta Confianza</option>
+                        <option value="medium-high">Alta y Media</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <button id="reset-zoom-btn" class="control-btn" title="Vuelve a la vista inicial del mapa">↺ Restablecer Zoom</button>
+                    <button id="download-png-btn" class="control-btn" title="Descarga el mapa como imagen PNG">⬇ Descargar PNG</button>
+                </div>
+            </div>
+
+            <!-- SVG Container -->
+            <div id="map-container" class="map-container">
+                <!-- D3.js will render here -->
+                <div id="loading-indicator" class="loading-indicator" style="display: none;">
+                    <div class="spinner"></div>
+                    <p>Cargando variante...</p>
+                </div>
+            </div>
+
+            <!-- Legend -->
+            <div id="legend-container" class="legend-container">
+                <!-- Will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Pedagogical Legend Section -->
+    <section id="pedagogical-legend" class="pedagogical-section">
+        <!-- Will be populated by JavaScript from escuelas.json -->
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>
+                Generado con <a href="https://d3js.org/" target="_blank" rel="noopener">D3.js v7</a> +
+                <a href="https://vitejs.dev/" target="_blank" rel="noopener">Vite</a>
+                • Visualización inspirada en investigación de <strong>Ha-Joon Chang</strong>, de su libro
+                <em>Economics: The User's Guide</em> (2015), Capítulo 4 •
+                12 escuelas económicas
+            </p>
+            <p style="margin-top: 10px; font-size: 0.85em;">
+                Proyecto: Mapa de Escuelas Políticas Económicas • Noviembre 2025 • Versión 3.2
+            </p>
+            <p style="margin-top: 10px; font-size: 0.85em;">
+                <strong>Autor:</strong> William Camilo Artunduaga Viana (Propio de Autor)
+            </p>
+            <p style="margin-top: 5px; font-size: 0.85em;">
+                📜 Licencia: <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener" style="color: #ffffff; text-decoration: underline;">Creative Commons BY-SA 4.0</a>
+                • Código abierto para mejoras comunitarias
+            </p>
+            <div class="footer-links" style="margin-top: 15px;">
+                <a href="https://github.com/willkwolf/EcoSchoolMap" target="_blank" rel="noopener">GitHub</a>
+                <a href="https://github.com/willkwolf/EcoSchoolMap/issues" target="_blank" rel="noopener">Reportar Issue</a>
+                <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">Licencia CC BY-SA 4.0</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Vite Entry Point -->
+    <script type="module" src="/src/main.js"></script>
+</body>
+</html>
