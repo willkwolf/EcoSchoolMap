@@ -653,6 +653,287 @@ h3 {
             }
         }
     }
+
+// ============================================================
+// Timeline Section
+// ============================================================
+
+.timeline-section {
+    padding: 4rem 2rem;
+    background-color: white;
+
+    @media (max-width: $mobile) {
+        padding: 2rem 1rem;
+    }
+
+    @media (max-width: $tablet) and (min-width: #{$mobile + 1}) {
+        padding: 3rem 1.5rem;
+    }
+
+    .timeline-container {
+        max-width: 1200px;
+        margin: 0 auto;
+
+        h2 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .intro-text {
+            max-width: 900px;
+            margin: 0 auto 2.5rem;
+            text-align: center;
+            line-height: 1.8;
+            color: #555;
+        }
+    }
+
+    .timeline-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+        margin-top: 2rem;
+
+        @media (max-width: $mobile) {
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+    }
+
+    .timeline-item {
+        background-color: $bg-color;
+        border-left: 4px solid $secondary-color;
+        padding: 1.5rem;
+        border-radius: 8px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+        &:hover {
+            transform: translateX(4px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .timeline-year {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-bottom: 0.75rem;
+        }
+
+        h4 {
+            color: $primary-color;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        p {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin: 0;
+        }
+    }
+}
+
+// ============================================================
+// Learning Path Section
+// ============================================================
+
+.learning-path-section {
+    padding: 4rem 2rem;
+    background-color: $bg-color;
+
+    @media (max-width: $mobile) {
+        padding: 2rem 1rem;
+    }
+
+    @media (max-width: $tablet) and (min-width: #{$mobile + 1}) {
+        padding: 3rem 1.5rem;
+    }
+
+    .learning-path-container {
+        max-width: 1200px;
+        margin: 0 auto;
+
+        h2 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .intro-text {
+            max-width: 900px;
+            margin: 0 auto 2.5rem;
+            text-align: center;
+            line-height: 1.8;
+            color: #555;
+        }
+    }
+
+    .path-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 2rem;
+        margin-top: 2rem;
+
+        @media (max-width: $tablet) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        @media (max-width: $mobile) {
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+    }
+
+    .path-step {
+        background-color: white;
+        border: 1px solid $border-color;
+        border-radius: 12px;
+        padding: 2rem 1.5rem;
+        text-align: center;
+        position: relative;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+        &:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+        }
+
+        .step-number {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.4);
+        }
+
+        h4 {
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+            color: $primary-color;
+            font-size: 1.1rem;
+        }
+
+        p {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin: 0;
+        }
+    }
+}
+
+// ============================================================
+// Applications Section
+// ============================================================
+
+.applications-section {
+    padding: 4rem 2rem;
+    background-color: white;
+
+    @media (max-width: $mobile) {
+        padding: 2rem 1rem;
+    }
+
+    @media (max-width: $tablet) and (min-width: #{$mobile + 1}) {
+        padding: 3rem 1.5rem;
+    }
+
+    .applications-container {
+        max-width: 1400px;
+        margin: 0 auto;
+
+        h2 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .intro-text {
+            max-width: 900px;
+            margin: 0 auto 2.5rem;
+            text-align: center;
+            line-height: 1.8;
+            color: #555;
+        }
+    }
+
+    .applications-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+        margin-top: 2rem;
+
+        @media (max-width: $tablet) {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+    }
+
+    .application-category {
+        background-color: $bg-color;
+        border-radius: 12px;
+        padding: 2rem;
+        border: 1px solid $border-color;
+
+        h3 {
+            color: $primary-color;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-size: 1.3rem;
+        }
+
+        .application-items {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .application-item {
+            background-color: white;
+            padding: 1.25rem;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+            &:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            }
+
+            h4 {
+                color: $primary-color;
+                margin-bottom: 0.75rem;
+                font-size: 1rem;
+                font-weight: 600;
+            }
+
+            p {
+                color: #666;
+                font-size: 0.9rem;
+                line-height: 1.6;
+                margin: 0.4rem 0;
+
+                strong {
+                    color: $secondary-color;
+                    font-weight: 600;
+                }
+            }
+        }
+    }
+}
 }
 
 // ============================================================
