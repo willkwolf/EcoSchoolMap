@@ -13,7 +13,7 @@
     "variant_name": "historical-emphasis",
     "preset_name": "historical-emphasis",
     "normalization_method": "none",
-    "generated_at": "2025-11-14T23:23:00.536466",
+    "generated_at": "2025-11-16T02:29:35.304028",
     "generator_version": "1.0",
     "generator_script": "generate_weight_variants.py"
   },
@@ -40,12 +40,12 @@
         "naturaleza_mundo": "complejo_incierto",
         "ambito_economico": "distribucion",
         "motor_cambio": "lucha_clases",
-        "politicas_preferidas": "redistribucion"
+        "politicas_preferidas": "intervencion_estatal"
       },
       "posicion": {
-        "x": -0.8,
+        "x": -0.77,
         "y": 0.78,
-        "justificacion": "Estado fuerte (izq) + Equidad máxima (arriba)"
+        "justificacion": "Estado transitorio en transición (centro-izq) + Equidad máxima (arriba)"
       },
       "escuela_relacionada_similar": null
     },
@@ -71,12 +71,12 @@
         "naturaleza_mundo": "complejo_incierto",
         "ambito_economico": "distribucion",
         "motor_cambio": "instituciones",
-        "politicas_preferidas": "redistribucion"
+        "politicas_preferidas": "intervencion_estatal"
       },
       "posicion": {
-        "x": -0.64,
+        "x": -0.62,
         "y": 0.62,
-        "justificacion": "Estado fuerte (izq) + Equidad social (arriba medio)"
+        "justificacion": "Estado transitorio (centro-izq) + Equidad social (arriba medio)"
       },
       "escuela_relacionada_similar": "ecologica"
     },
@@ -102,12 +102,12 @@
         "naturaleza_mundo": "complejo_incierto",
         "ambito_economico": "distribucion",
         "motor_cambio": "instituciones",
-        "politicas_preferidas": "intervencion_estatal"
+        "politicas_preferidas": "redistribucion"
       },
       "posicion": {
-        "x": -0.38,
+        "x": -0.4,
         "y": 0.54,
-        "justificacion": "Estado fuerte pero regulador (izq) + Equidad y sostenibilidad (arriba)"
+        "justificacion": "Estado transformador fuerte (izq) + Equidad y sostenibilidad (arriba)"
       },
       "escuela_relacionada_similar": "institucionalista"
     },
@@ -263,12 +263,12 @@
         "naturaleza_mundo": "complejo_incierto",
         "ambito_economico": "consumo",
         "motor_cambio": "decisiones_individuales",
-        "politicas_preferidas": "ambiguas"
+        "politicas_preferidas": "intervencion_estatal"
       },
       "posicion": {
-        "x": 0.32,
+        "x": 0.26,
         "y": -0.22,
-        "justificacion": "Estado mínimo indirecto (derecha) + Eficiencia vía nudges conductuales (énfasis en crecimiento)"
+        "justificacion": "Estado intervencionista conductual (centro-izq) + Equidad vía diseño (arriba)"
       },
       "escuela_relacionada_similar": null
     },
@@ -361,7 +361,7 @@
       "posicion": {
         "x": 0.49,
         "y": -0.2,
-        "justificacion": "Estado débil (derecha) + Crecimiento sin regulación (abajo extrema)"
+        "justificacion": "Estado mínimo extremo (derecha) + Crecimiento sin regulación (abajo extrema)"
       },
       "escuela_relacionada_similar": "neoclasica"
     },
@@ -386,12 +386,12 @@
         "naturaleza_mundo": "complejo_incierto",
         "ambito_economico": "produccion",
         "motor_cambio": "innovacion_tecnologica",
-        "politicas_preferidas": "libre_mercado"
+        "politicas_preferidas": "ambiguas"
       },
       "posicion": {
-        "x": 0.39,
+        "x": 0.3,
         "y": -0.36,
-        "justificacion": "Estado débil-moderado (derecha) + Énfasis en crecimiento disruptivo (abajo)"
+        "justificacion": "Estado moderado (centro-derecha) + Crecimiento con reconocimiento de instituciones (abajo-medio)"
       },
       "escuela_relacionada_similar": "austriaca"
     }

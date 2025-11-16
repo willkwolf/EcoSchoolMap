@@ -94,15 +94,103 @@
                 </div>
                 <div class="guide-card">
                     <h3>⚠️ Advertencia</h3>
-                    <p style="color: #d63031; font-weight: bold;">
+                    <p style="color: #b71c1c; font-weight: bold; background: #ffebee; padding: 1rem; border-radius: 8px; border-left: 4px solid #b71c1c;">
                         Basarse sólo en una escuela para explorar un tema tiene riesgo de:
                     </p>
-                    <ul>
+                    <ul style="margin-top: 1rem;">
                         <li>Polarización ideológica</li>
                         <li>Visión de túnel</li>
                         <li>Arrogancia intelectual</li>
                         <li>Análisis incompleto</li>
                     </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section id="timeline" class="timeline-section">
+        <div class="timeline-container">
+            <h2>📅 Evolución Histórica</h2>
+            <div class="timeline-grid">
+                <div class="timeline-item">
+                    <div class="timeline-year">1776</div>
+                    <h3>Escuela Clásica</h3>
+                    <p>Adam Smith publica "La Riqueza de las Naciones"</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">1867</div>
+                    <h3>Marxismo</h3>
+                    <p>Marx publica "El Capital"</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">1870</div>
+                    <h3>Neoclásica</h3>
+                    <p>Revolución marginalista (Walras, Jevons, Menger)</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">1920</div>
+                    <h3>Institucionalista</h3>
+                    <p>North y Ostrom sobre instituciones</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">1936</div>
+                    <h3>Keynesiana</h3>
+                    <p>Keynes responde a la Gran Depresión</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">1942</div>
+                    <h3>Schumpeteriana</h3>
+                    <p>Schumpeter: destrucción creativa</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">1980</div>
+                    <h3>Feminista</h3>
+                    <p>Federici y economía del cuidado</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2008</div>
+                    <h3>Conductista</h3>
+                    <p>Thaler y Kahneman (nudges)</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2012</div>
+                    <h3>Ecológica</h3>
+                    <p>Raworth: Doughnut Economics</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2013</div>
+                    <h3>Estado Emprendedor</h3>
+                    <p>Mazzucato: Estado como inversor</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Learning Path Section -->
+    <section id="learning-path" class="learning-path-section">
+        <div class="learning-path-container">
+            <h2>🎓 Ruta de Aprendizaje Recomendada</h2>
+            <div class="path-grid">
+                <div class="path-step">
+                    <div class="step-number">1</div>
+                    <h3>Comienza con el Mapa Base</h3>
+                    <p>Usa la configuración "Base" para entender el panorama general</p>
+                </div>
+                <div class="path-step">
+                    <div class="step-number">2</div>
+                    <h3>Explora un Coctel</h3>
+                    <p>Elige un tema que te interese (ej: "Desempleo y recesión")</p>
+                </div>
+                <div class="path-step">
+                    <div class="step-number">3</div>
+                    <h3>Compara Perspectivas</h3>
+                    <p>Usa diferentes "presets" para ver cómo cambian las posiciones</p>
+                </div>
+                <div class="path-step">
+                    <div class="step-number">4</div>
+                    <h3>Investiga Transiciones</h3>
+                    <p>Observa cómo eventos históricos movieron las escuelas</p>
                 </div>
             </div>
         </div>
@@ -212,7 +300,7 @@
             <!-- Controls -->
             <div class="controls">
                 <div class="control-group">
-                    <label for="preset-dropdown">Perspectiva de Peso:</label>
+                    <label for="preset-dropdown" title="Cambia qué aspectos se enfatizan en el cálculo de posiciones">Perspectiva de Peso:</label>
                     <select id="preset-dropdown">
                         <option value="base" selected>Base (Original)</option>
                         <option value="balanced">Balanceado</option>
@@ -225,7 +313,7 @@
                     </select>
                 </div>
                 <div class="control-group">
-                    <label for="normalization-dropdown">Método de Normalización:</label>
+                    <label for="normalization-dropdown" title="Cómo se distribuyen las escuelas en el espacio visual">Método de Normalización:</label>
                     <select id="normalization-dropdown">
                         <option value="percentile" selected>Percentil (Distribución Uniforme)</option>
                         <option value="zscore">Puntaje-Z (Centrado Estadístico)</option>
@@ -234,7 +322,7 @@
                     </select>
                 </div>
                 <div class="control-group">
-                    <label for="transitions-dropdown">Transiciones Históricas:</label>
+                    <label for="transitions-dropdown" title="Filtra las transiciones históricas por nivel de confianza">Transiciones Históricas:</label>
                     <select id="transitions-dropdown">
                         <option value="all" selected>Mostrar Todas</option>
                         <option value="none">Ocultar Todas</option>
@@ -243,8 +331,8 @@
                     </select>
                 </div>
                 <div class="control-group">
-                    <button id="reset-zoom-btn" class="control-btn">↺ Restablecer Zoom</button>
-                    <button id="download-png-btn" class="control-btn">⬇ Descargar PNG</button>
+                    <button id="reset-zoom-btn" class="control-btn" title="Vuelve a la vista inicial del mapa">↺ Restablecer Zoom</button>
+                    <button id="download-png-btn" class="control-btn" title="Descarga una imagen PNG del mapa actual">⬇ Descargar PNG</button>
                 </div>
             </div>
 
@@ -260,6 +348,31 @@
             <!-- Legend -->
             <div id="legend-container" class="legend-container">
                 <!-- Will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Applications Section -->
+    <section id="applications" class="applications-section">
+        <div class="applications-container">
+            <h2>💡 Aplicaciones Prácticas</h2>
+            <div class="applications-grid">
+                <div class="application-card">
+                    <h3>📊 Políticas Públicas</h3>
+                    <p>Entender fundamentos teóricos de propuestas económicas y sus implicaciones en diseño de políticas</p>
+                </div>
+                <div class="application-card">
+                    <h3>🏢 Decisiones Empresariales</h3>
+                    <p>Marcos de pensamiento para estrategia empresarial, innovación y gestión organizacional</p>
+                </div>
+                <div class="application-card">
+                    <h3>🗳️ Ciudadanía Informada</h3>
+                    <p>Crítica y análisis de propuestas políticas con base en teorías económicas</p>
+                </div>
+                <div class="application-card">
+                    <h3>🎓 Educación Económica</h3>
+                    <p>Enseñanza de economía crítica y plural, evitando dogmatismo</p>
+                </div>
             </div>
         </div>
     </section>
@@ -297,6 +410,5 @@
         </div>
     </footer>
 
-    <!-- Vite Entry Point -->
 </body>
 </html>
