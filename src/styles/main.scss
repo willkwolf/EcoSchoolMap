@@ -201,7 +201,7 @@ h3 {
         padding: 2rem 1rem;
     }
 
-    @media (max-width: $tablet) and (min-width: #{$mobile + 1}) {
+    @media (max-width: $tablet) and (min-width: $mobile + 1) {
         padding: 3rem 1.5rem;
     }
 
@@ -277,7 +277,7 @@ h3 {
         padding: 2rem 1rem;
     }
 
-    @media (max-width: $tablet) and (min-width: #{$mobile + 1}) {
+    @media (max-width: $tablet) and (min-width: $mobile + 1) {
         padding: 3rem 1.5rem;
     }
 
@@ -423,7 +423,7 @@ h3 {
         padding: 2rem 1rem;
     }
 
-    @media (max-width: $tablet) and (min-width: #{$mobile + 1}) {
+    @media (max-width: $tablet) and (min-width: $mobile + 1) {
         padding: 3rem 1.5rem;
     }
 
@@ -518,7 +518,7 @@ h3 {
                     font-size: 1rem;
                 }
 
-                @media (max-width: $tablet) and (min-width: #{$mobile + 1}) {
+                @media (max-width: $tablet) and (min-width: $mobile + 1) {
                     padding: 0.875rem 1.25rem;
                 }
             }
@@ -542,7 +542,7 @@ h3 {
             border-radius: 8px;
         }
 
-        @media (max-width: $tablet) and (min-width: #{$mobile + 1}) {
+        @media (max-width: $tablet) and (min-width: $mobile + 1) {
             padding: 1.25rem;
             min-height: 500px;
         }
@@ -609,7 +609,7 @@ h3 {
         padding: 2rem 1rem;
     }
 
-    @media (max-width: $tablet) and (min-width: #{$mobile + 1}) {
+    @media (max-width: $tablet) and (min-width: $mobile + 1) {
         padding: 3rem 1.5rem;
     }
 
@@ -716,7 +716,7 @@ h3 {
         right: 1rem;
     }
 
-    @media (max-width: $tablet) and (min-width: #{$mobile + 1}) {
+    @media (max-width: $tablet) and (min-width: $mobile + 1) {
         max-width: 280px;
     }
 
@@ -783,7 +783,7 @@ h3 {
         font-size: 10px;
     }
 
-    @media (max-width: $tablet) and (min-width: #{$mobile + 1}) {
+    @media (max-width: $tablet) and (min-width: $mobile + 1) {
         font-size: 11px;
     }
 }
@@ -804,7 +804,7 @@ h3 {
         font-size: 8px !important;
     }
 
-    @media (max-width: $tablet) and (min-width: #{$mobile + 1}) {
+    @media (max-width: $tablet) and (min-width: $mobile + 1) {
         font-size: 9px !important;
     }
 }
@@ -824,41 +824,15 @@ h3 {
         font-size: 10px !important;
     }
 
-    @media (max-width: $tablet) and (min-width: #{$mobile + 1}) {
+    @media (max-width: $tablet) and (min-width: $mobile + 1) {
         font-size: 12px !important;
     }
 
-    // Mobile-first axis labels
-    &.desktop-only {
-        @media (max-width: $mobile) {
-            display: none;
-        }
-    }
-
-    &.mobile-only {
-        display: none; // Hidden by default
-        
-        @media (max-width: $mobile) {
-            display: block; // Show only on mobile
-            font-size: 11px !important;
-            font-weight: 600;
-        }
-    }
-
-    // Adjust mobile label positions
-    &.axis-label-x {
-        &.mobile-only {
-            @media (max-width: $mobile) {
-                y: $mobile - 5 !important; // Closer to edge
-            }
-        }
-    }
-
+    // Hide long text on very small screens
+    &.axis-label-x,
     &.axis-label-y {
-        &.mobile-only {
-            @media (max-width: $mobile) {
-                y: 12 !important; // Adjust for rotation
-            }
+        @media (max-width: $mobile) {
+            display: none; // Axis labels too long for mobile
         }
     }
 }
