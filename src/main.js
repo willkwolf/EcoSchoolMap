@@ -25,10 +25,10 @@ const sections = [
     { id: 'hero', name: 'Introducción' },
     { id: 'guide', name: 'Guía de Lectura' },
     { id: 'timeline', name: 'Línea de Tiempo' },
-    { id: 'learning-path', name: 'Ruta de Aprendizaje' },
-    { id: 'applications', name: 'Aplicaciones Prácticas' },
     { id: 'cocktails', name: 'Cocteles Temáticos' },
     { id: 'visualization', name: 'Mapa Interactivo' },
+    { id: 'learning-path', name: 'Ruta de Aprendizaje' },
+    { id: 'applications', name: 'Aplicaciones Prácticas' },
     { id: 'pedagogical-legend', name: 'Leyenda Pedagógica' }
 ];
 
