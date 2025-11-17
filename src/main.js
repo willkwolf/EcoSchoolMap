@@ -81,9 +81,14 @@ function setupVariantControls() {
             normalizationDropdown.disabled = true;
 
             // Show loading indicator
-            loadingIndicator.style.display = 'block';
-            loadingIndicator.style.color = '';
-            loadingIndicator.querySelector('p').textContent = 'Cargando variante...';
+            if (loadingIndicator) {
+                loadingIndicator.style.display = 'block';
+                loadingIndicator.style.color = '';
+                const pElement = loadingIndicator.querySelector('p');
+                if (pElement) {
+                    pElement.textContent = 'Cargando variante...';
+                }
+            }
 
             // Load variant data (await completes when fetch finishes)
             const variantData = await loadVariant(preset, normalization);
@@ -103,16 +108,31 @@ function setupVariantControls() {
             console.error('❌ Error loading variant:', error);
 
             // Show error message to user
-            const errorText = loadingIndicator.querySelector('p');
-            errorText.textContent = 'Error al cargar variante. Intenta de nuevo.';
-            errorText.style.color = '#e74c3c';
-            loadingIndicator.querySelector('.spinner').style.display = 'none';
+            if (loadingIndicator) {
+                const errorText = loadingIndicator.querySelector('p');
+                if (errorText) {
+                    errorText.textContent = 'Error al cargar variante. Intenta de nuevo.';
+                    errorText.style.color = '#e74c3c';
+                }
+                const spinner = loadingIndicator.querySelector('.spinner');
+                if (spinner) {
+                    spinner.style.display = 'none';
+                }
+            }
 
             // Re-enable controls after 3 seconds
             setTimeout(() => {
-                loadingIndicator.style.display = 'none';
-                loadingIndicator.querySelector('.spinner').style.display = 'block';
-                errorText.style.color = '';
+                if (loadingIndicator) {
+                    loadingIndicator.style.display = 'none';
+                    const spinner = loadingIndicator.querySelector('.spinner');
+                    if (spinner) {
+                        spinner.style.display = 'block';
+                    }
+                    const errorText = loadingIndicator.querySelector('p');
+                    if (errorText) {
+                        errorText.style.color = '';
+                    }
+                }
                 presetDropdown.disabled = false;
                 normalizationDropdown.disabled = false;
             }, 3000);
