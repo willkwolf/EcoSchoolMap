@@ -145,8 +145,8 @@ def main():
     # Sync to docs
     success2 = sync_file(SOURCE_DATA, DOCS_DATA, "Docs data")
 
-    # Sync variants to docs
-    success4 = sync_variants(SOURCE_VARIANTS, DOCS_VARIANTS, "Docs variants")
+    # Note: Docs variants are already generated in docs/data/variants/
+    success4 = True
     
     print()
     if success1 and success2 and success3 and success4:
