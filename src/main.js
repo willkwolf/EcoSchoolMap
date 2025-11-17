@@ -18,6 +18,7 @@ console.log('🚀 Mapa de Escuelas Económicas - D3.js Version');
 let mapRenderer = null;
 let baseData = null;
 let scrollController = null;
+let isLoadingVariant = false;
 
 // Define sections for scrollytelling
 const sections = [
@@ -70,16 +71,18 @@ function setupVariantControls() {
     const loadingIndicator = document.getElementById('loading-indicator');
 
     const loadAndUpdateVariant = async () => {
+        if (isLoadingVariant) {
+            return; // Prevent multiple simultaneous loads
+        }
+
         const preset = presetDropdown.value;
         const normalization = normalizationDropdown.value;
 
         console.log(`Loading variant: ${preset}-${normalization}`);
 
-        try {
-            // Disable controls during transition
-            presetDropdown.disabled = true;
-            normalizationDropdown.disabled = true;
+        isLoadingVariant = true;
 
+        try {
             // Show loading indicator
             if (loadingIndicator) {
                 loadingIndicator.style.display = 'block';
@@ -97,13 +100,13 @@ function setupVariantControls() {
             // Update map (triggers 800ms D3 transition)
             mapRenderer.updateVariant(mergedData);
 
-            // Wait for D3 transition to complete (800ms) before re-enabling controls
+            // Wait for D3 transition to complete (800ms)
             await new Promise(resolve => setTimeout(resolve, 850));
 
-            // Hide indicator and re-enable controls
-            loadingIndicator.style.display = 'none';
-            presetDropdown.disabled = false;
-            normalizationDropdown.disabled = false;
+            // Hide indicator
+            if (loadingIndicator) {
+                loadingIndicator.style.display = 'none';
+            }
         } catch (error) {
             console.error('❌ Error loading variant:', error);
 
@@ -120,7 +123,7 @@ function setupVariantControls() {
                 }
             }
 
-            // Re-enable controls after 3 seconds
+            // Hide error after 3 seconds
             setTimeout(() => {
                 if (loadingIndicator) {
                     loadingIndicator.style.display = 'none';
@@ -133,9 +136,9 @@ function setupVariantControls() {
                         errorText.style.color = '';
                     }
                 }
-                presetDropdown.disabled = false;
-                normalizationDropdown.disabled = false;
             }, 3000);
+        } finally {
+            isLoadingVariant = false;
         }
     };
 
