@@ -20,6 +20,11 @@ SOURCE_DATA = PROJECT_ROOT / "data" / "escuelas.json"
 PUBLIC_DATA = PROJECT_ROOT / "public" / "data" / "escuelas.json"
 DOCS_DATA = PROJECT_ROOT / "docs" / "data" / "escuelas.json"
 
+# Variants directories
+SOURCE_VARIANTS = PROJECT_ROOT / "data" / "variants"
+PUBLIC_VARIANTS = PROJECT_ROOT / "public" / "data" / "variants"
+DOCS_VARIANTS = PROJECT_ROOT / "docs" / "data" / "variants"
+
 def load_json_file(filepath: Path) -> Dict:
     """Load JSON data from file."""
     try:
@@ -69,16 +74,16 @@ def sync_file(source: Path, destination: Path, description: str) -> bool:
     try:
         if not destination.parent.exists():
             destination.parent.mkdir(parents=True, exist_ok=True)
-        
+
         # Load both files to compare
         source_data = load_json_file(source)
         dest_data = load_json_file(destination) if destination.exists() else None
-        
+
         if dest_data:
             source_pos = extract_positions(source_data)
             dest_pos = extract_positions(dest_data)
             differences = compare_positions(source_pos, dest_pos)
-            
+
             if differences:
                 print(f"Warning {description}: Found {len(differences)} position differences:")
                 for school_id, (source_pos, dest_pos) in differences.items():
@@ -93,6 +98,28 @@ def sync_file(source: Path, destination: Path, description: str) -> bool:
 
     except Exception as e:
         print(f"Error {description}: Error syncing - {e}")
+        return False
+
+def sync_variants(source_dir: Path, dest_dir: Path, description: str) -> bool:
+    """Sync entire variants directory."""
+    try:
+        if not source_dir.exists():
+            print(f"Error {description}: Source directory not found: {source_dir}")
+            return False
+
+        if not dest_dir.exists():
+            dest_dir.mkdir(parents=True, exist_ok=True)
+
+        # Copy entire directory
+        if dest_dir.exists():
+            shutil.rmtree(dest_dir)
+        shutil.copytree(source_dir, dest_dir)
+
+        print(f"OK {description}: Synced {len(list(dest_dir.glob('*.json')))} variant files")
+        return True
+
+    except Exception as e:
+        print(f"Error {description}: Error syncing variants - {e}")
         return False
 
 def main():
@@ -111,12 +138,18 @@ def main():
     
     # Sync to public
     success1 = sync_file(SOURCE_DATA, PUBLIC_DATA, "Public data")
-    
+
+    # Sync variants to public (from docs, since they are generated there)
+    success3 = sync_variants(DOCS_VARIANTS, PUBLIC_VARIANTS, "Public variants")
+
     # Sync to docs
     success2 = sync_file(SOURCE_DATA, DOCS_DATA, "Docs data")
+
+    # Sync variants to docs
+    success4 = sync_variants(SOURCE_VARIANTS, DOCS_VARIANTS, "Docs variants")
     
     print()
-    if success1 and success2:
+    if success1 and success2 and success3 and success4:
         print("Sync completed successfully!")
         sys.exit(0)
     else:
