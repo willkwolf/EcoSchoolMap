@@ -9,7 +9,12 @@
       "eje_x": "Control del Estado: -1 (FUERTE/izquierda) a +1 (DÉBIL/derecha)",
       "eje_y": "Enfoque: -1 (CRECIMIENTO/abajo) a +1 (EQUIDAD/arriba)",
       "metodo": "Posición cualitativa, luego cuantificada y normalizada entre -1 y +1."
-    }
+    },
+    "variant_name": "base",
+    "preset_name": "base",
+    "normalization_method": "percentile",
+    "generated_at": "2025-11-19T10:15:22.504812",
+    "generator_version": "6.0"
   },
   "nodos": [
     {
@@ -37,7 +42,7 @@
         "politicas_preferidas": "intervencion_estatal"
       },
       "posicion": {
-        "x": 0.9,
+        "x": -0.75,
         "y": 0.9,
         "justificacion": "Estado transitorio en transición (centro-izq) + Equidad máxima (arriba)"
       },
@@ -68,7 +73,7 @@
         "politicas_preferidas": "intervencion_estatal"
       },
       "posicion": {
-        "x": 0.75,
+        "x": 0.6,
         "y": 0.75,
         "justificacion": "Estado transitorio (centro-izq) + Equidad social (arriba medio)"
       },
@@ -99,7 +104,7 @@
         "politicas_preferidas": "redistribucion"
       },
       "posicion": {
-        "x": 0.6,
+        "x": 0.45,
         "y": 0.6,
         "justificacion": "Estado transformador fuerte (izq) + Equidad y sostenibilidad (arriba)"
       },
@@ -130,7 +135,7 @@
         "politicas_preferidas": "intervencion_estatal"
       },
       "posicion": {
-        "x": 0.0,
+        "x": -0.15,
         "y": -0.15,
         "justificacion": "Estado fuerte promotor industrial (izquierda) + Énfasis en crecimiento y productividad (abajo)"
       },
@@ -168,7 +173,7 @@
         "politicas_preferidas": "intervencion_estatal"
       },
       "posicion": {
-        "x": 0.38,
+        "x": 0.22,
         "y": 0.3,
         "justificacion": "Estado moderado (centro-izq) + Equidad y crecimiento balanceados (arriba)"
       },
@@ -199,7 +204,7 @@
         "politicas_preferidas": "intervencion_estatal"
       },
       "posicion": {
-        "x": 0.38,
+        "x": 0.22,
         "y": 0.45,
         "justificacion": "Estado moderado coordinador (centro) + Énfasis institucional (arriba-medio)"
       },
@@ -229,7 +234,7 @@
         "politicas_preferidas": "intervencion_estatal"
       },
       "posicion": {
-        "x": 0.15,
+        "x": -0.0,
         "y": 0.15,
         "justificacion": "Estado moderado pero emprendedor (centro-izq) + Crecimiento e innovación (arriba-bajo)"
       },
@@ -260,7 +265,7 @@
         "politicas_preferidas": "intervencion_estatal"
       },
       "posicion": {
-        "x": -0.15,
+        "x": -0.3,
         "y": 0.0,
         "justificacion": "Estado intervencionista conductual (centro-izq) + Equidad vía diseño (arriba)"
       },
@@ -291,7 +296,7 @@
         "politicas_preferidas": "libre_mercado"
       },
       "posicion": {
-        "x": -0.6,
+        "x": -0.75,
         "y": -0.75,
         "justificacion": "Estado débil (derecha) + Énfasis en crecimiento (abajo-medio)"
       },
@@ -322,7 +327,7 @@
         "politicas_preferidas": "libre_mercado"
       },
       "posicion": {
-        "x": -0.75,
+        "x": -0.9,
         "y": -0.38,
         "justificacion": "Estado muy débil (derecha extrema) + Crecimiento puro (abajo)"
       },
@@ -353,7 +358,7 @@
         "politicas_preferidas": "libre_mercado"
       },
       "posicion": {
-        "x": -0.45,
+        "x": -0.6,
         "y": -0.38,
         "justificacion": "Estado mínimo extremo (derecha) + Crecimiento sin regulación (abajo extrema)"
       },
@@ -383,7 +388,7 @@
         "politicas_preferidas": "ambiguas"
       },
       "posicion": {
-        "x": -0.3,
+        "x": -0.45,
         "y": -0.6,
         "justificacion": "Estado moderado (centro-derecha) + Crecimiento con reconocimiento de instituciones (abajo-medio)"
       },
@@ -510,35 +515,35 @@
     },
     "cuadrantes": {
       "q1": {
-        "nombre": "Estado Fuerte + Equidad",
-        "escuelas": [
-          "marxista",
-          "feminista",
-          "ecologica",
-          "tradicion_desarrollista"
-        ]
-      },
-      "q2": {
-        "nombre": "Estado Fuerte + Crecimiento",
-        "escuelas": [
-          "keynesiana",
-          "institucionalista",
-          "estado_emprendedor"
-        ]
-      },
-      "q3": {
         "nombre": "Estado Débil + Equidad",
         "escuelas": [
           "conductista"
         ]
       },
-      "q4": {
+      "q2": {
+        "nombre": "Estado Fuerte + Equidad",
+        "escuelas": [
+          "marxista",
+          "feminista",
+          "ecologica"
+        ]
+      },
+      "q3": {
         "nombre": "Estado Débil + Crecimiento",
         "escuelas": [
           "clasica",
           "neoclasica",
           "austriaca",
           "schumpeteriana"
+        ]
+      },
+      "q4": {
+        "nombre": "Estado Fuerte + Crecimiento",
+        "escuelas": [
+          "keynesiana",
+          "institucionalista",
+          "estado_emprendedor",
+          "tradicion_desarrollista"
         ]
       }
     }

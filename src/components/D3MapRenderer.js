@@ -234,9 +234,9 @@ export class D3MapRenderer {
 
             if (!fromNode || !toNode) return;
 
-            const x1 = this.xScale(-fromNode.posicion.x); // Invert x-axis
+            const x1 = this.xScale(fromNode.posicion.x);
             const y1 = this.yScale(fromNode.posicion.y);
-            const x2 = this.xScale(-toNode.posicion.x); // Invert x-axis
+            const x2 = this.xScale(toNode.posicion.x);
             const y2 = this.yScale(toNode.posicion.y);
 
             // Calculate curve control point
@@ -286,7 +286,7 @@ export class D3MapRenderer {
         const nodesGroup = this.zoomGroup.append('g').attr('class', 'nodes');
 
         this.data.nodos.forEach(node => {
-            const x = this.xScale(-node.posicion.x); // Invert x-axis for display
+            const x = this.xScale(node.posicion.x);
             const y = this.yScale(node.posicion.y);
             const color = this.colorMap.get(node.id);
             const size = getNodeSize(node.tipo);
@@ -362,7 +362,7 @@ export class D3MapRenderer {
             const nodeGroup = this.zoomGroup.select(`.node.${newNode.id}`);
 
             if (!nodeGroup.empty()) {
-                const newX = this.xScale(-newNode.posicion.x); // Invert x-axis
+                const newX = this.xScale(newNode.posicion.x);
                 const newY = this.yScale(newNode.posicion.y);
 
                 // Animate node group position
@@ -389,9 +389,9 @@ export class D3MapRenderer {
 
             if (!fromNode || !toNode) return;
 
-            const x1 = this.xScale(-fromNode.posicion.x); // Invert x-axis
+            const x1 = this.xScale(fromNode.posicion.x);
             const y1 = this.yScale(fromNode.posicion.y);
-            const x2 = this.xScale(-toNode.posicion.x); // Invert x-axis
+            const x2 = this.xScale(toNode.posicion.x);
             const y2 = this.yScale(toNode.posicion.y);
 
             const dx = x2 - x1;
