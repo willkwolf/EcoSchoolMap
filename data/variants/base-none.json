@@ -6,7 +6,7 @@
     "variant_name": "base",
     "preset_name": "base",
     "normalization_method": "none",
-    "generated_at": "2025-11-19T16:01:50.888775",
+    "generated_at": "2025-11-19T17:17:53.091515",
     "generator_version": "1.0",
     "generator_script": "generate_weight_variants.py"
   },

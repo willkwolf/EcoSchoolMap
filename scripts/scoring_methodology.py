@@ -299,7 +299,75 @@ class SchoolScorer:
             if school_desc:
                 result = self.scorer.calculate(school_desc)
                 results[school_id] = (result.x_final, result.y_final)
+
+        # Apply normalization method to all results
+        if self.normalization_method != 'none':
+            results = self._apply_normalization(results)
+
         return results
+
+    def _apply_normalization(self, results):
+        """Apply the specified normalization method to the results."""
+        if not results:
+            return results
+
+        # Extract x and y values
+        x_values = [pos[0] for pos in results.values()]
+        y_values = [pos[1] for pos in results.values()]
+
+        if self.normalization_method == 'percentile':
+            x_normalized = self._percentile_normalize(x_values)
+            y_normalized = self._percentile_normalize(y_values)
+        elif self.normalization_method == 'zscore':
+            x_normalized = self._zscore_normalize(x_values)
+            y_normalized = self._zscore_normalize(y_values)
+        elif self.normalization_method == 'minmax':
+            x_normalized = self._minmax_normalize(x_values)
+            y_normalized = self._minmax_normalize(y_values)
+        else:
+            # Default to none (no normalization)
+            return results
+
+        # Reconstruct results with normalized values
+        normalized_results = {}
+        for i, school_id in enumerate(results.keys()):
+            normalized_results[school_id] = (x_normalized[i], y_normalized[i])
+
+        return normalized_results
+
+    def _percentile_normalize(self, values):
+        """Convert values to percentiles (0-1 range)."""
+        import numpy as np
+        values_array = np.array(values)
+        # Calculate percentiles
+        percentiles = (values_array - np.min(values_array)) / (np.max(values_array) - np.min(values_array))
+        # Handle case where all values are the same
+        percentiles = np.nan_to_num(percentiles, nan=0.5)
+        return percentiles.tolist()
+
+    def _zscore_normalize(self, values):
+        """Convert values to z-scores (standardized with mean=0, std=1)."""
+        import numpy as np
+        values_array = np.array(values)
+        mean_val = np.mean(values_array)
+        std_val = np.std(values_array)
+        if std_val == 0:
+            # All values are the same, return zeros
+            return [0.0] * len(values)
+        z_scores = (values_array - mean_val) / std_val
+        return z_scores.tolist()
+
+    def _minmax_normalize(self, values):
+        """Scale values to [0, 1] range."""
+        import numpy as np
+        values_array = np.array(values)
+        min_val = np.min(values_array)
+        max_val = np.max(values_array)
+        if max_val == min_val:
+            # All values are the same, return 0.5
+            return [0.5] * len(values)
+        normalized = (values_array - min_val) / (max_val - min_val)
+        return normalized.tolist()
 
     def _create_school_descriptors(self, descriptors):
         """Create SchoolDescriptors from dict."""
