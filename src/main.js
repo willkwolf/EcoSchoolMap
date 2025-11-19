@@ -41,8 +41,8 @@ async function init() {
         baseData = await loadBaseData();
         console.log('Base data loaded:', baseData);
 
-        // Load initial variant (base-percentile)
-        const initialVariant = await loadVariant('base', 'percentile');
+        // Load initial variant (base-none)
+        const initialVariant = await loadVariant('base', 'none');
         const mergedData = mergeVariantWithBase(initialVariant, baseData);
 
         // Initialize D3 renderer
