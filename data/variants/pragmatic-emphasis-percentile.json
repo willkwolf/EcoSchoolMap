@@ -13,7 +13,7 @@
     "variant_name": "pragmatic-emphasis",
     "preset_name": "pragmatic-emphasis",
     "normalization_method": "percentile",
-    "generated_at": "2025-11-19T09:01:04.479957",
+    "generated_at": "2025-11-19T09:22:01.836908",
     "generator_version": "1.0",
     "generator_script": "generate_weight_variants.py"
   },
@@ -43,7 +43,7 @@
         "politicas_preferidas": "intervencion_estatal"
       },
       "posicion": {
-        "x": -0.75,
+        "x": 0.9,
         "y": 0.9,
         "justificacion": "Estado transitorio en transición (centro-izq) + Equidad máxima (arriba)"
       },
@@ -74,7 +74,7 @@
         "politicas_preferidas": "intervencion_estatal"
       },
       "posicion": {
-        "x": -0.6,
+        "x": 0.75,
         "y": 0.75,
         "justificacion": "Estado transitorio (centro-izq) + Equidad social (arriba medio)"
       },
@@ -105,7 +105,7 @@
         "politicas_preferidas": "redistribucion"
       },
       "posicion": {
-        "x": -0.45,
+        "x": 0.6,
         "y": 0.6,
         "justificacion": "Estado transformador fuerte (izq) + Equidad y sostenibilidad (arriba)"
       },
@@ -136,7 +136,7 @@
         "politicas_preferidas": "intervencion_estatal"
       },
       "posicion": {
-        "x": 0.15,
+        "x": 0.0,
         "y": -0.15,
         "justificacion": "Estado fuerte promotor industrial (izquierda) + Énfasis en crecimiento y productividad (abajo)"
       },
@@ -174,7 +174,7 @@
         "politicas_preferidas": "intervencion_estatal"
       },
       "posicion": {
-        "x": -0.22,
+        "x": 0.38,
         "y": 0.3,
         "justificacion": "Estado moderado (centro-izq) + Equidad y crecimiento balanceados (arriba)"
       },
@@ -205,7 +205,7 @@
         "politicas_preferidas": "intervencion_estatal"
       },
       "posicion": {
-        "x": -0.22,
+        "x": 0.38,
         "y": 0.45,
         "justificacion": "Estado moderado coordinador (centro) + Énfasis institucional (arriba-medio)"
       },
@@ -235,7 +235,7 @@
         "politicas_preferidas": "intervencion_estatal"
       },
       "posicion": {
-        "x": 0.0,
+        "x": 0.15,
         "y": 0.15,
         "justificacion": "Estado moderado pero emprendedor (centro-izq) + Crecimiento e innovación (arriba-bajo)"
       },
@@ -266,7 +266,7 @@
         "politicas_preferidas": "intervencion_estatal"
       },
       "posicion": {
-        "x": 0.3,
+        "x": -0.15,
         "y": 0.0,
         "justificacion": "Estado intervencionista conductual (centro-izq) + Equidad vía diseño (arriba)"
       },
@@ -297,7 +297,7 @@
         "politicas_preferidas": "libre_mercado"
       },
       "posicion": {
-        "x": 0.75,
+        "x": -0.6,
         "y": -0.75,
         "justificacion": "Estado débil (derecha) + Énfasis en crecimiento (abajo-medio)"
       },
@@ -328,7 +328,7 @@
         "politicas_preferidas": "libre_mercado"
       },
       "posicion": {
-        "x": 0.9,
+        "x": -0.75,
         "y": -0.38,
         "justificacion": "Estado muy débil (derecha extrema) + Crecimiento puro (abajo)"
       },
@@ -359,7 +359,7 @@
         "politicas_preferidas": "libre_mercado"
       },
       "posicion": {
-        "x": 0.6,
+        "x": -0.45,
         "y": -0.38,
         "justificacion": "Estado mínimo extremo (derecha) + Crecimiento sin regulación (abajo extrema)"
       },
@@ -389,7 +389,7 @@
         "politicas_preferidas": "ambiguas"
       },
       "posicion": {
-        "x": 0.45,
+        "x": -0.3,
         "y": -0.6,
         "justificacion": "Estado moderado (centro-derecha) + Crecimiento con reconocimiento de instituciones (abajo-medio)"
       },
