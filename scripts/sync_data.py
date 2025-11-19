@@ -87,7 +87,7 @@ def sync_file(source: Path, destination: Path, description: str) -> bool:
             if differences:
                 print(f"Warning {description}: Found {len(differences)} position differences:")
                 for school_id, (source_pos, dest_pos) in differences.items():
-                    print(f"   • {school_id}: {dest_pos} → {source_pos}")
+                    print(f"   • {school_id}: {dest_pos} -> {source_pos}")
             else:
                 print(f"OK {description}: No significant differences found")
 
