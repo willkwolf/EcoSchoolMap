@@ -6,7 +6,7 @@
     "variant_name": "growth-emphasis",
     "preset_name": "growth-emphasis",
     "normalization_method": "zscore",
-    "generated_at": "2025-11-19T17:17:53.222929",
+    "generated_at": "2025-11-19T17:23:07.285128",
     "generator_version": "1.0",
     "generator_script": "generate_weight_variants.py"
   },

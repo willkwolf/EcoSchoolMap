@@ -6,7 +6,7 @@
     "variant_name": "balanced",
     "preset_name": "balanced",
     "normalization_method": "zscore",
-    "generated_at": "2025-11-19T17:17:53.133561",
+    "generated_at": "2025-11-19T17:23:07.216258",
     "generator_version": "1.0",
     "generator_script": "generate_weight_variants.py"
   },
