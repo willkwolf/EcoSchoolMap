@@ -440,10 +440,10 @@ export class D3MapRenderer {
     }
 
     /**
-     * Set visibility of transition arrows based on filter mode
-     * @param {string} mode - Visibility mode: 'all', 'none', 'high', 'medium-high'
+     * Set visibility of transition arrows based on selected confidence levels
+     * @param {Array<string>} selectedConfidences - Array of confidence levels to show: ['muy_alta', 'alta', 'media']
      */
-    setTransitionVisibility(mode) {
+    setTransitionVisibility(selectedConfidences) {
         const transitionGroup = this.zoomGroup.select('.transitions');
 
         if (!transitionGroup || transitionGroup.empty()) {
@@ -451,45 +451,21 @@ export class D3MapRenderer {
             return;
         }
 
-        switch (mode) {
-            case 'none':
-                // Hide all transitions
-                transitionGroup.style('display', 'none');
-                break;
-
-            case 'all':
-                // Show all transitions
-                transitionGroup.style('display', null);
-                transitionGroup.selectAll('.transition-arrow').style('display', null);
-                transitionGroup.selectAll('.transition-label').style('display', null);
-                break;
-
-            case 'high':
-                // Show only high confidence (muy_alta)
-                transitionGroup.style('display', null);
-                this.data.transiciones.forEach(transition => {
-                    const display = transition.confianza === 'muy_alta' ? null : 'none';
-                    transitionGroup.select(`.transition-arrow.${transition.id}`).style('display', display);
-                    transitionGroup.select(`.transition-label.${transition.id}`).style('display', display);
-                });
-                break;
-
-            case 'medium-high':
-                // Show medium and high confidence (alta, media) - excluding muy_alta
-                transitionGroup.style('display', null);
-                this.data.transiciones.forEach(transition => {
-                    const showConfidence = ['alta', 'media'];
-                    const display = showConfidence.includes(transition.confianza) ? null : 'none';
-                    transitionGroup.select(`.transition-arrow.${transition.id}`).style('display', display);
-                    transitionGroup.select(`.transition-label.${transition.id}`).style('display', display);
-                });
-                break;
-
-            default:
-                console.warn(`Unknown transition visibility mode: ${mode}`);
-                transitionGroup.style('display', null);
+        // If no confidences selected, hide all transitions
+        if (!selectedConfidences || selectedConfidences.length === 0) {
+            transitionGroup.style('display', 'none');
+            console.log('✅ Transition visibility: none selected');
+            return;
         }
 
-        console.log(`✅ Transition visibility set to: ${mode}`);
+        // Show transition group and filter by selected confidences
+        transitionGroup.style('display', null);
+        this.data.transiciones.forEach(transition => {
+            const display = selectedConfidences.includes(transition.confianza) ? null : 'none';
+            transitionGroup.select(`.transition-arrow.${transition.id}`).style('display', display);
+            transitionGroup.select(`.transition-label.${transition.id}`).style('display', display);
+        });
+
+        console.log(`✅ Transition visibility set to: ${selectedConfidences.join(', ')}`);
     }
 }

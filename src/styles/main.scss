@@ -522,6 +522,130 @@ h3 {
                     padding: 0.875rem 1.25rem;
                 }
             }
+
+            // Checkbox group styles
+            .checkbox-group {
+                display: flex;
+                flex-direction: column;
+                gap: 0.75rem;
+
+                .checkbox-label {
+                    display: flex;
+                    align-items: center;
+                    cursor: pointer;
+                    font-size: 0.95rem;
+                    font-weight: 500;
+                    color: $primary-color;
+                    user-select: none;
+
+                    input[type="checkbox"] {
+                        position: absolute;
+                        opacity: 0;
+                        cursor: pointer;
+                        height: 0;
+                        width: 0;
+
+                        &:checked ~ .checkmark {
+                            background-color: $secondary-color;
+                            border-color: $secondary-color;
+
+                            &:after {
+                                display: block;
+                            }
+                        }
+
+                        &:focus ~ .checkmark {
+                            box-shadow: 0 0 0 2px rgba($secondary-color, 0.3);
+                        }
+                    }
+
+                    .checkmark {
+                        height: 20px;
+                        width: 20px;
+                        background-color: #fff;
+                        border: 2px solid #ddd;
+                        border-radius: 4px;
+                        margin-right: 0.75rem;
+                        position: relative;
+                        transition: all 0.3s ease;
+                        flex-shrink: 0;
+
+                        &:after {
+                            content: "";
+                            position: absolute;
+                            display: none;
+                            left: 6px;
+                            top: 2px;
+                            width: 6px;
+                            height: 10px;
+                            border: solid white;
+                            border-width: 0 2px 2px 0;
+                            transform: rotate(45deg);
+                        }
+                    }
+
+                    &:hover .checkmark {
+                        border-color: $secondary-color;
+                    }
+                }
+
+                .checkbox-actions {
+                    display: flex;
+                    gap: 0.75rem;
+                    margin-top: 0.5rem;
+
+                    .checkbox-btn {
+                        padding: 0.5rem 1rem;
+                        border: 1px solid #ddd;
+                        border-radius: 6px;
+                        background-color: #f8f9fa;
+                        color: $primary-color;
+                        font-size: 0.85rem;
+                        font-weight: 600;
+                        cursor: pointer;
+                        transition: all 0.3s ease;
+                        min-height: 36px;
+
+                        &:hover {
+                            background-color: $secondary-color;
+                            color: white;
+                            border-color: $secondary-color;
+                        }
+
+                        &:active {
+                            transform: translateY(1px);
+                        }
+
+                        @media (max-width: $mobile) {
+                            flex: 1;
+                            padding: 0.75rem;
+                            font-size: 0.9rem;
+                        }
+                    }
+                }
+
+                @media (max-width: $mobile) {
+                    gap: 1rem;
+
+                    .checkbox-label {
+                        font-size: 1rem;
+                        padding: 0.25rem 0;
+
+                        .checkmark {
+                            height: 24px;
+                            width: 24px;
+                            margin-right: 1rem;
+
+                            &:after {
+                                left: 7px;
+                                top: 3px;
+                                width: 7px;
+                                height: 12px;
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 
