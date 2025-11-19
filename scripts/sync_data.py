@@ -136,20 +136,14 @@ def main():
     print(f"Docs:   {DOCS_DATA}")
     print()
     
-    # Sync to public
-    success1 = sync_file(SOURCE_DATA, PUBLIC_DATA, "Public data")
+    # Sync to docs (build output directory)
+    success1 = sync_file(SOURCE_DATA, DOCS_DATA, "Docs data")
 
-    # Sync variants to public (from docs, since they are generated there)
-    success3 = sync_variants(DOCS_VARIANTS, PUBLIC_VARIANTS, "Public variants")
-
-    # Sync to docs
-    success2 = sync_file(SOURCE_DATA, DOCS_DATA, "Docs data")
-
-    # Note: Docs variants are already generated in docs/data/variants/
-    success4 = True
+    # Sync variants to docs (from data, where they are generated)
+    success2 = sync_variants(SOURCE_VARIANTS, DOCS_VARIANTS, "Docs variants")
     
     print()
-    if success1 and success2 and success3 and success4:
+    if success1 and success2:
         print("Sync completed successfully!")
         sys.exit(0)
     else:
