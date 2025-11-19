@@ -65,10 +65,18 @@ async function init() {
 function setupVariantControls() {
     const presetDropdown = document.getElementById('preset-dropdown');
     const normalizationDropdown = document.getElementById('normalization-dropdown');
-    const transitionsDropdown = document.getElementById('transitions-dropdown');
     const resetZoomBtn = document.getElementById('reset-zoom-btn');
     const downloadPngBtn = document.getElementById('download-png-btn');
     const loadingIndicator = document.getElementById('loading-indicator');
+
+    // Transition checkboxes
+    const transitionCheckboxes = [
+        document.getElementById('transition-muy_alta'),
+        document.getElementById('transition-alta'),
+        document.getElementById('transition-media')
+    ];
+    const selectAllBtn = document.getElementById('select-all-transitions');
+    const deselectAllBtn = document.getElementById('deselect-all-transitions');
 
     const loadAndUpdateVariant = async () => {
         if (isLoadingVariant) {
@@ -145,10 +153,34 @@ function setupVariantControls() {
     presetDropdown.addEventListener('change', loadAndUpdateVariant);
     normalizationDropdown.addEventListener('change', loadAndUpdateVariant);
 
-    // Transitions visibility control
-    transitionsDropdown.addEventListener('change', () => {
-        const mode = transitionsDropdown.value;
-        mapRenderer.setTransitionVisibility(mode);
+    // Transitions visibility control with checkboxes
+    const updateTransitionVisibility = () => {
+        const selectedConfidences = transitionCheckboxes
+            .filter(checkbox => checkbox.checked)
+            .map(checkbox => checkbox.id.replace('transition-', ''));
+
+        mapRenderer.setTransitionVisibility(selectedConfidences);
+    };
+
+    // Add event listeners for checkboxes
+    transitionCheckboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', updateTransitionVisibility);
+    });
+
+    // Select all button
+    selectAllBtn.addEventListener('click', () => {
+        transitionCheckboxes.forEach(checkbox => {
+            checkbox.checked = true;
+        });
+        updateTransitionVisibility();
+    });
+
+    // Deselect all button
+    deselectAllBtn.addEventListener('click', () => {
+        transitionCheckboxes.forEach(checkbox => {
+            checkbox.checked = false;
+        });
+        updateTransitionVisibility();
     });
 
     // Reset zoom button
