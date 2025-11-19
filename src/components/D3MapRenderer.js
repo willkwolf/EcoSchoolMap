@@ -475,10 +475,10 @@ export class D3MapRenderer {
                 break;
 
             case 'medium-high':
-                // Show high and medium confidence (muy_alta, alta, media)
+                // Show medium and high confidence (alta, media) - excluding muy_alta
                 transitionGroup.style('display', null);
                 this.data.transiciones.forEach(transition => {
-                    const showConfidence = ['muy_alta', 'alta', 'media'];
+                    const showConfidence = ['alta', 'media'];
                     const display = showConfidence.includes(transition.confianza) ? null : 'none';
                     transitionGroup.select(`.transition-arrow.${transition.id}`).style('display', display);
                     transitionGroup.select(`.transition-label.${transition.id}`).style('display', display);
