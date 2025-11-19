@@ -13,7 +13,7 @@
     "variant_name": "equity-emphasis",
     "preset_name": "equity-emphasis",
     "normalization_method": "percentile",
-    "generated_at": "2025-11-19T10:00:45.648826",
+    "generated_at": "2025-11-19T10:20:49.606490",
     "generator_version": "1.0",
     "generator_script": "generate_weight_variants.py"
   },
@@ -516,35 +516,35 @@
     },
     "cuadrantes": {
       "q1": {
-        "nombre": "Estado Fuerte + Equidad",
-        "escuelas": [
-          "marxista",
-          "feminista",
-          "ecologica",
-          "tradicion_desarrollista"
-        ]
-      },
-      "q2": {
-        "nombre": "Estado Fuerte + Crecimiento",
-        "escuelas": [
-          "keynesiana",
-          "institucionalista",
-          "estado_emprendedor"
-        ]
-      },
-      "q3": {
         "nombre": "Estado Débil + Equidad",
         "escuelas": [
           "conductista"
         ]
       },
-      "q4": {
+      "q2": {
+        "nombre": "Estado Fuerte + Equidad",
+        "escuelas": [
+          "marxista",
+          "feminista",
+          "ecologica"
+        ]
+      },
+      "q3": {
         "nombre": "Estado Débil + Crecimiento",
         "escuelas": [
           "clasica",
           "neoclasica",
           "austriaca",
           "schumpeteriana"
+        ]
+      },
+      "q4": {
+        "nombre": "Estado Fuerte + Crecimiento",
+        "escuelas": [
+          "keynesiana",
+          "institucionalista",
+          "estado_emprendedor",
+          "tradicion_desarrollista"
         ]
       }
     }

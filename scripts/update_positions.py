@@ -18,10 +18,9 @@ positions = {}
 for nodo in base_data['nodos']:
     positions[nodo['id']] = nodo['posicion']
 
-# Update positions in original
+# Negate x positions in original
 for nodo in original_data['nodos']:
-    if nodo['id'] in positions:
-        nodo['posicion'] = positions[nodo['id']]
+    nodo['posicion']['x'] = -nodo['posicion']['x']
 
 # Save
 with open('data/escuelas.json', 'w', encoding='utf-8') as f:
