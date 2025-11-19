@@ -5,11 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "prebuild": "py scripts/sync_data.py",
     "build": "vite build",
     "preview": "vite preview",
-    "validate-data": "py scripts/validate_data_integrity.py",
-    "sync-data": "py scripts/sync_data.py"
+    "validate-data": "py scripts/validate_data_integrity.py"
   },
   "repository": {
     "type": "git",
