@@ -345,7 +345,7 @@ class SchoolScorer:
         return percentiles.tolist()
 
     def _zscore_normalize(self, values):
-        """Convert values to z-scores (standardized with mean=0, std=1)."""
+        """Convert values to z-scores (standardized with mean=0, std=1), clipped to [-1, 1]."""
         import numpy as np
         values_array = np.array(values)
         mean_val = np.mean(values_array)
@@ -354,7 +354,9 @@ class SchoolScorer:
             # All values are the same, return zeros
             return [0.0] * len(values)
         z_scores = (values_array - mean_val) / std_val
-        return z_scores.tolist()
+        # Clip z-scores to [-1, 1] range for map compatibility
+        clipped_z_scores = np.clip(z_scores, -1.0, 1.0)
+        return clipped_z_scores.tolist()
 
     def _minmax_normalize(self, values):
         """Scale values to [0, 1] range."""

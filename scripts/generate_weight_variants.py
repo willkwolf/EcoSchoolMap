@@ -118,6 +118,10 @@ def generate_variant(source_data: dict, preset_name: str,
     # Agregar metadata
     data = add_metadata(data, preset_name, preset_name, normalization_method)
 
+    # Update weights_preset in metadata to reflect the actual preset used
+    if 'metadata' in data:
+        data['metadata']['weights_preset'] = preset_name
+
     return data
 
 
