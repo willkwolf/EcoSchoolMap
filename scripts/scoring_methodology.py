@@ -1,24 +1,15 @@
 """
-scoring_methodology_v7.py - Motor de Inferencia para Escuelas Económicas (Eje X Invertido)
+scoring_methodology_v8_fixed.py - Motor de Inferencia para Escuelas Económicas
 
-CAMBIO IMPORTANTE V7:
----------------------
-Se ha invertido el Eje X para eliminar coincidencias con el espectro político tradicional "Derecha/Izquierda".
-Ahora el eje representa puramente la MAGNITUD DE LA INTERVENCIÓN ESTATAL.
+CORRECCIÓN V8:
+--------------
+1. Se agregó 'PRODUCCION' al Enum ConceptoEconomia (causante del AttributeError).
+2. Se mantiene el Eje X invertido:
+   - Negativo: Mercado / Individuo
+   - Positivo: Estado / Colectivo
 
-Nuevos Ejes:
-------------
-EJE X: INTENSIDAD DE INTERVENCIÓN ESTATAL
-    Range: [-1.0, 1.0]
-    -1.0: Estado Mínimo / Ausente (Laissez-faire).
-     0.0: Estado Regulador / Mixto.
-    +1.0: Estado Máximo / Omnipresente (Planificación Central).
-
-EJE Y: OBJETIVO SOCIOECONÓMICO (Trade-off de Okun)
-    Range: [-1.0, 1.0]
-    -1.0: Prioridad Eficiencia / Crecimiento (Acumulación).
-     0.0: Balance.
-    +1.0: Prioridad Equidad / Justicia Social (Redistribución).
+EJE X: INTENSIDAD DE INTERVENCIÓN ESTATAL [-1.0 a 1.0]
+EJE Y: OBJETIVO SOCIOECONÓMICO [-1.0 (Crecimiento) a 1.0 (Equidad)]
 """
 
 import numpy as np
@@ -27,7 +18,7 @@ from dataclasses import dataclass
 from typing import Dict, List
 
 # ============================================================
-# 1. DOMAIN DEFINITIONS (ENUMS - Sin Cambios)
+# 1. DOMAIN DEFINITIONS (ENUMS)
 # ============================================================
 
 class ConceptoEconomia(Enum):
@@ -35,6 +26,7 @@ class ConceptoEconomia(Enum):
     INDIVIDUOS = "individuos"
     INSTITUCIONES = "instituciones"
     SISTEMA = "sistema_complejo"
+    PRODUCCION = "sistema_productivo"  # <--- AGREGADO: Faltaba esta definición
 
 class ConceptoHumano(Enum):
     RACIONAL_EGOISTA = "racional_egoista"
@@ -92,43 +84,43 @@ class ScoringResult:
         return f"Pos(Estado={self.x_final:.2f}, Objetivo={self.y_final:.2f})"
 
 # ============================================================
-# 3. SCORING ENGINE (SIGNOS INVERTIDOS EN X)
+# 3. SCORING ENGINE (Eje X Invertido: + es Estado, - es Mercado)
 # ============================================================
 
 class EconomicSchoolScorer:
     
-    # ---------------------------------------------------------
-    # PUNTAJES BASE (Invertidos en X respecto a V6)
-    # X: -1 (Mercado/Individuo) <-> +1 (Estado/Colectivo)
-    # ---------------------------------------------------------
-    
+    # Diccionarios de puntaje
+    # X: +1.0 (Estado Máximo) <-> -1.0 (Estado Mínimo)
+    # Y: +1.0 (Equidad) <-> -1.0 (Crecimiento)
+
     _SCORES_ECONOMIA = {
-        # Antes -0.6 (fuerte estado), ahora +0.6
-        ConceptoEconomia.CLASES:        {'x': 0.6,  'y': 0.4},
-        # Antes +0.9 (débil estado), ahora -0.9
+        ConceptoEconomia.CLASES:        {'x': 0.7,  'y': 0.5},
         ConceptoEconomia.INDIVIDUOS:    {'x': -0.9, 'y': -0.5},
         ConceptoEconomia.INSTITUCIONES: {'x': 0.3,  'y': 0.0},
         ConceptoEconomia.SISTEMA:       {'x': 0.5,  'y': 0.2},
+        # Definición agregada: Ver la economía como sistema productivo
+        # implica coordinación (Estado +) para crecer (Crecimiento -)
+        ConceptoEconomia.PRODUCCION:    {'x': 0.6,  'y': -0.6}, 
     }
 
     _SCORES_HUMANO = {
-        ConceptoHumano.RACIONAL_EGOISTA:      {'x': -0.8, 'y': -0.8}, # Menos estado
-        ConceptoHumano.RACIONALIDAD_LIMITADA: {'x': 0.2,  'y': 0.3},  # Requiere regulación
-        ConceptoHumano.CONDICIONADO_CLASE:    {'x': 0.7,  'y': 0.7},  # Requiere intervención
+        ConceptoHumano.RACIONAL_EGOISTA:      {'x': -0.8, 'y': -0.8},
+        ConceptoHumano.RACIONALIDAD_LIMITADA: {'x': 0.2,  'y': 0.3},
+        ConceptoHumano.CONDICIONADO_CLASE:    {'x': 0.7,  'y': 0.7},
         ConceptoHumano.ADAPTABLE:             {'x': 0.1,  'y': 0.1},
     }
     
     _SCORES_MUNDO = {
-        NaturalezaMundo.EQUILIBRIO_ESTATICO:   {'x': -0.7, 'y': -0.3}, # Se autorregula -> Menos estado
-        NaturalezaMundo.INCERTIDUMBRE_RADICAL: {'x': 0.4,  'y': 0.0},  # Necesita estabilizador -> Más estado
+        NaturalezaMundo.EQUILIBRIO_ESTATICO:   {'x': -0.7, 'y': -0.3},
+        NaturalezaMundo.INCERTIDUMBRE_RADICAL: {'x': 0.4,  'y': 0.0},
         NaturalezaMundo.EVOLUTIVO:             {'x': -0.2, 'y': -0.6},
         NaturalezaMundo.DETERMINISTA:          {'x': 0.5,  'y': 0.0},
     }
 
     _SCORES_AMBITO = {
         AmbitoRelevante.INTERCAMBIO:  {'x': -0.6, 'y': -0.2},
-        AmbitoRelevante.PRODUCCION:   {'x': 0.2,  'y': -0.9}, # Puede implicar política industrial (+)
-        AmbitoRelevante.DISTRIBUCION: {'x': 0.6,  'y': 0.9},  # Requiere estado redistribuidor (+)
+        AmbitoRelevante.PRODUCCION:   {'x': 0.3,  'y': -0.9},
+        AmbitoRelevante.DISTRIBUCION: {'x': 0.6,  'y': 0.9},
         AmbitoRelevante.DEMANDA:      {'x': 0.4,  'y': 0.3},
     }
 
@@ -137,14 +129,14 @@ class EconomicSchoolScorer:
         MotorCambio.CAPITAL:             {'x': -0.5, 'y': -0.8},
         MotorCambio.TECNOLOGIA:          {'x': -0.3, 'y': -0.7},
         MotorCambio.LUCHA_CLASES:        {'x': 0.8,  'y': 0.8},
-        MotorCambio.POLITICA_INDUSTRIAL: {'x': 0.9,  'y': -0.6}, # Alto estado (+), fin crecimiento (-)
+        MotorCambio.POLITICA_INDUSTRIAL: {'x': 0.9,  'y': -0.7},
     }
 
     _SCORES_POLITICA = {
         PoliticaPreferida.LIBRE_MERCADO:        {'x': -1.0, 'y': -0.5},
         PoliticaPreferida.REGULACION_FALLOS:    {'x': -0.2, 'y': 0.0},
         PoliticaPreferida.ESTADO_BIENESTAR:     {'x': 0.5,  'y': 0.6},
-        PoliticaPreferida.ESTADO_DESARROLLISTA: {'x': 0.8,  'y': -0.7},
+        PoliticaPreferida.ESTADO_DESARROLLISTA: {'x': 0.8,  'y': -0.8},
         PoliticaPreferida.PLANIFICACION:        {'x': 1.0,  'y': 0.5},
     }
 
@@ -189,28 +181,14 @@ class EconomicSchoolScorer:
         )
 
     def _get_label(self, x: float, y: float) -> str:
-        """
-        Etiquetado de cuadrantes actualizado para X invertido.
-        X Positivo = Estado Fuerte.
-        X Negativo = Estado Débil.
-        """
-        # Cuadrante 1: Estado Fuerte (+X) y Equidad (+Y)
         if x > 0 and y > 0: return "Socialismo / Estado de Bienestar"
-        
-        # Cuadrante 2: Estado Débil (-X) y Equidad (+Y)
-        # (Raro teóricamente, suele ser mutualismo, cooperativismo o socialdemocracia muy ligera)
-        if x < 0 and y > 0: return "Economía Social de Mercado / Cooperativismo"
-        
-        # Cuadrante 3: Estado Débil (-X) y Crecimiento (-Y)
+        if x < 0 and y > 0: return "Econ. Social Mercado / Cooperativismo"
         if x < 0 and y < 0: return "Neoliberalismo / Escuela Austriaca"
-        
-        # Cuadrante 4: Estado Fuerte (+X) y Crecimiento (-Y)
         if x > 0 and y < 0: return "Estado Desarrollista / Mercantilismo"
-        
         return "Centro / Híbrido"
 
 # ============================================================
-# 4. EJEMPLO DE VISUALIZACIÓN
+# 4. EXECUTION
 # ============================================================
 
 if __name__ == "__main__":
@@ -228,6 +206,7 @@ if __name__ == "__main__":
             MotorCambio.INDIVIDUO, PoliticaPreferida.ESTADO_BIENESTAR
         ),
         SchoolDescriptors(
+            # AHORA SÍ FUNCIONARÁ: ConceptoEconomia.PRODUCCION existe
             "Desarrollista (Asia)", ConceptoEconomia.PRODUCCION, ConceptoHumano.ADAPTABLE,
             NaturalezaMundo.EVOLUTIVO, AmbitoRelevante.PRODUCCION,
             MotorCambio.POLITICA_INDUSTRIAL, PoliticaPreferida.ESTADO_DESARROLLISTA
@@ -245,12 +224,10 @@ if __name__ == "__main__":
     for s in schools_data:
         res = scorer.calculate(s)
         
-        # Visualización de barras ASCII
-        # X negativo (izquierda) es Mercado, X positivo (derecha) es Estado
+        # Visualización ASCII
         bar_len = 8
-        
-        # Lógica visual X: [-1 (Mkt) ... 0 ... +1 (Est)]
         x_val_norm = int(res.x_final * bar_len)
+        
         if res.x_final < 0:
             vis_x = "Mkt " + "█"*abs(x_val_norm)
         else:
