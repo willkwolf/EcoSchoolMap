@@ -100,7 +100,7 @@ class EconomicSchoolScorer:
         ConceptoEconomia.SISTEMA:       {'x': 0.5,  'y': 0.2},
         # Definición agregada: Ver la economía como sistema productivo
         # implica coordinación (Estado +) para crecer (Crecimiento -)
-        ConceptoEconomia.PRODUCCION:    {'x': 0.6,  'y': -0.6}, 
+        ConceptoEconomia.PRODUCCION:    {'x': 0.6,  'y': -0.6},
     }
 
     _SCORES_HUMANO = {

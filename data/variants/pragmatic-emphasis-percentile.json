@@ -6,7 +6,7 @@
     "variant_name": "pragmatic-emphasis",
     "preset_name": "pragmatic-emphasis",
     "normalization_method": "percentile",
-    "generated_at": "2025-11-19T11:08:45.585015",
+    "generated_at": "2025-11-19T16:01:51.014962",
     "generator_version": "1.0",
     "generator_script": "generate_weight_variants.py"
   },
