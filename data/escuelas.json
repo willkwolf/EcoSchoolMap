@@ -6,7 +6,7 @@
     "autor": "William Camilo Artundauga Viana",
     "notas": {
       "posicionamiento": "Cada nodo tiene coordenadas (x, y) basadas por criterios en scoring methodology.",
-      "eje_x": "Control del Estado: -1 (FUERTE/izquierda) a +1 (DÉBIL/derecha)",
+      "eje_x": "Control del Estado: -1 (DÉBIL/derecha) a +1 (FUERTE/izquierda)",
       "eje_y": "Enfoque: -1 (CRECIMIENTO/abajo) a +1 (EQUIDAD/arriba)",
       "metodo": "Posición cualitativa, luego cuantificada y normalizada entre -1 y +1."
     }
@@ -37,7 +37,7 @@
         "politicas_preferidas": "intervencion_estatal"
       },
       "posicion": {
-        "x": -0.3,
+        "x": 0.3,
         "y": 0.9,
         "justificacion": "Estado transitorio en transición (centro-izq) + Equidad máxima (arriba)"
       },
@@ -68,7 +68,7 @@
         "politicas_preferidas": "intervencion_estatal"
       },
       "posicion": {
-        "x": -0.3,
+        "x": 0.3,
         "y": 0.75,
         "justificacion": "Estado transitorio (centro-izq) + Equidad social (arriba medio)"
       },
@@ -99,7 +99,7 @@
         "politicas_preferidas": "redistribucion"
       },
       "posicion": {
-        "x": -0.6,
+        "x": 0.6,
         "y": 0.6,
         "justificacion": "Estado transformador fuerte (izq) + Equidad y sostenibilidad (arriba)"
       },
@@ -130,7 +130,7 @@
         "politicas_preferidas": "intervencion_estatal"
       },
       "posicion": {
-        "x": -0.21,
+        "x": 0.21,
         "y": -0.52,
         "justificacion": "Estado fuerte promotor industrial (izquierda) + Énfasis en crecimiento y productividad (abajo)"
       },
@@ -168,7 +168,7 @@
         "politicas_preferidas": "intervencion_estatal"
       },
       "posicion": {
-        "x": -0.4,
+        "x": 0.4,
         "y": 0.04,
         "justificacion": "Estado moderado (centro-izq) + Equidad y crecimiento balanceados (arriba)"
       },
@@ -199,7 +199,7 @@
         "politicas_preferidas": "intervencion_estatal"
       },
       "posicion": {
-        "x": -0.4,
+        "x": 0.4,
         "y": 0.25,
         "justificacion": "Estado moderado coordinador (centro) + Énfasis institucional (arriba-medio)"
       },
@@ -229,7 +229,7 @@
         "politicas_preferidas": "intervencion_estatal"
       },
       "posicion": {
-        "x": -0.26,
+        "x": 0.26,
         "y": -0.35,
         "justificacion": "Estado moderado pero emprendedor (centro-izq) + Crecimiento e innovación (arriba-bajo)"
       },
@@ -260,7 +260,7 @@
         "politicas_preferidas": "intervencion_estatal"
       },
       "posicion": {
-        "x": -0.15,
+        "x": 0.15,
         "y": 0.1,
         "justificacion": "Estado intervencionista conductual (centro-izq) + Equidad vía diseño (arriba)"
       },
@@ -291,7 +291,7 @@
         "politicas_preferidas": "libre_mercado"
       },
       "posicion": {
-        "x": 0.85,
+        "x": -0.85,
         "y": -0.9,
         "justificacion": "Estado débil (derecha) + Énfasis en crecimiento (abajo-medio)"
       },
@@ -322,7 +322,7 @@
         "politicas_preferidas": "libre_mercado"
       },
       "posicion": {
-        "x": 0.9,
+        "x": -0.9,
         "y": -0.59,
         "justificacion": "Estado muy débil (derecha extrema) + Crecimiento puro (abajo)"
       },
@@ -353,7 +353,7 @@
         "politicas_preferidas": "libre_mercado"
       },
       "posicion": {
-        "x": 0.92,
+        "x": -0.92,
         "y": -0.59,
         "justificacion": "Estado mínimo extremo (derecha) + Crecimiento sin regulación (abajo extrema)"
       },
@@ -383,7 +383,7 @@
         "politicas_preferidas": "ambiguas"
       },
       "posicion": {
-        "x": 0.25,
+        "x": -0.25,
         "y": -0.3,
         "justificacion": "Estado moderado (centro-derecha) + Crecimiento con reconocimiento de instituciones (abajo-medio)"
       },
@@ -500,8 +500,8 @@
     "nota": "Este bloque es SOLO para referencia. El script consume 'posicion' de cada nodo.",
     "sistema_coordenadas": {
       "eje_x": {
-        "negativo": "Control Estatal FUERTE (izquierda)",
-        "positivo": "Control Estatal DÉBIL (derecha)"
+        "negativo": "Control Estatal DÉBIL (derecha)",
+        "positivo": "Control Estatal FUERTE (izquierda)"
       },
       "eje_y": {
         "positivo": "Énfasis en EQUIDAD (arriba)",
@@ -510,35 +510,35 @@
     },
     "cuadrantes": {
       "q1": {
-        "nombre": "Estado Fuerte + Equidad",
-        "escuelas": [
-          "marxista",
-          "feminista",
-          "ecologica",
-          "tradicion_desarrollista"
-        ]
-      },
-      "q2": {
-        "nombre": "Estado Fuerte + Crecimiento",
-        "escuelas": [
-          "keynesiana",
-          "institucionalista",
-          "estado_emprendedor"
-        ]
-      },
-      "q3": {
         "nombre": "Estado Débil + Equidad",
         "escuelas": [
           "conductista"
         ]
       },
-      "q4": {
+      "q2": {
+        "nombre": "Estado Fuerte + Equidad",
+        "escuelas": [
+          "marxista",
+          "feminista",
+          "ecologica"
+        ]
+      },
+      "q3": {
         "nombre": "Estado Débil + Crecimiento",
         "escuelas": [
           "clasica",
           "neoclasica",
           "austriaca",
           "schumpeteriana"
+        ]
+      },
+      "q4": {
+        "nombre": "Estado Fuerte + Crecimiento",
+        "escuelas": [
+          "keynesiana",
+          "institucionalista",
+          "estado_emprendedor",
+          "tradicion_desarrollista"
         ]
       }
     }

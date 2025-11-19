@@ -131,39 +131,39 @@ CUADRANTE_COLORES = {
 # ============================================================
 CUADRANTES = {
     "q1": {
-        "nombre": "Estado Fuerte + Equidad",
-        "descripcion": "Intervención estatal radical para equidad",
-        "escuelas": ["marxista", "feminista", "ecologica"],
-        "color": "#7E1A2F",
-        "caracteristicas": ["Redistribución radical", "Crítica del capitalismo", "Equidad social"]
-    },
-    "q2": {
-        "nombre": "Estado Fuerte + Crecimiento",
-        "descripcion": "Control estatal para desarrollo económico",
-        "escuelas": ["keynesiana", "institucionalista", "estado_emprendedor", "tradicion_desarrollista"],
-        "color": "#579EA4",
-        "caracteristicas": ["Intervención estatal", "Gestión económica", "Desarrollo industrial"]
-    },
-    "q3": {
         "nombre": "Estado Débil + Equidad",
         "descripcion": "Incentivos y diseño conductual",
         "escuelas": ["conductista"],
-        "color": "#86AD34",
+        "color": "#7E1A2F",
         "caracteristicas": ["Nudges conductuales", "Equidad vía diseño", "Mínima intervención"]
     },
-    "q4": {
+    "q2": {
+        "nombre": "Estado Fuerte + Equidad",
+        "descripcion": "Intervención estatal radical para equidad",
+        "escuelas": ["marxista", "feminista", "ecologica"],
+        "color": "#579EA4",
+        "caracteristicas": ["Redistribución radical", "Crítica del capitalismo", "Equidad social"]
+    },
+    "q3": {
         "nombre": "Estado Débil + Crecimiento",
         "descripcion": "Mercado libre y crecimiento espontáneo",
         "escuelas": ["clasica", "neoclasica", "austriaca", "schumpeteriana"],
-        "color": "#DF7713",
+        "color": "#86AD34",
         "caracteristicas": ["Libre mercado", "Mínima intervención", "Innovación privada"]
+    },
+    "q4": {
+        "nombre": "Estado Fuerte + Crecimiento",
+        "descripcion": "Control estatal para desarrollo económico",
+        "escuelas": ["keynesiana", "institucionalista", "estado_emprendedor", "tradicion_desarrollista"],
+        "color": "#DF7713",
+        "caracteristicas": ["Intervención estatal", "Gestión económica", "Desarrollo industrial"]
     }
 }
 
 # ============================================================
 # ETIQUETAS DE EJES
 # ============================================================
-EJE_X_LABEL = 'Arquitectura Económica: ← Economía Dirigida (Estado Fuerte) | Economía de Mercado (Estado Limitado) →'
+EJE_X_LABEL = 'Arquitectura Económica: ← Economía de Mercado (Estado Débil) | Economía Dirigida (Estado Fuerte) →'
 EJE_Y_LABEL = 'Objetivo Socioeconómico: ← Productividad y Crecimiento | Equidad y Sostenibilidad →'
 TITULO_PRINCIPAL = 'Escuelas Políticas Económicas: Espacio Posicional 2D'
 
