@@ -155,4 +155,105 @@ class EconomicSchoolScorer:
         presets = {
             'balanced': {
                 'economia': 0.10, 'humano': 0.15, 'mundo': 0.05,
-                'ambito': 0.15, 'motor': 0.20
+                'ambito': 0.15, 'motor': 0.20, 'politica': 0.35
+            }
+        }
+        return presets.get(preset, presets['balanced'])
+
+    def calculate(self, school: SchoolDescriptors) -> ScoringResult:
+        x_weighted_sum = 0.0
+        y_weighted_sum = 0.0
+
+        mapping = [
+            ('economia', school.economia, self._SCORES_ECONOMIA),
+            ('humano', school.humano, self._SCORES_HUMANO),
+            ('mundo', school.mundo, self._SCORES_MUNDO),
+            ('ambito', school.ambito, self._SCORES_AMBITO),
+            ('motor', school.motor, self._SCORES_MOTOR),
+            ('politica', school.politica, self._SCORES_POLITICA),
+        ]
+
+        for key, enum_val, score_dict in mapping:
+            weight = self.weights[key]
+            scores = score_dict[enum_val]
+            x_weighted_sum += scores['x'] * weight
+            y_weighted_sum += scores['y'] * weight
+
+        x_final = np.clip(x_weighted_sum, -1.0, 1.0)
+        y_final = np.clip(y_weighted_sum, -1.0, 1.0)
+
+        return ScoringResult(
+            x_final=x_final,
+            y_final=y_final,
+            quadrant_label=self._get_label(x_final, y_final)
+        )
+
+    def _get_label(self, x: float, y: float) -> str:
+        """
+        Etiquetado de cuadrantes actualizado para X invertido.
+        X Positivo = Estado Fuerte.
+        X Negativo = Estado Débil.
+        """
+        # Cuadrante 1: Estado Fuerte (+X) y Equidad (+Y)
+        if x > 0 and y > 0: return "Socialismo / Estado de Bienestar"
+        
+        # Cuadrante 2: Estado Débil (-X) y Equidad (+Y)
+        # (Raro teóricamente, suele ser mutualismo, cooperativismo o socialdemocracia muy ligera)
+        if x < 0 and y > 0: return "Economía Social de Mercado / Cooperativismo"
+        
+        # Cuadrante 3: Estado Débil (-X) y Crecimiento (-Y)
+        if x < 0 and y < 0: return "Neoliberalismo / Escuela Austriaca"
+        
+        # Cuadrante 4: Estado Fuerte (+X) y Crecimiento (-Y)
+        if x > 0 and y < 0: return "Estado Desarrollista / Mercantilismo"
+        
+        return "Centro / Híbrido"
+
+# ============================================================
+# 4. EJEMPLO DE VISUALIZACIÓN
+# ============================================================
+
+if __name__ == "__main__":
+    scorer = EconomicSchoolScorer(weights_preset='balanced')
+
+    schools_data = [
+        SchoolDescriptors(
+            "Neoclásica", ConceptoEconomia.INDIVIDUOS, ConceptoHumano.RACIONAL_EGOISTA,
+            NaturalezaMundo.EQUILIBRIO_ESTATICO, AmbitoRelevante.INTERCAMBIO,
+            MotorCambio.INDIVIDUO, PoliticaPreferida.LIBRE_MERCADO
+        ),
+        SchoolDescriptors(
+            "Keynesiana", ConceptoEconomia.SISTEMA, ConceptoHumano.RACIONALIDAD_LIMITADA,
+            NaturalezaMundo.INCERTIDUMBRE_RADICAL, AmbitoRelevante.DEMANDA,
+            MotorCambio.INDIVIDUO, PoliticaPreferida.ESTADO_BIENESTAR
+        ),
+        SchoolDescriptors(
+            "Desarrollista (Asia)", ConceptoEconomia.PRODUCCION, ConceptoHumano.ADAPTABLE,
+            NaturalezaMundo.EVOLUTIVO, AmbitoRelevante.PRODUCCION,
+            MotorCambio.POLITICA_INDUSTRIAL, PoliticaPreferida.ESTADO_DESARROLLISTA
+        ),
+        SchoolDescriptors(
+            "Marxista Clásica", ConceptoEconomia.CLASES, ConceptoHumano.CONDICIONADO_CLASE,
+            NaturalezaMundo.DETERMINISTA, AmbitoRelevante.DISTRIBUCION,
+            MotorCambio.LUCHA_CLASES, PoliticaPreferida.PLANIFICACION
+        )
+    ]
+
+    print(f"{'ESCUELA':<22} | {'PODER ESTATAL (X)':<18} | {'OBJETIVO (Y)':<15} | {'CUADRANTE RESULTANTE'}")
+    print("-" * 95)
+    
+    for s in schools_data:
+        res = scorer.calculate(s)
+        
+        # Visualización de barras ASCII
+        # X negativo (izquierda) es Mercado, X positivo (derecha) es Estado
+        bar_len = 8
+        
+        # Lógica visual X: [-1 (Mkt) ... 0 ... +1 (Est)]
+        x_val_norm = int(res.x_final * bar_len)
+        if res.x_final < 0:
+            vis_x = "Mkt " + "█"*abs(x_val_norm)
+        else:
+            vis_x = "Est " + "█"*abs(x_val_norm)
+            
+        print(f"{s.nombre:<22} | {res.x_final:>5.2f} {vis_x:<11} | {res.y_final:>5.2f}           | {res.quadrant_label}")
