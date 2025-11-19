@@ -281,28 +281,28 @@ class SchoolScorer:
     # ============================================================
 
     # Descriptor 1: Concepción de la Economía
-    # Contribuye principalmente al Eje X (control estatal)
+    # Contribuye principalmente al Eje X (control estatal) - INVERTED
     CONCEPCION_ECONOMIA = {
-        'clases_sociales': -0.8,      # Visión colectivista → estado fuerte
-        'individuos': 0.8,             # Visión individualista → estado débil
-        'estructuras': -0.5,           # Enfoque estructural → regulación
-        'indefinido': 0.0              # Ambiguo → neutral
+        'clases_sociales': 0.8,       # Visión colectivista → estado fuerte (inverted)
+        'individuos': -0.8,           # Visión individualista → estado débil (inverted)
+        'estructuras': 0.5,           # Enfoque estructural → regulación (inverted)
+        'indefinido': 0.0             # Ambiguo → neutral
     }
 
     # Descriptor 2: Concepción del Ser Humano
-    # Contribuye a ambos ejes
+    # Contribuye a ambos ejes - X INVERTED
     CONCEPCION_HUMANO = {
-        'racional_egoista': {'x': 0.7, 'y': -0.6},    # Individuo racional → mercado libre, crecimiento
-        'condicionado_clase': {'x': -0.8, 'y': 0.7},  # Determinismo social → estado, equidad
-        'racionalidad_limitada': {'x': 0.2, 'y': 0.3}, # Necesita guía → regulación moderada
+        'racional_egoista': {'x': -0.7, 'y': -0.6},   # Individuo racional → mercado libre, crecimiento (inverted)
+        'condicionado_clase': {'x': 0.8, 'y': 0.7},   # Determinismo social → estado, equidad (inverted)
+        'racionalidad_limitada': {'x': -0.2, 'y': 0.3}, # Necesita guía → regulación moderada (inverted)
         'no_definido': {'x': 0.0, 'y': 0.0}           # Ambiguo → neutral
     }
 
     # Descriptor 3: Naturaleza del Mundo
-    # Contribuye principalmente al Eje X
+    # Contribuye principalmente al Eje X - INVERTED
     NATURALEZA_MUNDO = {
-        'cierto_predecible': 0.6,      # Confianza en modelos → menos intervención
-        'complejo_incierto': -0.6,     # Incertidumbre → más regulación
+        'cierto_predecible': -0.6,     # Confianza en modelos → menos intervención (inverted)
+        'complejo_incierto': 0.6,      # Incertidumbre → más regulación (inverted)
         'ambiguo': 0.0                 # Indefinido → neutral
     }
 
@@ -316,21 +316,21 @@ class SchoolScorer:
     }
 
     # Descriptor 5: Motor del Cambio
-    # Contribuye a ambos ejes
+    # Contribuye a ambos ejes - X INVERTED
     MOTOR_CAMBIO = {
-        'acumulacion_capital': {'x': 0.5, 'y': -0.5},      # Capitalismo → mercado, crecimiento
-        'decisiones_individuales': {'x': 0.7, 'y': -0.4},  # Libertad individual → mercado
-        'lucha_clases': {'x': -0.9, 'y': 0.8},             # Conflicto → estado fuerte, equidad
-        'innovacion_tecnologica': {'x': 0.3, 'y': -0.2},   # Innovación → mixto, crecimiento
-        'instituciones': {'x': -0.3, 'y': 0.4}             # Coordinación → regulación, balance
+        'acumulacion_capital': {'x': -0.5, 'y': -0.5},     # Capitalismo → mercado, crecimiento (inverted)
+        'decisiones_individuales': {'x': -0.7, 'y': -0.4}, # Libertad individual → mercado (inverted)
+        'lucha_clases': {'x': 0.9, 'y': 0.8},              # Conflicto → estado fuerte, equidad (inverted)
+        'innovacion_tecnologica': {'x': -0.3, 'y': -0.2},  # Innovación → mixto, crecimiento (inverted)
+        'instituciones': {'x': 0.3, 'y': 0.4}              # Coordinación → regulación, balance (inverted)
     }
 
     # Descriptor 6: Políticas Preferidas
-    # Contribuye principalmente al Eje X
+    # Contribuye principalmente al Eje X - INVERTED
     POLITICAS_PREFERIDAS = {
-        'libre_mercado': 0.9,          # Máxima libertad económica → estado débil
-        'intervencion_estatal': -0.7,  # Regulación activa → estado fuerte
-        'redistribucion': -0.9,        # Redistribución radical → estado muy fuerte
+        'libre_mercado': -0.9,         # Máxima libertad económica → estado débil (inverted)
+        'intervencion_estatal': 0.7,   # Regulación activa → estado fuerte (inverted)
+        'redistribucion': 0.9,         # Redistribución radical → estado muy fuerte (inverted)
         'ambiguas': 0.0                # Mixtas → neutral
     }
 
