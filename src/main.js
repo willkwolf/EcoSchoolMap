@@ -11,7 +11,7 @@ import { saveSvgAsPng } from 'save-svg-as-png';
 // Import components
 import { D3MapRenderer } from './components/D3MapRenderer.js';
 import { ScrollController } from './scrollytelling/ScrollController.js';
-import { loadVariant, loadBaseData, mergeVariantWithBase } from './data/loader.js';
+import { loadVariantData } from './data/loader.js';
 
 console.log('🚀 Mapa de Escuelas Económicas - D3.js Version');
 
@@ -37,16 +37,12 @@ async function init() {
     console.log('Initializing app...');
 
     try {
-        // Load base data
-        baseData = await loadBaseData();
-        console.log('Base data loaded:', baseData);
-
-        // Load initial variant (base-none)
-        const initialVariant = await loadVariant('base', 'none');
-        const mergedData = mergeVariantWithBase(initialVariant, baseData);
+        // Load initial variant data (base-none) with calculated positions
+        baseData = await loadVariantData('base', 'none');
+        console.log('Initial data loaded:', baseData);
 
         // Initialize D3 renderer
-        mapRenderer = new D3MapRenderer('#map-container', mergedData);
+        mapRenderer = new D3MapRenderer('#map-container', baseData);
         mapRenderer.render();
 
         // Setup variant selectors
@@ -101,9 +97,8 @@ function setupVariantControls() {
                 }
             }
 
-            // Load variant data (await completes when fetch finishes)
-            const variantData = await loadVariant(preset, normalization);
-            const mergedData = mergeVariantWithBase(variantData, baseData);
+            // Load variant data with calculated positions
+            const mergedData = await loadVariantData(preset, normalization);
 
             // Update map (triggers 800ms D3 transition)
             mapRenderer.updateVariant(mergedData);
