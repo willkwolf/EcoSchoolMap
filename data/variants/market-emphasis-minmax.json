@@ -6,7 +6,7 @@
     "variant_name": "market-emphasis",
     "preset_name": "market-emphasis",
     "normalization_method": "minmax",
-    "generated_at": "2025-11-19T17:17:53.205953",
+    "generated_at": "2025-11-19T17:23:07.273889",
     "generator_version": "1.0",
     "generator_script": "generate_weight_variants.py"
   },

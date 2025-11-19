@@ -6,7 +6,7 @@
     "variant_name": "equity-emphasis",
     "preset_name": "equity-emphasis",
     "normalization_method": "zscore",
-    "generated_at": "2025-11-19T17:17:53.178009",
+    "generated_at": "2025-11-19T17:23:07.251810",
     "generator_version": "1.0",
     "generator_script": "generate_weight_variants.py"
   },

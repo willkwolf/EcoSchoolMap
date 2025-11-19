@@ -6,7 +6,7 @@
     "variant_name": "state-emphasis",
     "preset_name": "state-emphasis",
     "normalization_method": "minmax",
-    "generated_at": "2025-11-19T17:17:53.160185",
+    "generated_at": "2025-11-19T17:23:07.242206",
     "generator_version": "1.0",
     "generator_script": "generate_weight_variants.py"
   },

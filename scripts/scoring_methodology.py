@@ -336,13 +336,12 @@ class SchoolScorer:
         return normalized_results
 
     def _percentile_normalize(self, values):
-        """Convert values to percentiles (0-1 range)."""
+        """Convert values to rank-based percentiles (0-1 range)."""
         import numpy as np
         values_array = np.array(values)
-        # Calculate percentiles
-        percentiles = (values_array - np.min(values_array)) / (np.max(values_array) - np.min(values_array))
-        # Handle case where all values are the same
-        percentiles = np.nan_to_num(percentiles, nan=0.5)
+        # Get ranks (1-based) and convert to percentiles (0-1)
+        ranks = values_array.argsort().argsort() + 1  # rank from 1 to n
+        percentiles = (ranks - 1) / (len(values) - 1)  # normalize to 0-1
         return percentiles.tolist()
 
     def _zscore_normalize(self, values):
