@@ -102,10 +102,7 @@ def generate_variant(source_data: dict, preset_name: str,
     # Actualizar posiciones en los nodos
     for nodo in data['nodos']:
         school_id = nodo['id']
-        if preset_name == 'base':
-            # For base variant, keep the original positions from source_data
-            continue
-        elif school_id in new_positions:
+        if school_id in new_positions:
             x_nueva, y_nueva = new_positions[school_id]
 
             if isinstance(nodo.get('posicion'), dict):
