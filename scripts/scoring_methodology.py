@@ -188,6 +188,136 @@ class EconomicSchoolScorer:
         return "Centro / Híbrido"
 
 # ============================================================
+# 4. COMPATIBILITY LAYER FOR VARIANT GENERATION
+# ============================================================
+
+# Weight presets for variant generation
+WEIGHT_PRESETS = {
+    'base': {
+        'x': {'economia': 0.10, 'humano': 0.15, 'mundo': 0.05, 'ambito': 0.15, 'motor': 0.20, 'politica': 0.35},
+        'y': {'economia': 0.10, 'humano': 0.15, 'mundo': 0.05, 'ambito': 0.15, 'motor': 0.20, 'politica': 0.35}
+    },
+    'balanced': {
+        'x': {'economia': 0.10, 'humano': 0.15, 'mundo': 0.05, 'ambito': 0.15, 'motor': 0.20, 'politica': 0.35},
+        'y': {'economia': 0.10, 'humano': 0.15, 'mundo': 0.05, 'ambito': 0.15, 'motor': 0.20, 'politica': 0.35}
+    },
+    'state-emphasis': {
+        'x': {'economia': 0.20, 'humano': 0.10, 'mundo': 0.10, 'ambito': 0.15, 'motor': 0.20, 'politica': 0.25},
+        'y': {'economia': 0.10, 'humano': 0.15, 'mundo': 0.05, 'ambito': 0.15, 'motor': 0.20, 'politica': 0.35}
+    },
+    'equity-emphasis': {
+        'x': {'economia': 0.10, 'humano': 0.15, 'mundo': 0.05, 'ambito': 0.15, 'motor': 0.20, 'politica': 0.35},
+        'y': {'economia': 0.15, 'humano': 0.20, 'mundo': 0.10, 'ambito': 0.20, 'motor': 0.15, 'politica': 0.20}
+    },
+    'market-emphasis': {
+        'x': {'economia': 0.05, 'humano': 0.10, 'mundo': 0.15, 'ambito': 0.20, 'motor': 0.25, 'politica': 0.25},
+        'y': {'economia': 0.10, 'humano': 0.15, 'mundo': 0.05, 'ambito': 0.15, 'motor': 0.20, 'politica': 0.35}
+    },
+    'growth-emphasis': {
+        'x': {'economia': 0.10, 'humano': 0.15, 'mundo': 0.05, 'ambito': 0.15, 'motor': 0.20, 'politica': 0.35},
+        'y': {'economia': 0.05, 'humano': 0.10, 'mundo': 0.15, 'ambito': 0.20, 'motor': 0.25, 'politica': 0.25}
+    },
+    'historical-emphasis': {
+        'x': {'economia': 0.15, 'humano': 0.10, 'mundo': 0.20, 'ambito': 0.10, 'motor': 0.15, 'politica': 0.30},
+        'y': {'economia': 0.10, 'humano': 0.15, 'mundo': 0.05, 'ambito': 0.15, 'motor': 0.20, 'politica': 0.35}
+    },
+    'pragmatic-emphasis': {
+        'x': {'economia': 0.12, 'humano': 0.18, 'mundo': 0.08, 'ambito': 0.12, 'motor': 0.18, 'politica': 0.32},
+        'y': {'economia': 0.12, 'humano': 0.18, 'mundo': 0.08, 'ambito': 0.12, 'motor': 0.18, 'politica': 0.32}
+    }
+}
+
+def get_available_presets():
+    """Get list of available weight presets."""
+    return list(WEIGHT_PRESETS.keys())
+
+def get_weight_preset(preset_name: str):
+    """Get weight preset by name."""
+    return WEIGHT_PRESETS.get(preset_name, WEIGHT_PRESETS['balanced'])
+
+class SchoolScorer:
+    """Compatibility class for variant generation."""
+
+    # Mapping from string values to Enums
+    _ECONOMIA_MAP = {
+        'clases_sociales': ConceptoEconomia.CLASES,
+        'individuos': ConceptoEconomia.INDIVIDUOS,
+        'estructuras': ConceptoEconomia.INSTITUCIONES,
+        'sistema_complejo': ConceptoEconomia.SISTEMA,
+        'sistema_productivo': ConceptoEconomia.PRODUCCION
+    }
+
+    _HUMANO_MAP = {
+        'racional_egoista': ConceptoHumano.RACIONAL_EGOISTA,
+        'racional_limitada': ConceptoHumano.RACIONALIDAD_LIMITADA,
+        'condicionado_clase': ConceptoHumano.CONDICIONADO_CLASE,
+        'adaptable_cultural': ConceptoHumano.ADAPTABLE
+    }
+
+    _MUNDO_MAP = {
+        'equilibrio_cierto': NaturalezaMundo.EQUILIBRIO_ESTATICO,
+        'incertidumbre': NaturalezaMundo.INCERTIDUMBRE_RADICAL,
+        'evolutivo_dinamico': NaturalezaMundo.EVOLUTIVO,
+        'determinista_historico': NaturalezaMundo.DETERMINISTA
+    }
+
+    _AMBITO_MAP = {
+        'intercambio_mercado': AmbitoRelevante.INTERCAMBIO,
+        'produccion': AmbitoRelevante.PRODUCCION,
+        'distribucion': AmbitoRelevante.DISTRIBUCION,
+        'consumo_demanda': AmbitoRelevante.DEMANDA
+    }
+
+    _MOTOR_MAP = {
+        'accion_individual': MotorCambio.INDIVIDUO,
+        'acumulacion_capital': MotorCambio.CAPITAL,
+        'innovacion': MotorCambio.TECNOLOGIA,
+        'conflicto_social': MotorCambio.LUCHA_CLASES,
+        'politica_estado': MotorCambio.POLITICA_INDUSTRIAL
+    }
+
+    _POLITICA_MAP = {
+        'laissez_faire': PoliticaPreferida.LIBRE_MERCADO,
+        'fallos_mercado': PoliticaPreferida.REGULACION_FALLOS,
+        'welfare_state': PoliticaPreferida.ESTADO_BIENESTAR,
+        'developmental_state': PoliticaPreferida.ESTADO_DESARROLLISTA,
+        'planificacion_central': PoliticaPreferida.PLANIFICACION
+    }
+
+    def __init__(self, normalization_method='percentile', weights_x=None, weights_y=None):
+        self.normalization_method = normalization_method
+        self.weights_x = weights_x or {'economia': 0.10, 'humano': 0.15, 'mundo': 0.05, 'ambito': 0.15, 'motor': 0.20, 'politica': 0.35}
+        self.weights_y = weights_y or {'economia': 0.10, 'humano': 0.15, 'mundo': 0.05, 'ambito': 0.15, 'motor': 0.20, 'politica': 0.35}
+        self.scorer = EconomicSchoolScorer()
+
+    def batch_calculate_positions(self, schools_descriptors):
+        """Calculate positions for multiple schools."""
+        results = {}
+        for school_id, descriptors in schools_descriptors.items():
+            # Convert descriptors to SchoolDescriptors object
+            school_desc = self._create_school_descriptors(descriptors)
+            if school_desc:
+                result = self.scorer.calculate(school_desc)
+                results[school_id] = (result.x_final, result.y_final)
+        return results
+
+    def _create_school_descriptors(self, descriptors):
+        """Create SchoolDescriptors from dict."""
+        try:
+            return SchoolDescriptors(
+                nombre=descriptors.get('nombre', 'Unknown'),
+                economia=self._ECONOMIA_MAP.get(descriptors.get('concepcion_economia'), ConceptoEconomia.INDIVIDUOS),
+                humano=self._HUMANO_MAP.get(descriptors.get('concepcion_humano'), ConceptoHumano.RACIONAL_EGOISTA),
+                mundo=self._MUNDO_MAP.get(descriptors.get('naturaleza_mundo'), NaturalezaMundo.EQUILIBRIO_ESTATICO),
+                ambito=self._AMBITO_MAP.get(descriptors.get('ambito_economico'), AmbitoRelevante.INTERCAMBIO),
+                motor=self._MOTOR_MAP.get(descriptors.get('motor_cambio'), MotorCambio.INDIVIDUO),
+                politica=self._POLITICA_MAP.get(descriptors.get('politicas_preferidas'), PoliticaPreferida.LIBRE_MERCADO)
+            )
+        except Exception as e:
+            print(f"Error creating descriptors: {e}")
+            return None
+
+# ============================================================
 # 4. EXECUTION
 # ============================================================
 

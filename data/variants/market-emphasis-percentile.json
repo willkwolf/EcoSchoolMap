@@ -1,19 +1,12 @@
 {
   "metadata": {
-    "version": "3.1",
-    "descripcion": "Escuelas y tradiciones político-económicas como grafo de nodos con posicionamiento explícito",
-    "ultima_actualizacion": "2025-11-14",
-    "autor": "William Camilo Artundauga Viana",
-    "notas": {
-      "posicionamiento": "Cada nodo tiene coordenadas (x, y) basadas por criterios en scoring methodology.",
-      "eje_x": "Control del Estado: -1 (FUERTE/izquierda) a +1 (DÉBIL/derecha)",
-      "eje_y": "Enfoque: -1 (CRECIMIENTO/abajo) a +1 (EQUIDAD/arriba)",
-      "metodo": "Posición cualitativa, luego cuantificada y normalizada entre -1 y +1."
-    },
+    "last_updated": "2025-11-19T11:02:56.746423",
+    "engine_version": "v8.0 (Inverted X Axis)",
+    "weights_preset": "balanced",
     "variant_name": "market-emphasis",
     "preset_name": "market-emphasis",
     "normalization_method": "percentile",
-    "generated_at": "2025-11-19T10:20:49.611723",
+    "generated_at": "2025-11-19T11:08:45.571713",
     "generator_version": "1.0",
     "generator_script": "generate_weight_variants.py"
   },
@@ -22,61 +15,52 @@
       "id": "marxista",
       "nombre": "Marxista",
       "categoria": "izquierda_redistribución",
-      "descripcion": "Enfoque basado en lucha de clases y redistribución radical",
+      "descripcion": "Enfoque basado en lucha de clases y planificación central",
       "autores": [
         "Karl Marx",
         "Friedrich Engels"
       ],
       "año_origen": 1867,
-      "caracteristicas": [
-        "Estado fuerte",
-        "Equidad y redistribución",
-        "Crítica del capitalismo"
-      ],
       "tipo": "tradicional",
       "descriptores": {
         "concepcion_economia": "clases_sociales",
         "concepcion_humano": "condicionado_clase",
-        "naturaleza_mundo": "complejo_incierto",
+        "naturaleza_mundo": "determinista_historico",
         "ambito_economico": "distribucion",
-        "motor_cambio": "lucha_clases",
-        "politicas_preferidas": "intervencion_estatal"
+        "motor_cambio": "conflicto_social",
+        "politicas_preferidas": "planificacion_central"
       },
       "posicion": {
-        "x": -0.75,
-        "y": 0.9,
-        "justificacion": "Estado transitorio en transición (centro-izq) + Equidad máxima (arriba)"
-      },
-      "escuela_relacionada_similar": null
+        "x": 0.8,
+        "y": 0.625,
+        "justificacion": "Pendiente de recálculo",
+        "etiqueta_cuadrante": "Socialismo / Estado de Bienestar"
+      }
     },
     {
       "id": "feminista",
       "nombre": "Feminista",
       "categoria": "izquierda_redistribución",
-      "descripcion": "Análisis económico desde perspectiva de género",
+      "descripcion": "Análisis económico desde perspectiva de género y cuidados",
       "autores": [
         "Silvia Federici",
         "Diane Elson"
       ],
       "año_origen": 1980,
-      "caracteristicas": [
-        "Estado fuerte",
-        "Equidad de género",
-        "Economía del cuidado"
-      ],
       "tipo": "tradicional",
       "descriptores": {
         "concepcion_economia": "clases_sociales",
         "concepcion_humano": "condicionado_clase",
-        "naturaleza_mundo": "complejo_incierto",
+        "naturaleza_mundo": "incertidumbre",
         "ambito_economico": "distribucion",
-        "motor_cambio": "instituciones",
-        "politicas_preferidas": "intervencion_estatal"
+        "motor_cambio": "conflicto_social",
+        "politicas_preferidas": "welfare_state"
       },
       "posicion": {
-        "x": -0.6,
-        "y": 0.75,
-        "justificacion": "Estado transitorio (centro-izq) + Equidad social (arriba medio)"
+        "x": 0.6200000000000001,
+        "y": 0.66,
+        "justificacion": "Pendiente de recálculo",
+        "etiqueta_cuadrante": "Socialismo / Estado de Bienestar"
       },
       "escuela_relacionada_similar": "ecologica"
     },
@@ -89,25 +73,20 @@
         "Kate Raworth"
       ],
       "año_origen": 2012,
-      "caracteristicas": [
-        "Estado regulador",
-        "Sostenibilidad",
-        "Límites planetarios",
-        "Equidad social"
-      ],
       "tipo": "nuevo_paradigma",
       "descriptores": {
-        "concepcion_economia": "estructuras",
-        "concepcion_humano": "racionalidad_limitada",
-        "naturaleza_mundo": "complejo_incierto",
+        "concepcion_economia": "sistema_complejo",
+        "concepcion_humano": "racional_limitada",
+        "naturaleza_mundo": "incertidumbre",
         "ambito_economico": "distribucion",
-        "motor_cambio": "instituciones",
-        "politicas_preferidas": "redistribucion"
+        "motor_cambio": "politica_estado",
+        "politicas_preferidas": "welfare_state"
       },
       "posicion": {
-        "x": -0.45,
-        "y": 0.6,
-        "justificacion": "Estado transformador fuerte (izq) + Equidad y sostenibilidad (arriba)"
+        "x": 0.5449999999999999,
+        "y": 0.27,
+        "justificacion": "Pendiente de recálculo",
+        "etiqueta_cuadrante": "Socialismo / Estado de Bienestar"
       },
       "escuela_relacionada_similar": "institucionalista"
     },
@@ -115,38 +94,29 @@
       "id": "tradicion_desarrollista",
       "nombre": "Tradición Desarrollista",
       "categoria": "realpolitik_histórica",
-      "descripcion": "Corriente de política económica que busca fortalecer la producción nacional, industria y poder estatal como motores del desarrollo. Evoluciona desde el mercantilismo (s. XVII) al estructuralismo latinoamericano.",
+      "descripcion": "Fortalecimiento de la producción nacional mediante política industrial",
       "autores": [
-        "Sin fundadores unificados (evoluciona históricamente)"
+        "Ha-Joon Chang",
+        "Friedrich List"
       ],
-      "año_origen_aproximado": 1600,
-      "caracteristicas": [
-        "Estado promotor del desarrollo",
-        "Proteccionismo e industrialización",
-        "Política fiscal activa",
-        "Autonomía económica nacional"
-      ],
+      "año_origen": 1841,
       "tipo": "tradicion",
       "descriptores": {
-        "concepcion_economia": "estructuras",
-        "concepcion_humano": "racionalidad_limitada",
-        "naturaleza_mundo": "complejo_incierto",
+        "concepcion_economia": "sistema_productivo",
+        "concepcion_humano": "adaptable_cultural",
+        "naturaleza_mundo": "evolutivo_dinamico",
         "ambito_economico": "produccion",
-        "motor_cambio": "acumulacion_capital",
-        "politicas_preferidas": "intervencion_estatal"
+        "motor_cambio": "politica_estado",
+        "politicas_preferidas": "developmental_state"
       },
       "posicion": {
-        "x": 0.15,
-        "y": -0.15,
-        "justificacion": "Estado fuerte promotor industrial (izquierda) + Énfasis en crecimiento y productividad (abajo)"
+        "x": 0.5700000000000001,
+        "y": -0.6299999999999999,
+        "justificacion": "Pendiente de recálculo",
+        "etiqueta_cuadrante": "Estado Desarrollista / Mercantilismo"
       },
-      "referentes_históricos": [
-        "Jean-Baptiste Colbert",
-        "Raúl Prebisch"
-      ],
       "relacion_historica_con": [
         "keynesiana",
-        "institucionalista",
         "estado_emprendedor"
       ]
     },
@@ -154,29 +124,25 @@
       "id": "keynesiana",
       "nombre": "Keynesiana",
       "categoria": "regulacionista_coordinación",
-      "descripcion": "Intervención estatal para estabilizar ciclos económicos",
+      "descripcion": "Intervención estatal para estabilizar la demanda agregada",
       "autores": [
         "John Maynard Keynes"
       ],
       "año_origen": 1936,
-      "caracteristicas": [
-        "Estado regulador",
-        "Gestión de demanda agregada",
-        "Pleno empleo"
-      ],
       "tipo": "tradicional",
       "descriptores": {
-        "concepcion_economia": "estructuras",
-        "concepcion_humano": "racionalidad_limitada",
-        "naturaleza_mundo": "complejo_incierto",
-        "ambito_economico": "consumo",
-        "motor_cambio": "instituciones",
-        "politicas_preferidas": "intervencion_estatal"
+        "concepcion_economia": "sistema_complejo",
+        "concepcion_humano": "racional_limitada",
+        "naturaleza_mundo": "incertidumbre",
+        "ambito_economico": "consumo_demanda",
+        "motor_cambio": "politica_estado",
+        "politicas_preferidas": "welfare_state"
       },
       "posicion": {
-        "x": -0.22,
-        "y": 0.3,
-        "justificacion": "Estado moderado (centro-izq) + Equidad y crecimiento balanceados (arriba)"
+        "x": 0.515,
+        "y": 0.18,
+        "justificacion": "Pendiente de recálculo",
+        "etiqueta_cuadrante": "Socialismo / Estado de Bienestar"
       },
       "escuela_relacionada_similar": "institucionalista"
     },
@@ -184,122 +150,106 @@
       "id": "institucionalista",
       "nombre": "Institucionalista",
       "categoria": "regulacionista_coordinación",
-      "descripcion": "Las instituciones moldean el comportamiento económico",
+      "descripcion": "Las instituciones (reglas del juego) moldean la economía",
       "autores": [
         "Douglass North",
         "Elinor Ostrom"
       ],
       "año_origen": 1920,
-      "caracteristicas": [
-        "Estado coordinador",
-        "Instituciones formales e informales",
-        "Innovación institucional"
-      ],
       "tipo": "tradicional",
       "descriptores": {
-        "concepcion_economia": "estructuras",
-        "concepcion_humano": "racionalidad_limitada",
-        "naturaleza_mundo": "complejo_incierto",
-        "ambito_economico": "comercio",
-        "motor_cambio": "instituciones",
-        "politicas_preferidas": "intervencion_estatal"
+        "concepcion_economia": "instituciones",
+        "concepcion_humano": "racional_limitada",
+        "naturaleza_mundo": "incertidumbre",
+        "ambito_economico": "intercambio_mercado",
+        "motor_cambio": "politica_estado",
+        "politicas_preferidas": "fallos_mercado"
       },
       "posicion": {
-        "x": -0.22,
-        "y": 0.45,
-        "justificacion": "Estado moderado coordinador (centro) + Énfasis institucional (arriba-medio)"
+        "x": -0.019999999999999976,
+        "y": -0.175,
+        "justificacion": "Pendiente de recálculo",
+        "etiqueta_cuadrante": "Estado Desarrollista / Mercantilismo"
       },
       "escuela_relacionada_similar": "keynesiana"
     },
     {
       "id": "estado_emprendedor",
-      "nombre": "Estado Emprendedor (Mazzucato)",
+      "nombre": "Estado Emprendedor",
       "categoria": "nuevo_paradigma_innovacion",
-      "descripcion": "Estado como inversor en innovación disruptiva",
+      "descripcion": "El Estado como inversor de primer riesgo en tecnología",
       "autores": [
         "Mariana Mazzucato"
       ],
       "año_origen": 2013,
-      "caracteristicas": [
-        "Estado innovador e inversor",
-        "I+D y tecnología",
-        "Valor público"
-      ],
       "tipo": "nuevo_paradigma",
       "descriptores": {
-        "concepcion_economia": "estructuras",
-        "concepcion_humano": "racionalidad_limitada",
-        "naturaleza_mundo": "complejo_incierto",
+        "concepcion_economia": "sistema_productivo",
+        "concepcion_humano": "racional_limitada",
+        "naturaleza_mundo": "evolutivo_dinamico",
         "ambito_economico": "produccion",
-        "motor_cambio": "innovacion_tecnologica",
-        "politicas_preferidas": "intervencion_estatal"
+        "motor_cambio": "innovacion",
+        "politicas_preferidas": "developmental_state"
       },
       "posicion": {
-        "x": 0.0,
-        "y": 0.15,
-        "justificacion": "Estado moderado pero emprendedor (centro-izq) + Crecimiento e innovación (arriba-bajo)"
+        "x": 0.345,
+        "y": -0.5999999999999999,
+        "justificacion": "Pendiente de recálculo",
+        "etiqueta_cuadrante": "Estado Desarrollista / Mercantilismo"
       },
-      "escuela_relacionada_similar": "keynesiana"
+      "escuela_relacionada_similar": "tradicion_desarrollista"
     },
     {
       "id": "conductista",
-      "nombre": "Conductista",
+      "nombre": "Conductista (Behavioral)",
       "categoria": "incentivos_nudges",
-      "descripcion": "Modifica comportamiento a través de incentivos y contexto (sin intervención estatal directa)",
+      "descripcion": "Economía basada en la psicología real de las decisiones",
       "autores": [
         "Richard Thaler",
         "Daniel Kahneman"
       ],
       "año_origen": 2008,
-      "caracteristicas": [
-        "Estado mínimo pero estratégico",
-        "Nudges conductuales",
-        "Equidad mediante diseño"
-      ],
       "tipo": "tradicional",
       "descriptores": {
         "concepcion_economia": "individuos",
-        "concepcion_humano": "racionalidad_limitada",
-        "naturaleza_mundo": "complejo_incierto",
-        "ambito_economico": "consumo",
-        "motor_cambio": "decisiones_individuales",
-        "politicas_preferidas": "intervencion_estatal"
+        "concepcion_humano": "racional_limitada",
+        "naturaleza_mundo": "incertidumbre",
+        "ambito_economico": "consumo_demanda",
+        "motor_cambio": "accion_individual",
+        "politicas_preferidas": "fallos_mercado"
       },
       "posicion": {
-        "x": 0.3,
-        "y": 0.0,
-        "justificacion": "Estado intervencionista conductual (centro-izq) + Equidad vía diseño (arriba)"
+        "x": -0.25,
+        "y": -0.04000000000000002,
+        "justificacion": "Pendiente de recálculo",
+        "etiqueta_cuadrante": "Neoliberalismo / Escuela Austriaca"
       },
-      "escuela_relacionada_similar": null
+      "escuela_relacionada_similar": "neoclasica"
     },
     {
       "id": "clasica",
       "nombre": "Clásica",
       "categoria": "liberal_mercado_libre",
-      "descripcion": "Mercado autorregulado por la mano invisible",
+      "descripcion": "La mano invisible y la acumulación de capital",
       "autores": [
         "Adam Smith",
         "David Ricardo"
       ],
       "año_origen": 1776,
-      "caracteristicas": [
-        "Estado mínimo",
-        "Mercado libre",
-        "Especialización y división del trabajo"
-      ],
       "tipo": "tradicional",
       "descriptores": {
-        "concepcion_economia": "individuos",
+        "concepcion_economia": "clases_sociales",
         "concepcion_humano": "racional_egoista",
-        "naturaleza_mundo": "cierto_predecible",
+        "naturaleza_mundo": "equilibrio_cierto",
         "ambito_economico": "produccion",
         "motor_cambio": "acumulacion_capital",
-        "politicas_preferidas": "libre_mercado"
+        "politicas_preferidas": "laissez_faire"
       },
       "posicion": {
-        "x": 0.75,
-        "y": -0.75,
-        "justificacion": "Estado débil (derecha) + Énfasis en crecimiento (abajo-medio)"
+        "x": -0.49,
+        "y": -0.5549999999999999,
+        "justificacion": "Pendiente de recálculo",
+        "etiqueta_cuadrante": "Neoliberalismo / Escuela Austriaca"
       },
       "escuela_relacionada_similar": "neoclasica"
     },
@@ -307,30 +257,26 @@
       "id": "neoclasica",
       "nombre": "Neoclásica",
       "categoria": "liberal_mercado_libre",
-      "descripcion": "Maximización de utilidad individual en mercados competitivos",
+      "descripcion": "Maximización de utilidad y equilibrio general",
       "autores": [
         "Léon Walras",
-        "Vilfredo Pareto"
+        "Alfred Marshall"
       ],
       "año_origen": 1870,
-      "caracteristicas": [
-        "Estado mínimo",
-        "Equilibrio de mercado",
-        "Competencia perfecta"
-      ],
       "tipo": "tradicional",
       "descriptores": {
         "concepcion_economia": "individuos",
         "concepcion_humano": "racional_egoista",
-        "naturaleza_mundo": "cierto_predecible",
-        "ambito_economico": "comercio",
-        "motor_cambio": "decisiones_individuales",
-        "politicas_preferidas": "libre_mercado"
+        "naturaleza_mundo": "equilibrio_cierto",
+        "ambito_economico": "intercambio_mercado",
+        "motor_cambio": "accion_individual",
+        "politicas_preferidas": "laissez_faire"
       },
       "posicion": {
-        "x": 0.9,
-        "y": -0.38,
-        "justificacion": "Estado muy débil (derecha extrema) + Crecimiento puro (abajo)"
+        "x": -0.885,
+        "y": -0.47000000000000003,
+        "justificacion": "Pendiente de recálculo",
+        "etiqueta_cuadrante": "Neoliberalismo / Escuela Austriaca"
       },
       "escuela_relacionada_similar": "austriaca"
     },
@@ -338,30 +284,26 @@
       "id": "austriaca",
       "nombre": "Austríaca",
       "categoria": "liberal_mercado_libre",
-      "descripcion": "Rechazo de intervención estatal, énfasis en acción individual",
+      "descripcion": "Acción humana, orden espontáneo y rechazo al intervencionismo",
       "autores": [
         "Ludwig von Mises",
         "Friedrich Hayek"
       ],
-      "año_origen": 1920,
-      "caracteristicas": [
-        "Estado mínimo (casi nulo)",
-        "Libertad individual",
-        "Anti-inflacionista"
-      ],
+      "año_origen": 1871,
       "tipo": "tradicional",
       "descriptores": {
         "concepcion_economia": "individuos",
         "concepcion_humano": "racional_egoista",
-        "naturaleza_mundo": "complejo_incierto",
-        "ambito_economico": "comercio",
-        "motor_cambio": "decisiones_individuales",
-        "politicas_preferidas": "libre_mercado"
+        "naturaleza_mundo": "incertidumbre",
+        "ambito_economico": "intercambio_mercado",
+        "motor_cambio": "accion_individual",
+        "politicas_preferidas": "laissez_faire"
       },
       "posicion": {
-        "x": 0.6,
-        "y": -0.38,
-        "justificacion": "Estado mínimo extremo (derecha) + Crecimiento sin regulación (abajo extrema)"
+        "x": -0.8300000000000001,
+        "y": -0.455,
+        "justificacion": "Pendiente de recálculo",
+        "etiqueta_cuadrante": "Neoliberalismo / Escuela Austriaca"
       },
       "escuela_relacionada_similar": "neoclasica"
     },
@@ -369,29 +311,25 @@
       "id": "schumpeteriana",
       "nombre": "Schumpeteriana",
       "categoria": "liberal_innovacion",
-      "descripcion": "Innovación disruptiva y destrucción creativa impulsan crecimiento",
+      "descripcion": "Destrucción creativa como motor del capitalismo",
       "autores": [
         "Joseph Schumpeter"
       ],
       "año_origen": 1942,
-      "caracteristicas": [
-        "Mercado con emprendimiento",
-        "Innovación disruptiva",
-        "Destrucción creativa"
-      ],
       "tipo": "tradicional",
       "descriptores": {
-        "concepcion_economia": "individuos",
+        "concepcion_economia": "sistema_complejo",
         "concepcion_humano": "racional_egoista",
-        "naturaleza_mundo": "complejo_incierto",
+        "naturaleza_mundo": "evolutivo_dinamico",
         "ambito_economico": "produccion",
-        "motor_cambio": "innovacion_tecnologica",
-        "politicas_preferidas": "ambiguas"
+        "motor_cambio": "innovacion",
+        "politicas_preferidas": "fallos_mercado"
       },
       "posicion": {
-        "x": 0.45,
-        "y": -0.6,
-        "justificacion": "Estado moderado (centro-derecha) + Crecimiento con reconocimiento de instituciones (abajo-medio)"
+        "x": -0.16499999999999998,
+        "y": -0.405,
+        "justificacion": "Pendiente de recálculo",
+        "etiqueta_cuadrante": "Neoliberalismo / Escuela Austriaca"
       },
       "escuela_relacionada_similar": "austriaca"
     }
