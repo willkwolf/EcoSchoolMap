@@ -397,7 +397,7 @@ export class D3MapRenderer {
                     // Calculate visual radius from symbol area
                     const area = getNodeSize(d.tipo);
                     const visualRadius = Math.sqrt(area / Math.PI);
-                    return this.collisionRadius + visualRadius + 8; // +8 for generous padding
+                    return this.collisionRadius + visualRadius + 3; // +3 for balanced spacing (closer than +8)
                 })
                 .strength(1.0) // Maximum collision strength
                 .iterations(10) // Maximum iterations for convergence
@@ -456,6 +456,9 @@ export class D3MapRenderer {
             } else {
                 console.log(`✅ FINAL RESULT: No overlaps detected - force simulation successful`);
             }
+
+            // Update transition arrows to final node positions
+            this.updateTransitionsToFinalPositions();
         }, 6000); // Let it run for 6 seconds for maximum convergence
 
         console.log('✅ Nodes rendered with force simulation');
@@ -580,6 +583,60 @@ export class D3MapRenderer {
                     .attr('y', cy);
             }
         });
+    }
+
+    /**
+     * Update transition arrows to use final node positions after force simulation
+     */
+    updateTransitionsToFinalPositions() {
+        if (!this.data.transiciones) return;
+
+        console.log('🔄 Updating transition arrows to final node positions...');
+
+        // Get current node positions from the force simulation
+        const currentNodePositions = {};
+        this.simulation.nodes().forEach(node => {
+            // Convert pixel coordinates back to normalized coordinates for scaling
+            const normalizedX = this.xScale.invert(node.x);
+            const normalizedY = this.yScale.invert(node.y);
+            currentNodePositions[node.id] = { x: normalizedX, y: normalizedY };
+        });
+
+        this.data.transiciones.forEach(transition => {
+            const fromNodePos = currentNodePositions[transition.desde_nodo];
+            const toNodePos = currentNodePositions[transition.hacia_nodo];
+
+            if (!fromNodePos || !toNodePos) return;
+
+            // Use current positions for arrow endpoints
+            const x1 = this.xScale(fromNodePos.x);
+            const y1 = this.yScale(fromNodePos.y);
+            const x2 = this.xScale(toNodePos.x);
+            const y2 = this.yScale(toNodePos.y);
+
+            const dx = x2 - x1;
+            const dy = y2 - y1;
+            const cx = x1 + dx / 2;
+            const cy = y1 + dy / 2 - 30;
+
+            const finalPath = `M ${x1},${y1} Q ${cx},${cy} ${x2},${y2}`;
+
+            // Update arrow path immediately (no animation)
+            const arrow = this.zoomGroup.select(`.transition-arrow.${transition.id}`);
+            if (!arrow.empty()) {
+                arrow.attr('d', finalPath);
+            }
+
+            // Update label position immediately
+            const label = this.zoomGroup.select(`.transition-label.${transition.id}`);
+            if (!label.empty()) {
+                label
+                    .attr('x', cx)
+                    .attr('y', cy);
+            }
+        });
+
+        console.log('✅ Transition arrows updated to final positions');
     }
 
     /**
