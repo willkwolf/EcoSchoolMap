@@ -393,7 +393,12 @@ export class D3MapRenderer {
             .force('x', d3.forceX(d => d.fx).strength(0.1)) // Moderate centering force
             .force('y', d3.forceY(d => d.fy).strength(0.1))
             .force('collision', d3.forceCollide()
-                .radius(d => this.collisionRadius + getNodeSize(d.tipo) / 2)
+                .radius(d => {
+                    // Calculate visual radius from symbol area
+                    const area = getNodeSize(d.tipo);
+                    const visualRadius = Math.sqrt(area / Math.PI);
+                    return this.collisionRadius + visualRadius + 3; // +3 for padding
+                })
                 .strength(1.0) // Maximum collision strength
                 .iterations(8) // Even more iterations for better convergence
             )
@@ -405,8 +410,22 @@ export class D3MapRenderer {
             .restart();
 
         // Handle simulation ticks
+        let tickCount = 0;
         this.simulation.on('tick', () => {
+            tickCount++;
             nodeElements.attr('transform', d => `translate(${d.x},${d.y})`);
+
+            // Debug: check for overlaps every 10 ticks
+            if (tickCount % 10 === 0) {
+                const currentPositions = {};
+                this.simulation.nodes().forEach(node => {
+                    currentPositions[node.id] = { x: node.x, y: node.y };
+                });
+                const overlaps = this.detectOverlaps(currentPositions, 0.15);
+                if (overlaps.length > 0) {
+                    console.log(`Tick ${tickCount}: ${overlaps.length} overlaps remaining`);
+                }
+            }
         });
 
         // Stop simulation after convergence to prevent continuous movement
@@ -468,8 +487,10 @@ export class D3MapRenderer {
             }
         });
 
-        // Restart simulation with high energy for smooth transition
+        // Use very weak centering forces toward fx/fy positions
         this.simulation
+            .force('x', d3.forceX(d => d.fx).strength(0.02)) // Very weak toward target
+            .force('y', d3.forceY(d => d.fy).strength(0.02)) // Very weak toward target
             .alpha(1.0) // Maximum initial energy
             .alphaDecay(0.01) // Very slow decay for maximum convergence
             .restart();
@@ -477,7 +498,7 @@ export class D3MapRenderer {
         // Stop simulation after convergence
         setTimeout(() => {
             this.simulation.alpha(0).restart();
-        }, 3500); // Even longer duration for preset switching to ensure convergence
+        }, 6000); // Very long duration (6 seconds) for maximum convergence
 
         console.log('✅ Nodes transitioning with force simulation');
     }
@@ -544,6 +565,36 @@ export class D3MapRenderer {
         this.updateTransitionsWithAnimation(newData.transiciones);
 
         console.log('✅ Variant updated with force simulation');
+    }
+
+    /**
+     * Detect overlapping nodes (for debugging)
+     * @param {Object} positions - Position object
+     * @param {number} threshold - Distance threshold
+     * @returns {Array} Array of overlapping pairs
+     */
+    detectOverlaps(positions, threshold = 0.15) {
+        const overlaps = [];
+        const nodeIds = Object.keys(positions);
+
+        for (let i = 0; i < nodeIds.length; i++) {
+            for (let j = i + 1; j < nodeIds.length; j++) {
+                const id1 = nodeIds[i];
+                const id2 = nodeIds[j];
+                const pos1 = positions[id1];
+                const pos2 = positions[id2];
+
+                const dx = pos1.x - pos2.x;
+                const dy = pos1.y - pos2.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+
+                if (distance < threshold) {
+                    overlaps.push([id1, id2, distance]);
+                }
+            }
+        }
+
+        return overlaps;
     }
 
     /**
