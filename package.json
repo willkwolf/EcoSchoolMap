@@ -5,8 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "prebuild": "node scripts/build_tools/clean_assets.js",
     "build": "vite build",
+    "postbuild": "node scripts/build_tools/clean_assets.js",
     "preview": "vite preview",
     "validate-data": "python scripts/data_validation/validate_data_integrity.py"
   },
