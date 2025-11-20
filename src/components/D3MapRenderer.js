@@ -54,6 +54,11 @@ export class D3MapRenderer {
         this.tooltipManager = new TooltipManager();
         this.zoom = null;
 
+        // Force simulation properties
+        this.simulation = null;
+        this.forceStrength = 0.1; // Repulsion strength
+        this.collisionRadius = 25; // Minimum distance between nodes
+
         this.init();
     }
 
@@ -104,7 +109,44 @@ export class D3MapRenderer {
         // Create arrow marker (in defs, outside zoom group)
         createArrowMarker(this.svg);
 
+        // Initialize force simulation
+        this.initForceSimulation();
+
         console.log('✅ D3MapRenderer initialized');
+    }
+
+    /**
+     * Initialize D3 force simulation for node repulsion and collision prevention
+     */
+    initForceSimulation() {
+        // Create force simulation with multiple forces
+        this.simulation = d3.forceSimulation()
+            // Repulsion force (like electrical charges)
+            .force('charge', d3.forceManyBody()
+                .strength(-this.forceStrength * 100) // Negative = repulsion
+                .distanceMax(100)
+            )
+            // Collision detection to prevent overlapping
+            .force('collision', d3.forceCollide()
+                .radius(this.collisionRadius)
+                .strength(0.7) // Moderate collision strength
+                .iterations(2)
+            )
+            // Center force to keep nodes near their target positions
+            .force('x', d3.forceX()
+                .strength(0.1) // Weak centering force
+            )
+            .force('y', d3.forceY()
+                .strength(0.1) // Weak centering force
+            )
+            // Custom positioning force to maintain target coordinates
+            .force('position', () => {
+                // This will be updated dynamically with target positions
+            })
+            .alphaDecay(0.02) // Slow decay for smooth convergence
+            .velocityDecay(0.3); // Moderate velocity decay
+
+        console.log('✅ Force simulation initialized');
     }
 
     /**
@@ -280,23 +322,37 @@ export class D3MapRenderer {
     }
 
     /**
-     * Render school nodes
+     * Render school nodes with force simulation for collision prevention
      */
     renderNodes() {
         const nodesGroup = this.zoomGroup.append('g').attr('class', 'nodes');
 
-        this.data.nodos.forEach(node => {
-            const x = this.xScale(node.posicion.x);
-            const y = this.yScale(node.posicion.y);
-            const color = this.colorMap.get(node.id);
-            const size = getNodeSize(node.tipo);
-            const symbolGenerator = getNodeSymbol(node.tipo, size);
-            const borderStyle = getNodeBorderStyle(node.tipo);
+        // Prepare node data for force simulation
+        const nodeData = this.data.nodos.map(node => ({
+            ...node,
+            // Convert normalized coordinates [-1,1] to pixel coordinates for simulation
+            x: this.xScale(node.posicion.x),
+            y: this.yScale(node.posicion.y),
+            // Store target positions for force simulation
+            fx: this.xScale(node.posicion.x), // Fixed x target
+            fy: this.yScale(node.posicion.y), // Fixed y target
+        }));
 
-            // Create node group
-            const nodeGroup = nodesGroup.append('g')
-                .attr('class', `node ${node.id}`)
-                .attr('transform', `translate(${x},${y})`);
+        // Create node elements
+        const nodeElements = nodesGroup.selectAll('.node')
+            .data(nodeData, d => d.id)
+            .enter()
+            .append('g')
+            .attr('class', d => `node ${d.id}`)
+            .attr('transform', d => `translate(${d.x},${d.y})`);
+
+        // Add symbols to nodes
+        nodeElements.each((d, i, nodes) => {
+            const nodeGroup = d3.select(nodes[i]);
+            const color = this.colorMap.get(d.id);
+            const size = getNodeSize(d.tipo);
+            const symbolGenerator = getNodeSymbol(d.tipo, size);
+            const borderStyle = getNodeBorderStyle(d.tipo);
 
             // Draw symbol
             nodeGroup.append('path')
@@ -306,11 +362,11 @@ export class D3MapRenderer {
                 .attr('stroke-width', borderStyle.width)
                 .attr('opacity', borderStyle.opacity)
                 .style('cursor', 'pointer')
-                .on('mouseenter', (event) => this.onNodeHover(event, node))
+                .on('mouseenter', (event) => this.onNodeHover(event, d))
                 .on('mouseleave', () => this.onNodeLeave());
 
             // Draw label
-            const labelOffset = getLabelOffset(node.tipo);
+            const labelOffset = getLabelOffset(d.tipo);
             nodeGroup.append('text')
                 .attr('class', 'node-label')
                 .attr('y', labelOffset)
@@ -318,8 +374,37 @@ export class D3MapRenderer {
                 .attr('font-size', '12px')
                 .attr('font-weight', 'bold')
                 .attr('fill', '#2c3e50')
-                .text(node.nombre);
+                .text(d.nombre);
         });
+
+        // Set up force simulation
+        this.simulation
+            .nodes(nodeData)
+            .force('x', d3.forceX(d => d.fx).strength(0.3)) // Stronger centering force
+            .force('y', d3.forceY(d => d.fy).strength(0.3))
+            .force('collision', d3.forceCollide()
+                .radius(d => this.collisionRadius + getNodeSize(d.tipo) / 2)
+                .strength(0.8)
+                .iterations(3)
+            )
+            .force('charge', d3.forceManyBody()
+                .strength(-this.forceStrength * 150)
+                .distanceMax(80)
+            )
+            .alpha(0.8) // High initial energy
+            .restart();
+
+        // Handle simulation ticks
+        this.simulation.on('tick', () => {
+            nodeElements.attr('transform', d => `translate(${d.x},${d.y})`);
+        });
+
+        // Stop simulation after convergence to prevent continuous movement
+        setTimeout(() => {
+            this.simulation.alpha(0).restart();
+        }, 2000); // Let it run for 2 seconds
+
+        console.log('✅ Nodes rendered with force simulation');
     }
 
     /**
@@ -351,28 +436,32 @@ export class D3MapRenderer {
     }
 
     /**
-     * Update nodes with smooth transition to new positions
+     * Update nodes with force simulation for smooth transitions to new positions
      * @param {Array} newNodos - New node data with updated positions
      */
     updateNodesWithTransition(newNodos) {
-        const duration = 800;
-        const easing = d3.easeCubicInOut;
-
-        newNodos.forEach(newNode => {
-            const nodeGroup = this.zoomGroup.select(`.node.${newNode.id}`);
-
-            if (!nodeGroup.empty()) {
-                const newX = this.xScale(newNode.posicion.x);
-                const newY = this.yScale(newNode.posicion.y);
-
-                // Animate node group position
-                nodeGroup
-                    .transition()
-                    .duration(duration)
-                    .ease(easing)
-                    .attr('transform', `translate(${newX},${newY})`);
+        // Update simulation nodes with new target positions
+        this.simulation.nodes().forEach(node => {
+            const newNode = newNodos.find(n => n.id === node.id);
+            if (newNode) {
+                // Update target positions (force simulation will move towards these)
+                node.fx = this.xScale(newNode.posicion.x);
+                node.fy = this.yScale(newNode.posicion.y);
             }
         });
+
+        // Restart simulation with high energy for smooth transition
+        this.simulation
+            .alpha(0.8) // High initial energy
+            .alphaDecay(0.02) // Slow decay
+            .restart();
+
+        // Stop simulation after convergence
+        setTimeout(() => {
+            this.simulation.alpha(0).restart();
+        }, 1500); // Shorter duration for preset switching
+
+        console.log('✅ Nodes transitioning with force simulation');
     }
 
     /**
@@ -432,11 +521,11 @@ export class D3MapRenderer {
         this.data = newData;
         this.colorMap = assignColorsToNodes(newData.nodos);
 
-        // Use smooth transitions instead of clear+render
+        // Update nodes with force simulation for smooth repulsion-aware transitions
         this.updateNodesWithTransition(newData.nodos);
         this.updateTransitionsWithAnimation(newData.transiciones);
 
-        console.log('✅ Variant updated with smooth transition');
+        console.log('✅ Variant updated with force simulation');
     }
 
     /**
