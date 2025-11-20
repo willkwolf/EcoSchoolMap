@@ -56,8 +56,8 @@ export class D3MapRenderer {
 
         // Force simulation properties
         this.simulation = null;
-        this.forceStrength = 0.15; // Repulsion strength (increased 150%)
-        this.collisionRadius = 40; // Minimum distance between nodes (increased 150%)
+        this.forceStrength = 0.12; // Reduced repulsion strength for better stability
+        this.collisionRadius = 45; // Increased collision radius for better separation
 
         this.init();
     }
@@ -129,15 +129,15 @@ export class D3MapRenderer {
             // Collision detection to prevent overlapping
             .force('collision', d3.forceCollide()
                 .radius(this.collisionRadius)
-                .strength(0.7) // Moderate collision strength
-                .iterations(2)
+                .strength(0.9) // Increased collision strength
+                .iterations(4) // More iterations for better convergence
             )
             // Center force to keep nodes near their target positions
             .force('x', d3.forceX()
-                .strength(0.1) // Weak centering force
+                .strength(0.05) // Very weak centering force to allow collision to work
             )
             .force('y', d3.forceY()
-                .strength(0.1) // Weak centering force
+                .strength(0.05) // Very weak centering force to allow collision to work
             )
             // Custom positioning force to maintain target coordinates
             .force('position', () => {
@@ -380,18 +380,18 @@ export class D3MapRenderer {
         // Set up force simulation
         this.simulation
             .nodes(nodeData)
-            .force('x', d3.forceX(d => d.fx).strength(0.3)) // Stronger centering force
-            .force('y', d3.forceY(d => d.fy).strength(0.3))
+            .force('x', d3.forceX(d => d.fx).strength(0.1)) // Moderate centering force
+            .force('y', d3.forceY(d => d.fy).strength(0.1))
             .force('collision', d3.forceCollide()
                 .radius(d => this.collisionRadius + getNodeSize(d.tipo) / 2)
-                .strength(0.8)
-                .iterations(3)
+                .strength(1.0) // Maximum collision strength
+                .iterations(5) // More iterations
             )
             .force('charge', d3.forceManyBody()
-                .strength(-this.forceStrength * 150)
-                .distanceMax(80)
+                .strength(-this.forceStrength * 120) // Slightly reduced repulsion
+                .distanceMax(100) // Increased distance
             )
-            .alpha(0.8) // High initial energy
+            .alpha(0.9) // High initial energy
             .restart();
 
         // Handle simulation ticks
@@ -402,7 +402,7 @@ export class D3MapRenderer {
         // Stop simulation after convergence to prevent continuous movement
         setTimeout(() => {
             this.simulation.alpha(0).restart();
-        }, 2000); // Let it run for 2 seconds
+        }, 3000); // Let it run for 3 seconds for better convergence
 
         console.log('✅ Nodes rendered with force simulation');
     }
@@ -452,14 +452,14 @@ export class D3MapRenderer {
 
         // Restart simulation with high energy for smooth transition
         this.simulation
-            .alpha(0.8) // High initial energy
-            .alphaDecay(0.02) // Slow decay
+            .alpha(0.9) // High initial energy
+            .alphaDecay(0.015) // Very slow decay for smooth transitions
             .restart();
 
         // Stop simulation after convergence
         setTimeout(() => {
             this.simulation.alpha(0).restart();
-        }, 1500); // Shorter duration for preset switching
+        }, 2500); // Longer duration for preset switching to ensure convergence
 
         console.log('✅ Nodes transitioning with force simulation');
     }
