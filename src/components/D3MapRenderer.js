@@ -58,6 +58,7 @@ export class D3MapRenderer {
         this.simulation = null;
         this.forceStrength = 0.12; // Reduced repulsion strength for better stability
         this.collisionRadius = 45; // Increased collision radius for better separation
+        this.collisionEnabled = true; // Default: collisions enabled
 
         this.init();
     }
@@ -147,6 +148,52 @@ export class D3MapRenderer {
             .velocityDecay(0.3); // Moderate velocity decay
 
         console.log('✅ Force simulation initialized');
+    }
+
+    /**
+     * Set collision forces enabled/disabled
+     * @param {boolean} enabled - Whether to enable collision forces
+     */
+    setCollisionEnabled(enabled) {
+        this.collisionEnabled = enabled;
+        this.restartSimulation();
+        console.log(`Collision forces ${enabled ? 'enabled' : 'disabled'}`);
+    }
+
+    /**
+     * Restart the force simulation with current settings
+     */
+    restartSimulation() {
+        if (this.simulation && this.simulation.nodes().length > 0) {
+            // Reconfigure forces
+            this.simulation
+                .force('x', d3.forceX(d => d.targetX).strength(0.3))
+                .force('y', d3.forceY(d => d.targetY).strength(0.3))
+                .force('charge', d3.forceManyBody().strength(-50).distanceMax(150));
+
+            // Conditionally add/remove collision force
+            if (this.collisionEnabled) {
+                this.simulation.force('collision', d3.forceCollide()
+                    .radius(d => {
+                        const area = getNodeSize(d.tipo);
+                        const visualRadius = Math.sqrt(area / Math.PI);
+                        return visualRadius + 15;
+                    })
+                    .strength(0.9)
+                    .iterations(3)
+                );
+            } else {
+                this.simulation.force('collision', null); // Remove collision force
+            }
+
+            // Restart with moderate energy
+            this.simulation.alpha(0.6).restart();
+
+            // Stop after convergence
+            setTimeout(() => {
+                this.simulation.alpha(0).restart();
+            }, 4000); // Shorter for toggle responsiveness
+        }
     }
 
     /**
@@ -315,28 +362,27 @@ export class D3MapRenderer {
         this.simulation
             .nodes(nodeData)
             // A. Fuerza de Posicionamiento (El "Elástico" hacia su lugar ideal)
-            .force('x', d3.forceX(d => d.targetX).strength(0.3)) // Aumenté fuerza para que no se alejen mucho
+            .force('x', d3.forceX(d => d.targetX).strength(0.3))
             .force('y', d3.forceY(d => d.targetY).strength(0.3))
-            
-            // B. Fuerza de Colisión (El "Escudo" personal)
-            .force('collision', d3.forceCollide()
+
+            // B. Fuerza de Colisión (El "Escudo" personal) - Condicional
+            .force('collision', this.collisionEnabled ? d3.forceCollide()
                 .radius(d => {
                     const area = getNodeSize(d.tipo);
                     const visualRadius = Math.sqrt(area / Math.PI);
-                    // Radio visual + espacio para etiquetas + margen de seguridad
-                    return visualRadius + 15; 
+                    return visualRadius + 15;
                 })
-                .strength(0.9) // Rigidez alta pero no absoluta para evitar jitter
-                .iterations(3) // 3 es suficiente para círculos simples
-            )
-            
+                .strength(0.9)
+                .iterations(3)
+            : null) // Remove if disabled
+
             // C. Fuerza de Carga (Repulsión global suave para "airear" el gráfico)
             .force('charge', d3.forceManyBody()
                 .strength(-50)
                 .distanceMax(150)
             )
             .alpha(1) // Energía inicial completa
-            .alphaDecay(0.05) // Decaimiento más rápido (converge en ~3-4 segs)
+            .alphaDecay(0.05) // Decaimiento más rápido
             .restart();
 
         // 4. MANEJO DEL TICK (Optimizado)
@@ -466,8 +512,8 @@ export class D3MapRenderer {
             .force('x', d3.forceX(d => d.targetX).strength(0.3))
             .force('y', d3.forceY(d => d.targetY).strength(0.3))
 
-            // B. Fuerza de Colisión (El "Escudo" personal)
-            .force('collision', d3.forceCollide()
+            // B. Fuerza de Colisión (El "Escudo" personal) - Condicional
+            .force('collision', this.collisionEnabled ? d3.forceCollide()
                 .radius(d => {
                     const area = getNodeSize(d.tipo);
                     const visualRadius = Math.sqrt(area / Math.PI);
@@ -475,7 +521,7 @@ export class D3MapRenderer {
                 })
                 .strength(0.9)
                 .iterations(3)
-            )
+            : null)
 
             // C. Fuerza de Carga (Repulsión global suave)
             .force('charge', d3.forceManyBody()
