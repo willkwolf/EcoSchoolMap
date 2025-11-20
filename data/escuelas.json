@@ -448,12 +448,6 @@
     },
     "cuadrantes": {
       "q1": {
-        "nombre": "Estado Débil + Equidad",
-        "escuelas": [
-          "conductista"
-        ]
-      },
-      "q2": {
         "nombre": "Estado Fuerte + Equidad",
         "escuelas": [
           "marxista",
@@ -461,22 +455,28 @@
           "ecologica"
         ]
       },
-      "q3": {
-        "nombre": "Estado Débil + Crecimiento",
+      "q2": {
+        "nombre": "Estado Débil + Equidad",
         "escuelas": [
-          "clasica",
-          "neoclasica",
-          "austriaca",
-          "schumpeteriana"
+          "conductista"
         ]
       },
-      "q4": {
+      "q3": {
         "nombre": "Estado Fuerte + Crecimiento",
         "escuelas": [
           "keynesiana",
           "institucionalista",
           "estado_emprendedor",
           "tradicion_desarrollista"
+        ]
+      },
+      "q4": {
+        "nombre": "Estado Débil + Crecimiento",
+        "escuelas": [
+          "clasica",
+          "neoclasica",
+          "austriaca",
+          "schumpeteriana"
         ]
       }
     }

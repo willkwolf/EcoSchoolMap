@@ -229,7 +229,7 @@ export class D3MapRenderer {
             .attr('text-anchor', 'middle')
             .attr('font-size', '14px')
             .attr('fill', '#2c3e50')
-            .text('Arquitectura Económica: ← Economía de Mercado (Estado Débil) | Economía Dirigida (Estado Fuerte) →');
+            .text('Arquitectura Económica: ← Economía Dirigida (Estado Fuerte) | Economía de Mercado (Estado Débil) →');
 
         axesGroup.append('text')
             .attr('class', 'axis-label axis-label-y desktop-only')
@@ -249,7 +249,7 @@ export class D3MapRenderer {
             .attr('text-anchor', 'middle')
             .attr('font-size', '12px')
             .attr('fill', '#2c3e50')
-            .text('← Estado Débil | Estado Fuerte →');
+            .text('← Estado Fuerte | Estado Débil →');
 
         axesGroup.append('text')
             .attr('class', 'axis-label axis-label-y mobile-only')
