@@ -6,7 +6,7 @@
     <meta name="description" content="Mapa interactivo de escuelas políticas económicas con D3.js y scrollytelling">
     <title>Mapa de Escuelas Económicas | Visualización Interactiva</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-  <script type="module" crossorigin src="./assets/main-BNqVZsYy.js"></script>
+  <script type="module" crossorigin src="./assets/main-Dqb3bt4A.js"></script>
   <link rel="stylesheet" crossorigin href="./assets/main-KSF26PJR.css">
 </head>
 <body>
@@ -158,6 +158,16 @@
                             <button type="button" id="select-all-transitions" class="checkbox-btn">Seleccionar Todas</button>
                             <button type="button" id="deselect-all-transitions" class="checkbox-btn">Deseleccionar Todas</button>
                         </div>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label title="⚠️ BETA: Desactiva colisiones para debugging de parámetros de fuerza. Puede causar superposiciones visuales. Experimental para tuning de presets y pesos.">Fuerzas de Simulación:</label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="collision-toggle" checked>
+                            <span class="checkmark"></span>
+                            Activar Colisiones
+                        </label>
                     </div>
                 </div>
                 <div class="control-group">
