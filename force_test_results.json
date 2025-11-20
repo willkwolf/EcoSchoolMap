@@ -1,0 +1,58 @@
+[
+  {
+    "preset": "equity-emphasis",
+    "normalization": "percentile",
+    "initialOverlaps": 0,
+    "minDistance": 0.25712973861329,
+    "avgDistance": 1.1857052962950931,
+    "overlappingPairs": []
+  },
+  {
+    "preset": "growth-emphasis",
+    "normalization": "percentile",
+    "initialOverlaps": 0,
+    "minDistance": 0.25712973861329,
+    "avgDistance": 1.1857052962950931,
+    "overlappingPairs": []
+  },
+  {
+    "preset": "base",
+    "normalization": "percentile",
+    "initialOverlaps": 0,
+    "minDistance": 0.2571297386132899,
+    "avgDistance": 1.1799106480737256,
+    "overlappingPairs": []
+  },
+  {
+    "preset": "state-emphasis",
+    "normalization": "percentile",
+    "initialOverlaps": 0,
+    "minDistance": 0.2571297386132899,
+    "avgDistance": 1.1773513695104472,
+    "overlappingPairs": []
+  },
+  {
+    "preset": "market-emphasis",
+    "normalization": "percentile",
+    "initialOverlaps": 0,
+    "minDistance": 0.2571297386132899,
+    "avgDistance": 1.173028590537297,
+    "overlappingPairs": []
+  },
+  {
+    "preset": "historical-emphasis",
+    "normalization": "percentile",
+    "initialOverlaps": 0,
+    "minDistance": 0.2571297386132899,
+    "avgDistance": 1.173028590537297,
+    "overlappingPairs": []
+  },
+  {
+    "preset": "pragmatic-emphasis",
+    "normalization": "percentile",
+    "initialOverlaps": 0,
+    "minDistance": 0.2571297386132899,
+    "avgDistance": 1.1799106480737256,
+    "overlappingPairs": []
+  }
+]
