@@ -260,10 +260,15 @@ function main() {
 
     const results = [];
 
-    // Test all presets with percentile normalization
-    for (const preset of presets) {
-        const result = testPreset(schools, preset, 'percentile', 0.15, 40);
-        results.push(result);
+    // Test specific presets mentioned by user
+    const testPresets = ['pragmatic-emphasis', 'state-emphasis'];
+    const testNorms = ['percentile', 'zscore']; // zscore might be "centrado estadístico"
+
+    for (const preset of testPresets) {
+        for (const norm of testNorms) {
+            const result = testPreset(schools, preset, norm, 0.15, 40);
+            results.push(result);
+        }
     }
 
     // Find best parameters

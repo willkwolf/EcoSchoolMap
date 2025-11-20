@@ -328,15 +328,25 @@ export class D3MapRenderer {
         const nodesGroup = this.zoomGroup.append('g').attr('class', 'nodes');
 
         // Prepare node data for force simulation
-        const nodeData = this.data.nodos.map(node => ({
-            ...node,
-            // Convert normalized coordinates [-1,1] to pixel coordinates for simulation
-            x: this.xScale(node.posicion.x),
-            y: this.yScale(node.posicion.y),
-            // Store target positions for force simulation
-            fx: this.xScale(node.posicion.x), // Fixed x target
-            fy: this.yScale(node.posicion.y), // Fixed y target
-        }));
+        const nodeData = this.data.nodos.map(node => {
+            // Add small random offset to prevent exact overlaps (guardrail)
+            const randomOffset = 0.001; // Small offset in normalized coordinates
+            const offsetX = (Math.random() - 0.5) * randomOffset;
+            const offsetY = (Math.random() - 0.5) * randomOffset;
+
+            const targetX = Math.max(-1, Math.min(1, node.posicion.x + offsetX));
+            const targetY = Math.max(-1, Math.min(1, node.posicion.y + offsetY));
+
+            return {
+                ...node,
+                // Convert normalized coordinates [-1,1] to pixel coordinates for simulation
+                x: this.xScale(targetX),
+                y: this.yScale(targetY),
+                // Store target positions for force simulation
+                fx: this.xScale(targetX), // Fixed x target
+                fy: this.yScale(targetY), // Fixed y target
+            };
+        });
 
         // Create node elements
         const nodeElements = nodesGroup.selectAll('.node')
@@ -385,7 +395,7 @@ export class D3MapRenderer {
             .force('collision', d3.forceCollide()
                 .radius(d => this.collisionRadius + getNodeSize(d.tipo) / 2)
                 .strength(1.0) // Maximum collision strength
-                .iterations(5) // More iterations
+                .iterations(8) // Even more iterations for better convergence
             )
             .force('charge', d3.forceManyBody()
                 .strength(-this.forceStrength * 120) // Slightly reduced repulsion
@@ -402,7 +412,7 @@ export class D3MapRenderer {
         // Stop simulation after convergence to prevent continuous movement
         setTimeout(() => {
             this.simulation.alpha(0).restart();
-        }, 3000); // Let it run for 3 seconds for better convergence
+        }, 4000); // Let it run for 4 seconds for maximum convergence
 
         console.log('✅ Nodes rendered with force simulation');
     }
@@ -444,22 +454,30 @@ export class D3MapRenderer {
         this.simulation.nodes().forEach(node => {
             const newNode = newNodos.find(n => n.id === node.id);
             if (newNode) {
+                // Add small random offset to prevent exact overlaps (guardrail)
+                const randomOffset = 0.001; // Small offset in normalized coordinates
+                const offsetX = (Math.random() - 0.5) * randomOffset;
+                const offsetY = (Math.random() - 0.5) * randomOffset;
+
+                const targetX = Math.max(-1, Math.min(1, newNode.posicion.x + offsetX));
+                const targetY = Math.max(-1, Math.min(1, newNode.posicion.y + offsetY));
+
                 // Update target positions (force simulation will move towards these)
-                node.fx = this.xScale(newNode.posicion.x);
-                node.fy = this.yScale(newNode.posicion.y);
+                node.fx = this.xScale(targetX);
+                node.fy = this.yScale(targetY);
             }
         });
 
         // Restart simulation with high energy for smooth transition
         this.simulation
-            .alpha(0.9) // High initial energy
-            .alphaDecay(0.015) // Very slow decay for smooth transitions
+            .alpha(1.0) // Maximum initial energy
+            .alphaDecay(0.01) // Very slow decay for maximum convergence
             .restart();
 
         // Stop simulation after convergence
         setTimeout(() => {
             this.simulation.alpha(0).restart();
-        }, 2500); // Longer duration for preset switching to ensure convergence
+        }, 3500); // Even longer duration for preset switching to ensure convergence
 
         console.log('✅ Nodes transitioning with force simulation');
     }
