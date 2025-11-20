@@ -223,7 +223,7 @@ function zscoreNormalize(values) {
 }
 
 /**
- * Percentile normalization (rank-based, 0-1 range)
+ * Percentile normalization (rank-based, scaled to [-1, 1] range)
  * @param {Array} values - Array of numbers
  * @returns {Array} Percentile normalized values
  */
@@ -237,12 +237,13 @@ function percentileNormalize(values) {
     indexed.forEach(([val, originalIdx], rankIdx) => {
         ranks[originalIdx] = rankIdx + 1; // 1-based rank
     });
-    // Convert to percentiles (0-1 range)
-    return ranks.map(rank => (rank - 1) / (values.length - 1));
+    // Convert to percentiles (0-1 range) then scale to [-1, 1]
+    const percentiles = ranks.map(rank => (rank - 1) / (values.length - 1));
+    return percentiles.map(p => 2 * p - 1); // Scale [0,1] to [-1,1]
 }
 
 /**
- * Min-max normalization (scales to [0, 1] range)
+ * Min-max normalization (scales to [-1, 1] range)
  * @param {Array} values - Array of numbers
  * @returns {Array} Min-max normalized values
  */
@@ -251,10 +252,12 @@ function minmaxNormalize(values) {
     const max = Math.max(...values);
 
     if (max === min) {
-        return new Array(values.length).fill(0.5); // All values are the same
+        return new Array(values.length).fill(0.0); // All values are the same, center at 0
     }
 
-    return values.map(val => (val - min) / (max - min));
+    // Scale to [0, 1] first, then to [-1, 1]
+    const normalized01 = values.map(val => (val - min) / (max - min));
+    return normalized01.map(val => 2 * val - 1); // Scale [0,1] to [-1,1]
 }
 
 /**
