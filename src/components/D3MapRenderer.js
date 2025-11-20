@@ -263,100 +263,114 @@ export class D3MapRenderer {
     }
 
     /**
-     * Render transition arrows between schools
-     */
-    renderTransitions() {
-        if (!this.data.transiciones) return;
-
-        const transitionGroup = this.zoomGroup.append('g').attr('class', 'transitions');
-
-        this.data.transiciones.forEach(transition => {
-            const fromNode = this.data.nodos.find(n => n.id === transition.desde_nodo);
-            const toNode = this.data.nodos.find(n => n.id === transition.hacia_nodo);
-
-            if (!fromNode || !toNode) return;
-
-            const x1 = this.xScale(fromNode.posicion.x);
-            const y1 = this.yScale(fromNode.posicion.y);
-            const x2 = this.xScale(toNode.posicion.x);
-            const y2 = this.yScale(toNode.posicion.y);
-
-            // Calculate curve control point
-            const dx = x2 - x1;
-            const dy = y2 - y1;
-            const cx = x1 + dx / 2;
-            const cy = y1 + dy / 2 - 30; // Curve upward
-
-            const style = getConfidenceStyle(transition.confianza);
-
-            // Create curved path
-            const path = `M ${x1},${y1} Q ${cx},${cy} ${x2},${y2}`;
-
-            transitionGroup.append('path')
-                .attr('class', `transition-arrow ${transition.id}`)
-                .attr('d', path)
-                .attr('fill', 'none')
-                .attr('stroke', '#2c3e50')
-                .attr('stroke-width', style.width)
-                .attr('stroke-dasharray', style.dasharray)
-                .attr('opacity', style.opacity)
-                .attr('marker-end', 'url(#arrow)')
-                .on('mouseenter', (event) => this.onTransitionHover(event, transition))
-                .on('mouseleave', () => this.onTransitionLeave());
-
-            // Add label at midpoint (optional - can be toggled)
-            const labelX = cx;
-            const labelY = cy;
-
-            transitionGroup.append('text')
-                .attr('class', `transition-label ${transition.id}`)
-                .attr('x', labelX)
-                .attr('y', labelY)
-                .attr('text-anchor', 'middle')
-                .attr('font-size', '10px')
-                .attr('font-weight', 'bold')
-                .attr('fill', '#2c3e50')
-                .attr('opacity', style.labelAlpha)
-                .text(transition.año);
-        });
-    }
-
-    /**
      * Render school nodes with force simulation for collision prevention
+     * REFACTORIZADO: Corrige el bloqueo de fx/fy y optimiza el rendimiento
      */
     renderNodes() {
         const nodesGroup = this.zoomGroup.append('g').attr('class', 'nodes');
 
-        // Prepare node data for force simulation
+        // 1. PREPARACIÓN DE DATOS
         const nodeData = this.data.nodos.map(node => {
-            // Add small random offset to prevent exact overlaps (guardrail)
-            const randomOffset = 0.001; // Small offset in normalized coordinates
+            // Offset minúsculo para evitar división por cero en el primer tick
+            const randomOffset = 0.001;
             const offsetX = (Math.random() - 0.5) * randomOffset;
             const offsetY = (Math.random() - 0.5) * randomOffset;
 
-            const targetX = Math.max(-1, Math.min(1, node.posicion.x + offsetX));
-            const targetY = Math.max(-1, Math.min(1, node.posicion.y + offsetY));
+            // Coordenadas objetivo (El "Ideal" matemático)
+            const normalizedTargetX = Math.max(-1, Math.min(1, node.posicion.x + offsetX));
+            const normalizedTargetY = Math.max(-1, Math.min(1, node.posicion.y + offsetY));
+
+            const pixelTargetX = this.xScale(normalizedTargetX);
+            const pixelTargetY = this.yScale(normalizedTargetY);
 
             return {
                 ...node,
-                // Convert normalized coordinates [-1,1] to pixel coordinates for simulation
-                x: this.xScale(targetX),
-                y: this.yScale(targetY),
-                // Store target positions for force simulation
-                fx: this.xScale(targetX), // Fixed x target
-                fy: this.yScale(targetY), // Fixed y target
+                // Posición inicial (donde empieza la simulación)
+                x: pixelTargetX, 
+                y: pixelTargetY,
+                
+                // CRÍTICO: Usamos propiedades personalizadas, NO fx/fy
+                targetX: pixelTargetX, 
+                targetY: pixelTargetY,
+                
+                // fx y fy deben ser null para permitir que la física actúe
+                fx: null,
+                fy: null
             };
         });
 
-        // Create node elements
+        // 2. CREACIÓN DE ELEMENTOS DOM
         const nodeElements = nodesGroup.selectAll('.node')
             .data(nodeData, d => d.id)
             .enter()
             .append('g')
             .attr('class', d => `node ${d.id}`)
+            // Inicializamos en el target, la simulación los moverá si es necesario
             .attr('transform', d => `translate(${d.x},${d.y})`);
 
-        // Add symbols to nodes
+        // (Tu código de agregar símbolos y textos se mantiene igual aquí...)
+        this.appendNodeVisuals(nodeElements); // Asumo que moviste esto a una fn auxiliar para limpieza
+
+        // 3. CONFIGURACIÓN DE LA SIMULACIÓN
+        this.simulation
+            .nodes(nodeData)
+            // A. Fuerza de Posicionamiento (El "Elástico" hacia su lugar ideal)
+            .force('x', d3.forceX(d => d.targetX).strength(0.3)) // Aumenté fuerza para que no se alejen mucho
+            .force('y', d3.forceY(d => d.targetY).strength(0.3))
+            
+            // B. Fuerza de Colisión (El "Escudo" personal)
+            .force('collision', d3.forceCollide()
+                .radius(d => {
+                    const area = getNodeSize(d.tipo);
+                    const visualRadius = Math.sqrt(area / Math.PI);
+                    // Radio visual + espacio para etiquetas + margen de seguridad
+                    return visualRadius + 15; 
+                })
+                .strength(0.9) // Rigidez alta pero no absoluta para evitar jitter
+                .iterations(3) // 3 es suficiente para círculos simples
+            )
+            
+            // C. Fuerza de Carga (Repulsión global suave para "airear" el gráfico)
+            .force('charge', d3.forceManyBody()
+                .strength(-50)
+                .distanceMax(150)
+            )
+            .alpha(1) // Energía inicial completa
+            .alphaDecay(0.05) // Decaimiento más rápido (converge en ~3-4 segs)
+            .restart();
+
+        // 4. MANEJO DEL TICK (Optimizado)
+        this.simulation.on('tick', () => {
+            // Limitación de bordes (Boundary Constraint)
+            // Lo hacemos directamente en el tick para "rebotar" en las paredes
+            nodeData.forEach(d => {
+                const r = 15; // Margen de seguridad en píxeles
+                const minX = this.xScale(-0.95);
+                const maxX = this.xScale(0.95);
+                const minY = this.yScale(-0.95);
+                const maxY = this.yScale(0.95);
+
+                // Clamping suave
+                d.x = Math.max(minX + r, Math.min(maxX - r, d.x));
+                d.y = Math.max(minY + r, Math.min(maxY - r, d.y));
+            });
+
+            // Actualización visual
+            nodeElements.attr('transform', d => `translate(${d.x},${d.y})`);
+            
+            // Actualizar flechas (Si es costoso, hacer cada 2 o 3 ticks)
+            this.updateTransitionsDuringMovement();
+        });
+
+        // 5. FINALIZACIÓN
+        this.simulation.on('end', () => {
+             console.log('✅ Simulación estabilizada');
+             this.updateTransitionsToFinalPositions();
+        });
+    }
+
+    // Helper para limpieza del código principal
+    appendNodeVisuals(nodeElements) {
         nodeElements.each((d, i, nodes) => {
             const nodeGroup = d3.select(nodes[i]);
             const color = this.colorMap.get(d.id);
@@ -386,122 +400,6 @@ export class D3MapRenderer {
                 .attr('fill', '#2c3e50')
                 .text(d.nombre);
         });
-
-        // Set up force simulation
-        this.simulation
-            .nodes(nodeData)
-            .force('x', d3.forceX(d => d.fx).strength(0.1)) // Moderate centering force
-            .force('y', d3.forceY(d => d.fy).strength(0.1))
-            .force('collision', d3.forceCollide()
-                .radius(d => {
-                    // Calculate visual radius from symbol area
-                    const area = getNodeSize(d.tipo);
-                    const visualRadius = Math.sqrt(area / Math.PI);
-                    return this.collisionRadius + visualRadius + 3; // +3 for balanced spacing (closer than +8)
-                })
-                .strength(1.0) // Maximum collision strength
-                .iterations(10) // Maximum iterations for convergence
-            )
-            .force('charge', d3.forceManyBody()
-                .strength(-this.forceStrength * 120) // Slightly reduced repulsion
-                .distanceMax(100) // Increased distance
-            )
-            .alpha(0.9) // High initial energy
-            .restart();
-
-        // Handle simulation ticks
-        let tickCount = 0;
-        this.simulation.on('tick', () => {
-            tickCount++;
-
-            // Enforce safe border constraints [-0.9, 0.9]
-            this.simulation.nodes().forEach(node => {
-                const normalizedX = this.xScale.invert(node.x);
-                const normalizedY = this.yScale.invert(node.y);
-
-                // Constrain to safe borders
-                const constrainedX = Math.max(-0.9, Math.min(0.9, normalizedX));
-                const constrainedY = Math.max(-0.9, Math.min(0.9, normalizedY));
-
-                // Update pixel positions
-                node.x = this.xScale(constrainedX);
-                node.y = this.yScale(constrainedY);
-            });
-
-            nodeElements.attr('transform', d => `translate(${d.x},${d.y})`);
-
-            // Update transition arrows to follow moving nodes
-            this.updateTransitionsDuringMovement();
-
-            // Debug: check for overlaps and position changes every 10 ticks
-            if (tickCount % 10 === 0) {
-                const currentPositions = {};
-                this.simulation.nodes().forEach(node => {
-                    currentPositions[node.id] = { x: node.x, y: node.y };
-                });
-                const overlaps = this.detectOverlaps(currentPositions, 0.15);
-
-                // Check border constraint effectiveness
-                const borderViolations = this.simulation.nodes().filter(node => {
-                    const normX = this.xScale.invert(node.x);
-                    const normY = this.yScale.invert(node.y);
-                    return Math.abs(normX) > 0.9 || Math.abs(normY) > 0.9;
-                });
-
-                console.log(`Tick ${tickCount}: ${overlaps.length} overlaps, ${borderViolations.length} border violations`);
-
-                if (overlaps.length > 0) {
-                    console.log(`  Overlaps: ${overlaps.map(([id1, id2, dist]) => {
-                        const node1 = this.data.nodos.find(n => n.id === id1);
-                        const node2 = this.data.nodos.find(n => n.id === id2);
-                        return `${node1.nombre}↔${node2.nombre}:${dist.toFixed(3)}`;
-                    }).join(', ')}`);
-                }
-
-                if (borderViolations.length > 0) {
-                    console.log(`  Border violations: ${borderViolations.map(n => `${n.nombre}:(${this.xScale.invert(n.x).toFixed(2)},${this.yScale.invert(n.y).toFixed(2)})`).join(', ')}`);
-                }
-
-                // Show position changes for first node every 50 ticks
-                if (tickCount % 50 === 0 && this.simulation.nodes().length > 0) {
-                    const firstNode = this.simulation.nodes()[0];
-                    const currentNormX = this.xScale.invert(firstNode.x);
-                    const currentNormY = this.yScale.invert(firstNode.y);
-                    const targetNormX = this.xScale.invert(firstNode.targetX);
-                    const targetNormY = this.yScale.invert(firstNode.targetY);
-                    const distanceToTarget = Math.sqrt((currentNormX - targetNormX)**2 + (currentNormY - targetNormY)**2);
-
-                    console.log(`  ${firstNode.nombre} progress: ${distanceToTarget.toFixed(3)} from target (${targetNormX.toFixed(2)}, ${targetNormY.toFixed(2)}) -> (${currentNormX.toFixed(2)}, ${currentNormY.toFixed(2)})`);
-                }
-            }
-        });
-
-        // Stop simulation after convergence to prevent continuous movement
-        setTimeout(() => {
-            this.simulation.alpha(0).restart();
-
-            // Final check for overlaps
-            const finalPositions = {};
-            this.simulation.nodes().forEach(node => {
-                finalPositions[node.id] = { x: node.x, y: node.y };
-            });
-            const finalOverlaps = this.detectOverlaps(finalPositions, 0.15);
-            if (finalOverlaps.length > 0) {
-                console.log(`❌ FINAL RESULT: ${finalOverlaps.length} overlaps still remain after 6 seconds`);
-                finalOverlaps.forEach(([id1, id2, dist]) => {
-                    const node1 = this.data.nodos.find(n => n.id === id1);
-                    const node2 = this.data.nodos.find(n => n.id === id2);
-                    console.log(`  ${node1.nombre} ↔ ${node2.nombre}: ${dist.toFixed(4)}`);
-                });
-            } else {
-                console.log(`✅ FINAL RESULT: No overlaps detected - force simulation successful`);
-            }
-
-            // Update transition arrows to final node positions
-            this.updateTransitionsToFinalPositions();
-        }, 6000); // Let it run for 6 seconds for maximum convergence
-
-        console.log('✅ Nodes rendered with force simulation');
     }
 
     /**
@@ -541,74 +439,59 @@ export class D3MapRenderer {
         this.simulation.nodes().forEach(node => {
             const newNode = newNodos.find(n => n.id === node.id);
             if (newNode) {
-                // Add small random offset to prevent exact overlaps (guardrail)
-                const randomOffset = 0.001; // Small offset in normalized coordinates
+                // Offset minúsculo para evitar división por cero
+                const randomOffset = 0.001;
                 const offsetX = (Math.random() - 0.5) * randomOffset;
                 const offsetY = (Math.random() - 0.5) * randomOffset;
 
-                const targetX = Math.max(-1, Math.min(1, newNode.posicion.x + offsetX));
-                const targetY = Math.max(-1, Math.min(1, newNode.posicion.y + offsetY));
+                const normalizedTargetX = Math.max(-1, Math.min(1, newNode.posicion.x + offsetX));
+                const normalizedTargetY = Math.max(-1, Math.min(1, newNode.posicion.y + offsetY));
 
-                // Store target positions as custom properties (don't use fx/fy to avoid fixing)
-                node.targetX = this.xScale(targetX);
-                node.targetY = this.yScale(targetY);
+                const pixelTargetX = this.xScale(normalizedTargetX);
+                const pixelTargetY = this.yScale(normalizedTargetY);
 
-                // Clear any existing fx/fy to allow free movement
-                delete node.fx;
-                delete node.fy;
+                // Usamos propiedades personalizadas, NO fx/fy
+                node.targetX = pixelTargetX;
+                node.targetY = pixelTargetY;
+
+                // fx y fy deben ser null para permitir que la física actúe
+                node.fx = null;
+                node.fy = null;
             }
         });
 
-        // Attractor behavior: target positions pull nodes while repulsion separates them
+        // Configuración de la simulación armonizada con renderNodes
         this.simulation
-            .force('x', d3.forceX(d => {
-                // d.targetX is already in pixel coordinates, constrain normalized version
-                const normalizedTargetX = this.xScale.invert(d.targetX);
-                const constrainedX = Math.max(-0.9, Math.min(0.9, normalizedTargetX));
-                return this.xScale(constrainedX);
-            }).strength(0.035)) // Gentler attraction for natural clustering
-            .force('y', d3.forceY(d => {
-                // d.targetY is already in pixel coordinates, constrain normalized version
-                const normalizedTargetY = this.yScale.invert(d.targetY);
-                const constrainedY = Math.max(-0.9, Math.min(0.9, normalizedTargetY));
-                return this.yScale(constrainedY);
-            }).strength(0.035)) // Gentler attraction for natural clustering
-            .force('charge', d3.forceManyBody()
-                .strength(-this.forceStrength * 60) // Moderate repulsion
-                .distanceMax(100) // Standard distance
+            // A. Fuerza de Posicionamiento (El "Elástico" hacia su lugar ideal)
+            .force('x', d3.forceX(d => d.targetX).strength(0.3))
+            .force('y', d3.forceY(d => d.targetY).strength(0.3))
+
+            // B. Fuerza de Colisión (El "Escudo" personal)
+            .force('collision', d3.forceCollide()
+                .radius(d => {
+                    const area = getNodeSize(d.tipo);
+                    const visualRadius = Math.sqrt(area / Math.PI);
+                    return visualRadius + 15;
+                })
+                .strength(0.9)
+                .iterations(3)
             )
-            .alpha(0.6) // Moderate initial energy for gentle start
-            .alphaDecay(0.025) // Faster decay for quicker convergence
+
+            // C. Fuerza de Carga (Repulsión global suave)
+            .force('charge', d3.forceManyBody()
+                .strength(-50)
+                .distanceMax(150)
+            )
+            .alpha(1) // Energía inicial completa
+            .alphaDecay(0.05) // Decaimiento más rápido
             .restart();
 
-        // Stop simulation after convergence
-        setTimeout(() => {
-            this.simulation.alpha(0).restart();
-        }, 6000); // Very long duration (6 seconds) for maximum convergence
-
-        // Debug logging for force balance analysis
-        console.log('🔧 FORCE SIMULATION PARAMETERS:');
-        console.log(`  - Centering strength: 0.035 (gentle attraction)`);
-        console.log(`  - Charge strength: ${-this.forceStrength * 60} (moderate repulsion)`);
-        console.log(`  - Initial alpha: 0.6 (moderate energy)`);
-        console.log(`  - Alpha decay: 0.025 (faster convergence)`);
-        console.log(`  - Border constraints: [-0.9, 0.9]`);
-
-        // Log initial vs target positions for first few nodes
-        console.log('📍 POSITION ANALYSIS (first 3 nodes):');
-        this.simulation.nodes().slice(0, 3).forEach((node, i) => {
-            const currentNormalizedX = this.xScale.invert(node.x);
-            const currentNormalizedY = this.yScale.invert(node.y);
-            const targetNormalizedX = this.xScale.invert(node.targetX);
-            const targetNormalizedY = this.yScale.invert(node.targetY);
-
-            console.log(`  ${node.nombre}:`);
-            console.log(`    Current: (${currentNormalizedX.toFixed(3)}, ${currentNormalizedY.toFixed(3)})`);
-            console.log(`    Target:  (${targetNormalizedX.toFixed(3)}, ${targetNormalizedY.toFixed(3)})`);
-            console.log(`    Distance: ${Math.sqrt((currentNormalizedX - targetNormalizedX)**2 + (currentNormalizedY - targetNormalizedY)**2).toFixed(3)}`);
+        // Finalización
+        this.simulation.on('end', () => {
+            console.log('✅ Transición estabilizada');
         });
 
-        console.log('✅ Nodes transitioning with force simulation');
+        console.log('✅ Nodes transitioning with harmonized force simulation');
     }
 
     /**
