@@ -1,22 +1,6 @@
 [
   {
-    "preset": "equity-emphasis",
-    "normalization": "percentile",
-    "initialOverlaps": 0,
-    "minDistance": 0.25712973861329,
-    "avgDistance": 1.1857052962950931,
-    "overlappingPairs": []
-  },
-  {
-    "preset": "growth-emphasis",
-    "normalization": "percentile",
-    "initialOverlaps": 0,
-    "minDistance": 0.25712973861329,
-    "avgDistance": 1.1857052962950931,
-    "overlappingPairs": []
-  },
-  {
-    "preset": "base",
+    "preset": "pragmatic-emphasis",
     "normalization": "percentile",
     "initialOverlaps": 0,
     "minDistance": 0.2571297386132899,
@@ -32,27 +16,51 @@
     "overlappingPairs": []
   },
   {
-    "preset": "market-emphasis",
-    "normalization": "percentile",
-    "initialOverlaps": 0,
-    "minDistance": 0.2571297386132899,
-    "avgDistance": 1.173028590537297,
-    "overlappingPairs": []
-  },
-  {
-    "preset": "historical-emphasis",
-    "normalization": "percentile",
-    "initialOverlaps": 0,
-    "minDistance": 0.2571297386132899,
-    "avgDistance": 1.173028590537297,
-    "overlappingPairs": []
+    "preset": "state-emphasis",
+    "normalization": "zscore",
+    "initialOverlaps": 2,
+    "minDistance": 0.002371690879594879,
+    "avgDistance": 1.4666470510951166,
+    "overlappingPairs": [
+      [
+        "marxista",
+        "feminista",
+        0.002371690879594879
+      ],
+      [
+        "neoclasica",
+        "austriaca",
+        0.0334942562953614
+      ]
+    ]
   },
   {
     "preset": "pragmatic-emphasis",
-    "normalization": "percentile",
-    "initialOverlaps": 0,
-    "minDistance": 0.2571297386132899,
-    "avgDistance": 1.1799106480737256,
-    "overlappingPairs": []
+    "normalization": "zscore",
+    "initialOverlaps": 4,
+    "minDistance": 0,
+    "avgDistance": 1.479800586800021,
+    "overlappingPairs": [
+      [
+        "marxista",
+        "feminista",
+        0
+      ],
+      [
+        "clasica",
+        "neoclasica",
+        0.08382408003895214
+      ],
+      [
+        "clasica",
+        "austriaca",
+        0.1397068000649203
+      ],
+      [
+        "neoclasica",
+        "austriaca",
+        0.05588272002596817
+      ]
+    ]
   }
 ]
