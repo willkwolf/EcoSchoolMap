@@ -37,8 +37,8 @@ async function init() {
     console.log('Initializing app...');
 
     try {
-        // Load initial variant data (base-none) with calculated positions
-        baseData = await loadVariantData('base', 'none');
+        // Load initial variant data (base-percentile) with calculated positions
+        baseData = await loadVariantData('base', 'percentile');
         console.log('Initial data loaded:', baseData);
 
         // Initialize D3 renderer
