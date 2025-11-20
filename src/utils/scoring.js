@@ -77,8 +77,8 @@ const SCORES_MOTOR = {
 const SCORES_POLITICA = {
     'laissez_faire': { x: -1.0, y: -0.5 },
     'fallos_mercado': { x: -0.2, y: 0.0 },
-    'welfare_state': { x: 0.5, y: 0.6 },
-    'developmental_state': { x: 0.8, y: -0.8 },
+    'estado_del_bienestar': { x: 0.5, y: 0.6 },
+    'estado_desarrollista': { x: 0.8, y: -0.8 },
     'planificacion_central': { x: 1.0, y: 0.5 }
 };
 
