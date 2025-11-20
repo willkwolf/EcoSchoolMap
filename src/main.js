@@ -74,6 +74,9 @@ function setupVariantControls() {
     const selectAllBtn = document.getElementById('select-all-transitions');
     const deselectAllBtn = document.getElementById('deselect-all-transitions');
 
+    // Collision toggle
+    const collisionToggle = document.getElementById('collision-toggle');
+
     const loadAndUpdateVariant = async () => {
         if (isLoadingVariant) {
             return; // Prevent multiple simultaneous loads
@@ -147,6 +150,13 @@ function setupVariantControls() {
 
     presetDropdown.addEventListener('change', loadAndUpdateVariant);
     normalizationDropdown.addEventListener('change', loadAndUpdateVariant);
+
+    // Collision toggle event listener
+    collisionToggle.addEventListener('change', () => {
+        const enabled = collisionToggle.checked;
+        mapRenderer.setCollisionEnabled(enabled);
+        console.log(`Collision forces ${enabled ? 'enabled' : 'disabled'}`);
+    });
 
     // Transitions visibility control with checkboxes
     const updateTransitionVisibility = () => {
