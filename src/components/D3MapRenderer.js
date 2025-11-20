@@ -56,8 +56,8 @@ export class D3MapRenderer {
 
         // Force simulation properties
         this.simulation = null;
-        this.forceStrength = 0.1; // Repulsion strength
-        this.collisionRadius = 25; // Minimum distance between nodes
+        this.forceStrength = 0.15; // Repulsion strength (increased 150%)
+        this.collisionRadius = 40; // Minimum distance between nodes (increased 150%)
 
         this.init();
     }
