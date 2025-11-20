@@ -58,7 +58,7 @@ export class D3MapRenderer {
         this.simulation = null;
         this.forceStrength = 0.12; // Reduced repulsion strength for better stability
         this.collisionRadius = 45; // Increased collision radius for better separation
-        this.collisionEnabled = true; // Default: collisions enabled
+        this.collisionEnabled = false; // Default: collisions disabled
 
         this.init();
     }
@@ -164,16 +164,15 @@ export class D3MapRenderer {
      * Restart the force simulation with current settings
      */
     restartSimulation() {
-        if (this.simulation && this.simulation.nodes().length > 0) {
-            // Reconfigure forces
+        const nodes = this.simulation.nodes();
+        if (!nodes || nodes.length === 0) return;
+
+        if (this.collisionEnabled) {
+            // Activar simulación con colisiones
             this.simulation
                 .force('x', d3.forceX(d => d.targetX).strength(0.3))
                 .force('y', d3.forceY(d => d.targetY).strength(0.3))
-                .force('charge', d3.forceManyBody().strength(-50).distanceMax(150));
-
-            // Conditionally add/remove collision force
-            if (this.collisionEnabled) {
-                this.simulation.force('collision', d3.forceCollide()
+                .force('collision', d3.forceCollide()
                     .radius(d => {
                         const area = getNodeSize(d.tipo);
                         const visualRadius = Math.sqrt(area / Math.PI);
@@ -181,18 +180,32 @@ export class D3MapRenderer {
                     })
                     .strength(0.9)
                     .iterations(3)
-                );
-            } else {
-                this.simulation.force('collision', null); // Remove collision force
-            }
-
-            // Restart with moderate energy
-            this.simulation.alpha(0.6).restart();
+                )
+                .force('charge', d3.forceManyBody().strength(-50).distanceMax(150))
+                .alpha(0.6)
+                .alphaDecay(0.05)
+                .restart();
 
             // Stop after convergence
             setTimeout(() => {
                 this.simulation.alpha(0).restart();
-            }, 4000); // Shorter for toggle responsiveness
+            }, 4000);
+        } else {
+            // Desactivar simulación: resetear posiciones a targets
+            this.simulation.stop();
+
+            // Resetear posiciones visuales a targets
+            const zoomGroup = this.zoomGroup;
+            if (zoomGroup) {
+                nodes.forEach(node => {
+                    const element = zoomGroup.select(`.node.${node.id}`);
+                    if (!element.empty()) {
+                        element.attr('transform', `translate(${node.targetX},${node.targetY})`);
+                        node.x = node.targetX;
+                        node.y = node.targetY;
+                    }
+                });
+            }
         }
     }
 
@@ -358,32 +371,37 @@ export class D3MapRenderer {
         // (Tu código de agregar símbolos y textos se mantiene igual aquí...)
         this.appendNodeVisuals(nodeElements); // Asumo que moviste esto a una fn auxiliar para limpieza
 
-        // 3. CONFIGURACIÓN DE LA SIMULACIÓN
-        this.simulation
-            .nodes(nodeData)
-            // A. Fuerza de Posicionamiento (El "Elástico" hacia su lugar ideal)
-            .force('x', d3.forceX(d => d.targetX).strength(0.3))
-            .force('y', d3.forceY(d => d.targetY).strength(0.3))
+        // 3. CONFIGURACIÓN DE LA SIMULACIÓN (Solo si colisiones activadas)
+        if (this.collisionEnabled) {
+            this.simulation
+                .nodes(nodeData)
+                // A. Fuerza de Posicionamiento (El "Elástico" hacia su lugar ideal)
+                .force('x', d3.forceX(d => d.targetX).strength(0.3))
+                .force('y', d3.forceY(d => d.targetY).strength(0.3))
 
-            // B. Fuerza de Colisión (El "Escudo" personal) - Condicional
-            .force('collision', this.collisionEnabled ? d3.forceCollide()
-                .radius(d => {
-                    const area = getNodeSize(d.tipo);
-                    const visualRadius = Math.sqrt(area / Math.PI);
-                    return visualRadius + 15;
-                })
-                .strength(0.9)
-                .iterations(3)
-            : null) // Remove if disabled
+                // B. Fuerza de Colisión (El "Escudo" personal)
+                .force('collision', d3.forceCollide()
+                    .radius(d => {
+                        const area = getNodeSize(d.tipo);
+                        const visualRadius = Math.sqrt(area / Math.PI);
+                        return visualRadius + 15;
+                    })
+                    .strength(0.9)
+                    .iterations(3)
+                )
 
-            // C. Fuerza de Carga (Repulsión global suave para "airear" el gráfico)
-            .force('charge', d3.forceManyBody()
-                .strength(-50)
-                .distanceMax(150)
-            )
-            .alpha(1) // Energía inicial completa
-            .alphaDecay(0.05) // Decaimiento más rápido
-            .restart();
+                // C. Fuerza de Carga (Repulsión global suave para "airear" el gráfico)
+                .force('charge', d3.forceManyBody()
+                    .strength(-50)
+                    .distanceMax(150)
+                )
+                .alpha(1) // Energía inicial completa
+                .alphaDecay(0.05) // Decaimiento más rápido
+                .restart();
+        } else {
+            // Sin simulación: solo posicionar en targets
+            this.simulation.nodes(nodeData).stop();
+        }
 
         // 4. MANEJO DEL TICK (Optimizado)
         this.simulation.on('tick', () => {
@@ -506,38 +524,45 @@ export class D3MapRenderer {
             }
         });
 
-        // Configuración de la simulación armonizada con renderNodes
-        this.simulation
-            // A. Fuerza de Posicionamiento (El "Elástico" hacia su lugar ideal)
-            .force('x', d3.forceX(d => d.targetX).strength(0.3))
-            .force('y', d3.forceY(d => d.targetY).strength(0.3))
+        // Configuración de la simulación solo si colisiones activadas
+        if (this.collisionEnabled) {
+            this.simulation
+                // A. Fuerza de Posicionamiento (El "Elástico" hacia su lugar ideal)
+                .force('x', d3.forceX(d => d.targetX).strength(0.3))
+                .force('y', d3.forceY(d => d.targetY).strength(0.3))
 
-            // B. Fuerza de Colisión (El "Escudo" personal) - Condicional
-            .force('collision', this.collisionEnabled ? d3.forceCollide()
-                .radius(d => {
-                    const area = getNodeSize(d.tipo);
-                    const visualRadius = Math.sqrt(area / Math.PI);
-                    return visualRadius + 15;
-                })
-                .strength(0.9)
-                .iterations(3)
-            : null)
+                // B. Fuerza de Colisión (El "Escudo" personal)
+                .force('collision', d3.forceCollide()
+                    .radius(d => {
+                        const area = getNodeSize(d.tipo);
+                        const visualRadius = Math.sqrt(area / Math.PI);
+                        return visualRadius + 15;
+                    })
+                    .strength(0.9)
+                    .iterations(3)
+                )
 
-            // C. Fuerza de Carga (Repulsión global suave)
-            .force('charge', d3.forceManyBody()
-                .strength(-50)
-                .distanceMax(150)
-            )
-            .alpha(1) // Energía inicial completa
-            .alphaDecay(0.05) // Decaimiento más rápido
-            .restart();
+                // C. Fuerza de Carga (Repulsión global suave)
+                .force('charge', d3.forceManyBody()
+                    .strength(-50)
+                    .distanceMax(150)
+                )
+                .alpha(1)
+                .alphaDecay(0.05)
+                .restart();
 
-        // Finalización
-        this.simulation.on('end', () => {
-            console.log('✅ Transición estabilizada');
-        });
+            // Finalización
+            this.simulation.on('end', () => {
+                console.log('✅ Transición estabilizada');
+            });
+        } else {
+            // Sin simulación: solo actualizar targets
+            this.simulation.nodes().forEach(node => {
+                // Mantener posiciones actuales si no hay simulación
+            });
+        }
 
-        console.log('✅ Nodes transitioning with harmonized force simulation');
+        console.log('✅ Nodes transitioning with conditional force simulation');
     }
 
     /**
