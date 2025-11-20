@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "prebuild": "node scripts/build_tools/copy_data.js",
     "build": "vite build",
     "postbuild": "node scripts/build_tools/clean_assets.js",
     "preview": "vite preview",

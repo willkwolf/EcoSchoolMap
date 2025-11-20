@@ -74,7 +74,7 @@
         "naturaleza_mundo": "incertidumbre",
         "ambito_economico": "distribucion",
         "motor_cambio": "politica_estado",
-        "politicas_preferidas": "welfare_state"
+        "politicas_preferidas": "estado_del_bienestar"
       },
       "posicion": {
         "x": 0.54,
@@ -101,7 +101,7 @@
         "naturaleza_mundo": "evolutivo_dinamico",
         "ambito_economico": "produccion",
         "motor_cambio": "politica_estado",
-        "politicas_preferidas": "developmental_state"
+        "politicas_preferidas": "estado_desarrollista"
       },
       "posicion": {
         "x": 0.57,
@@ -130,7 +130,7 @@
         "naturaleza_mundo": "incertidumbre",
         "ambito_economico": "consumo_demanda",
         "motor_cambio": "politica_estado",
-        "politicas_preferidas": "welfare_state"
+        "politicas_preferidas": "estado_del_bienestar"
       },
       "posicion": {
         "x": 0.52,
@@ -183,7 +183,7 @@
         "naturaleza_mundo": "evolutivo_dinamico",
         "ambito_economico": "produccion",
         "motor_cambio": "innovacion",
-        "politicas_preferidas": "developmental_state"
+        "politicas_preferidas": "estado_desarrollista"
       },
       "posicion": {
         "x": 0.34,
@@ -195,7 +195,7 @@
     },
     {
       "id": "conductista",
-      "nombre": "Conductista (Behavioral)",
+      "nombre": "Conductista",
       "categoria": "incentivos_nudges",
       "descripcion": "Economía basada en la psicología real de las decisiones",
       "autores": [
@@ -448,12 +448,6 @@
     },
     "cuadrantes": {
       "q1": {
-        "nombre": "Estado Débil + Equidad",
-        "escuelas": [
-          "conductista"
-        ]
-      },
-      "q2": {
         "nombre": "Estado Fuerte + Equidad",
         "escuelas": [
           "marxista",
@@ -461,22 +455,28 @@
           "ecologica"
         ]
       },
-      "q3": {
-        "nombre": "Estado Débil + Crecimiento",
+      "q2": {
+        "nombre": "Estado Débil + Equidad",
         "escuelas": [
-          "clasica",
-          "neoclasica",
-          "austriaca",
-          "schumpeteriana"
+          "conductista"
         ]
       },
-      "q4": {
+      "q3": {
         "nombre": "Estado Fuerte + Crecimiento",
         "escuelas": [
           "keynesiana",
           "institucionalista",
           "estado_emprendedor",
           "tradicion_desarrollista"
+        ]
+      },
+      "q4": {
+        "nombre": "Estado Débil + Crecimiento",
+        "escuelas": [
+          "clasica",
+          "neoclasica",
+          "austriaca",
+          "schumpeteriana"
         ]
       }
     }
