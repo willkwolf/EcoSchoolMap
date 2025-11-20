@@ -397,10 +397,10 @@ export class D3MapRenderer {
                     // Calculate visual radius from symbol area
                     const area = getNodeSize(d.tipo);
                     const visualRadius = Math.sqrt(area / Math.PI);
-                    return this.collisionRadius + visualRadius + 3; // +3 for padding
+                    return this.collisionRadius + visualRadius + 8; // +8 for generous padding
                 })
                 .strength(1.0) // Maximum collision strength
-                .iterations(8) // Even more iterations for better convergence
+                .iterations(10) // Maximum iterations for convergence
             )
             .force('charge', d3.forceManyBody()
                 .strength(-this.forceStrength * 120) // Slightly reduced repulsion
@@ -506,16 +506,21 @@ export class D3MapRenderer {
                 const targetX = Math.max(-1, Math.min(1, newNode.posicion.x + offsetX));
                 const targetY = Math.max(-1, Math.min(1, newNode.posicion.y + offsetY));
 
-                // Update target positions (force simulation will move towards these)
-                node.fx = this.xScale(targetX);
-                node.fy = this.yScale(targetY);
+                // Store target positions as custom properties (don't use fx/fy to avoid fixing)
+                node.targetX = this.xScale(targetX);
+                node.targetY = this.yScale(targetY);
+
+                // Clear any existing fx/fy to allow free movement
+                delete node.fx;
+                delete node.fy;
             }
         });
 
-        // Disable centering forces entirely - let collision and charge forces work
+        // Minimize interference - only collision should work
         this.simulation
-            .force('x', null) // Disable centering forces
-            .force('y', null) // Disable centering forces
+            .force('x', d3.forceX(d => d.targetX).strength(0.005)) // Minimal centering
+            .force('y', d3.forceY(d => d.targetY).strength(0.005)) // Minimal centering
+            .force('charge', d3.forceManyBody().strength(0)) // Disable charge force
             .alpha(1.0) // Maximum initial energy
             .alphaDecay(0.005) // Extremely slow decay for maximum convergence
             .restart();
