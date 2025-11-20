@@ -119,47 +119,6 @@ export function calculatePositions(schools, presetName = 'base', normalizationMe
     return rawPositions;
 }
 
-/**
- * Calculate position for a single school
- * @param {Object} descriptors - School descriptors
- * @param {Object} weights - Weight configuration
- * @returns {Object} {x, y} position
- */
-function calculateSchoolPosition(descriptors, weights) {
-    let xWeightedSum = 0.0;
-    let yWeightedSum = 0.0;
-
-    // Map data keys to scoring keys
-    const keyMapping = {
-        'economia': 'concepcion_economia',
-        'humano': 'concepcion_humano',
-        'mundo': 'naturaleza_mundo',
-        'ambito': 'ambito_economico',
-        'motor': 'motor_cambio',
-        'politica': 'politicas_preferidas'
-    };
-
-    // Calculate weighted sum for each dimension
-    for (const [scoreKey, scoreDict] of Object.entries(SCORE_MAPPINGS)) {
-        const dataKey = keyMapping[scoreKey];
-        const descriptorValue = descriptors[dataKey];
-
-        if (descriptorValue && scoreDict[descriptorValue]) {
-            const scores = scoreDict[descriptorValue];
-            const weight = weights.x[scoreKey]; // Use x weights for x calculation
-            xWeightedSum += scores.x * weight;
-
-            const yWeight = weights.y[scoreKey]; // Use y weights for y calculation
-            yWeightedSum += scores.y * yWeight;
-        }
-    }
-
-    // Clip to [-1, 1] range (same as Python version)
-    const xFinal = Math.max(-1.0, Math.min(1.0, xWeightedSum));
-    const yFinal = Math.max(-1.0, Math.min(1.0, yWeightedSum));
-
-    return { x: xFinal, y: yFinal };
-}
 
 /**
  * Apply normalization to a set of positions
@@ -275,4 +234,54 @@ export function getAvailablePresets() {
  */
 export function getWeightPreset(presetName) {
     return WEIGHT_PRESETS[presetName] || WEIGHT_PRESETS['base'];
+}
+
+/**
+ * Calculate position for a single school with strict guardrails
+ */
+function calculateSchoolPosition(descriptors, weights) {
+    let xWeightedSum = 0.0;
+    let yWeightedSum = 0.0;
+    let totalWeightX = 0.0; // Para normalizar si los pesos no suman 1.0 exacto
+    let totalWeightY = 0.0;
+
+    const keyMapping = {
+        'economia': 'concepcion_economia',
+        'humano': 'concepcion_humano',
+        'mundo': 'naturaleza_mundo',
+        'ambito': 'ambito_economico',
+        'motor': 'motor_cambio',
+        'politica': 'politicas_preferidas'
+    };
+
+    for (const [scoreKey, scoreDict] of Object.entries(SCORE_MAPPINGS)) {
+        const dataKey = keyMapping[scoreKey];
+        const descriptorValue = descriptors[dataKey];
+
+        // Guardrail: Solo sumar si el descriptor es válido
+        if (descriptorValue && scoreDict[descriptorValue]) {
+            const scores = scoreDict[descriptorValue];
+            
+            const wX = weights.x[scoreKey];
+            const wY = weights.y[scoreKey];
+
+            xWeightedSum += scores.x * wX;
+            yWeightedSum += scores.y * wY;
+
+            totalWeightX += wX;
+            totalWeightY += wY;
+        }
+    }
+
+    // Guardrail: Normalización interna (Si los pesos suman 0.95 o 1.05, ajustamos a 1.0)
+    // Esto asegura consistencia matemática rigurosa.
+    const finalX = totalWeightX > 0 ? xWeightedSum / totalWeightX : 0;
+    const finalY = totalWeightY > 0 ? yWeightedSum / totalWeightY : 0;
+
+    // Guardrail: Hard Clipping [-1, 1]
+    // El centro exacto [0,0] representa la máxima ambigüedad o hibridez.
+    return { 
+        x: Math.max(-1.0, Math.min(1.0, finalX)), 
+        y: Math.max(-1.0, Math.min(1.0, finalY)) 
+    };
 }
