@@ -239,7 +239,7 @@ export class D3MapRenderer {
             .attr('font-size', '14px')
             .attr('fill', '#2c3e50')
             .attr('transform', `rotate(-90, 0, 0)`)
-            .text('Objetivo Socioeconómico: ← Productividad y Crecimiento | Equidad y Sostenibilidad →');
+            .text('Objetivo Socioeconómico: Productividad y Crecimiento ↓ | Equidad y Sostenibilidad ↑');
 
         // Mobile axis labels (hidden on desktop)
         axesGroup.append('text')
@@ -259,7 +259,7 @@ export class D3MapRenderer {
             .attr('font-size', '12px')
             .attr('fill', '#2c3e50')
             .attr('transform', `rotate(-90, 0, 0)`)
-            .text('← Crecimiento | Equidad →');
+            .text('Crecimiento ↓ | Equidad ↑');
     }
 
     /**
@@ -413,7 +413,25 @@ export class D3MapRenderer {
         let tickCount = 0;
         this.simulation.on('tick', () => {
             tickCount++;
+
+            // Enforce safe border constraints [-0.9, 0.9]
+            this.simulation.nodes().forEach(node => {
+                const normalizedX = this.xScale.invert(node.x);
+                const normalizedY = this.yScale.invert(node.y);
+
+                // Constrain to safe borders
+                const constrainedX = Math.max(-0.9, Math.min(0.9, normalizedX));
+                const constrainedY = Math.max(-0.9, Math.min(0.9, normalizedY));
+
+                // Update pixel positions
+                node.x = this.xScale(constrainedX);
+                node.y = this.yScale(constrainedY);
+            });
+
             nodeElements.attr('transform', d => `translate(${d.x},${d.y})`);
+
+            // Update transition arrows to follow moving nodes
+            this.updateTransitionsDuringMovement();
 
             // Debug: check for overlaps every 10 ticks
             if (tickCount % 10 === 0) {
@@ -519,13 +537,24 @@ export class D3MapRenderer {
             }
         });
 
-        // Minimize interference - only collision should work
+        // Attractor behavior: target positions pull nodes while repulsion separates them
         this.simulation
-            .force('x', d3.forceX(d => d.targetX).strength(0.005)) // Minimal centering
-            .force('y', d3.forceY(d => d.targetY).strength(0.005)) // Minimal centering
-            .force('charge', d3.forceManyBody().strength(0)) // Disable charge force
+            .force('x', d3.forceX(d => {
+                // Constrain to safe border [-0.9, 0.9] with stronger attraction near edges
+                const constrainedX = Math.max(-0.9, Math.min(0.9, d.targetX));
+                return this.xScale(constrainedX);
+            }).strength(0.08)) // Stronger attraction to target positions
+            .force('y', d3.forceY(d => {
+                // Constrain to safe border [-0.9, 0.9] with stronger attraction near edges
+                const constrainedY = Math.max(-0.9, Math.min(0.9, d.targetY));
+                return this.yScale(constrainedY);
+            }).strength(0.08)) // Stronger attraction to target positions
+            .force('charge', d3.forceManyBody()
+                .strength(-this.forceStrength * 80) // Reduced repulsion for balance
+                .distanceMax(120) // Increased distance
+            )
             .alpha(1.0) // Maximum initial energy
-            .alphaDecay(0.005) // Extremely slow decay for maximum convergence
+            .alphaDecay(0.008) // Balanced decay
             .restart();
 
         // Stop simulation after convergence
@@ -579,6 +608,56 @@ export class D3MapRenderer {
                     .transition()
                     .duration(duration)
                     .ease(easing)
+                    .attr('x', cx)
+                    .attr('y', cy);
+            }
+        });
+    }
+
+    /**
+     * Update transition arrows during node movement (called on each tick)
+     */
+    updateTransitionsDuringMovement() {
+        if (!this.data.transiciones) return;
+
+        // Get current node positions from the force simulation
+        const currentNodePositions = {};
+        this.simulation.nodes().forEach(node => {
+            // Convert pixel coordinates back to normalized coordinates for scaling
+            const normalizedX = this.xScale.invert(node.x);
+            const normalizedY = this.yScale.invert(node.y);
+            currentNodePositions[node.id] = { x: normalizedX, y: normalizedY };
+        });
+
+        this.data.transiciones.forEach(transition => {
+            const fromNodePos = currentNodePositions[transition.desde_nodo];
+            const toNodePos = currentNodePositions[transition.hacia_nodo];
+
+            if (!fromNodePos || !toNodePos) return;
+
+            // Use current positions for arrow endpoints
+            const x1 = this.xScale(fromNodePos.x);
+            const y1 = this.yScale(fromNodePos.y);
+            const x2 = this.xScale(toNodePos.x);
+            const y2 = this.yScale(toNodePos.y);
+
+            const dx = x2 - x1;
+            const dy = y2 - y1;
+            const cx = x1 + dx / 2;
+            const cy = y1 + dy / 2 - 30;
+
+            const currentPath = `M ${x1},${y1} Q ${cx},${cy} ${x2},${y2}`;
+
+            // Update arrow path immediately (no animation)
+            const arrow = this.zoomGroup.select(`.transition-arrow.${transition.id}`);
+            if (!arrow.empty()) {
+                arrow.attr('d', currentPath);
+            }
+
+            // Update label position immediately
+            const label = this.zoomGroup.select(`.transition-label.${transition.id}`);
+            if (!label.empty()) {
+                label
                     .attr('x', cx)
                     .attr('y', cy);
             }
