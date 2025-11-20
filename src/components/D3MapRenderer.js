@@ -433,23 +433,45 @@ export class D3MapRenderer {
             // Update transition arrows to follow moving nodes
             this.updateTransitionsDuringMovement();
 
-            // Debug: check for overlaps every 10 ticks
+            // Debug: check for overlaps and position changes every 10 ticks
             if (tickCount % 10 === 0) {
                 const currentPositions = {};
                 this.simulation.nodes().forEach(node => {
                     currentPositions[node.id] = { x: node.x, y: node.y };
                 });
                 const overlaps = this.detectOverlaps(currentPositions, 0.15);
+
+                // Check border constraint effectiveness
+                const borderViolations = this.simulation.nodes().filter(node => {
+                    const normX = this.xScale.invert(node.x);
+                    const normY = this.yScale.invert(node.y);
+                    return Math.abs(normX) > 0.9 || Math.abs(normY) > 0.9;
+                });
+
+                console.log(`Tick ${tickCount}: ${overlaps.length} overlaps, ${borderViolations.length} border violations`);
+
                 if (overlaps.length > 0) {
-                    console.log(`Tick ${tickCount}: ${overlaps.length} overlaps remaining`);
-                    // Show details of remaining overlaps
-                    overlaps.forEach(([id1, id2, dist]) => {
+                    console.log(`  Overlaps: ${overlaps.map(([id1, id2, dist]) => {
                         const node1 = this.data.nodos.find(n => n.id === id1);
                         const node2 = this.data.nodos.find(n => n.id === id2);
-                        console.log(`  ${node1.nombre} ↔ ${node2.nombre}: ${dist.toFixed(4)} (threshold: 0.15)`);
-                    });
-                } else if (tickCount % 50 === 0) {
-                    console.log(`Tick ${tickCount}: No overlaps detected`);
+                        return `${node1.nombre}↔${node2.nombre}:${dist.toFixed(3)}`;
+                    }).join(', ')}`);
+                }
+
+                if (borderViolations.length > 0) {
+                    console.log(`  Border violations: ${borderViolations.map(n => `${n.nombre}:(${this.xScale.invert(n.x).toFixed(2)},${this.yScale.invert(n.y).toFixed(2)})`).join(', ')}`);
+                }
+
+                // Show position changes for first node every 50 ticks
+                if (tickCount % 50 === 0 && this.simulation.nodes().length > 0) {
+                    const firstNode = this.simulation.nodes()[0];
+                    const currentNormX = this.xScale.invert(firstNode.x);
+                    const currentNormY = this.yScale.invert(firstNode.y);
+                    const targetNormX = this.xScale.invert(firstNode.targetX);
+                    const targetNormY = this.yScale.invert(firstNode.targetY);
+                    const distanceToTarget = Math.sqrt((currentNormX - targetNormX)**2 + (currentNormY - targetNormY)**2);
+
+                    console.log(`  ${firstNode.nombre} progress: ${distanceToTarget.toFixed(3)} from target (${targetNormX.toFixed(2)}, ${targetNormY.toFixed(2)}) -> (${currentNormX.toFixed(2)}, ${currentNormY.toFixed(2)})`);
                 }
             }
         });
@@ -540,27 +562,51 @@ export class D3MapRenderer {
         // Attractor behavior: target positions pull nodes while repulsion separates them
         this.simulation
             .force('x', d3.forceX(d => {
-                // Constrain to safe border [-0.9, 0.9] with stronger attraction near edges
-                const constrainedX = Math.max(-0.9, Math.min(0.9, d.targetX));
+                // d.targetX is already in pixel coordinates, constrain normalized version
+                const normalizedTargetX = this.xScale.invert(d.targetX);
+                const constrainedX = Math.max(-0.9, Math.min(0.9, normalizedTargetX));
                 return this.xScale(constrainedX);
-            }).strength(0.08)) // Stronger attraction to target positions
+            }).strength(0.035)) // Gentler attraction for natural clustering
             .force('y', d3.forceY(d => {
-                // Constrain to safe border [-0.9, 0.9] with stronger attraction near edges
-                const constrainedY = Math.max(-0.9, Math.min(0.9, d.targetY));
+                // d.targetY is already in pixel coordinates, constrain normalized version
+                const normalizedTargetY = this.yScale.invert(d.targetY);
+                const constrainedY = Math.max(-0.9, Math.min(0.9, normalizedTargetY));
                 return this.yScale(constrainedY);
-            }).strength(0.08)) // Stronger attraction to target positions
+            }).strength(0.035)) // Gentler attraction for natural clustering
             .force('charge', d3.forceManyBody()
-                .strength(-this.forceStrength * 80) // Reduced repulsion for balance
-                .distanceMax(120) // Increased distance
+                .strength(-this.forceStrength * 60) // Moderate repulsion
+                .distanceMax(100) // Standard distance
             )
-            .alpha(1.0) // Maximum initial energy
-            .alphaDecay(0.008) // Balanced decay
+            .alpha(0.6) // Moderate initial energy for gentle start
+            .alphaDecay(0.025) // Faster decay for quicker convergence
             .restart();
 
         // Stop simulation after convergence
         setTimeout(() => {
             this.simulation.alpha(0).restart();
         }, 6000); // Very long duration (6 seconds) for maximum convergence
+
+        // Debug logging for force balance analysis
+        console.log('🔧 FORCE SIMULATION PARAMETERS:');
+        console.log(`  - Centering strength: 0.035 (gentle attraction)`);
+        console.log(`  - Charge strength: ${-this.forceStrength * 60} (moderate repulsion)`);
+        console.log(`  - Initial alpha: 0.6 (moderate energy)`);
+        console.log(`  - Alpha decay: 0.025 (faster convergence)`);
+        console.log(`  - Border constraints: [-0.9, 0.9]`);
+
+        // Log initial vs target positions for first few nodes
+        console.log('📍 POSITION ANALYSIS (first 3 nodes):');
+        this.simulation.nodes().slice(0, 3).forEach((node, i) => {
+            const currentNormalizedX = this.xScale.invert(node.x);
+            const currentNormalizedY = this.yScale.invert(node.y);
+            const targetNormalizedX = this.xScale.invert(node.targetX);
+            const targetNormalizedY = this.yScale.invert(node.targetY);
+
+            console.log(`  ${node.nombre}:`);
+            console.log(`    Current: (${currentNormalizedX.toFixed(3)}, ${currentNormalizedY.toFixed(3)})`);
+            console.log(`    Target:  (${targetNormalizedX.toFixed(3)}, ${targetNormalizedY.toFixed(3)})`);
+            console.log(`    Distance: ${Math.sqrt((currentNormalizedX - targetNormalizedX)**2 + (currentNormalizedY - targetNormalizedY)**2).toFixed(3)}`);
+        });
 
         console.log('✅ Nodes transitioning with force simulation');
     }
