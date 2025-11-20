@@ -25,98 +25,59 @@ All presets with percentile normalization:
 
 This confirmed that overlaps are not caused by position calculation but by force simulation failure.
 
+## Root Cause Analysis
+
+**Primary Issue**: Z-score normalization creates exact position overlaps (e.g., Marxista and Feminista at distance 0.0000), and the force simulation lacks guardrails to prevent this.
+
+**Secondary Issue**: When switching presets, nodes are placed directly at target positions without displacement, so collision detection never triggers for overlapping nodes.
+
 ## Implemented Solutions
 
-### Parameter Adjustments in D3MapRenderer.js
+### 1. Guardrails: Random Micro-Offsets
+Added small random offsets (0.001 in normalized coordinates) to prevent exact overlaps:
 
-#### 1. Base Force Parameters
 ```javascript
-// BEFORE
-this.forceStrength = 0.15;
-this.collisionRadius = 40;
+// In renderNodes() and updateNodesWithTransition()
+const randomOffset = 0.001;
+const offsetX = (Math.random() - 0.5) * randomOffset;
+const offsetY = (Math.random() - 0.5) * randomOffset;
 
-// AFTER
+const targetX = Math.max(-1, Math.min(1, node.posicion.x + offsetX));
+const targetY = Math.max(-1, Math.min(1, node.posicion.y + offsetY));
+```
+
+### 2. Enhanced Force Simulation Parameters
+
+#### Base Parameters
+```javascript
 this.forceStrength = 0.12; // Reduced for stability
 this.collisionRadius = 45; // Increased for better separation
 ```
 
-#### 2. Force Simulation Setup (initForceSimulation)
+#### Collision Forces (Maximum Strength)
 ```javascript
-// BEFORE
-.force('collision', d3.forceCollide()
-    .radius(this.collisionRadius)
-    .strength(0.7)
-    .iterations(2)
-)
-
-// AFTER
-.force('collision', d3.forceCollide()
-    .radius(this.collisionRadius)
-    .strength(0.9) // Increased
-    .iterations(4) // Increased
-)
-```
-
-#### 3. Centering Forces
-```javascript
-// BEFORE
-.force('x', d3.forceX().strength(0.1))
-.force('y', d3.forceY().strength(0.1))
-
-// AFTER
-.force('x', d3.forceX().strength(0.05)) // Reduced
-.force('y', d3.forceY().strength(0.05)) // Reduced
-```
-
-#### 4. Node Rendering Forces
-```javascript
-// BEFORE
-.force('x', d3.forceX(d => d.fx).strength(0.3))
-.force('y', d3.forceY(d => d.fy).strength(0.3))
 .force('collision', d3.forceCollide()
     .radius(d => this.collisionRadius + getNodeSize(d.tipo) / 2)
-    .strength(0.8)
-    .iterations(3)
-)
-.force('charge', d3.forceManyBody()
-    .strength(-this.forceStrength * 150)
-    .distanceMax(80)
-)
-
-// AFTER
-.force('x', d3.forceX(d => d.fx).strength(0.1)) // Reduced
-.force('y', d3.forceY(d => d.fy).strength(0.1)) // Reduced
-.force('collision', d3.forceCollide()
-    .radius(d => this.collisionRadius + getNodeSize(d.tipo) / 2)
-    .strength(1.0) // Maximum
-    .iterations(5) // Increased
-)
-.force('charge', d3.forceManyBody()
-    .strength(-this.forceStrength * 120) // Reduced
-    .distanceMax(100) // Increased
+    .strength(1.0) // Maximum collision strength
+    .iterations(8) // Increased iterations for convergence
 )
 ```
 
-#### 5. Simulation Timing
+#### Reduced Centering Forces
 ```javascript
-// BEFORE
-.alpha(0.8)
-setTimeout(() => this.simulation.alpha(0).restart(), 2000);
-
-// AFTER
-.alpha(0.9) // Higher energy
-setTimeout(() => this.simulation.alpha(0).restart(), 3000); // Longer
+// Allow collision to dominate
+.force('x', d3.forceX(d => d.fx).strength(0.05))
+.force('y', d3.forceY(d => d.fy).strength(0.05))
 ```
 
-#### 6. Transition Timing
+#### Extended Simulation Time
 ```javascript
-// BEFORE
-.alpha(0.8).alphaDecay(0.02)
-setTimeout(() => this.simulation.alpha(0).restart(), 1500);
+// Initial rendering: 4 seconds
+setTimeout(() => this.simulation.alpha(0).restart(), 4000);
 
-// AFTER
-.alpha(0.9).alphaDecay(0.015) // Slower decay
-setTimeout(() => this.simulation.alpha(0).restart(), 2500); // Longer
+// Transitions: 3.5 seconds with maximum energy
+.alpha(1.0).alphaDecay(0.01)
+setTimeout(() => this.simulation.alpha(0).restart(), 3500);
 ```
 
 ## Key Improvements
