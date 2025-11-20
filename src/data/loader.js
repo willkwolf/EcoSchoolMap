@@ -36,6 +36,7 @@ export async function loadBaseData() {
         }
         const data = await response.json();
         console.log('✅ Base data loaded:', data.metadata);
+
         return data;
     } catch (error) {
         console.error('❌ Error loading base data:', error);
@@ -77,6 +78,13 @@ export function calculateVariant(baseData, preset = 'base', normalization = 'non
 
         // Calculate positions for all schools
         const positions = calculatePositions(baseData.nodos, preset, normalization);
+
+        // Debug: log some positions
+        console.log('Sample calculated positions:', {
+            marxista: positions['marxista'],
+            neoclasica: positions['neoclasica'],
+            keynesiana: positions['keynesiana']
+        });
 
         // Create variant data structure
         const variantData = {

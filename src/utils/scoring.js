@@ -129,15 +129,27 @@ function calculateSchoolPosition(descriptors, weights) {
     let xWeightedSum = 0.0;
     let yWeightedSum = 0.0;
 
+    // Map data keys to scoring keys
+    const keyMapping = {
+        'economia': 'concepcion_economia',
+        'humano': 'concepcion_humano',
+        'mundo': 'naturaleza_mundo',
+        'ambito': 'ambito_economico',
+        'motor': 'motor_cambio',
+        'politica': 'politicas_preferidas'
+    };
+
     // Calculate weighted sum for each dimension
-    for (const [key, scoreDict] of Object.entries(SCORE_MAPPINGS)) {
-        const descriptorValue = descriptors[key];
+    for (const [scoreKey, scoreDict] of Object.entries(SCORE_MAPPINGS)) {
+        const dataKey = keyMapping[scoreKey];
+        const descriptorValue = descriptors[dataKey];
+
         if (descriptorValue && scoreDict[descriptorValue]) {
             const scores = scoreDict[descriptorValue];
-            const weight = weights.x[key]; // Use x weights for x calculation
+            const weight = weights.x[scoreKey]; // Use x weights for x calculation
             xWeightedSum += scores.x * weight;
 
-            const yWeight = weights.y[key]; // Use y weights for y calculation
+            const yWeight = weights.y[scoreKey]; // Use y weights for y calculation
             yWeightedSum += scores.y * yWeight;
         }
     }

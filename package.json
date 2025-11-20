@@ -5,9 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "prebuild": "node scripts/build_tools/clean_assets.js",
     "build": "vite build",
     "preview": "vite preview",
-    "validate-data": "py scripts/validate_data_integrity.py"
+    "validate-data": "python scripts/data_validation/validate_data_integrity.py"
   },
   "repository": {
     "type": "git",
