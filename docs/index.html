@@ -108,65 +108,76 @@
         </div>
     </section>
 
-    <!-- Historical Timeline Section -->
-    <section id="timeline" class="timeline-section">
-        <div class="timeline-container">
-            <h2>Línea de Tiempo Histórica</h2>
-            <p class="intro-text">
-                Explora los hitos más importantes en el desarrollo del pensamiento económico desde 1776 hasta 2013.
-                Cada evento marcó un punto de inflexión en cómo entendemos y analizamos la economía.
-            </p>
-            <div class="timeline-grid">
-                <div class="timeline-item">
-                    <div class="timeline-year">1776</div>
-                    <h4>Adam Smith y la Economía Clásica</h4>
-                    <p>Publicación de "La Riqueza de las Naciones" - Fundación del pensamiento económico moderno</p>
+    <!-- Visualization Section -->
+    <section id="visualization" class="visualization-section">
+        <div class="vis-container">
+            <h2>Mapa Interactivo</h2>
+
+            <!-- Controls -->
+            <div class="controls">
+                <div class="control-group">
+                    <label for="preset-dropdown" title="Las perspectivas de peso alteran las posiciones de las escuelas para mostrar diferentes enfoques económicos">Perspectiva de Peso:</label>
+                    <select id="preset-dropdown">
+                        <option value="base" selected>Base (Original)</option>
+                        <option value="state-emphasis">Enfoque Estado</option>
+                        <option value="equity-emphasis">Enfoque Equidad</option>
+                        <option value="market-emphasis">Enfoque Mercado</option>
+                        <option value="growth-emphasis">Enfoque Crecimiento</option>
+                        <option value="historical-emphasis">Enfoque Historico</option>
+                        <option value="pragmatic-emphasis">Enfoque Pragmatico</option>
+                    </select>
                 </div>
-                <div class="timeline-item">
-                    <div class="timeline-year">1867</div>
-                    <h4>Marx y el Capital</h4>
-                    <p>Publicación de "El Capital" - Crítica radical al sistema capitalista</p>
+                <div class="control-group">
+                    <label for="normalization-dropdown" title="Los métodos de normalización cambian cómo se representan los valores en el mapa">Método de Normalización:</label>
+                    <select id="normalization-dropdown">
+                        <option value="percentile" selected>Percentil (Distribución Uniforme)</option>
+                        <option value="zscore">Puntaje-Z (Centrado Estadístico)</option>
+                        <option value="minmax">Min-Max (Rango Completo)</option>
+                        <option value="none">Crudo (Sin Normalización)</option>
+                    </select>
                 </div>
-                <div class="timeline-item">
-                    <div class="timeline-year">1870s</div>
-                    <h4>Revolución Neoclásica</h4>
-                    <p>Desarrollo del marginalismo y la teoría del equilibrio general</p>
+                <div class="control-group">
+                    <label title="Controla la visibilidad de las transiciones históricas entre escuelas">Transiciones Históricas:</label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="transition-muy_alta" checked>
+                            <span class="checkmark"></span>
+                            Muy Alta Confianza
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="transition-alta" checked>
+                            <span class="checkmark"></span>
+                            Alta Confianza
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="transition-media" checked>
+                            <span class="checkmark"></span>
+                            Media Confianza
+                        </label>
+                        <div class="checkbox-actions">
+                            <button type="button" id="select-all-transitions" class="checkbox-btn">Seleccionar Todas</button>
+                            <button type="button" id="deselect-all-transitions" class="checkbox-btn">Deseleccionar Todas</button>
+                        </div>
+                    </div>
                 </div>
-                <div class="timeline-item">
-                    <div class="timeline-year">1936</div>
-                    <h4>Keynes y la Revolución Keynesiana</h4>
-                    <p>Publicación de "Teoría General" - Intervención estatal en crisis económicas</p>
+                <div class="control-group">
+                    <button id="reset-zoom-btn" class="control-btn" title="Vuelve a la vista inicial del mapa">↺ Restablecer Zoom</button>
+                    <button id="download-png-btn" class="control-btn" title="Descarga el mapa como imagen PNG">⬇ Descargar PNG</button>
                 </div>
-                <div class="timeline-item">
-                    <div class="timeline-year">1940s</div>
-                    <h4>Escuela Austriaca en América</h4>
-                    <p>Exilio de economistas austriacos y expansión de sus ideas</p>
+            </div>
+
+            <!-- SVG Container -->
+            <div id="map-container" class="map-container">
+                <!-- D3.js will render here -->
+                <div id="loading-indicator" class="loading-indicator" style="display: none;">
+                    <div class="spinner"></div>
+                    <p>Cargando variante...</p>
                 </div>
-                <div class="timeline-item">
-                    <div class="timeline-year">1950s</div>
-                    <h4>Teoría del Desarrollo</h4>
-                    <p>Emergencia de la economía del desarrollo y el estructuralismo</p>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-year">1970s</div>
-                    <h4>Críticas al Keynesianismo</h4>
-                    <p>Estanflación y resurgimiento de ideas de libre mercado</p>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-year">1980s</div>
-                    <h4>Revolución Neoliberal</h4>
-                    <p>Consolidación del pensamiento de mercado bajo Reagan y Thatcher</p>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-year">1990s</div>
-                    <h4>Énfasis en Instituciones</h4>
-                    <p>Reconocimiento de la importancia de las instituciones en el desarrollo</p>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-year">2013</div>
-                    <h4>Economía Feminista</h4>
-                    <p>Consolidación como escuela de pensamiento reconocida</p>
-                </div>
+            </div>
+
+            <!-- Legend -->
+            <div id="legend-container" class="legend-container">
+                <!-- Will be populated by JavaScript -->
             </div>
         </div>
     </section>
@@ -267,76 +278,65 @@
         </div>
     </section>
 
-    <!-- Visualization Section -->
-    <section id="visualization" class="visualization-section">
-        <div class="vis-container">
-            <h2>Mapa Interactivo</h2>
-
-            <!-- Controls -->
-            <div class="controls">
-                <div class="control-group">
-                    <label for="preset-dropdown" title="Las perspectivas de peso alteran las posiciones de las escuelas para mostrar diferentes enfoques económicos">Perspectiva de Peso:</label>
-                    <select id="preset-dropdown">
-                        <option value="base" selected>Base (Original)</option>
-                        <option value="state-emphasis">Enfoque Estado</option>
-                        <option value="equity-emphasis">Enfoque Equidad</option>
-                        <option value="market-emphasis">Enfoque Mercado</option>
-                        <option value="growth-emphasis">Enfoque Crecimiento</option>
-                        <option value="historical-emphasis">Enfoque Historico</option>
-                        <option value="pragmatic-emphasis">Enfoque Pragmatico</option>
-                    </select>
+    <!-- Historical Timeline Section -->
+    <section id="timeline" class="timeline-section">
+        <div class="timeline-container">
+            <h2>Línea de Tiempo Histórica</h2>
+            <p class="intro-text">
+                Explora los hitos más importantes en el desarrollo del pensamiento económico desde 1776 hasta 2013.
+                Cada evento marcó un punto de inflexión en cómo entendemos y analizamos la economía.
+            </p>
+            <div class="timeline-grid">
+                <div class="timeline-item">
+                    <div class="timeline-year">1776</div>
+                    <h4>Adam Smith y la Economía Clásica</h4>
+                    <p>Publicación de "La Riqueza de las Naciones" - Fundación del pensamiento económico moderno</p>
                 </div>
-                <div class="control-group">
-                    <label for="normalization-dropdown" title="Los métodos de normalización cambian cómo se representan los valores en el mapa">Método de Normalización:</label>
-                    <select id="normalization-dropdown">
-                        <option value="percentile" selected>Percentil (Distribución Uniforme)</option>
-                        <option value="zscore">Puntaje-Z (Centrado Estadístico)</option>
-                        <option value="minmax">Min-Max (Rango Completo)</option>
-                        <option value="none">Crudo (Sin Normalización)</option>
-                    </select>
+                <div class="timeline-item">
+                    <div class="timeline-year">1867</div>
+                    <h4>Marx y el Capital</h4>
+                    <p>Publicación de "El Capital" - Crítica radical al sistema capitalista</p>
                 </div>
-                <div class="control-group">
-                    <label title="Controla la visibilidad de las transiciones históricas entre escuelas">Transiciones Históricas:</label>
-                    <div class="checkbox-group">
-                        <label class="checkbox-label">
-                            <input type="checkbox" id="transition-muy_alta" checked>
-                            <span class="checkmark"></span>
-                            Muy Alta Confianza
-                        </label>
-                        <label class="checkbox-label">
-                            <input type="checkbox" id="transition-alta" checked>
-                            <span class="checkmark"></span>
-                            Alta Confianza
-                        </label>
-                        <label class="checkbox-label">
-                            <input type="checkbox" id="transition-media" checked>
-                            <span class="checkmark"></span>
-                            Media Confianza
-                        </label>
-                        <div class="checkbox-actions">
-                            <button type="button" id="select-all-transitions" class="checkbox-btn">Seleccionar Todas</button>
-                            <button type="button" id="deselect-all-transitions" class="checkbox-btn">Deseleccionar Todas</button>
-                        </div>
-                    </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">1870s</div>
+                    <h4>Revolución Neoclásica</h4>
+                    <p>Desarrollo del marginalismo y la teoría del equilibrio general</p>
                 </div>
-                <div class="control-group">
-                    <button id="reset-zoom-btn" class="control-btn" title="Vuelve a la vista inicial del mapa">↺ Restablecer Zoom</button>
-                    <button id="download-png-btn" class="control-btn" title="Descarga el mapa como imagen PNG">⬇ Descargar PNG</button>
+                <div class="timeline-item">
+                    <div class="timeline-year">1936</div>
+                    <h4>Keynes y la Revolución Keynesiana</h4>
+                    <p>Publicación de "Teoría General" - Intervención estatal en crisis económicas</p>
                 </div>
-            </div>
-
-            <!-- SVG Container -->
-            <div id="map-container" class="map-container">
-                <!-- D3.js will render here -->
-                <div id="loading-indicator" class="loading-indicator" style="display: none;">
-                    <div class="spinner"></div>
-                    <p>Cargando variante...</p>
+                <div class="timeline-item">
+                    <div class="timeline-year">1940s</div>
+                    <h4>Escuela Austriaca en América</h4>
+                    <p>Exilio de economistas austriacos y expansión de sus ideas</p>
                 </div>
-            </div>
-
-            <!-- Legend -->
-            <div id="legend-container" class="legend-container">
-                <!-- Will be populated by JavaScript -->
+                <div class="timeline-item">
+                    <div class="timeline-year">1950s</div>
+                    <h4>Teoría del Desarrollo</h4>
+                    <p>Emergencia de la economía del desarrollo y el estructuralismo</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">1970s</div>
+                    <h4>Críticas al Keynesianismo</h4>
+                    <p>Estanflación y resurgimiento de ideas de libre mercado</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">1980s</div>
+                    <h4>Revolución Neoliberal</h4>
+                    <p>Consolidación del pensamiento de mercado bajo Reagan y Thatcher</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">1990s</div>
+                    <h4>Énfasis en Instituciones</h4>
+                    <p>Reconocimiento de la importancia de las instituciones en el desarrollo</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2013</div>
+                    <h4>Economía Feminista</h4>
+                    <p>Consolidación como escuela de pensamiento reconocida</p>
+                </div>
             </div>
         </div>
     </section>
