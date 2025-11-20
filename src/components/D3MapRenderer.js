@@ -424,6 +424,14 @@ export class D3MapRenderer {
                 const overlaps = this.detectOverlaps(currentPositions, 0.15);
                 if (overlaps.length > 0) {
                     console.log(`Tick ${tickCount}: ${overlaps.length} overlaps remaining`);
+                    // Show details of remaining overlaps
+                    overlaps.forEach(([id1, id2, dist]) => {
+                        const node1 = this.data.nodos.find(n => n.id === id1);
+                        const node2 = this.data.nodos.find(n => n.id === id2);
+                        console.log(`  ${node1.nombre} ↔ ${node2.nombre}: ${dist.toFixed(4)} (threshold: 0.15)`);
+                    });
+                } else if (tickCount % 50 === 0) {
+                    console.log(`Tick ${tickCount}: No overlaps detected`);
                 }
             }
         });
@@ -431,7 +439,24 @@ export class D3MapRenderer {
         // Stop simulation after convergence to prevent continuous movement
         setTimeout(() => {
             this.simulation.alpha(0).restart();
-        }, 4000); // Let it run for 4 seconds for maximum convergence
+
+            // Final check for overlaps
+            const finalPositions = {};
+            this.simulation.nodes().forEach(node => {
+                finalPositions[node.id] = { x: node.x, y: node.y };
+            });
+            const finalOverlaps = this.detectOverlaps(finalPositions, 0.15);
+            if (finalOverlaps.length > 0) {
+                console.log(`❌ FINAL RESULT: ${finalOverlaps.length} overlaps still remain after 6 seconds`);
+                finalOverlaps.forEach(([id1, id2, dist]) => {
+                    const node1 = this.data.nodos.find(n => n.id === id1);
+                    const node2 = this.data.nodos.find(n => n.id === id2);
+                    console.log(`  ${node1.nombre} ↔ ${node2.nombre}: ${dist.toFixed(4)}`);
+                });
+            } else {
+                console.log(`✅ FINAL RESULT: No overlaps detected - force simulation successful`);
+            }
+        }, 6000); // Let it run for 6 seconds for maximum convergence
 
         console.log('✅ Nodes rendered with force simulation');
     }
@@ -487,12 +512,12 @@ export class D3MapRenderer {
             }
         });
 
-        // Use very weak centering forces toward fx/fy positions
+        // Disable centering forces entirely - let collision and charge forces work
         this.simulation
-            .force('x', d3.forceX(d => d.fx).strength(0.02)) // Very weak toward target
-            .force('y', d3.forceY(d => d.fy).strength(0.02)) // Very weak toward target
+            .force('x', null) // Disable centering forces
+            .force('y', null) // Disable centering forces
             .alpha(1.0) // Maximum initial energy
-            .alphaDecay(0.01) // Very slow decay for maximum convergence
+            .alphaDecay(0.005) // Extremely slow decay for maximum convergence
             .restart();
 
         // Stop simulation after convergence
