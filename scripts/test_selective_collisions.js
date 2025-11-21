@@ -144,11 +144,16 @@ class SelectiveCollisionTester {
         const avgDisplacement = displacementValues.reduce((a, b) => a + b, 0) / displacementValues.length;
         const maxDisplacement = Math.max(...displacementValues);
 
+        // Check for boundary violations
+        const boundaryViolations = Object.values(collisionPositions).filter(pos =>
+            Math.abs(pos.x) > 1.0 || Math.abs(pos.y) > 1.0
+        ).length;
+
         // Check for issues
         const largeDisplacements = Object.entries(displacements).filter(([id, d]) => d > 0.1).length;
         const disappeared = Object.entries(displacements).filter(([id, d]) => d > 1.0).length;
 
-        console.log(`  ${preset}-${normalization}: Avg ${avgDisplacement.toFixed(3)}, Max ${maxDisplacement.toFixed(3)}, Large ${largeDisplacements}, Disappeared ${disappeared}`);
+        console.log(`  ${preset}-${normalization}: Avg ${avgDisplacement.toFixed(3)}, Max ${maxDisplacement.toFixed(3)}, Large ${largeDisplacements}, Disappeared ${disappeared}, Boundary violations ${boundaryViolations}`);
 
         return {
             variant: `${preset}-${normalization}`,
@@ -156,7 +161,8 @@ class SelectiveCollisionTester {
             maxDisplacement,
             largeDisplacements,
             disappeared,
-            passed: disappeared === 0 && largeDisplacements <= 2 // Allow some large for close pairs
+            boundaryViolations,
+            passed: disappeared === 0 && largeDisplacements <= 2 && boundaryViolations === 0 // No boundary violations allowed
         };
     }
 
@@ -206,7 +212,7 @@ class SelectiveCollisionTester {
             if (failed > 0) {
                 console.log('\n❌ Failed variants:');
                 results.filter(r => !r.passed).forEach(r => {
-                    console.log(`  ${r.variant}: ${r.error || `Large ${r.largeDisplacements}, Disappeared ${r.disappeared}`}`);
+                    console.log(`  ${r.variant}: ${r.error || `Large ${r.largeDisplacements}, Disappeared ${r.disappeared}, Boundary violations ${r.boundaryViolations}`}`);
                 });
             }
 
