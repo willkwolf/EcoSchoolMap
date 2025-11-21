@@ -152,51 +152,144 @@ export class D3MapRenderer {
 
     /**
      * Set collision forces enabled/disabled
-      * @param {boolean} enabled - Whether to enable collision forces
-      */
-     setCollisionEnabled(enabled) {
-         const wasEnabled = this.collisionEnabled;
-         this.collisionEnabled = enabled;
+       * @param {boolean} enabled - Whether to enable collision forces
+       */
+      setCollisionEnabled(enabled) {
+          const wasEnabled = this.collisionEnabled;
+          this.collisionEnabled = enabled;
 
-         // CRITICAL: Clear ALL existing event handlers FIRST to prevent race conditions
-         // during rapid toggling. Multiple handlers running simultaneously cause conflicts.
-         this.simulation.on('tick', null);
-         this.simulation.on('end', null);
+          // CRITICAL: Clear ALL existing event handlers FIRST to prevent race conditions
+          // during rapid toggling. Multiple handlers running simultaneously cause conflicts.
+          this.simulation.on('tick', null);
+          this.simulation.on('end', null);
 
-         if (enabled) {
-             // Enabling collisions: add forces and start simulation
-             this.enableCollisionForces();
-             this.setupTickHandler(); // Set up tick handler for collision mode
-             this.restartSimulation();
-         } else {
-             // Disabling collisions: remove forces, stop simulation, reset positions
-             this.disableCollisionForces();
-             this.simulation.stop();
-             this.resetNodesToTargets();
-             this.updateTransitionsToFinalPositions();
-         }
+          if (enabled) {
+              // Enabling collisions: apply immediate position adjustments
+              this.enableCollisionForces();
+              // No simulation restart needed - positions adjusted directly
+          } else {
+              // Disabling collisions: reset positions to targets
+              this.disableCollisionForces();
+              this.simulation.stop();
+              this.resetNodesToTargets();
+              this.updateTransitionsToFinalPositions();
+          }
 
-         console.log(`Collision forces ${enabled ? 'enabled' : 'disabled'}`);
-     }
+          console.log(`Collision resolution ${enabled ? 'enabled' : 'disabled'}`);
+      }
 
     /**
-     * Add collision forces to simulation with balanced parameters
-     * Strong positioning to minimize displacement, minimal collision for separation
+     * Detect pairs of nodes that are close enough to need collision forces
+     * @returns {Array} Array of [nodeId1, nodeId2] pairs that need repulsion
+     */
+    detectClosePairs() {
+        const nodes = this.simulation.nodes();
+        const closePairs = [];
+        const threshold = 0.15; // Normalized coordinate distance threshold
+
+        for (let i = 0; i < nodes.length; i++) {
+            for (let j = i + 1; j < nodes.length; j++) {
+                const node1 = nodes[i];
+                const node2 = nodes[j];
+
+                // Convert pixel positions back to normalized coordinates for distance calculation
+                const normX1 = this.xScale.invert(node1.x);
+                const normY1 = this.yScale.invert(node1.y);
+                const normX2 = this.xScale.invert(node2.x);
+                const normY2 = this.yScale.invert(node2.y);
+
+                const dx = normX1 - normX2;
+                const dy = normY1 - normY2;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+
+                if (distance < threshold) {
+                    closePairs.push([node1.id, node2.id, distance]);
+                }
+            }
+        }
+
+        console.log(`🔍 Detected ${closePairs.length} close pairs needing collision forces`);
+        if (closePairs.length > 0) {
+            closePairs.forEach(([id1, id2, dist]) => {
+                console.log(`  ${id1} ↔ ${id2}: ${dist.toFixed(3)}`);
+            });
+        }
+
+        return closePairs;
+    }
+
+    /**
+     * Apply selective collision resolution by directly adjusting positions of overlapping pairs
+     * No force simulation - immediate position adjustment for minimal disruption
      */
     enableCollisionForces() {
+        const closePairs = this.detectClosePairs();
+
+        if (closePairs.length > 0) {
+            console.log(`🔧 Applying immediate collision resolution for ${closePairs.length} pairs`);
+
+            const nodes = this.simulation.nodes();
+            const nodeMap = new Map(nodes.map(n => [n.id, n]));
+
+            closePairs.forEach(([id1, id2]) => {
+                const node1 = nodeMap.get(id1);
+                const node2 = nodeMap.get(id2);
+
+                if (node1 && node2) {
+                    const dx = node2.x - node1.x;
+                    const dy = node2.y - node1.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance > 0) {
+                        // Calculate required minimum distance (visual radii + small padding)
+                        const area1 = getNodeSize(node1.tipo);
+                        const area2 = getNodeSize(node2.tipo);
+                        const radius1 = Math.sqrt(area1 / Math.PI) + 3;
+                        const radius2 = Math.sqrt(area2 / Math.PI) + 3;
+                        const minDistance = radius1 + radius2;
+
+                        if (distance < minDistance) {
+                            const overlap = minDistance - distance;
+                            const adjustment = overlap * 0.5; // Move half the overlap distance
+
+                            // Move nodes apart along the line connecting their centers
+                            const moveX = (dx / distance) * adjustment;
+                            const moveY = (dy / distance) * adjustment;
+
+                            // Apply equal and opposite adjustments
+                            node1.x -= moveX;
+                            node1.y -= moveY;
+                            node2.x += moveX;
+                            node2.y += moveY;
+
+                            // Keep within bounds
+                            const minX = this.xScale(-0.95);
+                            const maxX = this.xScale(0.95);
+                            const minY = this.yScale(-0.95);
+                            const maxY = this.yScale(0.95);
+
+                            node1.x = Math.max(minX, Math.min(maxX, node1.x));
+                            node1.y = Math.max(minY, Math.min(maxY, node1.y));
+                            node2.x = Math.max(minX, Math.min(maxX, node2.x));
+                            node2.y = Math.max(minY, Math.min(maxY, node2.y));
+
+                            console.log(`  Adjusted ${id1} ↔ ${id2}: moved ${adjustment.toFixed(1)}px apart`);
+                        }
+                    }
+                }
+            });
+
+            // Update visual positions immediately
+            this.zoomGroup.selectAll('.node').attr('transform', d => `translate(${d.x},${d.y})`);
+            this.updateTransitionsToFinalPositions();
+        }
+
+        // No forces needed - positions adjusted directly
         this.simulation
-            .force('collision', d3.forceCollide()
-                .radius(d => {
-                    const area = getNodeSize(d.tipo);
-                    const visualRadius = Math.sqrt(area / Math.PI);
-                    return visualRadius + 3; // Tiny padding for minimal separation
-                })
-                .strength(0.15) // Slightly stronger collision for better separation
-                .iterations(2) // More iterations for convergence
-            )
-            // Strong positioning forces to keep nodes close to their target positions
-            .force('x', d3.forceX(d => d.targetX).strength(0.4))
-            .force('y', d3.forceY(d => d.targetY).strength(0.4));
+            .force('collision', null)
+            .force('selective-collision', null)
+            .force('x', null)
+            .force('y', null);
     }
 
     /**
@@ -205,6 +298,7 @@ export class D3MapRenderer {
     disableCollisionForces() {
         this.simulation
             .force('collision', null)
+            .force('selective-collision', null)
             .force('charge', null)
             .force('centerX', null)
             .force('centerY', null);
@@ -291,8 +385,11 @@ export class D3MapRenderer {
                 .force('y', d3.forceY(d => d.targetY).strength(0.3));
         }
 
+        // Use minimal alpha when collisions enabled to avoid global movement
+        const initialAlpha = this.collisionEnabled ? 0.1 : 0.6;
+
         this.simulation
-            .alpha(0.6)
+            .alpha(initialAlpha)
             .alphaDecay(0.05)
             .restart();
 
@@ -301,7 +398,7 @@ export class D3MapRenderer {
             setTimeout(() => {
                 this.simulation.alpha(0).restart();
                 this.updateTransitionsToFinalPositions();
-            }, 3000); // Timeout for convergence
+            }, 2000); // Shorter timeout for selective convergence
         }
     }
 
@@ -526,34 +623,19 @@ export class D3MapRenderer {
         // (Tu código de agregar símbolos y textos se mantiene igual aquí...)
         this.appendNodeVisuals(nodeElements); // Asumo que moviste esto a una fn auxiliar para limpieza
 
-        // 3. CONFIGURACIÓN DE LA SIMULACIÓN (Solo si colisiones activadas)
-        if (this.collisionEnabled) {
-            this.simulation
-                .nodes(nodeData)
-                // A. Fuerza de Posicionamiento (Más suave cuando colisiones activas)
-                .force('x', d3.forceX(d => d.targetX).strength(0.15))
-                .force('y', d3.forceY(d => d.targetY).strength(0.15))
+        // 3. CONFIGURACIÓN DE LA SIMULACIÓN
+        this.simulation.nodes(nodeData);
 
-                // B. Fuerza de Colisión (Mínima)
-                .force('collision', d3.forceCollide()
-                    .radius(d => {
-                        const area = getNodeSize(d.tipo);
-                        const visualRadius = Math.sqrt(area / Math.PI);
-                        return visualRadius + 3;
-                    })
-                    .strength(0.1)
-                    .iterations(1)
-                )
-                // C. Sin fuerza de carga - solo colisión mínima
-                // D. Centrado mínimo para estabilidad
-                .force('centerX', d3.forceX(d => d.targetX).strength(0.05))
-                .force('centerY', d3.forceY(d => d.targetY).strength(0.05))
-                .alpha(0.6) // Energía inicial reducida para convergencia más suave
-                .alphaDecay(0.08) // Decaimiento más lento para mejor estabilidad
+        if (this.collisionEnabled) {
+            // Selective collision forces: only apply to close pairs
+            this.enableCollisionForces();
+            this.simulation
+                .alpha(0.6)
+                .alphaDecay(0.08)
                 .restart();
         } else {
             // Sin simulación: solo posicionar en targets
-            this.simulation.nodes(nodeData).stop();
+            this.simulation.stop();
         }
 
         // 4. MANEJO DEL TICK (Optimizado)
@@ -907,6 +989,38 @@ export class D3MapRenderer {
         }
 
         return overlaps;
+    }
+
+    /**
+     * Capture current node positions for testing (normalized coordinates)
+     * @returns {Object} Object with node IDs as keys and {x, y} positions as values
+     */
+    capturePositions() {
+        const positions = {};
+        this.simulation.nodes().forEach(node => {
+            const normalizedX = this.xScale.invert(node.x);
+            const normalizedY = this.yScale.invert(node.y);
+            positions[node.id] = {
+                x: normalizedX,
+                y: normalizedY,
+                targetX: this.xScale.invert(node.targetX),
+                targetY: this.yScale.invert(node.targetY)
+            };
+        });
+        return positions;
+    }
+
+    /**
+     * Export positions as JSON string for testing
+     * @returns {string} JSON string of current positions
+     */
+    exportPositionsForTest() {
+        const positions = this.capturePositions();
+        return JSON.stringify({
+            timestamp: new Date().toISOString(),
+            collisionEnabled: this.collisionEnabled,
+            positions: positions
+        }, null, 2);
     }
 
     /**
