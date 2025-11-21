@@ -36,34 +36,73 @@ export const WEIGHT_PRESETS = {
     }
 };
 
-// Scoring dictionaries (same as Python version)
+// Scoring dictionaries (updated to match current descriptors)
 const SCORES_ECONOMIA = {
     'clases_sociales': { x: 0.7, y: 0.5 },
     'individuos': { x: -0.9, y: -0.5 },
     'instituciones': { x: 0.3, y: 0.0 },
     'sistema_complejo': { x: 0.5, y: 0.2 },
-    'sistema_productivo': { x: 0.6, y: -0.6 }
+    'sistema_productivo': { x: 0.6, y: -0.6 },
+    'agentes_individuales': { x: -0.8, y: -0.4 },
+    'flujos_agregados': { x: 0.4, y: 0.1 },
+    'reglas_de_juego': { x: 0.2, y: -0.1 },
+    'sistema_evolutivo': { x: -0.3, y: -0.5 },
+    'ecosistema_innovacion': { x: 0.3, y: -0.4 },
+    'toma_decisiones_real': { x: -0.4, y: 0.2 },
+    'clases_factores': { x: -0.6, y: -0.7 },
+    'proceso_descubrimiento': { x: -0.7, y: -0.3 },
+    'subsistema_biosfera': { x: 0.5, y: 0.3 },
+    'sistema_productivo_nacional': { x: 0.7, y: -0.5 }
 };
 
 const SCORES_HUMANO = {
     'racional_egoista': { x: -0.8, y: -0.8 },
     'racional_limitada': { x: 0.2, y: 0.3 },
     'condicionado_clase': { x: 0.7, y: 0.7 },
-    'adaptable_cultural': { x: 0.1, y: 0.1 }
+    'adaptable_cultural': { x: 0.1, y: 0.1 },
+    'interdependiente': { x: 0.6, y: 0.6 },
+    'colaborativo': { x: 0.4, y: -0.2 },
+    'sesgado_heuristico': { x: -0.3, y: 0.4 },
+    'propension_intercambio': { x: -0.5, y: -0.6 },
+    'racional_maximizador': { x: -0.9, y: -0.5 },
+    'accion_intencional': { x: -0.6, y: -0.4 },
+    'ecodependiente': { x: 0.5, y: 0.4 },
+    'espiritus_animales': { x: 0.3, y: 0.2 }
 };
 
 const SCORES_MUNDO = {
     'equilibrio_cierto': { x: -0.7, y: -0.3 },
     'incertidumbre': { x: 0.4, y: 0.0 },
     'evolutivo_dinamico': { x: -0.2, y: -0.6 },
-    'determinista_historico': { x: 0.5, y: 0.0 }
+    'determinista_historico': { x: 0.5, y: 0.0 },
+    'socialmente_construido': { x: 0.6, y: 0.5 },
+    'complejidad_dinamica': { x: 0.4, y: 0.3 },
+    'jerarquia_internacional': { x: 0.8, y: -0.4 },
+    'incertidumbre_fundamental': { x: 0.5, y: 0.1 },
+    'costos_transaccion': { x: 0.1, y: -0.2 },
+    'arquitectura_decision': { x: -0.3, y: 0.3 },
+    'tendencia_equilibrio': { x: -0.6, y: -0.4 },
+    'incertidumbre_radical': { x: -0.4, y: -0.2 },
+    'desequilibrio_constante': { x: -0.1, y: -0.5 }
 };
 
 const SCORES_AMBITO = {
     'intercambio_mercado': { x: -0.6, y: -0.2 },
     'produccion': { x: 0.3, y: -0.9 },
     'distribucion': { x: 0.6, y: 0.9 },
-    'consumo_demanda': { x: 0.4, y: 0.3 }
+    'consumo_demanda': { x: 0.4, y: 0.3 },
+    'produccion_distribucion': { x: 0.7, y: 0.6 },
+    'reproduccion_social': { x: 0.5, y: 0.7 },
+    'metabolismo_social': { x: 0.4, y: 0.4 },
+    'produccion_tecnologia': { x: 0.6, y: -0.5 },
+    'consumo_inversion': { x: 0.5, y: 0.2 },
+    'coordinacion_social': { x: 0.2, y: 0.0 },
+    'I+D+i': { x: 0.3, y: -0.3 },
+    'micro_comportamiento': { x: -0.2, y: 0.3 },
+    'produccion_naciones': { x: -0.4, y: -0.6 },
+    'precios_mercado': { x: -0.7, y: -0.3 },
+    'coordinacion_precios': { x: -0.5, y: -0.4 },
+    'cambio_tecnologico': { x: -0.1, y: -0.5 }
 };
 
 const SCORES_MOTOR = {
@@ -71,7 +110,17 @@ const SCORES_MOTOR = {
     'acumulacion_capital': { x: -0.5, y: -0.8 },
     'innovacion': { x: -0.3, y: -0.7 },
     'conflicto_social': { x: 0.8, y: 0.8 },
-    'politica_estado': { x: 0.9, y: -0.7 }
+    'politica_estado': { x: 0.9, y: -0.7 },
+    'conflicto_estructural': { x: 0.7, y: 0.6 },
+    'reconocimiento_cuidados': { x: 0.6, y: 0.7 },
+    'regeneracion': { x: 0.4, y: 0.5 },
+    'politica_industrial': { x: 0.8, y: -0.5 },
+    'gasto_autonomo': { x: 0.6, y: 0.3 },
+    'cambio_institucional': { x: 0.3, y: 0.1 },
+    'direccionaldad_publica': { x: 0.5, y: -0.3 },
+    'diseño_eleccion': { x: -0.1, y: 0.4 },
+    'empresarialidad': { x: -0.4, y: -0.6 },
+    'destruccion_creativa': { x: -0.2, y: -0.7 }
 };
 
 const SCORES_POLITICA = {
@@ -79,7 +128,19 @@ const SCORES_POLITICA = {
     'fallos_mercado': { x: -0.2, y: 0.0 },
     'estado_del_bienestar': { x: 0.5, y: 0.6 },
     'estado_desarrollista': { x: 0.8, y: -0.8 },
-    'planificacion_central': { x: 1.0, y: 0.5 }
+    'planificacion_central': { x: 1.0, y: 0.5 },
+    'socializacion_medios': { x: 0.9, y: 0.7 },
+    'infraestructura_social': { x: 0.6, y: 0.5 },
+    'economia_circular': { x: 0.4, y: 0.4 },
+    'proteccionismo_estrategico': { x: 0.7, y: -0.4 },
+    'contraciclicas': { x: 0.5, y: 0.3 },
+    'gobernanza_comunes': { x: 0.3, y: 0.2 },
+    'inversion_estrategica': { x: 0.6, y: -0.3 },
+    'arquitectura_decisiones': { x: -0.1, y: 0.4 },
+    'mercados_abiertos': { x: -0.5, y: -0.6 },
+    'libre_competencia': { x: -0.8, y: -0.4 },
+    'no_intervencion': { x: -0.7, y: -0.3 },
+    'fomento_innovacion': { x: -0.3, y: -0.5 }
 };
 
 const SCORE_MAPPINGS = {
