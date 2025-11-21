@@ -265,8 +265,8 @@ export class D3MapRenderer {
                             // Keep within bounds
                             const minX = this.xScale(-0.95);
                             const maxX = this.xScale(0.95);
-                            const minY = this.yScale(-0.95);
-                            const maxY = this.yScale(0.95);
+                            const minY = this.yScale(0.95); // top
+                            const maxY = this.yScale(-0.95); // bottom
 
                             node1.x = Math.max(minX, Math.min(maxX, node1.x));
                             node1.y = Math.max(minY, Math.min(maxY, node1.y));
@@ -288,6 +288,7 @@ export class D3MapRenderer {
         this.simulation
             .force('collision', null)
             .force('selective-collision', null)
+            .force('charge', null)
             .force('x', null)
             .force('y', null);
     }
@@ -318,8 +319,8 @@ export class D3MapRenderer {
                 const r = 15; // Margen de seguridad en píxeles
                 const minX = this.xScale(-0.95);
                 const maxX = this.xScale(0.95);
-                const minY = this.yScale(-0.95);
-                const maxY = this.yScale(0.95);
+                const minY = this.yScale(0.95); // top (smaller y value)
+                const maxY = this.yScale(-0.95); // bottom (larger y value)
 
                 // Clamping suave
                 d.x = Math.max(minX + r, Math.min(maxX - r, d.x));
