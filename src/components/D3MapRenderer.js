@@ -179,8 +179,8 @@ export class D3MapRenderer {
     }
 
     /**
-     * Add collision and charge forces to simulation with soft parameters
-     * Minimal intervention: just slight separation for overlapping nodes
+     * Add collision and charge forces to simulation with optimized soft parameters
+     * Fine-tuned for minimal displacement while maintaining collision prevention
      */
     enableCollisionForces() {
         this.simulation
@@ -197,9 +197,9 @@ export class D3MapRenderer {
                 .strength(-15) // Much weaker repulsion
                 .distanceMax(100) // Shorter range
             )
-            // Gentle centering force to maintain target proximity
-            .force('centerX', d3.forceX(d => d.targetX).strength(0.1))
-            .force('centerY', d3.forceY(d => d.targetY).strength(0.1));
+            // Optimized centering forces for better stability (increased from 0.1 to 0.12)
+            .force('centerX', d3.forceX(d => d.targetX).strength(0.12))
+            .force('centerY', d3.forceY(d => d.targetY).strength(0.12));
     }
 
     /**
@@ -510,8 +510,8 @@ export class D3MapRenderer {
                 // D. Fuerzas de Centrado Suave
                 .force('centerX', d3.forceX(d => d.targetX).strength(0.1))
                 .force('centerY', d3.forceY(d => d.targetY).strength(0.1))
-                .alpha(0.8) // Energía inicial moderada
-                .alphaDecay(0.06) // Decaimiento ligeramente más rápido
+                .alpha(0.6) // Energía inicial reducida para convergencia más suave
+                .alphaDecay(0.08) // Decaimiento más lento para mejor estabilidad
                 .restart();
         } else {
             // Sin simulación: solo posicionar en targets
@@ -684,8 +684,8 @@ export class D3MapRenderer {
                 // D. Fuerzas de Centrado Suave
                 .force('centerX', d3.forceX(d => d.targetX).strength(0.1))
                 .force('centerY', d3.forceY(d => d.targetY).strength(0.1))
-                .alpha(0.8)
-                .alphaDecay(0.06)
+                .alpha(0.6)
+                .alphaDecay(0.08)
                 .restart();
 
             // Finalización
