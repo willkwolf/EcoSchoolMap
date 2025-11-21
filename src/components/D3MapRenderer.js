@@ -158,6 +158,11 @@ export class D3MapRenderer {
         this.collisionEnabled = enabled;
         this.restartSimulation();
         console.log(`Collision forces ${enabled ? 'enabled' : 'disabled'}`);
+
+        // Ensure transitions are updated immediately after toggle change
+        setTimeout(() => {
+            this.updateTransitionsToFinalPositions();
+        }, 50); // Small delay to allow position changes to settle
     }
 
     /**
@@ -747,18 +752,28 @@ export class D3MapRenderer {
 
     /**
      * Update transition arrows to use final node positions after force simulation
+     * Uses appropriate positions based on collision state to avoid race conditions
      */
     updateTransitionsToFinalPositions() {
         if (!this.data.transiciones) return;
 
         console.log('🔄 Updating transition arrows to final node positions...');
 
-        // Get current node positions from the force simulation
+        // Get node positions based on collision state to avoid stale data
         const currentNodePositions = {};
         this.simulation.nodes().forEach(node => {
-            // Convert pixel coordinates back to normalized coordinates for scaling
-            const normalizedX = this.xScale.invert(node.x);
-            const normalizedY = this.yScale.invert(node.y);
+            let normalizedX, normalizedY;
+
+            if (this.collisionEnabled) {
+                // When collisions enabled: use current simulation positions
+                normalizedX = this.xScale.invert(node.x);
+                normalizedY = this.yScale.invert(node.y);
+            } else {
+                // When collisions disabled: use target positions (more reliable)
+                normalizedX = this.xScale.invert(node.targetX);
+                normalizedY = this.yScale.invert(node.targetY);
+            }
+
             currentNodePositions[node.id] = { x: normalizedX, y: normalizedY };
         });
 
@@ -768,7 +783,7 @@ export class D3MapRenderer {
 
             if (!fromNodePos || !toNodePos) return;
 
-            // Use current positions for arrow endpoints
+            // Use positions for arrow endpoints
             const x1 = this.xScale(fromNodePos.x);
             const y1 = this.yScale(fromNodePos.y);
             const x2 = this.xScale(toNodePos.x);
