@@ -158,18 +158,17 @@ export class D3MapRenderer {
         const wasEnabled = this.collisionEnabled;
         this.collisionEnabled = enabled;
 
-        // If disabling collisions, immediately reset nodes to target positions
-        if (!enabled && wasEnabled) {
+        if (enabled) {
+            // Enabling collisions: start simulation
+            this.restartSimulation();
+        } else {
+            // Disabling collisions: stop simulation and reset to targets
+            this.simulation.stop();
             this.resetNodesToTargets();
+            this.updateTransitionsToFinalPositions();
         }
 
-        this.restartSimulation();
         console.log(`Collision forces ${enabled ? 'enabled' : 'disabled'}`);
-
-        // Ensure transitions are updated immediately after toggle change
-        setTimeout(() => {
-            this.updateTransitionsToFinalPositions();
-        }, 50); // Small delay to allow position changes to settle
     }
 
     /**
@@ -193,14 +192,15 @@ export class D3MapRenderer {
     }
 
     /**
-     * Restart the force simulation with current settings
+     * Restart the force simulation with collision forces enabled
+     * Only called when enabling collisions
      */
     restartSimulation() {
         const nodes = this.simulation.nodes();
         if (!nodes || nodes.length === 0) return;
 
+        // Only restart simulation when collisions are enabled
         if (this.collisionEnabled) {
-            // Activar simulación con colisiones
             this.simulation
                 .force('x', d3.forceX(d => d.targetX).strength(0.3))
                 .force('y', d3.forceY(d => d.targetY).strength(0.3))
@@ -221,26 +221,8 @@ export class D3MapRenderer {
             // Stop after convergence
             setTimeout(() => {
                 this.simulation.alpha(0).restart();
-            }, 4000);
-        } else {
-            // Desactivar simulación: resetear posiciones a targets
-            this.simulation.stop();
-
-            // Resetear posiciones visuales a targets
-            const zoomGroup = this.zoomGroup;
-            if (zoomGroup) {
-                nodes.forEach(node => {
-                    const element = zoomGroup.select(`.node.${node.id}`);
-                    if (!element.empty()) {
-                        element.attr('transform', `translate(${node.targetX},${node.targetY})`);
-                        node.x = node.targetX;
-                        node.y = node.targetY;
-                    }
-                });
-
-                // Actualizar transiciones a posiciones finales (targets)
                 this.updateTransitionsToFinalPositions();
-            }
+            }, 4000);
         }
     }
 
