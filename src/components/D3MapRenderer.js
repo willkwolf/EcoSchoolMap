@@ -158,6 +158,11 @@ export class D3MapRenderer {
         const wasEnabled = this.collisionEnabled;
         this.collisionEnabled = enabled;
 
+        // CRITICAL: Clear ALL existing event handlers FIRST to prevent race conditions
+        // during rapid toggling. Multiple handlers running simultaneously cause conflicts.
+        this.simulation.on('tick', null);
+        this.simulation.on('end', null);
+
         if (enabled) {
             // Enabling collisions: add forces and start simulation
             this.enableCollisionForces();
