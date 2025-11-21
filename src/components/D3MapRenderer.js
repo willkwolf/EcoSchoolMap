@@ -256,6 +256,65 @@ export class D3MapRenderer {
     }
 
     /**
+     * Render historical transition arrows and labels
+     */
+    renderTransitions() {
+        if (!this.data.transiciones || this.data.transiciones.length === 0) return;
+
+        const transitionGroup = this.zoomGroup.append('g').attr('class', 'transitions');
+
+        this.data.transiciones.forEach(transition => {
+            const fromNode = this.data.nodos.find(n => n.id === transition.desde_nodo);
+            const toNode = this.data.nodos.find(n => n.id === transition.hacia_nodo);
+
+            if (!fromNode || !toNode) return;
+
+            // Calculate arrow path
+            const x1 = this.xScale(fromNode.posicion.x);
+            const y1 = this.yScale(fromNode.posicion.y);
+            const x2 = this.xScale(toNode.posicion.x);
+            const y2 = this.yScale(toNode.posicion.y);
+
+            const dx = x2 - x1;
+            const dy = y2 - y1;
+            const cx = x1 + dx / 2;
+            const cy = y1 + dy / 2 - 30;
+
+            const path = `M ${x1},${y1} Q ${cx},${cy} ${x2},${y2}`;
+
+            // Get confidence style
+            const style = getConfidenceStyle(transition.confianza);
+
+            // Create arrow path
+            transitionGroup.append('path')
+                .attr('class', `transition-arrow ${transition.id}`)
+                .attr('d', path)
+                .attr('stroke', style.color)
+                .attr('stroke-width', style.width)
+                .attr('fill', 'none')
+                .attr('marker-end', 'url(#arrowhead)')
+                .style('opacity', style.opacity)
+                .style('cursor', 'pointer')
+                .on('mouseenter', (event) => this.onTransitionHover(event, transition))
+                .on('mouseleave', () => this.onTransitionLeave());
+
+            // Create label
+            transitionGroup.append('text')
+                .attr('class', `transition-label ${transition.id}`)
+                .attr('x', cx)
+                .attr('y', cy)
+                .attr('text-anchor', 'middle')
+                .attr('font-size', '11px')
+                .attr('font-weight', 'bold')
+                .attr('fill', style.color)
+                .style('pointer-events', 'none')
+                .text(transition.año);
+        });
+
+        console.log(`✅ Rendered ${this.data.transiciones.length} transition arrows`);
+    }
+
+    /**
      * Render X and Y axes with zero lines
      */
     renderAxes() {
