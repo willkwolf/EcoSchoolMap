@@ -155,7 +155,14 @@ export class D3MapRenderer {
      * @param {boolean} enabled - Whether to enable collision forces
      */
     setCollisionEnabled(enabled) {
+        const wasEnabled = this.collisionEnabled;
         this.collisionEnabled = enabled;
+
+        // If disabling collisions, immediately reset nodes to target positions
+        if (!enabled && wasEnabled) {
+            this.resetNodesToTargets();
+        }
+
         this.restartSimulation();
         console.log(`Collision forces ${enabled ? 'enabled' : 'disabled'}`);
 
@@ -163,6 +170,26 @@ export class D3MapRenderer {
         setTimeout(() => {
             this.updateTransitionsToFinalPositions();
         }, 50); // Small delay to allow position changes to settle
+    }
+
+    /**
+     * Immediately reset all nodes to their target positions (synchronous)
+     */
+    resetNodesToTargets() {
+        const nodes = this.simulation.nodes();
+        if (!nodes || nodes.length === 0) return;
+
+        nodes.forEach(node => {
+            const element = this.zoomGroup.select(`.node.${node.id}`);
+            if (!element.empty()) {
+                // Immediately set to target position
+                element.attr('transform', `translate(${node.targetX},${node.targetY})`);
+                node.x = node.targetX;
+                node.y = node.targetY;
+            }
+        });
+
+        console.log('🔄 Nodes immediately reset to target positions');
     }
 
     /**
