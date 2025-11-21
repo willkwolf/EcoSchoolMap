@@ -68,16 +68,16 @@ console.log('\n📊 COLLISIONS: Recording positions with collision forces...');
 // Collision simulation
 const collisionNodes = JSON.parse(JSON.stringify(nodeData)); // Deep clone
 const collisionSim = d3.forceSimulation(collisionNodes)
-    .force('x', d3.forceX(d => d.targetX).strength(0.15))
-    .force('y', d3.forceY(d => d.targetY).strength(0.15))
+    .force('x', d3.forceX(d => d.targetX).strength(0.4))
+    .force('y', d3.forceY(d => d.targetY).strength(0.4))
     .force('collision', d3.forceCollide()
         .radius(d => {
             const area = getNodeSize(d.tipo);
             const visualRadius = Math.sqrt(area / Math.PI);
             return visualRadius + 3;
         })
-        .strength(0.1)
-        .iterations(1)
+        .strength(0.15)
+        .iterations(2)
     )
     .alpha(0.6)
     .alphaDecay(0.08)
