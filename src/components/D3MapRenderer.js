@@ -583,6 +583,25 @@ export class D3MapRenderer {
             }
         });
 
+        // Siempre actualizar posiciones visuales a nuevos targets
+        const transitionDuration = 800;
+        const nodes = this.simulation.nodes();
+
+        nodes.forEach(node => {
+            const element = this.zoomGroup.select(`.node.${node.id}`);
+            if (!element.empty()) {
+                element
+                    .transition()
+                    .duration(transitionDuration)
+                    .ease(d3.easeCubicInOut)
+                    .attr('transform', `translate(${node.targetX},${node.targetY})`);
+
+                // Actualizar coordenadas del nodo
+                node.x = node.targetX;
+                node.y = node.targetY;
+            }
+        });
+
         // Configuración de la simulación solo si colisiones activadas
         if (this.collisionEnabled) {
             this.simulation
@@ -612,16 +631,16 @@ export class D3MapRenderer {
 
             // Finalización
             this.simulation.on('end', () => {
-                console.log('✅ Transición estabilizada');
+                console.log('✅ Transición estabilizada con colisiones');
             });
         } else {
-            // Sin simulación: solo actualizar targets
-            this.simulation.nodes().forEach(node => {
-                // Mantener posiciones actuales si no hay simulación
-            });
+            // Sin simulación: solo transición suave a targets
+            setTimeout(() => {
+                console.log('✅ Transición completada sin colisiones');
+            }, transitionDuration);
         }
 
-        console.log('✅ Nodes transitioning with conditional force simulation');
+        console.log('✅ Nodes transitioning with smooth animation');
     }
 
     /**
