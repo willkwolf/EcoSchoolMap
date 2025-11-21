@@ -1,84 +1,90 @@
-# Plan de Implementación: Mejoras en Toggle de Colisiones
+# Plan de Implementación: Colisiones Selectivas para Evitar Desplazamientos Globales
 
-## Contexto del Problema
-- Colisiones ocurren únicamente con preset original y pesos centrados estadísticos
-- Escuelas austriaca y clásica se colisionan, requieren fuerza repulsora pequeña
-- Desplazamiento debe evitar colisiones con otros nodos y salir del marco (borde como pared repulsora)
-- Solución más simple: ajustar parámetros para evitar colisiones o lograr apariencia de superposición
+## Contexto del Problema (Revisado)
+- El enfoque anterior aplicaba fuerzas de colisión globalmente, causando desplazamientos innecesarios en todos los nodos
+- Solo 4 escuelas requieren ajustes: Marxista/Feminista (casi tocan bordes) y Austríaca/Neoclásica (superpuestas)
+- El resto de nodos están suficientemente separados y no deben moverse
+- Objetivo: Aplicar fuerzas de colisión selectivamente solo a nodos cercanos/superpuestos
 
-## Parámetros Objetivo ULTRA-SOFT
-- Fuerza de colisión mínima: `strength 0.1`
-- Eliminar fuerzas de carga (charge): `null`
-- Centrado mínimo: `0.05`
-- Desplazamiento promedio objetivo: `2.11px`
-- Separación apenas perceptible para nodos superpuestos
+## Análisis de Pares Conflictivos (base-zscore)
+- **Marxista ↔ Feminista**: Distancia ~0.184 unidades (casi tocan bordes)
+- **Austríaca ↔ Neoclásica**: Distancia ~0.051 unidades (superpuestas)
+- **Otros pares**: Distancia mínima >0.15, no requieren intervención
+
+## Enfoque Revisado: Fuerzas Selectivas
+- Detectar automáticamente pares de nodos con distancia < umbral (ej: 0.15 unidades normalizadas)
+- Aplicar fuerzas de colisión solo entre estos pares
+- Mantener nodos lejanos en posiciones exactas (sin desplazamiento)
+- Usar fuerza de repulsión mínima para separación sutil
+
+## Parámetros Objetivo SELECTIVOS
+- Umbral de detección: `0.15` unidades normalizadas
+- Fuerza de colisión selectiva: `strength 0.1` (muy suave)
+- Iteraciones: `1` (convergencia rápida)
+- Desplazamiento esperado: `< 1px` para nodos no conflictivos, `2-3px` para pares específicos
 
 ## Pasos de Implementación
 
 ### 1. Actualizar Etiqueta del Toggle
 - [ ] Cambiar texto a "(Sin colisiones)" cuando toggle esté activado
-- [ ] Mantener "Activar Colisiones" cuando desactivado
+- [ ] Mantener "Permitir Colisiones" cuando desactivado
 - Ubicación: `src/main.js` - event listener del toggle
 
-### 2. Modificar Parámetros de Fuerza en D3MapRenderer
-- [ ] Actualizar `enableCollisionForces()` con parámetros ULTRA-SOFT
-- [ ] Remover fuerza de carga (charge)
-- [ ] Ajustar fuerza de colisión a 0.1
-- [ ] Centrado mínimo a 0.05
+### 2. Implementar Detección Selectiva de Colisiones
+- [ ] Crear función `detectClosePairs()` para identificar nodos con distancia < 0.15
+- [ ] Modificar `enableCollisionForces()` para aplicar fuerzas solo a pares detectados
+- [ ] Usar fuerza de colisión personalizada por par en lugar de global
 - Ubicación: `src/components/D3MapRenderer.js`
 
-### 3. Agregar Logs de Depuración en Producción
-- [ ] Implementar logging de desplazamientos cuando colisiones activas
-- [ ] Monitorear desplazamiento promedio y máximo
-- [ ] Logs en consola para debugging
-- Ubicación: `src/components/D3MapRenderer.js` - en tick/end de simulación
+### 3. Modificar Simulación de Fuerzas
+- [ ] Reemplazar fuerza de colisión global con fuerzas selectivas entre pares cercanos
+- [ ] Mantener posicionamiento fuerte (0.4) para estabilidad
+- [ ] Eliminar fuerzas de carga globales
+- Ubicación: `src/components/D3MapRenderer.js` - método `enableCollisionForces()`
 
-### 4. Actualizar Script de Pruebas
-- [ ] Verificar consistencia con parámetros de producción
-- [ ] Ajustes si necesarios en `scripts/sync_toggle_test.js`
+### 4. Agregar Logs de Depuración Selectivos
+- [ ] Log solo desplazamientos de nodos en pares conflictivos
+- [ ] Monitorear que nodos lejanos no se muevan (>0.1px)
+- Ubicación: `src/components/D3MapRenderer.js` - en tick handler
 
-### 5. Ejecutar Pruebas
-- [ ] Comando: `node scripts/sync_toggle_test.js`
-- [ ] Validar desplazamiento promedio < 3px
-- [ ] Verificar no hay nodos con desplazamiento > 5px
-- [ ] Confirmar producción lista
+### 5. Crear Script de Prueba con Memoria
+- [ ] Script que guarda JSON de posiciones antes toggle (base-zscore sin colisiones)
+- [ ] Aplica toggle y guarda posiciones finales
+- [ ] Compara desplazamientos, verifica <1px para nodos no conflictivos
+- Ubicación: `scripts/test_selective_collisions.js`
 
-### 6. Construir y Probar
+### 6. Ejecutar Pruebas
+- [ ] Comando: `node scripts/test_selective_collisions.js`
+- [ ] Validar desplazamiento <1px para 11/13 nodos
+- [ ] Verificar separación adecuada para pares marxista/feminista y austriaca/neoclasica
+- [ ] Confirmar no hay superposiciones
+
+### 7. Construir y Probar
 - [ ] Comando: `npm run build`
-- [ ] Probar aplicación en navegador
-- [ ] Verificar funcionamiento del toggle
-- [ ] Confirmar desplazamientos mínimos
+- [ ] Probar en navegador con base-zscore
+- [ ] Verificar cambios visuales mínimos excepto en 4 escuelas
+- [ ] Confirmar toggle funciona correctamente
 
-### 7. Commit y Push
+### 8. Commit y Push
 - [ ] Commits con mensajes descriptivos
 - [ ] Push a repositorio
-- [ ] Validación final de cambios
+- [ ] Validación final
 
-## Resultados de Pruebas
-
-### Prueba Inicial (Parámetros Actuales)
-- Desplazamiento promedio: [PENDIENTE]
-- Desplazamiento máximo: [PENDIENTE]
-- Nodos excediendo 5px: [PENDIENTE]
-- Estado de producción: [PENDIENTE]
-
-### Prueba con Parámetros ULTRA-SOFT
-- Desplazamiento promedio: 2.15px (objetivo: 2.11px - ✅ muy cercano, aceptable)
-- Desplazamiento máximo: 6.77px
-- Nodos excediendo 5px: 4 (pares ecologica/keynesiana y neoclasica/austriaca - colisiones naturales)
-- Estado de producción: ✅ (desplazamiento promedio óptimo, separación mínima perceptible)
-- Nota: Los desplazamientos >5px corresponden a pares de nodos que colisionan naturalmente; el promedio cumple el objetivo
+## Resultados Esperados
+- **Antes**: Desplazamientos globales innecesarios
+- **Después**: Solo pares conflictivos se repelen mínimamente
+- **Validación**: 11 nodos sin movimiento perceptible, 4 nodos con separación sutil
 
 ## Notas Técnicas
-- La fuerza de colisión actúa como "pared repulsora" en los bordes
-- Sin fuerza de carga reduce complejidad de la simulación
-- Centrado mínimo mantiene estabilidad sin interferir con colisiones
-- Logs de depuración ayudan a monitorear rendimiento en producción
+- La detección selectiva reduce complejidad computacional
+- Fuerzas personalizadas evitan sobre-corrección
+- Mantiene estabilidad visual mientras resuelve conflictos específicos
+- Compatible con todos los presets (no solo base-zscore)
 
 ## Validación Final
-- [x] Toggle cambia etiqueta correctamente: "(No Permitir Colisiones)" / "Permitir Colisiones"
-- [x] Parámetros aplicados consistentemente: collision 0.1, no charge, positioning 0.15
-- [x] Desplazamientos dentro de límites aceptables: promedio 2.15px, máximo 6.77px para pares específicos
-- [x] Sin colisiones visuales perceptibles: separación mínima lograda
-- [x] Aplicación funciona correctamente: pruebas diagnósticas confirman funcionamiento
-- [x] Implementación completada y probada
+- [ ] Toggle cambia etiqueta correctamente
+- [ ] Fuerzas aplicadas solo a pares cercanos
+- [ ] Desplazamientos mínimos para nodos lejanos (<1px)
+- [ ] Separación adecuada para pares conflictivos
+- [ ] Sin superposiciones visuales
+- [ ] Implementación probada y funcional
