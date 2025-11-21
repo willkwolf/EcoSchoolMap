@@ -159,16 +159,47 @@ export class D3MapRenderer {
         this.collisionEnabled = enabled;
 
         if (enabled) {
-            // Enabling collisions: start simulation
+            // Enabling collisions: add forces and start simulation
+            this.enableCollisionForces();
             this.restartSimulation();
         } else {
-            // Disabling collisions: stop simulation and reset to targets
+            // Disabling collisions: remove forces, stop simulation, reset positions
+            this.disableCollisionForces();
             this.simulation.stop();
             this.resetNodesToTargets();
             this.updateTransitionsToFinalPositions();
         }
 
         console.log(`Collision forces ${enabled ? 'enabled' : 'disabled'}`);
+    }
+
+    /**
+     * Add collision and charge forces to simulation
+     */
+    enableCollisionForces() {
+        this.simulation
+            .force('collision', d3.forceCollide()
+                .radius(d => {
+                    const area = getNodeSize(d.tipo);
+                    const visualRadius = Math.sqrt(area / Math.PI);
+                    return visualRadius + 15;
+                })
+                .strength(0.9)
+                .iterations(3)
+            )
+            .force('charge', d3.forceManyBody()
+                .strength(-50)
+                .distanceMax(150)
+            );
+    }
+
+    /**
+     * Remove collision and charge forces from simulation
+     */
+    disableCollisionForces() {
+        this.simulation
+            .force('collision', null)
+            .force('charge', null);
     }
 
     /**
@@ -192,33 +223,23 @@ export class D3MapRenderer {
     }
 
     /**
-     * Restart the force simulation with collision forces enabled
-     * Only called when enabling collisions
+     * Restart the force simulation with positioning forces
+     * Collision/charge forces are managed separately by enable/disable methods
      */
     restartSimulation() {
         const nodes = this.simulation.nodes();
         if (!nodes || nodes.length === 0) return;
 
-        // Only restart simulation when collisions are enabled
-        if (this.collisionEnabled) {
-            this.simulation
-                .force('x', d3.forceX(d => d.targetX).strength(0.3))
-                .force('y', d3.forceY(d => d.targetY).strength(0.3))
-                .force('collision', d3.forceCollide()
-                    .radius(d => {
-                        const area = getNodeSize(d.tipo);
-                        const visualRadius = Math.sqrt(area / Math.PI);
-                        return visualRadius + 15;
-                    })
-                    .strength(0.9)
-                    .iterations(3)
-                )
-                .force('charge', d3.forceManyBody().strength(-50).distanceMax(150))
-                .alpha(0.6)
-                .alphaDecay(0.05)
-                .restart();
+        // Always apply positioning forces
+        this.simulation
+            .force('x', d3.forceX(d => d.targetX).strength(0.3))
+            .force('y', d3.forceY(d => d.targetY).strength(0.3))
+            .alpha(0.6)
+            .alphaDecay(0.05)
+            .restart();
 
-            // Stop after convergence
+        // Stop after convergence if collisions are enabled
+        if (this.collisionEnabled) {
             setTimeout(() => {
                 this.simulation.alpha(0).restart();
                 this.updateTransitionsToFinalPositions();
