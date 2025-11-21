@@ -65,23 +65,20 @@ console.log('✅ Baseline simulation completed');
 
 console.log('\n📊 COLLISIONS: Running simulation with optimized collision forces...');
 
-// Collision simulation with MINIMAL parameters
+// Collision simulation with balanced parameters
 const collisionNodes = JSON.parse(JSON.stringify(nodeData)); // Deep clone
 const collisionSim = d3.forceSimulation(collisionNodes)
-    .force('x', d3.forceX(d => d.targetX).strength(0.15))
-    .force('y', d3.forceY(d => d.targetY).strength(0.15))
+    .force('x', d3.forceX(d => d.targetX).strength(0.4))
+    .force('y', d3.forceY(d => d.targetY).strength(0.4))
     .force('collision', d3.forceCollide()
         .radius(d => {
             const area = getNodeSize(d.tipo);
             const visualRadius = Math.sqrt(area / Math.PI);
             return visualRadius + 3; // Tiny padding
         })
-        .strength(0.1) // Minimal strength
-        .iterations(1) // Single iteration
+        .strength(0.15) // Balanced strength
+        .iterations(2) // More iterations
     )
-    // No charge forces - only minimal collision detection
-    .force('centerX', d3.forceX(d => d.targetX).strength(0.05)) // Minimal centering
-    .force('centerY', d3.forceY(d => d.targetY).strength(0.05))
     .alpha(0.6)
     .alphaDecay(0.08)
     .stop();

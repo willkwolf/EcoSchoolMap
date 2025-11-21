@@ -180,8 +180,8 @@ export class D3MapRenderer {
      }
 
     /**
-     * Add collision forces to simulation with ULTRA-SOFT parameters
-     * Minimal collision strength, no charge forces, positioning to targets for stability
+     * Add collision forces to simulation with balanced parameters
+     * Strong positioning to minimize displacement, minimal collision for separation
      */
     enableCollisionForces() {
         this.simulation
@@ -191,12 +191,12 @@ export class D3MapRenderer {
                     const visualRadius = Math.sqrt(area / Math.PI);
                     return visualRadius + 3; // Tiny padding for minimal separation
                 })
-                .strength(0.1) // Minimal collision strength
-                .iterations(1) // Single iteration for stability
+                .strength(0.15) // Slightly stronger collision for better separation
+                .iterations(2) // More iterations for convergence
             )
-            // Positioning forces to keep nodes near their target positions
-            .force('x', d3.forceX(d => d.targetX).strength(0.15))
-            .force('y', d3.forceY(d => d.targetY).strength(0.15));
+            // Strong positioning forces to keep nodes close to their target positions
+            .force('x', d3.forceX(d => d.targetX).strength(0.4))
+            .force('y', d3.forceY(d => d.targetY).strength(0.4));
     }
 
     /**
