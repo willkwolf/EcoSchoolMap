@@ -205,6 +205,9 @@ export class D3MapRenderer {
                         node.y = node.targetY;
                     }
                 });
+
+                // Actualizar transiciones a posiciones finales (targets)
+                this.updateTransitionsToFinalPositions();
             }
         }
     }
