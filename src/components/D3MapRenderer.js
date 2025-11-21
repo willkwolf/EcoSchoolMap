@@ -179,7 +179,8 @@ export class D3MapRenderer {
     }
 
     /**
-     * Add collision and charge forces to simulation
+     * Add collision and charge forces to simulation with soft parameters
+     * Minimal intervention: just slight separation for overlapping nodes
      */
     enableCollisionForces() {
         this.simulation
@@ -187,15 +188,18 @@ export class D3MapRenderer {
                 .radius(d => {
                     const area = getNodeSize(d.tipo);
                     const visualRadius = Math.sqrt(area / Math.PI);
-                    return visualRadius + 15;
+                    return visualRadius + 8; // Reduced padding for minimal separation
                 })
-                .strength(0.9)
-                .iterations(3)
+                .strength(0.4) // Much softer collision strength
+                .iterations(2) // Fewer iterations for stability
             )
             .force('charge', d3.forceManyBody()
-                .strength(-50)
-                .distanceMax(150)
-            );
+                .strength(-15) // Much weaker repulsion
+                .distanceMax(100) // Shorter range
+            )
+            // Gentle centering force to maintain target proximity
+            .force('centerX', d3.forceX(d => d.targetX).strength(0.1))
+            .force('centerY', d3.forceY(d => d.targetY).strength(0.1));
     }
 
     /**
@@ -204,7 +208,9 @@ export class D3MapRenderer {
     disableCollisionForces() {
         this.simulation
             .force('collision', null)
-            .force('charge', null);
+            .force('charge', null)
+            .force('centerX', null)
+            .force('centerY', null);
     }
 
     /**
@@ -235,10 +241,14 @@ export class D3MapRenderer {
         const nodes = this.simulation.nodes();
         if (!nodes || nodes.length === 0) return;
 
-        // Always apply positioning forces
+        // Positioning force strength depends on collision state
+        const positioningStrength = this.collisionEnabled ? 0.15 : 0.3;
+        // When collisions enabled: weaker positioning to allow collision forces to work
+        // When collisions disabled: stronger positioning for precise target placement
+
         this.simulation
-            .force('x', d3.forceX(d => d.targetX).strength(0.3))
-            .force('y', d3.forceY(d => d.targetY).strength(0.3))
+            .force('x', d3.forceX(d => d.targetX).strength(positioningStrength))
+            .force('y', d3.forceY(d => d.targetY).strength(positioningStrength))
             .alpha(0.6)
             .alphaDecay(0.05)
             .restart();
@@ -248,7 +258,7 @@ export class D3MapRenderer {
             setTimeout(() => {
                 this.simulation.alpha(0).restart();
                 this.updateTransitionsToFinalPositions();
-            }, 4000);
+            }, 3000); // Reduced timeout for faster convergence with softer forces
         }
     }
 
@@ -477,28 +487,31 @@ export class D3MapRenderer {
         if (this.collisionEnabled) {
             this.simulation
                 .nodes(nodeData)
-                // A. Fuerza de Posicionamiento (El "Elástico" hacia su lugar ideal)
-                .force('x', d3.forceX(d => d.targetX).strength(0.3))
-                .force('y', d3.forceY(d => d.targetY).strength(0.3))
+                // A. Fuerza de Posicionamiento (Más suave cuando colisiones activas)
+                .force('x', d3.forceX(d => d.targetX).strength(0.15))
+                .force('y', d3.forceY(d => d.targetY).strength(0.15))
 
-                // B. Fuerza de Colisión (El "Escudo" personal)
+                // B. Fuerza de Colisión (Parámetros suaves)
                 .force('collision', d3.forceCollide()
                     .radius(d => {
                         const area = getNodeSize(d.tipo);
                         const visualRadius = Math.sqrt(area / Math.PI);
-                        return visualRadius + 15;
+                        return visualRadius + 8;
                     })
-                    .strength(0.9)
-                    .iterations(3)
+                    .strength(0.4)
+                    .iterations(2)
                 )
 
-                // C. Fuerza de Carga (Repulsión global suave para "airear" el gráfico)
+                // C. Fuerza de Carga (Repulsión muy suave)
                 .force('charge', d3.forceManyBody()
-                    .strength(-50)
-                    .distanceMax(150)
+                    .strength(-15)
+                    .distanceMax(100)
                 )
-                .alpha(1) // Energía inicial completa
-                .alphaDecay(0.05) // Decaimiento más rápido
+                // D. Fuerzas de Centrado Suave
+                .force('centerX', d3.forceX(d => d.targetX).strength(0.1))
+                .force('centerY', d3.forceY(d => d.targetY).strength(0.1))
+                .alpha(0.8) // Energía inicial moderada
+                .alphaDecay(0.06) // Decaimiento ligeramente más rápido
                 .restart();
         } else {
             // Sin simulación: solo posicionar en targets
@@ -648,33 +661,36 @@ export class D3MapRenderer {
         // Configuración de la simulación solo si colisiones activadas
         if (this.collisionEnabled) {
             this.simulation
-                // A. Fuerza de Posicionamiento (El "Elástico" hacia su lugar ideal)
-                .force('x', d3.forceX(d => d.targetX).strength(0.3))
-                .force('y', d3.forceY(d => d.targetY).strength(0.3))
+                // A. Fuerza de Posicionamiento (Más suave cuando colisiones activas)
+                .force('x', d3.forceX(d => d.targetX).strength(0.15))
+                .force('y', d3.forceY(d => d.targetY).strength(0.15))
 
-                // B. Fuerza de Colisión (El "Escudo" personal)
+                // B. Fuerza de Colisión (Parámetros suaves)
                 .force('collision', d3.forceCollide()
                     .radius(d => {
                         const area = getNodeSize(d.tipo);
                         const visualRadius = Math.sqrt(area / Math.PI);
-                        return visualRadius + 15;
+                        return visualRadius + 8;
                     })
-                    .strength(0.9)
-                    .iterations(3)
+                    .strength(0.4)
+                    .iterations(2)
                 )
 
-                // C. Fuerza de Carga (Repulsión global suave)
+                // C. Fuerza de Carga (Repulsión muy suave)
                 .force('charge', d3.forceManyBody()
-                    .strength(-50)
-                    .distanceMax(150)
+                    .strength(-15)
+                    .distanceMax(100)
                 )
-                .alpha(1)
-                .alphaDecay(0.05)
+                // D. Fuerzas de Centrado Suave
+                .force('centerX', d3.forceX(d => d.targetX).strength(0.1))
+                .force('centerY', d3.forceY(d => d.targetY).strength(0.1))
+                .alpha(0.8)
+                .alphaDecay(0.06)
                 .restart();
 
             // Finalización
             this.simulation.on('end', () => {
-                console.log('✅ Transición estabilizada con colisiones');
+                console.log('✅ Transición estabilizada con colisiones suaves');
             });
         } else {
             // Sin simulación: solo transición suave a targets
