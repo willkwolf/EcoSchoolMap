@@ -155,6 +155,12 @@ function setupVariantControls() {
     collisionToggle.addEventListener('change', () => {
         const enabled = collisionToggle.checked;
         mapRenderer.setCollisionEnabled(enabled);
+
+        // Update toggle label
+        const label = collisionToggle.parentElement;
+        const textNode = label.lastChild;
+        textNode.textContent = enabled ? 'Permitir Colisiones' : '(No Permitir Colisiones)';
+
         console.log(`Collision forces ${enabled ? 'enabled' : 'disabled'}`);
     });
 

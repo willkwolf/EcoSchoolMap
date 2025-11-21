@@ -152,35 +152,36 @@ export class D3MapRenderer {
 
     /**
      * Set collision forces enabled/disabled
-     * @param {boolean} enabled - Whether to enable collision forces
-     */
-    setCollisionEnabled(enabled) {
-        const wasEnabled = this.collisionEnabled;
-        this.collisionEnabled = enabled;
+      * @param {boolean} enabled - Whether to enable collision forces
+      */
+     setCollisionEnabled(enabled) {
+         const wasEnabled = this.collisionEnabled;
+         this.collisionEnabled = enabled;
 
-        // CRITICAL: Clear ALL existing event handlers FIRST to prevent race conditions
-        // during rapid toggling. Multiple handlers running simultaneously cause conflicts.
-        this.simulation.on('tick', null);
-        this.simulation.on('end', null);
+         // CRITICAL: Clear ALL existing event handlers FIRST to prevent race conditions
+         // during rapid toggling. Multiple handlers running simultaneously cause conflicts.
+         this.simulation.on('tick', null);
+         this.simulation.on('end', null);
 
-        if (enabled) {
-            // Enabling collisions: add forces and start simulation
-            this.enableCollisionForces();
-            this.restartSimulation();
-        } else {
-            // Disabling collisions: remove forces, stop simulation, reset positions
-            this.disableCollisionForces();
-            this.simulation.stop();
-            this.resetNodesToTargets();
-            this.updateTransitionsToFinalPositions();
-        }
+         if (enabled) {
+             // Enabling collisions: add forces and start simulation
+             this.enableCollisionForces();
+             this.setupTickHandler(); // Set up tick handler for collision mode
+             this.restartSimulation();
+         } else {
+             // Disabling collisions: remove forces, stop simulation, reset positions
+             this.disableCollisionForces();
+             this.simulation.stop();
+             this.resetNodesToTargets();
+             this.updateTransitionsToFinalPositions();
+         }
 
-        console.log(`Collision forces ${enabled ? 'enabled' : 'disabled'}`);
-    }
+         console.log(`Collision forces ${enabled ? 'enabled' : 'disabled'}`);
+     }
 
     /**
-     * Add collision and charge forces to simulation with optimized soft parameters
-     * Fine-tuned for minimal displacement while maintaining collision prevention
+     * Add collision forces to simulation with ULTRA-SOFT parameters
+     * Minimal collision strength, no charge forces, positioning to targets for stability
      */
     enableCollisionForces() {
         this.simulation
@@ -188,18 +189,14 @@ export class D3MapRenderer {
                 .radius(d => {
                     const area = getNodeSize(d.tipo);
                     const visualRadius = Math.sqrt(area / Math.PI);
-                    return visualRadius + 8; // Reduced padding for minimal separation
+                    return visualRadius + 3; // Tiny padding for minimal separation
                 })
-                .strength(0.4) // Much softer collision strength
-                .iterations(2) // Fewer iterations for stability
+                .strength(0.1) // Minimal collision strength
+                .iterations(1) // Single iteration for stability
             )
-            .force('charge', d3.forceManyBody()
-                .strength(-15) // Much weaker repulsion
-                .distanceMax(100) // Shorter range
-            )
-            // Minimal centering to prevent complete drift
-            .force('centerX', d3.forceX(d => d.targetX).strength(0.05))
-            .force('centerY', d3.forceY(d => d.targetY).strength(0.05));
+            // Positioning forces to keep nodes near their target positions
+            .force('x', d3.forceX(d => d.targetX).strength(0.15))
+            .force('y', d3.forceY(d => d.targetY).strength(0.15));
     }
 
     /**
@@ -211,6 +208,51 @@ export class D3MapRenderer {
             .force('charge', null)
             .force('centerX', null)
             .force('centerY', null);
+    }
+
+    /**
+     * Setup tick handler for force simulation
+     */
+    setupTickHandler() {
+        this.simulation.on('tick', () => {
+            const nodes = this.simulation.nodes();
+            if (!nodes || nodes.length === 0) return;
+
+            // Limitación de bordes (Boundary Constraint)
+            // Lo hacemos directamente en el tick para "rebotar" en las paredes
+            nodes.forEach(d => {
+                const r = 15; // Margen de seguridad en píxeles
+                const minX = this.xScale(-0.95);
+                const maxX = this.xScale(0.95);
+                const minY = this.yScale(-0.95);
+                const maxY = this.yScale(0.95);
+
+                // Clamping suave
+                d.x = Math.max(minX + r, Math.min(maxX - r, d.x));
+                d.y = Math.max(minY + r, Math.min(maxY - r, d.y));
+            });
+
+            // Debug logging for collision monitoring (production)
+            if (this.collisionEnabled) {
+                let totalDisplacement = 0;
+                let maxDisplacement = 0;
+                nodes.forEach(d => {
+                    const dx = d.x - d.targetX;
+                    const dy = d.y - d.targetY;
+                    const displacement = Math.sqrt(dx * dx + dy * dy);
+                    totalDisplacement += displacement;
+                    maxDisplacement = Math.max(maxDisplacement, displacement);
+                });
+                const avgDisplacement = totalDisplacement / nodes.length;
+                console.log(`🔄 Collision forces active - Avg displacement: ${avgDisplacement.toFixed(2)}px, Max: ${maxDisplacement.toFixed(2)}px`);
+            }
+
+            // Actualización visual
+            this.zoomGroup.selectAll('.node').attr('transform', d => `translate(${d.x},${d.y})`);
+
+            // Actualizar flechas (Si es costoso, hacer cada 2 o 3 ticks)
+            this.updateTransitionsDuringMovement();
+        });
     }
 
     /**
@@ -241,14 +283,15 @@ export class D3MapRenderer {
         const nodes = this.simulation.nodes();
         if (!nodes || nodes.length === 0) return;
 
-        // Positioning force strength depends on collision state
-        const positioningStrength = this.collisionEnabled ? 0.15 : 0.3;
-        // When collisions enabled: weaker positioning to allow collision forces to work
-        // When collisions disabled: stronger positioning for precise target placement
+        // Positioning forces are set in enableCollisionForces when collisions enabled
+        // When collisions disabled: set stronger positioning for precise target placement
+        if (!this.collisionEnabled) {
+            this.simulation
+                .force('x', d3.forceX(d => d.targetX).strength(0.3))
+                .force('y', d3.forceY(d => d.targetY).strength(0.3));
+        }
 
         this.simulation
-            .force('x', d3.forceX(d => d.targetX).strength(positioningStrength))
-            .force('y', d3.forceY(d => d.targetY).strength(positioningStrength))
             .alpha(0.6)
             .alphaDecay(0.05)
             .restart();
@@ -258,7 +301,7 @@ export class D3MapRenderer {
             setTimeout(() => {
                 this.simulation.alpha(0).restart();
                 this.updateTransitionsToFinalPositions();
-            }, 3000); // Reduced timeout for faster convergence with softer forces
+            }, 3000); // Timeout for convergence
         }
     }
 
@@ -514,27 +557,7 @@ export class D3MapRenderer {
         }
 
         // 4. MANEJO DEL TICK (Optimizado)
-        this.simulation.on('tick', () => {
-            // Limitación de bordes (Boundary Constraint)
-            // Lo hacemos directamente en el tick para "rebotar" en las paredes
-            nodeData.forEach(d => {
-                const r = 15; // Margen de seguridad en píxeles
-                const minX = this.xScale(-0.95);
-                const maxX = this.xScale(0.95);
-                const minY = this.yScale(-0.95);
-                const maxY = this.yScale(0.95);
-
-                // Clamping suave
-                d.x = Math.max(minX + r, Math.min(maxX - r, d.x));
-                d.y = Math.max(minY + r, Math.min(maxY - r, d.y));
-            });
-
-            // Actualización visual
-            nodeElements.attr('transform', d => `translate(${d.x},${d.y})`);
-            
-            // Actualizar flechas (Si es costoso, hacer cada 2 o 3 ticks)
-            this.updateTransitionsDuringMovement();
-        });
+        this.setupTickHandler();
 
         // 5. FINALIZACIÓN
         this.simulation.on('end', () => {
@@ -655,25 +678,11 @@ export class D3MapRenderer {
 
         // Configuración de la simulación solo si colisiones activadas
         if (this.collisionEnabled) {
-            this.simulation
-                // A. Fuerza de Posicionamiento (Más suave cuando colisiones activas)
-                .force('x', d3.forceX(d => d.targetX).strength(0.15))
-                .force('y', d3.forceY(d => d.targetY).strength(0.15))
+            // Enable collision forces
+            this.enableCollisionForces();
+            this.setupTickHandler(); // Ensure tick handler is set
 
-                // B. Fuerza de Colisión (Mínima)
-                .force('collision', d3.forceCollide()
-                    .radius(d => {
-                        const area = getNodeSize(d.tipo);
-                        const visualRadius = Math.sqrt(area / Math.PI);
-                        return visualRadius + 3;
-                    })
-                    .strength(0.1)
-                    .iterations(1)
-                )
-                // C. Sin fuerza de carga - solo colisión mínima
-                // D. Centrado mínimo para estabilidad
-                .force('centerX', d3.forceX(d => d.targetX).strength(0.05))
-                .force('centerY', d3.forceY(d => d.targetY).strength(0.05))
+            this.simulation
                 .alpha(0.6)
                 .alphaDecay(0.08)
                 .restart();
