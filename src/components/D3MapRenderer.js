@@ -197,9 +197,9 @@ export class D3MapRenderer {
                 .strength(-15) // Much weaker repulsion
                 .distanceMax(100) // Shorter range
             )
-            // Optimized centering forces for better stability (increased from 0.1 to 0.12)
-            .force('centerX', d3.forceX(d => d.targetX).strength(0.12))
-            .force('centerY', d3.forceY(d => d.targetY).strength(0.12));
+            // Minimal centering to prevent complete drift
+            .force('centerX', d3.forceX(d => d.targetX).strength(0.05))
+            .force('centerY', d3.forceY(d => d.targetY).strength(0.05));
     }
 
     /**
@@ -491,25 +491,20 @@ export class D3MapRenderer {
                 .force('x', d3.forceX(d => d.targetX).strength(0.15))
                 .force('y', d3.forceY(d => d.targetY).strength(0.15))
 
-                // B. Fuerza de Colisión (Parámetros suaves)
+                // B. Fuerza de Colisión (Mínima)
                 .force('collision', d3.forceCollide()
                     .radius(d => {
                         const area = getNodeSize(d.tipo);
                         const visualRadius = Math.sqrt(area / Math.PI);
-                        return visualRadius + 8;
+                        return visualRadius + 3;
                     })
-                    .strength(0.4)
-                    .iterations(2)
+                    .strength(0.1)
+                    .iterations(1)
                 )
-
-                // C. Fuerza de Carga (Repulsión muy suave)
-                .force('charge', d3.forceManyBody()
-                    .strength(-15)
-                    .distanceMax(100)
-                )
-                // D. Fuerzas de Centrado Suave
-                .force('centerX', d3.forceX(d => d.targetX).strength(0.1))
-                .force('centerY', d3.forceY(d => d.targetY).strength(0.1))
+                // C. Sin fuerza de carga - solo colisión mínima
+                // D. Centrado mínimo para estabilidad
+                .force('centerX', d3.forceX(d => d.targetX).strength(0.05))
+                .force('centerY', d3.forceY(d => d.targetY).strength(0.05))
                 .alpha(0.6) // Energía inicial reducida para convergencia más suave
                 .alphaDecay(0.08) // Decaimiento más lento para mejor estabilidad
                 .restart();
@@ -665,25 +660,20 @@ export class D3MapRenderer {
                 .force('x', d3.forceX(d => d.targetX).strength(0.15))
                 .force('y', d3.forceY(d => d.targetY).strength(0.15))
 
-                // B. Fuerza de Colisión (Parámetros suaves)
+                // B. Fuerza de Colisión (Mínima)
                 .force('collision', d3.forceCollide()
                     .radius(d => {
                         const area = getNodeSize(d.tipo);
                         const visualRadius = Math.sqrt(area / Math.PI);
-                        return visualRadius + 8;
+                        return visualRadius + 3;
                     })
-                    .strength(0.4)
-                    .iterations(2)
+                    .strength(0.1)
+                    .iterations(1)
                 )
-
-                // C. Fuerza de Carga (Repulsión muy suave)
-                .force('charge', d3.forceManyBody()
-                    .strength(-15)
-                    .distanceMax(100)
-                )
-                // D. Fuerzas de Centrado Suave
-                .force('centerX', d3.forceX(d => d.targetX).strength(0.1))
-                .force('centerY', d3.forceY(d => d.targetY).strength(0.1))
+                // C. Sin fuerza de carga - solo colisión mínima
+                // D. Centrado mínimo para estabilidad
+                .force('centerX', d3.forceX(d => d.targetX).strength(0.05))
+                .force('centerY', d3.forceY(d => d.targetY).strength(0.05))
                 .alpha(0.6)
                 .alphaDecay(0.08)
                 .restart();
