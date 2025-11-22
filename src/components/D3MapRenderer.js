@@ -185,21 +185,16 @@ export class D3MapRenderer {
     detectClosePairs() {
         const nodes = this.simulation.nodes();
         const closePairs = [];
-        const threshold = 0.15; // Normalized coordinate distance threshold
+        const threshold = 35; // Pixel distance threshold for collision detection
 
         for (let i = 0; i < nodes.length; i++) {
             for (let j = i + 1; j < nodes.length; j++) {
                 const node1 = nodes[i];
                 const node2 = nodes[j];
 
-                // Convert pixel positions back to normalized coordinates for distance calculation
-                const normX1 = this.xScale.invert(node1.x);
-                const normY1 = this.yScale.invert(node1.y);
-                const normX2 = this.xScale.invert(node2.x);
-                const normY2 = this.yScale.invert(node2.y);
-
-                const dx = normX1 - normX2;
-                const dy = normY1 - normY2;
+                // Calculate pixel distance
+                const dx = node2.x - node1.x;
+                const dy = node2.y - node1.y;
                 const distance = Math.sqrt(dx * dx + dy * dy);
 
                 if (distance < threshold) {
@@ -208,10 +203,10 @@ export class D3MapRenderer {
             }
         }
 
-        console.log(`🔍 Detected ${closePairs.length} close pairs needing collision forces`);
+        console.log(`🔍 Detected ${closePairs.length} close pairs needing collision forces (threshold: ${threshold}px)`);
         if (closePairs.length > 0) {
             closePairs.forEach(([id1, id2, dist]) => {
-                console.log(`  ${id1} ↔ ${id2}: ${dist.toFixed(3)}`);
+                console.log(`  ${id1} ↔ ${id2}: ${dist.toFixed(1)}px`);
             });
         }
 
@@ -241,26 +236,24 @@ export class D3MapRenderer {
                     const distance = Math.sqrt(dx * dx + dy * dy);
 
                     if (distance > 0) {
-                        // Calculate required minimum distance (visual radii + small padding)
-                        const area1 = getNodeSize(node1.tipo);
-                        const area2 = getNodeSize(node2.tipo);
-                        const radius1 = Math.sqrt(area1 / Math.PI) + 3;
-                        const radius2 = Math.sqrt(area2 / Math.PI) + 3;
-                        const minDistance = radius1 + radius2;
+                        // Use pixel threshold as minimum distance for consistent detection and adjustment
+                        const minDistance = 35; // Same as detection threshold
 
                         if (distance < minDistance) {
                             const overlap = minDistance - distance;
                             const adjustment = overlap * 0.5; // Move half the overlap distance
 
-                            // Move nodes apart along the line connecting their centers
-                            const moveX = (dx / distance) * adjustment;
-                            const moveY = (dy / distance) * adjustment;
+                            // Calculate repulsion direction: each node moves away from the other
+                            const unitX = dx / distance;
+                            const unitY = dy / distance;
 
-                            // Apply equal and opposite adjustments
-                            node1.x -= moveX;
-                            node1.y -= moveY;
-                            node2.x += moveX;
-                            node2.y += moveY;
+                            // Node1 moves in opposite direction to the vector from node1 to node2
+                            node1.x -= unitX * adjustment;
+                            node1.y -= unitY * adjustment;
+
+                            // Node2 moves in the direction of the vector from node1 to node2
+                            node2.x += unitX * adjustment;
+                            node2.y += unitY * adjustment;
 
                             // Keep within bounds
                             const minX = this.xScale(-0.95);
@@ -273,7 +266,7 @@ export class D3MapRenderer {
                             node2.x = Math.max(minX, Math.min(maxX, node2.x));
                             node2.y = Math.max(minY, Math.min(maxY, node2.y));
 
-                            console.log(`  Adjusted ${id1} ↔ ${id2}: moved ${adjustment.toFixed(1)}px apart`);
+                            console.log(`  Repelled ${id1} ↔ ${id2}: moved ${adjustment.toFixed(1)}px apart (overlap: ${overlap.toFixed(1)}px)`);
                         }
                     }
                 }
