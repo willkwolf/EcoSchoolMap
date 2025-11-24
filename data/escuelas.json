@@ -1,8 +1,8 @@
 {
   "metadata": {
     "last_updated": "2025-11-20T15:30:00.000000",
-    "engine_version": "v8.1 (Academic Neutral)",
-    "weights_preset": "balanced"
+    "engine_version": "v8.1 (Neutral Académico)",
+    "weights_preset": "equilibrado"
   },
   "nodos": [
     {
@@ -195,7 +195,7 @@
     },
     {
       "id": "conductista",
-      "nombre": "Conductista (Behavioral)",
+      "nombre": "Conductista",
       "categoria": "psicologia_economica",
       "descripcion": "Cuestionamiento de la racionalidad perfecta mediante el estudio de sesgos cognitivos.",
       "autores": [
