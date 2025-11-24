@@ -1,0 +1,694 @@
+🚀 Starting Comprehensive Selective Collision Test
+Loading pragmatic-emphasis zscore variant...
+🔢 Calculating variant: pragmatic-emphasis-zscore
+Sample calculated positions: {
+  marxista: { x: 1, y: 1 },
+  neoclasica: { x: -1, y: -0.8648773914700465 },
+  keynesiana: { x: 0.7280784709686812, y: 0.6081991529317436 }
+}
+✅ Variant calculated: pragmatic-emphasis-zscore
+✅ Data merged successfully
+Data loaded: pragmatic-emphasis-zscore
+✅ TooltipManager initialized
+✅ Force simulation initialized
+✅ D3MapRenderer initialized
+✅ Rendered 8 transition arrows
+✅ Visualization rendered
+🔄 Nodes immediately reset to target positions
+🔄 Updating transition arrows to final node positions...
+✅ Transition arrows updated to final positions
+Collision resolution disabled
+✅ Test environment initialized
+
+🧪 Testing base-none
+🔢 Calculating variant: base-none
+Sample calculated positions: {
+  marxista: { x: 0.7600000000000001, y: 0.6100000000000001 },
+  neoclasica: { x: -0.7999999999999999, y: -0.39999999999999997 },
+  keynesiana: { x: 0.48000000000000004, y: 0.24000000000000002 }
+}
+✅ Variant calculated: base-none
+✅ Data merged successfully
+✅ TooltipManager initialized
+✅ Force simulation initialized
+✅ D3MapRenderer initialized
+✅ Rendered 8 transition arrows
+✅ Visualization rendered
+🔄 Nodes immediately reset to target positions
+🔄 Updating transition arrows to final node positions...
+✅ Transition arrows updated to final positions
+Collision resolution disabled
+🔍 Detected 0 close pairs needing collision forces (threshold: 35px)
+Collision resolution enabled
+  base-none: Avg 0.000, Max 0.000, Large 0, Disappeared 0, Boundary violations 0
+
+🧪 Testing base-zscore
+🔢 Calculating variant: base-zscore
+Sample calculated positions: {
+  marxista: { x: 1, y: 1 },
+  neoclasica: { x: -1, y: -0.8409403241865117 },
+  keynesiana: { x: 0.7307998072464568, y: 0.61374481085665 }
+}
+✅ Variant calculated: base-zscore
+✅ Data merged successfully
+✅ TooltipManager initialized
+✅ Force simulation initialized
+✅ D3MapRenderer initialized
+✅ Rendered 8 transition arrows
+✅ Visualization rendered
+🔄 Nodes immediately reset to target positions
+🔄 Updating transition arrows to final node positions...
+✅ Transition arrows updated to final positions
+Collision resolution disabled
+🔍 Detected 2 close pairs needing collision forces (threshold: 35px)
+  marxista ↔ feminista: 32.9px
+  neoclasica ↔ austriaca: 8.8px
+🔧 Applying immediate collision resolution for 2 pairs
+  Repelled marxista ↔ feminista: moved 1.0px apart (overlap: 2.1px)
+  Repelled neoclasica ↔ austriaca: moved 13.1px apart (overlap: 26.2px)
+🔄 Updating transition arrows to final node positions...
+✅ Transition arrows updated to final positions
+Collision resolution enabled
+  base-zscore: Avg 0.022, Max 0.070, Large 0, Disappeared 0, Boundary violations 0
+
+🧪 Testing base-percentile
+🔢 Calculating variant: base-percentile
+Sample calculated positions: {
+  marxista: { x: 1, y: 1 },
+  neoclasica: { x: -1, y: -0.6363636363636364 },
+  keynesiana: { x: 0.4545454545454546, y: 0.2727272727272727 }
+}
+✅ Variant calculated: base-percentile
+✅ Data merged successfully
+✅ TooltipManager initialized
+✅ Force simulation initialized
+✅ D3MapRenderer initialized
+✅ Rendered 8 transition arrows
+✅ Visualization rendered
+🔄 Nodes immediately reset to target positions
+🔄 Updating transition arrows to final node positions...
+✅ Transition arrows updated to final positions
+Collision resolution disabled
+🔍 Detected 0 close pairs needing collision forces (threshold: 35px)
+Collision resolution enabled
+  base-percentile: Avg 0.000, Max 0.000, Large 0, Disappeared 0, Boundary violations 0
+
+🧪 Testing base-minmax
+🔢 Calculating variant: base-minmax
+Sample calculated positions: {
+  marxista: { x: 1, y: 1 },
+  neoclasica: { x: -1, y: -0.6159999999999999 },
+  keynesiana: { x: 0.641025641025641, y: 0.4079999999999999 }
+}
+✅ Variant calculated: base-minmax
+✅ Data merged successfully
+✅ TooltipManager initialized
+✅ Force simulation initialized
+✅ D3MapRenderer initialized
+✅ Rendered 8 transition arrows
+✅ Visualization rendered
+🔄 Nodes immediately reset to target positions
+🔄 Updating transition arrows to final node positions...
+✅ Transition arrows updated to final positions
+Collision resolution disabled
+🔍 Detected 0 close pairs needing collision forces (threshold: 35px)
+Collision resolution enabled
+  base-minmax: Avg 0.000, Max 0.000, Large 0, Disappeared 0, Boundary violations 0
+
+🧪 Testing state-emphasis-none
+🔢 Calculating variant: state-emphasis-none
+Sample calculated positions: {
+  marxista: { x: 0.7299999999999999, y: 0.6100000000000001 },
+  neoclasica: { x: -0.7928571428571428, y: -0.39999999999999997 },
+  keynesiana: { x: 0.48000000000000004, y: 0.24000000000000002 }
+}
+✅ Variant calculated: state-emphasis-none
+✅ Data merged successfully
+✅ TooltipManager initialized
+✅ Force simulation initialized
+✅ D3MapRenderer initialized
+✅ Rendered 8 transition arrows
+✅ Visualization rendered
+🔄 Nodes immediately reset to target positions
+🔄 Updating transition arrows to final node positions...
+✅ Transition arrows updated to final positions
+Collision resolution disabled
+🔍 Detected 0 close pairs needing collision forces (threshold: 35px)
+Collision resolution enabled
+  state-emphasis-none: Avg 0.000, Max 0.000, Large 0, Disappeared 0, Boundary violations 0
+
+🧪 Testing state-emphasis-zscore
+🔢 Calculating variant: state-emphasis-zscore
+Sample calculated positions: {
+  marxista: { x: 1, y: 1 },
+  neoclasica: { x: -1, y: -0.8409403241865117 },
+  keynesiana: { x: 0.7502725132384209, y: 0.61374481085665 }
+}
+✅ Variant calculated: state-emphasis-zscore
+✅ Data merged successfully
+✅ TooltipManager initialized
+✅ Force simulation initialized
+✅ D3MapRenderer initialized
+✅ Rendered 8 transition arrows
+✅ Visualization rendered
+🔄 Nodes immediately reset to target positions
+🔄 Updating transition arrows to final node positions...
+✅ Transition arrows updated to final positions
+Collision resolution disabled
+🔍 Detected 2 close pairs needing collision forces (threshold: 35px)
+  marxista ↔ feminista: 25.0px
+  neoclasica ↔ austriaca: 8.9px
+🔧 Applying immediate collision resolution for 2 pairs
+  Repelled marxista ↔ feminista: moved 5.0px apart (overlap: 10.0px)
+  Repelled neoclasica ↔ austriaca: moved 13.1px apart (overlap: 26.1px)
+🔄 Updating transition arrows to final node positions...
+✅ Transition arrows updated to final positions
+Collision resolution enabled
+  state-emphasis-zscore: Avg 0.022, Max 0.071, Large 0, Disappeared 0, Boundary violations 0
+
+🧪 Testing state-emphasis-percentile
+🔢 Calculating variant: state-emphasis-percentile
+Sample calculated positions: {
+  marxista: { x: 1, y: 1 },
+  neoclasica: { x: -1, y: -0.6363636363636364 },
+  keynesiana: { x: 0.4545454545454546, y: 0.2727272727272727 }
+}
+✅ Variant calculated: state-emphasis-percentile
+✅ Data merged successfully
+✅ TooltipManager initialized
+✅ Force simulation initialized
+✅ D3MapRenderer initialized
+✅ Rendered 8 transition arrows
+✅ Visualization rendered
+🔄 Nodes immediately reset to target positions
+🔄 Updating transition arrows to final node positions...
+✅ Transition arrows updated to final positions
+Collision resolution disabled
+🔍 Detected 0 close pairs needing collision forces (threshold: 35px)
+Collision resolution enabled
+  state-emphasis-percentile: Avg 0.000, Max 0.000, Large 0, Disappeared 0, Boundary violations 0
+
+🧪 Testing state-emphasis-minmax
+🔢 Calculating variant: state-emphasis-minmax
+Sample calculated positions: {
+  marxista: { x: 1, y: 1 },
+  neoclasica: { x: -1, y: -0.6159999999999999 },
+  keynesiana: { x: 0.6716697936210134, y: 0.4079999999999999 }
+}
+✅ Variant calculated: state-emphasis-minmax
+✅ Data merged successfully
+✅ TooltipManager initialized
+✅ Force simulation initialized
+✅ D3MapRenderer initialized
+✅ Rendered 8 transition arrows
+✅ Visualization rendered
+🔄 Nodes immediately reset to target positions
+🔄 Updating transition arrows to final node positions...
+✅ Transition arrows updated to final positions
+Collision resolution disabled
+🔍 Detected 0 close pairs needing collision forces (threshold: 35px)
+Collision resolution enabled
+  state-emphasis-minmax: Avg 0.000, Max 0.000, Large 0, Disappeared 0, Boundary violations 0
+
+🧪 Testing equity-emphasis-none
+🔢 Calculating variant: equity-emphasis-none
+Sample calculated positions: {
+  marxista: { x: 0.7600000000000001, y: 0.565 },
+  neoclasica: { x: -0.7999999999999999, y: -0.4000000000000001 },
+  keynesiana: { x: 0.48000000000000004, y: 0.21000000000000002 }
+}
+✅ Variant calculated: equity-emphasis-none
+✅ Data merged successfully
+✅ TooltipManager initialized
+✅ Force simulation initialized
+✅ D3MapRenderer initialized
+✅ Rendered 8 transition arrows
+✅ Visualization rendered
+🔄 Nodes immediately reset to target positions
+🔄 Updating transition arrows to final node positions...
+✅ Transition arrows updated to final positions
+Collision resolution disabled
+🔍 Detected 0 close pairs needing collision forces (threshold: 35px)
+Collision resolution enabled
+  equity-emphasis-none: Avg 0.000, Max 0.000, Large 0, Disappeared 0, Boundary violations 0
+
+🧪 Testing equity-emphasis-zscore
+🔢 Calculating variant: equity-emphasis-zscore
+Sample calculated positions: {
+  marxista: { x: 1, y: 1 },
+  neoclasica: { x: -1, y: -0.8437232251232827 },
+  keynesiana: { x: 0.7307998072464568, y: 0.5848004407747588 }
+}
+✅ Variant calculated: equity-emphasis-zscore
+✅ Data merged successfully
+✅ TooltipManager initialized
+✅ Force simulation initialized
+✅ D3MapRenderer initialized
+✅ Rendered 8 transition arrows
+✅ Visualization rendered
+🔄 Nodes immediately reset to target positions
+🔄 Updating transition arrows to final node positions...
+✅ Transition arrows updated to final positions
+Collision resolution disabled
+🔍 Detected 2 close pairs needing collision forces (threshold: 35px)
+  marxista ↔ feminista: 32.9px
+  neoclasica ↔ austriaca: 15.4px
+🔧 Applying immediate collision resolution for 2 pairs
+  Repelled marxista ↔ feminista: moved 1.0px apart (overlap: 2.1px)
+  Repelled neoclasica ↔ austriaca: moved 9.8px apart (overlap: 19.6px)
+🔄 Updating transition arrows to final node positions...
+✅ Transition arrows updated to final positions
+Collision resolution enabled
+  equity-emphasis-zscore: Avg 0.020, Max 0.070, Large 0, Disappeared 0, Boundary violations 0
+
+🧪 Testing equity-emphasis-percentile
+🔢 Calculating variant: equity-emphasis-percentile
+Sample calculated positions: {
+  marxista: { x: 1, y: 0.8181818181818181 },
+  neoclasica: { x: -1, y: -0.6363636363636364 },
+  keynesiana: { x: 0.4545454545454546, y: 0.2727272727272727 }
+}
+✅ Variant calculated: equity-emphasis-percentile
+✅ Data merged successfully
+✅ TooltipManager initialized
+✅ Force simulation initialized
+✅ D3MapRenderer initialized
+✅ Rendered 8 transition arrows
+✅ Visualization rendered
+🔄 Nodes immediately reset to target positions
+🔄 Updating transition arrows to final node positions...
+✅ Transition arrows updated to final positions
+Collision resolution disabled
+🔍 Detected 0 close pairs needing collision forces (threshold: 35px)
+Collision resolution enabled
+  equity-emphasis-percentile: Avg 0.000, Max 0.000, Large 0, Disappeared 0, Boundary violations 0
+
+🧪 Testing equity-emphasis-minmax
+🔢 Calculating variant: equity-emphasis-minmax
+Sample calculated positions: {
+  marxista: { x: 1, y: 0.9335722819593788 },
+  neoclasica: { x: -1, y: -0.6344086021505377 },
+  keynesiana: { x: 0.641025641025641, y: 0.3567502986857827 }
+}
+✅ Variant calculated: equity-emphasis-minmax
+✅ Data merged successfully
+✅ TooltipManager initialized
+✅ Force simulation initialized
+✅ D3MapRenderer initialized
+✅ Rendered 8 transition arrows
+✅ Visualization rendered
+🔄 Nodes immediately reset to target positions
+🔄 Updating transition arrows to final node positions...
+✅ Transition arrows updated to final positions
+Collision resolution disabled
+🔍 Detected 0 close pairs needing collision forces (threshold: 35px)
+Collision resolution enabled
+  equity-emphasis-minmax: Avg 0.000, Max 0.000, Large 0, Disappeared 0, Boundary violations 0
+
+🧪 Testing market-emphasis-none
+🔢 Calculating variant: market-emphasis-none
+Sample calculated positions: {
+  marxista: { x: 0.72, y: 0.6100000000000001 },
+  neoclasica: { x: -0.7833333333333332, y: -0.39999999999999997 },
+  keynesiana: { x: 0.5, y: 0.24000000000000002 }
+}
+✅ Variant calculated: market-emphasis-none
+✅ Data merged successfully
+✅ TooltipManager initialized
+✅ Force simulation initialized
+✅ D3MapRenderer initialized
+✅ Rendered 8 transition arrows
+✅ Visualization rendered
+🔄 Nodes immediately reset to target positions
+🔄 Updating transition arrows to final node positions...
+✅ Transition arrows updated to final positions
+Collision resolution disabled
+🔍 Detected 0 close pairs needing collision forces (threshold: 35px)
+Collision resolution enabled
+  market-emphasis-none: Avg 0.000, Max 0.000, Large 0, Disappeared 0, Boundary violations 0
+
+🧪 Testing market-emphasis-zscore
+🔢 Calculating variant: market-emphasis-zscore
+Sample calculated positions: {
+  marxista: { x: 1, y: 1 },
+  neoclasica: { x: -1, y: -0.8409403241865117 },
+  keynesiana: { x: 0.7895477592920749, y: 0.61374481085665 }
+}
+✅ Variant calculated: market-emphasis-zscore
+✅ Data merged successfully
+✅ TooltipManager initialized
+✅ Force simulation initialized
+✅ D3MapRenderer initialized
+✅ Rendered 8 transition arrows
+✅ Visualization rendered
+🔄 Nodes immediately reset to target positions
+🔄 Updating transition arrows to final node positions...
+✅ Transition arrows updated to final positions
+Collision resolution disabled
+🔍 Detected 2 close pairs needing collision forces (threshold: 35px)
+  marxista ↔ feminista: 25.6px
+  neoclasica ↔ austriaca: 9.0px
+🔧 Applying immediate collision resolution for 2 pairs
+  Repelled marxista ↔ feminista: moved 4.7px apart (overlap: 9.4px)
+  Repelled neoclasica ↔ austriaca: moved 13.0px apart (overlap: 26.0px)
+🔄 Updating transition arrows to final node positions...
+✅ Transition arrows updated to final positions
+Collision resolution enabled
+  market-emphasis-zscore: Avg 0.022, Max 0.071, Large 0, Disappeared 0, Boundary violations 0
+
+🧪 Testing market-emphasis-percentile
+🔢 Calculating variant: market-emphasis-percentile
+Sample calculated positions: {
+  marxista: { x: 1, y: 1 },
+  neoclasica: { x: -1, y: -0.6363636363636364 },
+  keynesiana: { x: 0.4545454545454546, y: 0.2727272727272727 }
+}
+✅ Variant calculated: market-emphasis-percentile
+✅ Data merged successfully
+✅ TooltipManager initialized
+✅ Force simulation initialized
+✅ D3MapRenderer initialized
+✅ Rendered 8 transition arrows
+✅ Visualization rendered
+🔄 Nodes immediately reset to target positions
+🔄 Updating transition arrows to final node positions...
+✅ Transition arrows updated to final positions
+Collision resolution disabled
+🔍 Detected 0 close pairs needing collision forces (threshold: 35px)
+Collision resolution enabled
+  market-emphasis-percentile: Avg 0.000, Max 0.000, Large 0, Disappeared 0, Boundary violations 0
+
+🧪 Testing market-emphasis-minmax
+🔢 Calculating variant: market-emphasis-minmax
+Sample calculated positions: {
+  marxista: { x: 1, y: 1 },
+  neoclasica: { x: -1, y: -0.6159999999999999 },
+  keynesiana: { x: 0.7073170731707317, y: 0.4079999999999999 }
+}
+✅ Variant calculated: market-emphasis-minmax
+✅ Data merged successfully
+✅ TooltipManager initialized
+✅ Force simulation initialized
+✅ D3MapRenderer initialized
+✅ Rendered 8 transition arrows
+✅ Visualization rendered
+🔄 Nodes immediately reset to target positions
+🔄 Updating transition arrows to final node positions...
+✅ Transition arrows updated to final positions
+Collision resolution disabled
+🔍 Detected 0 close pairs needing collision forces (threshold: 35px)
+Collision resolution enabled
+  market-emphasis-minmax: Avg 0.000, Max 0.000, Large 0, Disappeared 0, Boundary violations 0
+
+🧪 Testing growth-emphasis-none
+🔢 Calculating variant: growth-emphasis-none
+Sample calculated positions: {
+  marxista: { x: 0.7600000000000001, y: 0.54 },
+  neoclasica: { x: -0.7999999999999999, y: -0.3833333333333333 },
+  keynesiana: { x: 0.48000000000000004, y: 0.23000000000000004 }
+}
+✅ Variant calculated: growth-emphasis-none
+✅ Data merged successfully
+✅ TooltipManager initialized
+✅ Force simulation initialized
+✅ D3MapRenderer initialized
+✅ Rendered 8 transition arrows
+✅ Visualization rendered
+🔄 Nodes immediately reset to target positions
+🔄 Updating transition arrows to final node positions...
+✅ Transition arrows updated to final positions
+Collision resolution disabled
+🔍 Detected 0 close pairs needing collision forces (threshold: 35px)
+Collision resolution enabled
+  growth-emphasis-none: Avg 0.000, Max 0.000, Large 0, Disappeared 0, Boundary violations 0
+
+🧪 Testing growth-emphasis-zscore
+🔢 Calculating variant: growth-emphasis-zscore
+Sample calculated positions: {
+  marxista: { x: 1, y: 1 },
+  neoclasica: { x: -1, y: -0.785487776458129 },
+  keynesiana: { x: 0.7307998072464568, y: 0.6294526406730736 }
+}
+✅ Variant calculated: growth-emphasis-zscore
+✅ Data merged successfully
+✅ TooltipManager initialized
+✅ Force simulation initialized
+✅ D3MapRenderer initialized
+✅ Rendered 8 transition arrows
+✅ Visualization rendered
+🔄 Nodes immediately reset to target positions
+🔄 Updating transition arrows to final node positions...
+✅ Transition arrows updated to final positions
+Collision resolution disabled
+🔍 Detected 2 close pairs needing collision forces (threshold: 35px)
+  marxista ↔ feminista: 33.2px
+  neoclasica ↔ austriaca: 4.0px
+🔧 Applying immediate collision resolution for 2 pairs
+  Repelled marxista ↔ feminista: moved 0.9px apart (overlap: 1.8px)
+  Repelled neoclasica ↔ austriaca: moved 15.5px apart (overlap: 31.0px)
+🔄 Updating transition arrows to final node positions...
+✅ Transition arrows updated to final positions
+Collision resolution enabled
+  growth-emphasis-zscore: Avg 0.023, Max 0.077, Large 0, Disappeared 0, Boundary violations 0
+
+🧪 Testing growth-emphasis-percentile
+🔢 Calculating variant: growth-emphasis-percentile
+Sample calculated positions: {
+  marxista: { x: 1, y: 0.8181818181818181 },
+  neoclasica: { x: -1, y: -0.2727272727272727 },
+  keynesiana: { x: 0.4545454545454546, y: 0.2727272727272727 }
+}
+✅ Variant calculated: growth-emphasis-percentile
+✅ Data merged successfully
+✅ TooltipManager initialized
+✅ Force simulation initialized
+✅ D3MapRenderer initialized
+✅ Rendered 8 transition arrows
+✅ Visualization rendered
+🔄 Nodes immediately reset to target positions
+🔄 Updating transition arrows to final node positions...
+✅ Transition arrows updated to final positions
+Collision resolution disabled
+🔍 Detected 0 close pairs needing collision forces (threshold: 35px)
+Collision resolution enabled
+  growth-emphasis-percentile: Avg 0.000, Max 0.000, Large 0, Disappeared 0, Boundary violations 0
+
+🧪 Testing growth-emphasis-minmax
+🔢 Calculating variant: growth-emphasis-minmax
+Sample calculated positions: {
+  marxista: { x: 1, y: 0.8939037433155084 },
+  neoclasica: { x: -1, y: -0.6071301247771835 },
+  keynesiana: { x: 0.641025641025641, y: 0.3899465240641713 }
+}
+✅ Variant calculated: growth-emphasis-minmax
+✅ Data merged successfully
+✅ TooltipManager initialized
+✅ Force simulation initialized
+✅ D3MapRenderer initialized
+✅ Rendered 8 transition arrows
+✅ Visualization rendered
+🔄 Nodes immediately reset to target positions
+🔄 Updating transition arrows to final node positions...
+✅ Transition arrows updated to final positions
+Collision resolution disabled
+🔍 Detected 0 close pairs needing collision forces (threshold: 35px)
+Collision resolution enabled
+  growth-emphasis-minmax: Avg 0.000, Max 0.000, Large 0, Disappeared 0, Boundary violations 0
+
+🧪 Testing historical-emphasis-none
+🔢 Calculating variant: historical-emphasis-none
+Sample calculated positions: {
+  marxista: { x: 0.72, y: 0.6100000000000001 },
+  neoclasica: { x: -0.8000000000000002, y: -0.39999999999999997 },
+  keynesiana: { x: 0.48, y: 0.24000000000000002 }
+}
+✅ Variant calculated: historical-emphasis-none
+✅ Data merged successfully
+✅ TooltipManager initialized
+✅ Force simulation initialized
+✅ D3MapRenderer initialized
+✅ Rendered 8 transition arrows
+✅ Visualization rendered
+🔄 Nodes immediately reset to target positions
+🔄 Updating transition arrows to final node positions...
+✅ Transition arrows updated to final positions
+Collision resolution disabled
+🔍 Detected 0 close pairs needing collision forces (threshold: 35px)
+Collision resolution enabled
+  historical-emphasis-none: Avg 0.000, Max 0.000, Large 0, Disappeared 0, Boundary violations 0
+
+🧪 Testing historical-emphasis-zscore
+🔢 Calculating variant: historical-emphasis-zscore
+Sample calculated positions: {
+  marxista: { x: 1, y: 1 },
+  neoclasica: { x: -1, y: -0.8409403241865117 },
+  keynesiana: { x: 0.7613175721519252, y: 0.61374481085665 }
+}
+✅ Variant calculated: historical-emphasis-zscore
+✅ Data merged successfully
+✅ TooltipManager initialized
+✅ Force simulation initialized
+✅ D3MapRenderer initialized
+✅ Rendered 8 transition arrows
+✅ Visualization rendered
+🔄 Nodes immediately reset to target positions
+🔄 Updating transition arrows to final node positions...
+✅ Transition arrows updated to final positions
+Collision resolution disabled
+🔍 Detected 2 close pairs needing collision forces (threshold: 35px)
+  marxista ↔ feminista: 12.7px
+  neoclasica ↔ austriaca: 8.8px
+🔧 Applying immediate collision resolution for 2 pairs
+  Repelled marxista ↔ feminista: moved 11.2px apart (overlap: 22.3px)
+  Repelled neoclasica ↔ austriaca: moved 13.1px apart (overlap: 26.2px)
+🔄 Updating transition arrows to final node positions...
+✅ Transition arrows updated to final positions
+Collision resolution enabled
+  historical-emphasis-zscore: Avg 0.022, Max 0.070, Large 0, Disappeared 0, Boundary violations 0
+
+🧪 Testing historical-emphasis-percentile
+🔢 Calculating variant: historical-emphasis-percentile
+Sample calculated positions: {
+  marxista: { x: 1, y: 1 },
+  neoclasica: { x: -1, y: -0.6363636363636364 },
+  keynesiana: { x: 0.4545454545454546, y: 0.2727272727272727 }
+}
+✅ Variant calculated: historical-emphasis-percentile
+✅ Data merged successfully
+✅ TooltipManager initialized
+✅ Force simulation initialized
+✅ D3MapRenderer initialized
+✅ Rendered 8 transition arrows
+✅ Visualization rendered
+🔄 Nodes immediately reset to target positions
+🔄 Updating transition arrows to final node positions...
+✅ Transition arrows updated to final positions
+Collision resolution disabled
+🔍 Detected 0 close pairs needing collision forces (threshold: 35px)
+Collision resolution enabled
+  historical-emphasis-percentile: Avg 0.000, Max 0.000, Large 0, Disappeared 0, Boundary violations 0
+
+🧪 Testing historical-emphasis-minmax
+🔢 Calculating variant: historical-emphasis-minmax
+Sample calculated positions: {
+  marxista: { x: 1, y: 1 },
+  neoclasica: { x: -1, y: -0.6159999999999999 },
+  keynesiana: { x: 0.6842105263157898, y: 0.4079999999999999 }
+}
+✅ Variant calculated: historical-emphasis-minmax
+✅ Data merged successfully
+✅ TooltipManager initialized
+✅ Force simulation initialized
+✅ D3MapRenderer initialized
+✅ Rendered 8 transition arrows
+✅ Visualization rendered
+🔄 Nodes immediately reset to target positions
+🔄 Updating transition arrows to final node positions...
+✅ Transition arrows updated to final positions
+Collision resolution disabled
+🔍 Detected 0 close pairs needing collision forces (threshold: 35px)
+Collision resolution enabled
+  historical-emphasis-minmax: Avg 0.000, Max 0.000, Large 0, Disappeared 0, Boundary violations 0
+
+🧪 Testing pragmatic-emphasis-none
+🔢 Calculating variant: pragmatic-emphasis-none
+Sample calculated positions: {
+  marxista: { x: 0.748, y: 0.59 },
+  neoclasica: { x: -0.8081081081081081, y: -0.40810810810810816 },
+  keynesiana: { x: 0.47, y: 0.23 }
+}
+✅ Variant calculated: pragmatic-emphasis-none
+✅ Data merged successfully
+✅ TooltipManager initialized
+✅ Force simulation initialized
+✅ D3MapRenderer initialized
+✅ Rendered 8 transition arrows
+✅ Visualization rendered
+🔄 Nodes immediately reset to target positions
+🔄 Updating transition arrows to final node positions...
+✅ Transition arrows updated to final positions
+Collision resolution disabled
+🔍 Detected 0 close pairs needing collision forces (threshold: 35px)
+Collision resolution enabled
+  pragmatic-emphasis-none: Avg 0.000, Max 0.000, Large 0, Disappeared 0, Boundary violations 0
+
+🧪 Testing pragmatic-emphasis-zscore
+🔢 Calculating variant: pragmatic-emphasis-zscore
+Sample calculated positions: {
+  marxista: { x: 1, y: 1 },
+  neoclasica: { x: -1, y: -0.8648773914700465 },
+  keynesiana: { x: 0.7280784709686812, y: 0.6081991529317436 }
+}
+✅ Variant calculated: pragmatic-emphasis-zscore
+✅ Data merged successfully
+✅ TooltipManager initialized
+✅ Force simulation initialized
+✅ D3MapRenderer initialized
+✅ Rendered 8 transition arrows
+✅ Visualization rendered
+🔄 Nodes immediately reset to target positions
+🔄 Updating transition arrows to final node positions...
+✅ Transition arrows updated to final positions
+Collision resolution disabled
+🔍 Detected 2 close pairs needing collision forces (threshold: 35px)
+  marxista ↔ feminista: 21.5px
+  neoclasica ↔ austriaca: 19.4px
+🔧 Applying immediate collision resolution for 2 pairs
+  Repelled marxista ↔ feminista: moved 6.7px apart (overlap: 13.5px)
+  Repelled neoclasica ↔ austriaca: moved 7.8px apart (overlap: 15.6px)
+🔄 Updating transition arrows to final node positions...
+✅ Transition arrows updated to final positions
+Collision resolution enabled
+  pragmatic-emphasis-zscore: Avg 0.020, Max 0.071, Large 0, Disappeared 0, Boundary violations 0
+
+🧪 Testing pragmatic-emphasis-percentile
+🔢 Calculating variant: pragmatic-emphasis-percentile
+Sample calculated positions: {
+  marxista: { x: 1, y: 1 },
+  neoclasica: { x: -1, y: -0.6363636363636364 },
+  keynesiana: { x: 0.4545454545454546, y: 0.2727272727272727 }
+}
+✅ Variant calculated: pragmatic-emphasis-percentile
+✅ Data merged successfully
+✅ TooltipManager initialized
+✅ Force simulation initialized
+✅ D3MapRenderer initialized
+✅ Rendered 8 transition arrows
+✅ Visualization rendered
+🔄 Nodes immediately reset to target positions
+🔄 Updating transition arrows to final node positions...
+✅ Transition arrows updated to final positions
+Collision resolution disabled
+🔍 Detected 0 close pairs needing collision forces (threshold: 35px)
+Collision resolution enabled
+  pragmatic-emphasis-percentile: Avg 0.000, Max 0.000, Large 0, Disappeared 0, Boundary violations 0
+
+🧪 Testing pragmatic-emphasis-minmax
+🔢 Calculating variant: pragmatic-emphasis-minmax
+Sample calculated positions: {
+  marxista: { x: 1, y: 1 },
+  neoclasica: { x: -1, y: -0.633564825054187 },
+  keynesiana: { x: 0.6426983465332776, y: 0.41080196399345326 }
+}
+✅ Variant calculated: pragmatic-emphasis-minmax
+✅ Data merged successfully
+✅ TooltipManager initialized
+✅ Force simulation initialized
+✅ D3MapRenderer initialized
+✅ Rendered 8 transition arrows
+✅ Visualization rendered
+🔄 Nodes immediately reset to target positions
+🔄 Updating transition arrows to final node positions...
+✅ Transition arrows updated to final positions
+Collision resolution disabled
+🔍 Detected 0 close pairs needing collision forces (threshold: 35px)
+Collision resolution enabled
+  pragmatic-emphasis-minmax: Avg 0.000, Max 0.000, Large 0, Disappeared 0, Boundary violations 0
+
+📋 COMPREHENSIVE TEST RESULTS:
+Total variants tested: 28
+Passed: 28
+Failed: 0
+✅ ALL TESTS PASSED: Selective collision working across all variants
+🧹 Test environment cleaned up
+✅ Comprehensive test completed
