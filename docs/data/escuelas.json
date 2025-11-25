@@ -519,6 +519,14 @@
       "S": {
         "id_nodo": "schumpeteriana",
         "nombre_completo": "Schumpeteriana"
+      },
+      "F": {
+        "id_nodo": "feminista",
+        "nombre_completo": "Feminista"
+      },
+      "E": {
+        "id_nodo": "ecologica",
+        "nombre_completo": "Ecológica"
       }
     },
     "guia_tematica": [
@@ -623,6 +631,26 @@
         "siglas": [
           "C",
           "K"
+        ]
+      },
+      {
+        "titulo": "Economía del cuidado y desigualdad de género",
+        "descripcion": "Para explorar el trabajo reproductivo no remunerado y la desigualdad de género en la economía",
+        "siglas": [
+          "F",
+          "M",
+          "K",
+          "Co"
+        ]
+      },
+      {
+        "titulo": "Sostenibilidad y límites planetarios",
+        "descripcion": "Para comprender la economía dentro de límites ecológicos y sociales",
+        "siglas": [
+          "E",
+          "D",
+          "K",
+          "I"
         ]
       }
     ],
