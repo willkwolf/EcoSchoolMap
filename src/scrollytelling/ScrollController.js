@@ -4,8 +4,12 @@
  */
 
 export class ScrollController {
-    constructor(sections = []) {
+    constructor(sections = [], options = {}) {
         this.sections = sections;
+        this.options = {
+            navAriaLabel: 'Section navigation',
+            ...options
+        };
         this.activeSection = null;
         this.observers = [];
         this.navIndicators = [];
@@ -30,12 +34,12 @@ export class ScrollController {
     createScrollIndicators() {
         const nav = document.createElement('nav');
         nav.className = 'scroll-indicators';
-        nav.setAttribute('aria-label', 'Navegación de secciones');
+        nav.setAttribute('aria-label', this.options.navAriaLabel);
 
         this.sections.forEach((section, index) => {
             const indicator = document.createElement('button');
             indicator.className = 'scroll-indicator';
-            indicator.setAttribute('aria-label', `Ir a ${section.name}`);
+            indicator.setAttribute('aria-label', section.ariaLabel || section.name);
             indicator.dataset.section = section.id;
 
             indicator.addEventListener('click', () => {
@@ -55,8 +59,8 @@ export class ScrollController {
     setupIntersectionObservers() {
         const options = {
             root: null,
-            rootMargin: '-20% 0px -20% 0px',
-            threshold: 0.3
+            rootMargin: '-8% 0px -68% 0px',
+            threshold: 0.12
         };
 
         this.sections.forEach((section, index) => {
@@ -133,9 +137,10 @@ export class ScrollController {
         const element = document.getElementById(sectionId);
 
         if (element) {
-            element.scrollIntoView({
-                behavior: 'smooth',
-                block: 'center'
+            const offsetTop = window.scrollY + element.getBoundingClientRect().top - 24;
+            window.scrollTo({
+                top: Math.max(offsetTop, 0),
+                behavior: 'smooth'
             });
         }
     }

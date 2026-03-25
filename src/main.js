@@ -12,6 +12,15 @@ import { saveSvgAsPng } from 'save-svg-as-png';
 import { D3MapRenderer } from './components/D3MapRenderer.js';
 import { ScrollController } from './scrollytelling/ScrollController.js';
 import { loadVariantData } from './data/loader.js';
+import {
+    applyLocalizedContent,
+    getCurrentLocale,
+    getSections,
+    initializeLocale,
+    onLocaleChange,
+    setLocale,
+    t
+} from './i18n/index.js';
 
 console.log('🚀 Mapa de Escuelas Económicas - D3.js Version');
 
@@ -19,18 +28,7 @@ let mapRenderer = null;
 let baseData = null;
 let scrollController = null;
 let isLoadingVariant = false;
-
-// Define sections for scrollytelling
-const sections = [
-    { id: 'hero', name: 'Introducción' },
-    { id: 'guide', name: 'Guía de Lectura' },
-    { id: 'timeline', name: 'Línea de Tiempo' },
-    { id: 'cocktails', name: 'Cocteles Temáticos' },
-    { id: 'visualization', name: 'Mapa Interactivo' },
-    { id: 'learning-path', name: 'Ruta de Aprendizaje' },
-    { id: 'applications', name: 'Aplicaciones Prácticas' },
-    { id: 'pedagogical-legend', name: 'Leyenda Pedagógica' }
-];
+let localeListenerRegistered = false;
 
 // Initialize app
 async function init() {
@@ -42,14 +40,18 @@ async function init() {
         console.log('Initial data loaded:', baseData);
 
         // Initialize D3 renderer
-        mapRenderer = new D3MapRenderer('#map-container', baseData);
+        mapRenderer = new D3MapRenderer('#map-container', baseData, {
+            locale: getCurrentLocale()
+        });
         mapRenderer.render();
 
         // Setup variant selectors
         setupVariantControls();
 
         // Initialize scrollytelling
-        scrollController = new ScrollController(sections);
+        scrollController = new ScrollController(getSections(), {
+            navAriaLabel: t('scroll.navAriaLabel')
+        });
 
         console.log('✅ App initialized successfully');
     } catch (error) {
@@ -96,7 +98,7 @@ function setupVariantControls() {
                 loadingIndicator.style.color = '';
                 const pElement = loadingIndicator.querySelector('p');
                 if (pElement) {
-                    pElement.textContent = 'Cargando variante...';
+                    pElement.textContent = t('ui.loadingVariant');
                 }
             }
 
@@ -120,7 +122,7 @@ function setupVariantControls() {
             if (loadingIndicator) {
                 const errorText = loadingIndicator.querySelector('p');
                 if (errorText) {
-                    errorText.textContent = 'Error al cargar variante. Intenta de nuevo.';
+                    errorText.textContent = t('ui.loadingError');
                     errorText.style.color = '#e74c3c';
                 }
                 const spinner = loadingIndicator.querySelector('.spinner');
@@ -155,11 +157,7 @@ function setupVariantControls() {
     collisionToggle.addEventListener('change', () => {
         const enabled = collisionToggle.checked;
         mapRenderer.setCollisionEnabled(enabled);
-
-        // Update toggle label
-        const label = collisionToggle.parentElement;
-        const textNode = label.lastChild;
-        textNode.textContent = enabled ? 'Permitir Colisiones' : '(No Permitir Colisiones)';
+        updateCollisionToggleLabel(enabled);
 
         console.log(`Collision forces ${enabled ? 'enabled' : 'disabled'}`);
     });
@@ -205,7 +203,7 @@ function setupVariantControls() {
         if (svg) {
             const preset = presetDropdown.value;
             const normalization = normalizationDropdown.value;
-            const filename = `mapa-escuelas-${preset}-${normalization}.png`;
+            const filename = `${t('ui.downloadFilenamePrefix')}-${preset}-${normalization}.png`;
 
             saveSvgAsPng(svg, filename, {
                 scale: 2,
@@ -216,9 +214,65 @@ function setupVariantControls() {
     });
 }
 
+function updateCollisionToggleLabel(enabled) {
+    const labelText = document.querySelector('.checkbox-label-text');
+    if (labelText) {
+        labelText.textContent = enabled ? t('ui.collisionEnabled') : t('ui.collisionDisabled');
+    }
+}
+
+function bindLanguageSelector() {
+    const languageSelector = document.getElementById('language-selector');
+    if (!languageSelector) {
+        return;
+    }
+
+    languageSelector.value = getCurrentLocale();
+    languageSelector.addEventListener('change', (event) => {
+        setLocale(event.target.value);
+    });
+}
+
+function cleanupApp() {
+    if (scrollController) {
+        scrollController.destroy();
+        scrollController = null;
+    }
+
+    if (mapRenderer?.tooltipManager) {
+        mapRenderer.tooltipManager.destroy();
+    }
+
+    mapRenderer = null;
+}
+
+async function bootstrapApp() {
+    cleanupApp();
+    applyLocalizedContent(getCurrentLocale());
+    bindLanguageSelector();
+    await init();
+}
+
+function registerLocaleListener() {
+    if (localeListenerRegistered) {
+        return;
+    }
+
+    onLocaleChange(() => {
+        bootstrapApp();
+    });
+    localeListenerRegistered = true;
+}
+
 // Start app when DOM is ready
 if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
+    document.addEventListener('DOMContentLoaded', () => {
+        initializeLocale();
+        registerLocaleListener();
+        bootstrapApp();
+    });
 } else {
-    init();
+    initializeLocale();
+    registerLocaleListener();
+    bootstrapApp();
 }

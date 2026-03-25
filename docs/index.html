@@ -6,13 +6,22 @@
     <meta name="description" content="Mapa interactivo de escuelas políticas económicas con D3.js y scrollytelling">
     <title>Mapa de Escuelas Económicas | Visualización Interactiva</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-  <script type="module" crossorigin src="./assets/main-_ADHHfsg.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/main-KSF26PJR.css">
+  <script type="module" crossorigin src="./assets/main-WqgoYHG4.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/main-DIH_bpBh.css">
 </head>
 <body>
     <!-- Hero Section -->
     <section id="hero" class="hero-section">
         <div class="hero-content">
+            <div class="hero-topbar">
+                <div class="language-switcher">
+                    <label for="language-selector">Idioma</label>
+                    <select id="language-selector" aria-label="Seleccionar idioma">
+                        <option value="es" selected>Español</option>
+                        <option value="en">English</option>
+                    </select>
+                </div>
+            </div>
             <h1>Mapa de Escuelas Económicas</h1>
             <p class="hero-subtitle">Una visualización interactiva del pensamiento económico</p>
             <p class="hero-description">
@@ -166,7 +175,7 @@
                         <label class="checkbox-label">
                             <input type="checkbox" id="collision-toggle">
                             <span class="checkmark"></span>
-                            (No Permitir Colisiones)
+                            <span class="checkbox-label-text">No Permitir Colisiones</span>
                         </label>
                     </div>
                 </div>

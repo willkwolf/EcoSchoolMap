@@ -11,6 +11,15 @@
     <!-- Hero Section -->
     <section id="hero" class="hero-section">
         <div class="hero-content">
+            <div class="hero-topbar">
+                <div class="language-switcher">
+                    <label for="language-selector">Idioma</label>
+                    <select id="language-selector" aria-label="Seleccionar idioma">
+                        <option value="es" selected>Español</option>
+                        <option value="en">English</option>
+                    </select>
+                </div>
+            </div>
             <h1>Mapa de Escuelas Económicas</h1>
             <p class="hero-subtitle">Una visualización interactiva del pensamiento económico</p>
             <p class="hero-description">
@@ -164,7 +173,7 @@
                         <label class="checkbox-label">
                             <input type="checkbox" id="collision-toggle">
                             <span class="checkmark"></span>
-                            (No Permitir Colisiones)
+                            <span class="checkbox-label-text">No Permitir Colisiones</span>
                         </label>
                     </div>
                 </div>

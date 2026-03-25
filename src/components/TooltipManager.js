@@ -3,6 +3,15 @@
  */
 
 import * as d3 from 'd3';
+import {
+    getCategoryLabel,
+    getDescriptorValueLabel,
+    getNodeDescription,
+    getNodeDisplayName,
+    getTransitionDescription,
+    getTransitionEvent,
+    t
+} from '../i18n/index.js';
 
 export class TooltipManager {
     constructor() {
@@ -96,17 +105,17 @@ export class TooltipManager {
 
         const autoresText = Array.isArray(node.autores)
             ? node.autores.join(', ')
-            : node.autores || 'N/A';
+            : node.autores || t('ui.notAvailable');
 
         return `
             <div class="tooltip-header">
-                <h3>${node.nombre}</h3>
-                <span class="categoria">${node.categoria || ''}</span>
+                <h3>${getNodeDisplayName(node)}</h3>
+                <span class="categoria">${getCategoryLabel(node.categoria)}</span>
             </div>
             <div class="tooltip-body">
-                <p><strong>Año:</strong> ${node.año_origen || 'N/A'}</p>
-                <p><strong>Autores:</strong> ${autoresText}</p>
-                <p>${node.descripcion || ''}</p>
+                <p><strong>${t('tooltip.year')}:</strong> ${node.año_origen || t('ui.notAvailable')}</p>
+                <p><strong>${t('tooltip.authors')}:</strong> ${autoresText}</p>
+                <p>${getNodeDescription(node)}</p>
                 ${descriptoresHTML ? `<div class="descriptores">${descriptoresHTML}</div>` : ''}
             </div>
         `;
@@ -121,7 +130,7 @@ export class TooltipManager {
         const referenciaHTML = transition.referencia && transition.referencia.APA
             ? `
                 <div class="referencia">
-                    <h4>Referencia:</h4>
+                    <h4>${t('tooltip.reference')}:</h4>
                     <p><em>${transition.referencia.APA}</em></p>
                     ${transition.referencia.DOI ? `<p>DOI: ${transition.referencia.DOI}</p>` : ''}
                 </div>
@@ -130,12 +139,12 @@ export class TooltipManager {
 
         return `
             <div class="tooltip-header">
-                <h3>${transition.evento_disparador}</h3>
-                <span class="categoria">Año: ${transition.año}</span>
+                <h3>${getTransitionEvent(transition)}</h3>
+                <span class="categoria">${t('tooltip.year')}: ${transition.año}</span>
             </div>
             <div class="tooltip-body">
-                <p>${transition.descripcion || ''}</p>
-                <p><strong>Confianza:</strong> ${this.formatConfianza(transition.confianza)}</p>
+                <p>${getTransitionDescription(transition)}</p>
+                <p><strong>${t('tooltip.confidence')}:</strong> ${this.formatConfianza(transition.confianza)}</p>
                 ${referenciaHTML}
             </div>
         `;
@@ -147,16 +156,7 @@ export class TooltipManager {
      * @returns {string} Formatted key
      */
     formatDescriptorKey(key) {
-        const keyMap = {
-            'concepcion_economia': 'Concepción Economía',
-            'concepcion_humano': 'Concepción Humano',
-            'naturaleza_mundo': 'Naturaleza Mundo',
-            'ambito_economico': 'Ámbito Económico',
-            'motor_cambio': 'Motor Cambio',
-            'politicas_preferidas': 'Políticas Preferidas'
-        };
-
-        return keyMap[key] || key;
+        return t(`tooltip.descriptors.${key}`);
     }
 
     /**
@@ -166,12 +166,7 @@ export class TooltipManager {
      */
     formatDescriptorValue(value) {
         if (!value) return '';
-
-        // Replace underscores with spaces and capitalize
-        return value
-            .split('_')
-            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-            .join(' ');
+        return getDescriptorValueLabel(value);
     }
 
     /**
@@ -180,14 +175,7 @@ export class TooltipManager {
      * @returns {string} Formatted confidence
      */
     formatConfianza(confianza) {
-        const confianzaMap = {
-            'muy_alta': 'Muy Alta',
-            'alta': 'Alta',
-            'media': 'Media',
-            'baja': 'Baja'
-        };
-
-        return confianzaMap[confianza] || confianza;
+        return t(`tooltip.confidenceValues.${confianza}`);
     }
 
     /**
