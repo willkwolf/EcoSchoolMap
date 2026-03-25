@@ -22,6 +22,7 @@ import * as d3 from 'd3';
 import { createScales, assignColorsToNodes, getConfidenceStyle } from '../utils/scales.js';
 import { getNodeSymbol, getNodeSize, getNodeBorderStyle, createArrowMarker, getLabelOffset } from '../utils/symbols.js';
 import { TooltipManager } from './TooltipManager.js';
+import { getNodeDisplayName, t } from '../i18n/index.js';
 
 export class D3MapRenderer {
     /**
@@ -535,7 +536,7 @@ export class D3MapRenderer {
             .attr('text-anchor', 'middle')
             .attr('font-size', '14px')
             .attr('fill', '#2c3e50')
-            .text('Arquitectura Económica: ← Economía de Mercado (Estado Débil) | Economía Dirigida (Estado Fuerte) →');
+            .text(t('visualization.axes.xDesktop'));
 
         axesGroup.append('text')
             .attr('class', 'axis-label axis-label-y desktop-only')
@@ -545,7 +546,7 @@ export class D3MapRenderer {
             .attr('font-size', '14px')
             .attr('fill', '#2c3e50')
             .attr('transform', `rotate(-90, 0, 0)`)
-            .text('Objetivo Socioeconómico: Productividad y Crecimiento ↓ | Equidad y Sostenibilidad ↑');
+            .text(t('visualization.axes.yDesktop'));
 
         // Mobile axis labels (hidden on desktop)
         axesGroup.append('text')
@@ -555,7 +556,7 @@ export class D3MapRenderer {
             .attr('text-anchor', 'middle')
             .attr('font-size', '12px')
             .attr('fill', '#2c3e50')
-            .text('← Estado Débil | Estado Fuerte →');
+            .text(t('visualization.axes.xMobile'));
 
         axesGroup.append('text')
             .attr('class', 'axis-label axis-label-y mobile-only')
@@ -565,7 +566,7 @@ export class D3MapRenderer {
             .attr('font-size', '12px')
             .attr('fill', '#2c3e50')
             .attr('transform', `rotate(-90, 0, 0)`)
-            .text('Crecimiento ↓ | Equidad ↑');
+            .text(t('visualization.axes.yMobile'));
     }
 
     /**
@@ -671,7 +672,7 @@ export class D3MapRenderer {
                 .attr('font-size', '12px')
                 .attr('font-weight', 'bold')
                 .attr('fill', '#2c3e50')
-                .text(d.nombre);
+                .text(getNodeDisplayName(d));
         });
     }
 
