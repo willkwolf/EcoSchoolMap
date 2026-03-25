@@ -13,13 +13,46 @@ $accent-color: #e74c3c;
 $text-color: #2c3e50;
 $bg-color: #f8f9fa;
 $border-color: #e0e0e0;
+$section-divider-color: rgba($primary-color, 0.08);
 
 $font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+$section-padding-desktop: 4.5rem 2rem;
+$section-padding-tablet: 3.5rem 1.5rem;
+$section-padding-mobile: 2.75rem 1rem;
 
 // Breakpoints
 $mobile: 480px;
 $tablet: 768px;
 $desktop: 1024px;
+
+// ============================================================
+// Mixins
+// ============================================================
+
+@mixin section-spacing($background-color) {
+    padding: $section-padding-desktop;
+    background-color: $background-color;
+
+    @media (max-width: $mobile) {
+        padding: $section-padding-mobile;
+    }
+
+    @media (max-width: $tablet) and (min-width: #{$mobile + 1}) {
+        padding: $section-padding-tablet;
+    }
+}
+
+@mixin section-intro($align: center, $max-width: 72ch) {
+    max-width: $max-width;
+    margin: 0 auto 2.75rem;
+    text-align: $align;
+    line-height: 1.8;
+    color: #555;
+
+    p + p {
+        margin-top: 1rem;
+    }
+}
 
 // ============================================================
 // Reset & Base
@@ -41,6 +74,12 @@ body {
     line-height: 1.6;
     color: $text-color;
     background-color: $bg-color;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
 }
 
 // ============================================================
@@ -236,16 +275,7 @@ h3 {
 // ============================================================
 
 .guide-section {
-    padding: 4rem 2rem;
-    background-color: white;
-
-    @media (max-width: $mobile) {
-        padding: 2rem 1rem;
-    }
-
-    @media (max-width: $tablet) and (min-width: #{$mobile + 1}) {
-        padding: 3rem 1.5rem;
-    }
+    @include section-spacing(white);
 
     .guide-container {
         max-width: 1200px;
@@ -313,16 +343,7 @@ h3 {
 // ============================================================
 
 .cocktails-section {
-    padding: 4rem 2rem;
-    background-color: $bg-color;
-
-    @media (max-width: $mobile) {
-        padding: 2rem 1rem;
-    }
-
-    @media (max-width: $tablet) and (min-width: #{$mobile + 1}) {
-        padding: 3rem 1.5rem;
-    }
+    @include section-spacing($bg-color);
 
     .cocktails-container {
         max-width: 1200px;
@@ -344,13 +365,9 @@ h3 {
     }
 
     .intro-text {
-        max-width: 900px;
-        margin: 0 auto 2.5rem;
-        line-height: 1.8;
-        color: #555;
+        @include section-intro(left);
 
         p {
-            margin-bottom: 1.5rem;
             font-size: 1.05rem;
         }
     }
@@ -460,16 +477,7 @@ h3 {
 // ============================================================
 
 .visualization-section {
-    padding: 4rem 2rem;
-    background-color: $bg-color;
-
-    @media (max-width: $mobile) {
-        padding: 2rem 1rem;
-    }
-
-    @media (max-width: $tablet) and (min-width: #{$mobile + 1}) {
-        padding: 3rem 1.5rem;
-    }
+    @include section-spacing($bg-color);
 
     .vis-container {
         max-width: 1400px;
@@ -771,16 +779,7 @@ h3 {
 // ============================================================
 
 .pedagogical-section {
-    padding: 4rem 2rem;
-    background-color: white;
-
-    @media (max-width: $mobile) {
-        padding: 2rem 1rem;
-    }
-
-    @media (max-width: $tablet) and (min-width: #{$mobile + 1}) {
-        padding: 3rem 1.5rem;
-    }
+    @include section-spacing(white);
 
     .pedagogical-legend {
         max-width: 1200px;
@@ -797,9 +796,9 @@ h3 {
         }
 
         .intro-text {
-            margin-bottom: 2rem;
-            line-height: 1.8;
-            color: #555;
+            @include section-intro(left, 78ch);
+            margin-left: 0;
+            margin-right: 0;
         }
 
         .siglas-grid {
@@ -830,16 +829,7 @@ h3 {
 // ============================================================
 
 .timeline-section {
-    padding: 4rem 2rem;
-    background-color: white;
-
-    @media (max-width: $mobile) {
-        padding: 2rem 1rem;
-    }
-
-    @media (max-width: $tablet) and (min-width: #{$mobile + 1}) {
-        padding: 3rem 1.5rem;
-    }
+    @include section-spacing(white);
 
     .timeline-container {
         max-width: 1200px;
@@ -852,11 +842,7 @@ h3 {
         }
 
         .intro-text {
-            max-width: 900px;
-            margin: 0 auto 2.5rem;
-            text-align: center;
-            line-height: 1.8;
-            color: #555;
+            @include section-intro(center);
         }
     }
 
@@ -915,16 +901,7 @@ h3 {
 // ============================================================
 
 .learning-path-section {
-    padding: 4rem 2rem;
-    background-color: $bg-color;
-
-    @media (max-width: $mobile) {
-        padding: 2rem 1rem;
-    }
-
-    @media (max-width: $tablet) and (min-width: #{$mobile + 1}) {
-        padding: 3rem 1.5rem;
-    }
+    @include section-spacing($bg-color);
 
     .learning-path-container {
         max-width: 1200px;
@@ -937,11 +914,7 @@ h3 {
         }
 
         .intro-text {
-            max-width: 900px;
-            margin: 0 auto 2.5rem;
-            text-align: center;
-            line-height: 1.8;
-            color: #555;
+            @include section-intro(center);
         }
     }
 
@@ -1014,16 +987,7 @@ h3 {
 // ============================================================
 
 .applications-section {
-    padding: 4rem 2rem;
-    background-color: white;
-
-    @media (max-width: $mobile) {
-        padding: 2rem 1rem;
-    }
-
-    @media (max-width: $tablet) and (min-width: #{$mobile + 1}) {
-        padding: 3rem 1.5rem;
-    }
+    @include section-spacing(white);
 
     .applications-container {
         max-width: 1400px;
@@ -1036,11 +1000,7 @@ h3 {
         }
 
         .intro-text {
-            max-width: 900px;
-            margin: 0 auto 2.5rem;
-            text-align: center;
-            line-height: 1.8;
-            color: #555;
+            @include section-intro(center);
         }
     }
 
@@ -1458,16 +1418,24 @@ h3 {
         transform: scale(1.2);
     }
 
+    &:focus-visible {
+        outline: 3px solid rgba($secondary-color, 0.28);
+        outline-offset: 4px;
+    }
+
     &.active {
         background-color: $primary-color;
         width: 16px;
         height: 16px;
         border-width: 3px;
+        box-shadow: 0 0 0 5px rgba($secondary-color, 0.14);
     }
 }
 
 // Section active state animations
 section {
+    position: relative;
+    scroll-margin-top: 1.5rem;
     transition: opacity 0.5s ease, transform 0.5s ease;
 
     &.section-active {
@@ -1477,6 +1445,21 @@ section {
 
     // Initial hidden state for scroll reveal
     &:not(.section-active) {
-        opacity: 0.85;
+        opacity: 0.96;
+    }
+}
+
+section + section {
+    border-top: 1px solid $section-divider-color;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero-section .scroll-indicator {
+        animation: none;
+    }
+
+    .scroll-indicator,
+    section {
+        transition: none;
     }
 }

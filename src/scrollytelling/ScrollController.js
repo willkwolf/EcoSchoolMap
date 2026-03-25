@@ -1,18 +1,23 @@
 /**
  * ScrollController - Manages scroll-based animations and section highlights
- * Lightweight version using Intersection Observer API
+ * Lightweight version using a viewport anchor to avoid race conditions
+ * between long sections during smooth scrolling.
  */
 
 export class ScrollController {
     constructor(sections = [], options = {}) {
         this.sections = sections;
         this.options = {
+            activationViewportRatio: 0.35,
             navAriaLabel: 'Section navigation',
             ...options
         };
         this.activeSection = null;
-        this.observers = [];
         this.navIndicators = [];
+        this.sectionElements = [];
+        this.animationFrameId = null;
+
+        this.handleViewportChange = this.handleViewportChange.bind(this);
 
         this.init();
     }
@@ -22,8 +27,10 @@ export class ScrollController {
      */
     init() {
         this.createScrollIndicators();
-        this.setupIntersectionObservers();
+        this.cacheSections();
+        this.setupActiveSectionTracking();
         this.setupSmoothScroll();
+        this.updateActiveSection(true);
 
         console.log('✅ ScrollController initialized');
     }
@@ -54,47 +61,122 @@ export class ScrollController {
     }
 
     /**
-     * Setup Intersection Observer for each section
+     * Cache section DOM nodes once so scroll tracking stays deterministic
      */
-    setupIntersectionObservers() {
-        const options = {
-            root: null,
-            rootMargin: '-8% 0px -68% 0px',
-            threshold: 0.12
-        };
-
-        this.sections.forEach((section, index) => {
+    cacheSections() {
+        this.sectionElements = this.sections.reduce((elements, section, index) => {
             const element = document.getElementById(section.id);
 
             if (!element) {
                 console.warn(`Section not found: ${section.id}`);
-                return;
+                return elements;
             }
 
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        this.activateSection(section.id, index);
+            elements.push({ section, index, element });
+            return elements;
+        }, []);
+    }
 
-                        // Trigger section callback if defined
-                        if (section.onEnter && typeof section.onEnter === 'function') {
-                            section.onEnter();
-                        }
-                    }
-                });
-            }, options);
-
-            observer.observe(element);
-            this.observers.push(observer);
-        });
+    /**
+     * Track viewport changes with a throttled scroll/resize handler.
+     * Using one deterministic anchor avoids multiple observers fighting
+     * for control when adjacent sections are both intersecting.
+     */
+    setupActiveSectionTracking() {
+        window.addEventListener('scroll', this.handleViewportChange, { passive: true });
+        window.addEventListener('resize', this.handleViewportChange);
     }
 
     /**
      * Setup smooth scroll behavior
      */
     setupSmoothScroll() {
-        // Enable smooth scrolling via CSS
-        document.documentElement.style.scrollBehavior = 'smooth';
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        document.documentElement.style.scrollBehavior = prefersReducedMotion ? 'auto' : 'smooth';
+    }
+
+    /**
+     * Schedule one active-section update per animation frame.
+     */
+    handleViewportChange() {
+        if (this.animationFrameId !== null) {
+            return;
+        }
+
+        this.animationFrameId = window.requestAnimationFrame(() => {
+            this.animationFrameId = null;
+            this.updateActiveSection();
+        });
+    }
+
+    /**
+     * Resolve the section that currently owns the viewport anchor.
+     * @returns {number} Section index or -1 when nothing is available
+     */
+    getActiveSectionIndex() {
+        if (!this.sectionElements.length) {
+            return -1;
+        }
+
+        const viewportRatio = Math.min(Math.max(this.options.activationViewportRatio, 0.15), 0.7);
+        const anchorY = window.innerHeight * viewportRatio;
+        const sectionAtAnchor = this.sectionElements.find(({ element }) => {
+            const rect = element.getBoundingClientRect();
+            return rect.top <= anchorY && rect.bottom >= anchorY;
+        });
+
+        if (sectionAtAnchor) {
+            return sectionAtAnchor.index;
+        }
+
+        const isAtPageBottom =
+            window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+
+        if (isAtPageBottom) {
+            return this.sectionElements[this.sectionElements.length - 1].index;
+        }
+
+        return this.sectionElements.reduce(
+            (closest, current) => {
+                const distance = Math.abs(current.element.getBoundingClientRect().top - anchorY);
+
+                if (distance < closest.distance) {
+                    return {
+                        distance,
+                        index: current.index
+                    };
+                }
+
+                return closest;
+            },
+            {
+                distance: Number.POSITIVE_INFINITY,
+                index: this.sectionElements[0].index
+            }
+        ).index;
+    }
+
+    /**
+     * Update the active section based on the viewport anchor.
+     * @param {boolean} force - Force a refresh even if the section did not change
+     */
+    updateActiveSection(force = false) {
+        const index = this.getActiveSectionIndex();
+
+        if (index === -1) {
+            return;
+        }
+
+        const section = this.sections[index];
+        if (!section) {
+            return;
+        }
+
+        if (!force && this.activeSection === section.id) {
+            return;
+        }
+
+        this.activateSection(section.id, index);
     }
 
     /**
@@ -120,6 +202,10 @@ export class ScrollController {
             if (element) {
                 if (i === index) {
                     element.classList.add('section-active');
+
+                    if (section.onEnter && typeof section.onEnter === 'function') {
+                        section.onEnter();
+                    }
                 } else {
                     element.classList.remove('section-active');
                 }
@@ -146,10 +232,16 @@ export class ScrollController {
     }
 
     /**
-     * Cleanup observers
+     * Cleanup event listeners
      */
     destroy() {
-        this.observers.forEach(observer => observer.disconnect());
+        window.removeEventListener('scroll', this.handleViewportChange);
+        window.removeEventListener('resize', this.handleViewportChange);
+
+        if (this.animationFrameId !== null) {
+            window.cancelAnimationFrame(this.animationFrameId);
+            this.animationFrameId = null;
+        }
 
         const nav = document.querySelector('.scroll-indicators');
         if (nav) {
