@@ -181,7 +181,6 @@
                         <p>Loading variant...</p>
                     </div>
                 </div>
-                <div id="legend-container" class="legend-container"></div>
             `,cocktails:`
                 <h2>Methodological Synergies: Integrated Analytical Frameworks</h2>
                 <div class="intro-text">
