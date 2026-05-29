@@ -232,68 +232,77 @@
             </div>
 
             <h3>Configuraciones de Análisis: Grupos Temáticos Recomendados</h3>
+            
+            <div class="tabs-container">
+                <button class="tab-btn active" data-tab="all" tabindex="0">Mostrar Todo</button>
+                <button class="tab-btn" data-tab="gobernanza" tabindex="0">Gobernanza y Estado</button>
+                <button class="tab-btn" data-tab="capitalismo" tabindex="0">Dinámica del Capitalismo</button>
+                <button class="tab-btn" data-tab="sociedad" tabindex="0">Individuo y Sociedad</button>
+                <button class="tab-btn" data-tab="sostenibilidad" tabindex="0">Sostenibilidad y Límites</button>
+            </div>
+
             <div class="cocktails-grid">
-                <div class="cocktail-card">
+                <div class="cocktail-card" data-category="capitalismo">
                     <div class="cocktail-number">1</div>
                     <h4>Vitalidad y visibilidad del capitalismo</h4>
                     <p class="cocktail-schools"><strong>Escuelas:</strong> Clásica, Marxista, Schumpeteriana, Institucionalista</p>
                 </div>
-                <div class="cocktail-card">
+                <div class="cocktail-card" data-category="gobernanza">
                     <div class="cocktail-number">2</div>
                     <h4>Defensa del libre mercado</h4>
                     <p class="cocktail-schools"><strong>Escuelas:</strong> Clásica, Austríaca, Neoclásica</p>
                 </div>
-                <div class="cocktail-card">
+                <div class="cocktail-card" data-category="sociedad">
                     <div class="cocktail-number">3</div>
                     <h4>Conceptualización de lo individual</h4>
                     <p class="cocktail-schools"><strong>Escuelas:</strong> Neoclásica, Austríaca, Conductista</p>
                 </div>
-                <div class="cocktail-card">
+                <div class="cocktail-card" data-category="gobernanza">
                     <div class="cocktail-number">4</div>
                     <h4>Necesidad de intervención estatal</h4>
                     <p class="cocktail-schools"><strong>Escuelas:</strong> Neoclásica, Desarrollista, Keynesiana</p>
                 </div>
-                <div class="cocktail-card">
+                <div class="cocktail-card" data-category="sociedad">
                     <div class="cocktail-number">5</div>
                     <h4>Teorías sobre grupos y clases</h4>
                     <p class="cocktail-schools"><strong>Escuelas:</strong> Clásica, Marxista, Keynesiana, Institucionalista</p>
                 </div>
-                <div class="cocktail-card">
+                <div class="cocktail-card" data-category="sostenibilidad">
                     <div class="cocktail-number">6</div>
                     <h4>Economía más allá de mercados</h4>
                     <p class="cocktail-schools"><strong>Escuelas:</strong> Marxista, Institucionalista, Conductista</p>
                 </div>
-                <div class="cocktail-card">
+                <div class="cocktail-card" data-category="capitalismo">
                     <div class="cocktail-number">7</div>
                     <h4>Sistemas económicos completos</h4>
                     <p class="cocktail-schools"><strong>Escuelas:</strong> Marxista, Desarrollista, Keynesiana, Institucionalista</p>
                 </div>
-                <div class="cocktail-card">
+                <div class="cocktail-card" data-category="capitalismo">
                     <div class="cocktail-number">8</div>
                     <h4>Desarrollo tecnológico y productividad</h4>
                     <p class="cocktail-schools"><strong>Escuelas:</strong> Clásica, Marxista, Desarrollista, Schumpeteriana</p>
                 </div>
-                <div class="cocktail-card">
+                <div class="cocktail-card" data-category="sociedad">
                     <div class="cocktail-number">9</div>
                     <h4>Interacción individuo-sociedad</h4>
                     <p class="cocktail-schools"><strong>Escuelas:</strong> Austríaca, Neoclásica, Institucionalista, Conductista</p>
                 </div>
-                <div class="cocktail-card">
+                <div class="cocktail-card" data-category="capitalismo">
                     <div class="cocktail-number">10</div>
                     <h4>Corporaciones y su funcionamiento</h4>
                     <p class="cocktail-schools"><strong>Escuelas:</strong> Schumpeteriana, Institucionalista, Conductista</p>
                 </div>
-                <div class="cocktail-card">
+                <div class="cocktail-card" data-category="gobernanza">
                     <div class="cocktail-number">11</div>
                     <h4>Desempleo y recesión</h4>
                     <p class="cocktail-schools"><strong>Escuelas:</strong> Clásica, Keynesiana</p>
                 </div>
-                <div class="cocktail-card">
+                <div class="cocktail-card" data-category="sociedad">
                     <div class="cocktail-number">12</div>
                     <h4>Economía del cuidado y desigualdad de género</h4>
                     <p class="cocktail-schools"><strong>Escuelas:</strong> Feminista, Marxista, Keynesiana, Conductista</p>
                 </div>
-                <div class="cocktail-card">
+                <div class="cocktail-card" data-category="sostenibilidad">
                     <div class="cocktail-number">13</div>
                     <h4>Sostenibilidad y límites planetarios</h4>
                     <p class="cocktail-schools"><strong>Escuelas:</strong> Ecológica, Desarrollista, Keynesiana, Institucionalista</p>
@@ -310,83 +319,90 @@
                 Explora los hitos más importantes en el desarrollo del pensamiento económico desde 1776 hasta 2013.
                 Cada evento marcó un punto de inflexión en cómo entendemos y analizamos la economía.
             </p>
+            <div class="tabs-container">
+                <button class="tab-btn active" data-tab="all" tabindex="0">Toda la Historia</button>
+                <button class="tab-btn" data-tab="era-fundaciones" tabindex="0">Fundaciones (1776-1870s)</button>
+                <button class="tab-btn" data-tab="era-consolidacion" tabindex="0">Consolidación (1898-1940s)</button>
+                <button class="tab-btn" data-tab="era-contemporanea" tabindex="0">Era Contemporánea (1950s-2013)</button>
+            </div>
+
             <div class="timeline-grid">
-                <div class="timeline-item">
+                <div class="timeline-item" data-category="era-fundaciones">
                     <div class="timeline-year">1776</div>
                     <h4>Adam Smith y la Economía Clásica</h4>
                     <p>Publicación de "La Riqueza de las Naciones" - Fundación del pensamiento económico moderno</p>
                 </div>
-                <div class="timeline-item">
+                <div class="timeline-item" data-category="era-fundaciones">
                     <div class="timeline-year">1867</div>
                     <h4>Marx y el Capital</h4>
                     <p>Publicación de "El Capital" - Crítica radical al sistema capitalista</p>
                 </div>
-                <div class="timeline-item">
+                <div class="timeline-item" data-category="era-fundaciones">
                     <div class="timeline-year">1870s</div>
                     <h4>Revolución Neoclásica</h4>
                     <p>Desarrollo del marginalismo y la teoría del equilibrio general</p>
                 </div>
-                <div class="timeline-item">
+                <div class="timeline-item" data-category="era-consolidacion">
                     <div class="timeline-year">1898</div>
                     <h4>Thorstein Veblen - Institucionalismo</h4>
                     <p>Publicación de "Why Economics Needs Social Theory" - Fundación del institucionalismo</p>
                 </div>
-                <div class="timeline-item">
+                <div class="timeline-item" data-category="era-consolidacion">
                     <div class="timeline-year">1912</div>
                     <h4>Joseph Schumpeter - Desarrollo Económico</h4>
                     <p>Publicación de "Teoría del Desarrollo Económico" - Innovación y destrucción creativa</p>
                 </div>
-                <div class="timeline-item">
+                <div class="timeline-item" data-category="era-consolidacion">
                     <div class="timeline-year">1936</div>
                     <h4>Keynes y la Revolución Keynesiana</h4>
                     <p>Publicación de "Teoría General" - Intervención estatal en crisis económicas</p>
                 </div>
-                <div class="timeline-item">
+                <div class="timeline-item" data-category="era-consolidacion">
                     <div class="timeline-year">1940s</div>
                     <h4>Escuela Austriaca en América</h4>
                     <p>Exilio de economistas austriacos y expansión de sus ideas</p>
                 </div>
-                <div class="timeline-item">
+                <div class="timeline-item" data-category="era-contemporanea">
                     <div class="timeline-year">1950s</div>
                     <h4>Teoría del Desarrollo</h4>
                     <p>Emergencia de la economía del desarrollo y el estructuralismo</p>
                 </div>
-                <div class="timeline-item">
+                <div class="timeline-item" data-category="era-contemporanea">
                     <div class="timeline-year">1970s</div>
                     <h4>Críticas al Keynesianismo</h4>
                     <p>Estanflación y resurgimiento de ideas de libre mercado</p>
                 </div>
-                <div class="timeline-item">
+                <div class="timeline-item" data-category="era-contemporanea">
                     <div class="timeline-year">1979</div>
                     <h4>Kahneman y Tversky - Economía Conductista</h4>
                     <p>Prospect Theory - Sesgos cognitivos y racionalidad limitada</p>
                 </div>
-                <div class="timeline-item">
+                <div class="timeline-item" data-category="era-contemporanea">
                     <div class="timeline-year">1980s</div>
                     <h4>Revolución Neoliberal</h4>
                     <p>Consolidación del pensamiento de mercado bajo Reagan y Thatcher</p>
                 </div>
-                <div class="timeline-item">
+                <div class="timeline-item" data-category="era-contemporanea">
                     <div class="timeline-year">1980s</div>
                     <h4>Economía Feminista</h4>
                     <p>Integración de género en el análisis económico</p>
                 </div>
-                <div class="timeline-item">
+                <div class="timeline-item" data-category="era-contemporanea">
                     <div class="timeline-year">1990s</div>
                     <h4>Énfasis en Instituciones</h4>
                     <p>Reconocimiento de la importancia de las instituciones en el desarrollo</p>
                 </div>
-                <div class="timeline-item">
+                <div class="timeline-item" data-category="era-contemporanea">
                     <div class="timeline-year">2011</div>
                     <h4>Kate Raworth - Economía Ecológica</h4>
                     <p>Economía Donut - Límites planetarios y sociales</p>
                 </div>
-                <div class="timeline-item">
+                <div class="timeline-item" data-category="era-contemporanea">
                     <div class="timeline-year">2013</div>
                     <h4>Mariana Mazzucato - Estado Emprendedor</h4>
                     <p>El Estado como creador de mercados e innovación</p>
                 </div>
-                <div class="timeline-item">
+                <div class="timeline-item" data-category="era-contemporanea">
                     <div class="timeline-year">2013</div>
                     <h4>Economía Feminista</h4>
                     <p>Consolidación como escuela de pensamiento reconocida</p>
@@ -448,58 +464,86 @@
 
             <h3>Claves Pedagógicas para Profundizar</h3>
             <div class="principles-grid">
-                <div class="principle-card">
-                    <h4>1. Distingue entre nodos, capas y trayectorias</h4>
-                    <p>
-                        <em>Idea clave:</em>
-                        Los <strong>nodos</strong> son escuelas que sí proponen una forma de organizar la economía y un objetivo principal.
-                    </p>
-                    <p>
-                        Las <strong>capas</strong> atraviesan todo el mapa y lo condicionan, mientras que las
-                        <strong>trayectorias</strong> recuerdan que las ideas cambian con el tiempo y que las
-                        transiciones entre posiciones nunca son automáticas.
-                    </p>
+                <div class="principle-card accordion-card">
+                    <button class="accordion-trigger" aria-expanded="false" tabindex="0">
+                        <h4>1. Distingue entre nodos, capas y trayectorias</h4>
+                        <span class="accordion-icon"></span>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-body-inner">
+                            <p>
+                                <em>Idea clave:</em>
+                                Los <strong>nodos</strong> son escuelas que sí proponen una forma de organizar la economía y un objetivo principal.
+                            </p>
+                            <p>
+                                Las <strong>capas</strong> atraviesan todo el mapa y lo condicionan, mientras que las
+                                <strong>trayectorias</strong> recuerdan que las ideas cambian con el tiempo y que las
+                                transiciones entre posiciones nunca son automáticas.
+                            </p>
+                        </div>
+                    </div>
                 </div>
-                <div class="principle-card">
-                    <h4>2. No todo el plano es igualmente realizable</h4>
-                    <p>
-                        <em>Región factible:</em>
-                        El mapa muestra posibilidades conceptuales, pero la realidad también depende de recursos,
-                        energía, instituciones y límites ecológicos.
-                    </p>
-                    <p>
-                        Lecturas como <strong>Kate Raworth</strong>, <strong>Nicholas Georgescu-Roegen</strong> y
-                        <strong>Herman Daly</strong> ayudan a entender que toda propuesta económica opera entre un
-                        suelo social y un techo biofísico.
-                    </p>
+                <div class="principle-card accordion-card">
+                    <button class="accordion-trigger" aria-expanded="false" tabindex="0">
+                        <h4>2. No todo el plano es igualmente realizable</h4>
+                        <span class="accordion-icon"></span>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-body-inner">
+                            <p>
+                                <em>Región factible:</em>
+                                El mapa muestra posibilidades conceptuales, pero la realidad también depende de recursos,
+                                energía, instituciones y límites ecológicos.
+                            </p>
+                            <p>
+                                Lecturas como <strong>Kate Raworth</strong>, <strong>Nicholas Georgescu-Roegen</strong> y
+                                <strong>Herman Daly</strong> ayudan a entender que toda propuesta económica opera entre un
+                                suelo social y un techo biofísico.
+                            </p>
+                        </div>
+                    </div>
                 </div>
-                <div class="principle-card">
-                    <h4>3. Por qué algunas perspectivas no aparecen como nodos</h4>
-                    <p>
-                        <em>Regla rápida:</em>
-                        Si una teoría no define al mismo tiempo una forma clara de coordinación y un objetivo final,
-                        aquí funciona mejor como lectura complementaria que como escuela ubicada en el plano.
-                    </p>
-                    <p>
-                        Por eso la <strong>complejidad</strong>, la <strong>dinámica de sistemas</strong> o el
-                        <strong>enfoque biofísico</strong> no compiten con las escuelas del mapa: más bien ayudan a
-                        interpretar sus bordes, sus restricciones y sus zonas de estabilidad.
-                    </p>
+                <div class="principle-card accordion-card">
+                    <button class="accordion-trigger" aria-expanded="false" tabindex="0">
+                        <h4>3. Por qué algunas perspectivas no aparecen como nodos</h4>
+                        <span class="accordion-icon"></span>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-body-inner">
+                            <p>
+                                <em>Regla rápida:</em>
+                                Si una teoría no define al mismo tiempo una forma clara de coordinación y un objetivo final,
+                                aquí funciona mejor como lectura complementaria que como escuela ubicada en el plano.
+                            </p>
+                            <p>
+                                Por eso la <strong>complejidad</strong>, la <strong>dinámica de sistemas</strong> o el
+                                <strong>enfoque biofísico</strong> no compiten con las escuelas del mapa: más bien ayudan a
+                                interpretar sus bordes, sus restricciones y sus zonas de estabilidad.
+                            </p>
+                        </div>
+                    </div>
                 </div>
-                <div class="principle-card">
-                    <h4>4. Lecturas sugeridas para ampliar la mirada</h4>
-                    <p>
-                        <strong>Donella Meadows</strong> ayuda a pensar retardos, acumulaciones y efectos no previstos
-                        en sistemas complejos.
-                    </p>
-                    <p>
-                        <strong>Brian Arthur</strong> y <strong>Doyne Farmer</strong> muestran cómo las redes, la
-                        incertidumbre y la dependencia de trayectoria cambian la lectura del desarrollo económico.
-                    </p>
-                    <p>
-                        <strong>Charles Hall</strong> recuerda que la disponibilidad energética también condiciona lo
-                        que una economía puede sostener en el tiempo.
-                    </p>
+                <div class="principle-card accordion-card">
+                    <button class="accordion-trigger" aria-expanded="false" tabindex="0">
+                        <h4>4. Lecturas sugeridas para ampliar la mirada</h4>
+                        <span class="accordion-icon"></span>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-body-inner">
+                            <p>
+                                <strong>Donella Meadows</strong> ayuda a pensar retardos, acumulaciones y efectos no previstos
+                                en sistemas complejos.
+                            </p>
+                            <p>
+                                <strong>Brian Arthur</strong> y <strong>Doyne Farmer</strong> muestran cómo las redes, la
+                                incertidumbre y la dependencia de trayectoria cambian la lectura del desarrollo económico.
+                            </p>
+                            <p>
+                                <strong>Charles Hall</strong> recuerda que la disponibilidad energética también condiciona lo
+                                que una economía puede sostener en el tiempo.
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -513,8 +557,15 @@
                 Aprende a aplicar las diferentes escuelas económicas a situaciones reales en tres ámbitos clave:
                 políticas públicas, empresariales y ciudadanas.
             </p>
+
+            <div class="tabs-container">
+                <button class="tab-btn active" data-tab="app-publicas" tabindex="0">Políticas Públicas</button>
+                <button class="tab-btn" data-tab="app-organizativas" tabindex="0">Estrategia Organizacional</button>
+                <button class="tab-btn" data-tab="app-ciudadania" tabindex="0">Acción Ciudadana</button>
+            </div>
+
             <div class="applications-grid">
-                <div class="application-category">
+                <div class="application-category" id="app-publicas">
                     <h3>Políticas Públicas y Gobernanza</h3>
                     <div class="application-items">
                         <div class="application-item">
@@ -537,7 +588,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="application-category">
+                <div class="application-category" id="app-organizativas" style="display: none;">
                     <h3>Estrategia Organizacional y Corporativa</h3>
                     <div class="application-items">
                         <div class="application-item">
@@ -560,7 +611,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="application-category">
+                <div class="application-category" id="app-ciudadania" style="display: none;">
                     <h3>Acción Ciudadana y Decisiones de Consumo</h3>
                     <div class="application-items">
                         <div class="application-item">
@@ -608,45 +659,73 @@
 
             <h3>Principios Fundacionales para el Estudio Riguroso</h3>
             <div class="principles-grid">
-                <div class="principle-card">
-                    <h4>1. Humildad Intelectual</h4>
-                    <p>
-                        <em>"La verdadera sabiduría viene de saber que no sabes"</em> - Sócrates
-                    </p>
-                    <p>
-                        Reconoce que ninguna escuela tiene todas las respuestas. Mantén la mente abierta
-                        a nuevas ideas y dispuesto a revisar tus creencias cuando la evidencia lo requiera.
-                    </p>
+                <div class="principle-card accordion-card">
+                    <button class="accordion-trigger" aria-expanded="false" tabindex="0">
+                        <h4>1. Humildad Intelectual</h4>
+                        <span class="accordion-icon"></span>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-body-inner">
+                            <p>
+                                <em>"La verdadera sabiduría viene de saber que no sabes"</em> - Sócrates
+                            </p>
+                            <p>
+                                Reconoce que ninguna escuela tiene todas las respuestas. Mantén la mente abierta
+                                a nuevas ideas y dispuesto a revisar tus creencias cuando la evidencia lo requiera.
+                            </p>
+                        </div>
+                    </div>
                 </div>
-                <div class="principle-card">
-                    <h4>2. Rigor Analítico</h4>
-                    <p>
-                        <em>"Duda de todo al menos una vez, incluso de que dos más dos sean cuatro"</em> - Georg Lichtenberg
-                    </p>
-                    <p>
-                        Examina críticamente los supuestos de cada escuela. Pregunta: ¿Qué evidencia respalda
-                        esta teoría? ¿En qué contextos funciona mejor? ¿Cuáles son sus limitaciones?
-                    </p>
+                <div class="principle-card accordion-card">
+                    <button class="accordion-trigger" aria-expanded="false" tabindex="0">
+                        <h4>2. Rigor Analítico</h4>
+                        <span class="accordion-icon"></span>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-body-inner">
+                            <p>
+                                <em>"Duda de todo al menos una vez, incluso de que dos más dos sean cuatro"</em> - Georg Lichtenberg
+                            </p>
+                            <p>
+                                Examina críticamente los supuestos de cada escuela. Pregunta: ¿Qué evidencia respalda
+                                esta teoría? ¿En qué contextos funciona mejor? ¿Cuáles son sus limitaciones?
+                            </p>
+                        </div>
+                    </div>
                 </div>
-                <div class="principle-card">
-                    <h4>3. Pensamiento Contextual</h4>
-                    <p>
-                        <em>"No hay nada más práctico que una buena teoría"</em> - Kurt Lewin
-                    </p>
-                    <p>
-                        Las teorías económicas no existen en el vacío. Considera el contexto histórico,
-                        institucional y cultural al aplicar ideas de diferentes escuelas.
-                    </p>
+                <div class="principle-card accordion-card">
+                    <button class="accordion-trigger" aria-expanded="false" tabindex="0">
+                        <h4>3. Pensamiento Contextual</h4>
+                        <span class="accordion-icon"></span>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-body-inner">
+                            <p>
+                                <em>"No hay nada más práctico que una buena teoría"</em> - Kurt Lewin
+                            </p>
+                            <p>
+                                Las teorías económicas no existen en el vacío. Considera el contexto histórico,
+                                institucional y cultural al aplicar ideas de diferentes escuelas.
+                            </p>
+                        </div>
+                    </div>
                 </div>
-                <div class="principle-card">
-                    <h4>4. Síntesis Creativa</h4>
-                    <p>
-                        <em>"La verdad es una tierra sin caminos"</em> - Jiddu Krishnamurti
-                    </p>
-                    <p>
-                        No te limites a elegir una escuela. Aprende a combinar insights de múltiples
-                        perspectivas para desarrollar tu propio entendimiento matizado de la economía.
-                    </p>
+                <div class="principle-card accordion-card">
+                    <button class="accordion-trigger" aria-expanded="false" tabindex="0">
+                        <h4>4. Síntesis Creativa</h4>
+                        <span class="accordion-icon"></span>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-body-inner">
+                            <p>
+                                <em>"La verdad es una tierra sin caminos"</em> - Jiddu Krishnamurti
+                            </p>
+                            <p>
+                                No te limites a elegir una escuela. Aprende a combinar insights de múltiples
+                                perspectivas para desarrollar tu propio entendimiento matizado de la economía.
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
 

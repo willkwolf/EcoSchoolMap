@@ -341,20 +341,27 @@ export const translations = {
                     </p>
                 </div>
                 <h3>Analytical Configurations: Recommended Thematic Groupings</h3>
+                <div class="tabs-container">
+                    <button class="tab-btn active" data-tab="all" tabindex="0">Show All</button>
+                    <button class="tab-btn" data-tab="gobernanza" tabindex="0">Governance and State</button>
+                    <button class="tab-btn" data-tab="capitalismo" tabindex="0">Capitalism Dynamics</button>
+                    <button class="tab-btn" data-tab="sociedad" tabindex="0">Individual and Society</button>
+                    <button class="tab-btn" data-tab="sostenibilidad" tabindex="0">Sustainability and Limits</button>
+                </div>
                 <div class="cocktails-grid">
-                    <div class="cocktail-card"><div class="cocktail-number">1</div><h4>Vitality and visibility of capitalism</h4><p class="cocktail-schools"><strong>Schools:</strong> Classical, Marxist, Schumpeterian, Institutionalist</p></div>
-                    <div class="cocktail-card"><div class="cocktail-number">2</div><h4>Defense of the free market</h4><p class="cocktail-schools"><strong>Schools:</strong> Classical, Austrian, Neoclassical</p></div>
-                    <div class="cocktail-card"><div class="cocktail-number">3</div><h4>Conceptualizing the individual</h4><p class="cocktail-schools"><strong>Schools:</strong> Neoclassical, Austrian, Behavioral</p></div>
-                    <div class="cocktail-card"><div class="cocktail-number">4</div><h4>The need for state intervention</h4><p class="cocktail-schools"><strong>Schools:</strong> Neoclassical, Developmentalist, Keynesian</p></div>
-                    <div class="cocktail-card"><div class="cocktail-number">5</div><h4>Theories of groups and classes</h4><p class="cocktail-schools"><strong>Schools:</strong> Classical, Marxist, Keynesian, Institutionalist</p></div>
-                    <div class="cocktail-card"><div class="cocktail-number">6</div><h4>Economy beyond markets</h4><p class="cocktail-schools"><strong>Schools:</strong> Marxist, Institutionalist, Behavioral</p></div>
-                    <div class="cocktail-card"><div class="cocktail-number">7</div><h4>Complete economic systems</h4><p class="cocktail-schools"><strong>Schools:</strong> Marxist, Developmentalist, Keynesian, Institutionalist</p></div>
-                    <div class="cocktail-card"><div class="cocktail-number">8</div><h4>Technological development and productivity</h4><p class="cocktail-schools"><strong>Schools:</strong> Classical, Marxist, Developmentalist, Schumpeterian</p></div>
-                    <div class="cocktail-card"><div class="cocktail-number">9</div><h4>Interaction between individuals and society</h4><p class="cocktail-schools"><strong>Schools:</strong> Austrian, Neoclassical, Institutionalist, Behavioral</p></div>
-                    <div class="cocktail-card"><div class="cocktail-number">10</div><h4>Corporations and how they work</h4><p class="cocktail-schools"><strong>Schools:</strong> Schumpeterian, Institutionalist, Behavioral</p></div>
-                    <div class="cocktail-card"><div class="cocktail-number">11</div><h4>Unemployment and recession</h4><p class="cocktail-schools"><strong>Schools:</strong> Classical, Keynesian</p></div>
-                    <div class="cocktail-card"><div class="cocktail-number">12</div><h4>Care economy and gender inequality</h4><p class="cocktail-schools"><strong>Schools:</strong> Feminist, Marxist, Keynesian, Behavioral</p></div>
-                    <div class="cocktail-card"><div class="cocktail-number">13</div><h4>Sustainability and planetary boundaries</h4><p class="cocktail-schools"><strong>Schools:</strong> Ecological, Developmentalist, Keynesian, Institutionalist</p></div>
+                    <div class="cocktail-card" data-category="capitalismo"><div class="cocktail-number">1</div><h4>Vitality and visibility of capitalism</h4><p class="cocktail-schools"><strong>Schools:</strong> Classical, Marxist, Schumpeterian, Institutionalist</p></div>
+                    <div class="cocktail-card" data-category="gobernanza"><div class="cocktail-number">2</div><h4>Defense of the free market</h4><p class="cocktail-schools"><strong>Schools:</strong> Classical, Austrian, Neoclassical</p></div>
+                    <div class="cocktail-card" data-category="sociedad"><div class="cocktail-number">3</div><h4>Conceptualizing the individual</h4><p class="cocktail-schools"><strong>Schools:</strong> Neoclassical, Austrian, Behavioral</p></div>
+                    <div class="cocktail-card" data-category="gobernanza"><div class="cocktail-number">4</div><h4>The need for state intervention</h4><p class="cocktail-schools"><strong>Schools:</strong> Neoclassical, Developmentalist, Keynesian</p></div>
+                    <div class="cocktail-card" data-category="sociedad"><div class="cocktail-number">5</div><h4>Theories of groups and classes</h4><p class="cocktail-schools"><strong>Schools:</strong> Classical, Marxist, Keynesian, Institutionalist</p></div>
+                    <div class="cocktail-card" data-category="sostenibilidad"><div class="cocktail-number">6</div><h4>Economy beyond markets</h4><p class="cocktail-schools"><strong>Schools:</strong> Marxist, Institutionalist, Behavioral</p></div>
+                    <div class="cocktail-card" data-category="capitalismo"><div class="cocktail-number">7</div><h4>Complete economic systems</h4><p class="cocktail-schools"><strong>Schools:</strong> Marxist, Developmentalist, Keynesian, Institutionalist</p></div>
+                    <div class="cocktail-card" data-category="capitalismo"><div class="cocktail-number">8</div><h4>Technological development and productivity</h4><p class="cocktail-schools"><strong>Schools:</strong> Classical, Marxist, Developmentalist, Schumpeterian</p></div>
+                    <div class="cocktail-card" data-category="sociedad"><div class="cocktail-number">9</div><h4>Interaction between individuals and society</h4><p class="cocktail-schools"><strong>Schools:</strong> Austrian, Neoclassical, Institutionalist, Behavioral</p></div>
+                    <div class="cocktail-card" data-category="capitalismo"><div class="cocktail-number">10</div><h4>Corporations and how they work</h4><p class="cocktail-schools"><strong>Schools:</strong> Schumpeterian, Institutionalist, Behavioral</p></div>
+                    <div class="cocktail-card" data-category="gobernanza"><div class="cocktail-number">11</div><h4>Unemployment and recession</h4><p class="cocktail-schools"><strong>Schools:</strong> Classical, Keynesian</p></div>
+                    <div class="cocktail-card" data-category="sociedad"><div class="cocktail-number">12</div><h4>Care economy and gender inequality</h4><p class="cocktail-schools"><strong>Schools:</strong> Feminist, Marxist, Keynesian, Behavioral</p></div>
+                    <div class="cocktail-card" data-category="sostenibilidad"><div class="cocktail-number">13</div><h4>Sustainability and planetary boundaries</h4><p class="cocktail-schools"><strong>Schools:</strong> Ecological, Developmentalist, Keynesian, Institutionalist</p></div>
                 </div>
             `,
             timeline: `
@@ -363,23 +370,29 @@ export const translations = {
                     Explore the most important milestones in the development of economic thought from 1776 to 2013.
                     Each event marked a turning point in how we understand and analyze the economy.
                 </p>
+                <div class="tabs-container">
+                    <button class="tab-btn active" data-tab="all" tabindex="0">All History</button>
+                    <button class="tab-btn" data-tab="era-fundaciones" tabindex="0">Foundations (1776-1870s)</button>
+                    <button class="tab-btn" data-tab="era-consolidacion" tabindex="0">Consolidation (1898-1940s)</button>
+                    <button class="tab-btn" data-tab="era-contemporanea" tabindex="0">Contemporary Era (1950s-2013)</button>
+                </div>
                 <div class="timeline-grid">
-                    <div class="timeline-item"><div class="timeline-year">1776</div><h4>Adam Smith and Classical Economics</h4><p>Publication of "The Wealth of Nations" and the foundation of modern economic thought</p></div>
-                    <div class="timeline-item"><div class="timeline-year">1867</div><h4>Marx and Capital</h4><p>Publication of "Capital" and a radical critique of the capitalist system</p></div>
-                    <div class="timeline-item"><div class="timeline-year">1870s</div><h4>The Neoclassical Revolution</h4><p>Development of marginalism and general equilibrium theory</p></div>
-                    <div class="timeline-item"><div class="timeline-year">1898</div><h4>Thorstein Veblen and Institutionalism</h4><p>Publication of "Why Economics Needs Social Theory" and the birth of institutionalism</p></div>
-                    <div class="timeline-item"><div class="timeline-year">1912</div><h4>Joseph Schumpeter and Economic Development</h4><p>Publication of "The Theory of Economic Development" on innovation and creative destruction</p></div>
-                    <div class="timeline-item"><div class="timeline-year">1936</div><h4>Keynes and the Keynesian Revolution</h4><p>Publication of "The General Theory" and the case for state intervention in crises</p></div>
-                    <div class="timeline-item"><div class="timeline-year">1940s</div><h4>The Austrian School in America</h4><p>Exile of Austrian economists and the spread of their ideas</p></div>
-                    <div class="timeline-item"><div class="timeline-year">1950s</div><h4>Development Theory</h4><p>Rise of development economics and structuralism</p></div>
-                    <div class="timeline-item"><div class="timeline-year">1970s</div><h4>Critiques of Keynesianism</h4><p>Stagflation and the revival of free-market ideas</p></div>
-                    <div class="timeline-item"><div class="timeline-year">1979</div><h4>Kahneman and Tversky: Behavioral Economics</h4><p>Prospect Theory, cognitive biases, and bounded rationality</p></div>
-                    <div class="timeline-item"><div class="timeline-year">1980s</div><h4>The Neoliberal Revolution</h4><p>Consolidation of market-centered thought under Reagan and Thatcher</p></div>
-                    <div class="timeline-item"><div class="timeline-year">1980s</div><h4>Feminist Economics</h4><p>Integration of gender into economic analysis</p></div>
-                    <div class="timeline-item"><div class="timeline-year">1990s</div><h4>Renewed Focus on Institutions</h4><p>Recognition of the importance of institutions in development</p></div>
-                    <div class="timeline-item"><div class="timeline-year">2011</div><h4>Kate Raworth and Ecological Economics</h4><p>Doughnut Economics, planetary boundaries, and social floors</p></div>
-                    <div class="timeline-item"><div class="timeline-year">2013</div><h4>Mariana Mazzucato and the Entrepreneurial State</h4><p>The state as a creator of markets and innovation</p></div>
-                    <div class="timeline-item"><div class="timeline-year">2013</div><h4>Feminist Economics</h4><p>Consolidation as a recognized school of thought</p></div>
+                    <div class="timeline-item" data-category="era-fundaciones"><div class="timeline-year">1776</div><h4>Adam Smith and Classical Economics</h4><p>Publication of "The Wealth of Nations" and the foundation of modern economic thought</p></div>
+                    <div class="timeline-item" data-category="era-fundaciones"><div class="timeline-year">1867</div><h4>Marx and Capital</h4><p>Publication of "Capital" and a radical critique of the capitalist system</p></div>
+                    <div class="timeline-item" data-category="era-fundaciones"><div class="timeline-year">1870s</div><h4>The Neoclassical Revolution</h4><p>Development of marginalism and general equilibrium theory</p></div>
+                    <div class="timeline-item" data-category="era-consolidacion"><div class="timeline-year">1898</div><h4>Thorstein Veblen and Institutionalism</h4><p>Publication of "Why Economics Needs Social Theory" and the birth of institutionalism</p></div>
+                    <div class="timeline-item" data-category="era-consolidacion"><div class="timeline-year">1912</div><h4>Joseph Schumpeter and Economic Development</h4><p>Publication of "The Theory of Economic Development" on innovation and creative destruction</p></div>
+                    <div class="timeline-item" data-category="era-consolidacion"><div class="timeline-year">1936</div><h4>Keynes and the Keynesian Revolution</h4><p>Publication of "The General Theory" and the case for state intervention in crises</p></div>
+                    <div class="timeline-item" data-category="era-consolidacion"><div class="timeline-year">1940s</div><h4>The Austrian School in America</h4><p>Exile of Austrian economists and the spread of their ideas</p></div>
+                    <div class="timeline-item" data-category="era-contemporanea"><div class="timeline-year">1950s</div><h4>Development Theory</h4><p>Rise of development economics and structuralism</p></div>
+                    <div class="timeline-item" data-category="era-contemporanea"><div class="timeline-year">1970s</div><h4>Critiques of Keynesianism</h4><p>Stagflation and the revival of free-market ideas</p></div>
+                    <div class="timeline-item" data-category="era-contemporanea"><div class="timeline-year">1979</div><h4>Kahneman and Tversky: Behavioral Economics</h4><p>Prospect Theory, cognitive biases, and bounded rationality</p></div>
+                    <div class="timeline-item" data-category="era-contemporanea"><div class="timeline-year">1980s</div><h4>The Neoliberal Revolution</h4><p>Consolidation of market-centered thought under Reagan and Thatcher</p></div>
+                    <div class="timeline-item" data-category="era-contemporanea"><div class="timeline-year">1980s</div><h4>Feminist Economics</h4><p>Integration of gender into economic analysis</p></div>
+                    <div class="timeline-item" data-category="era-contemporanea"><div class="timeline-year">1990s</div><h4>Renewed Focus on Institutions</h4><p>Recognition of the importance of institutions in development</p></div>
+                    <div class="timeline-item" data-category="era-contemporanea"><div class="timeline-year">2011</div><h4>Kate Raworth and Ecological Economics</h4><p>Doughnut Economics, planetary boundaries, and social floors</p></div>
+                    <div class="timeline-item" data-category="era-contemporanea"><div class="timeline-year">2013</div><h4>Mariana Mazzucato and the Entrepreneurial State</h4><p>The state as a creator of markets and innovation</p></div>
+                    <div class="timeline-item" data-category="era-contemporanea"><div class="timeline-year">2013</div><h4>Feminist Economics</h4><p>Consolidation as a recognized school of thought</p></div>
                 </div>
             `,
             learningPath: `
@@ -411,10 +424,55 @@ export const translations = {
                 </div>
                 <h3>Pedagogical Keys for Deepening Analysis</h3>
                 <div class="principles-grid">
-                    <div class="principle-card"><h4>1. Distinguish nodes, layers, and trajectories</h4><p><em>Key idea:</em> <strong>Nodes</strong> are schools that propose both a way to organize the economy and a main goal.</p><p><strong>Layers</strong> cut across the whole map and condition it, while <strong>trajectories</strong> remind us that ideas change over time and that movement between positions is never automatic.</p></div>
-                    <div class="principle-card"><h4>2. Not every part of the plane is equally feasible</h4><p><em>Feasible region:</em> The map shows conceptual possibilities, but real economies are also constrained by resources, energy, institutions, and ecological limits.</p><p>Readings such as <strong>Kate Raworth</strong>, <strong>Nicholas Georgescu-Roegen</strong>, and <strong>Herman Daly</strong> help explain that every proposal operates between a social floor and a biophysical ceiling.</p></div>
-                    <div class="principle-card"><h4>3. Why some perspectives do not appear as nodes</h4><p><em>Quick rule:</em> If a theory does not define both a coordination mechanism and a final goal, it works better here as complementary reading than as a school placed on the plane.</p><p>That is why <strong>complexity</strong>, <strong>systems dynamics</strong>, or the <strong>biophysical approach</strong> do not compete with the schools in the map. They help interpret the borders, constraints, and stability zones of those schools.</p></div>
-                    <div class="principle-card"><h4>4. Suggested readings to broaden the frame</h4><p><strong>Donella Meadows</strong> helps readers think about delays, accumulations, and unintended effects in complex systems.</p><p><strong>Brian Arthur</strong> and <strong>Doyne Farmer</strong> show how networks, uncertainty, and path dependence reshape the reading of economic development.</p><p><strong>Charles Hall</strong> reminds us that energy availability also constrains what an economy can sustain over time.</p></div>
+                    <div class="principle-card accordion-card">
+                        <button class="accordion-trigger" aria-expanded="false" tabindex="0">
+                            <h4>1. Distinguish nodes, layers, and trajectories</h4>
+                            <span class="accordion-icon"></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="accordion-body-inner">
+                                <p><em>Key idea:</em> <strong>Nodes</strong> are schools that propose both a way to organize the economy and a main goal.</p>
+                                <p><strong>Layers</strong> cut across the whole map and condition it, while <strong>trajectories</strong> remind us that ideas change over time and that movement between positions is never automatic.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="principle-card accordion-card">
+                        <button class="accordion-trigger" aria-expanded="false" tabindex="0">
+                            <h4>2. Not every part of the plane is equally feasible</h4>
+                            <span class="accordion-icon"></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="accordion-body-inner">
+                                <p><em>Feasible region:</em> The map shows conceptual possibilities, but real economies are also constrained by resources, energy, institutions, and ecological limits.</p>
+                                <p>Readings such as <strong>Kate Raworth</strong>, <strong>Nicholas Georgescu-Roegen</strong>, and <strong>Herman Daly</strong> help explain that every proposal operates between a social floor and a biophysical ceiling.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="principle-card accordion-card">
+                        <button class="accordion-trigger" aria-expanded="false" tabindex="0">
+                            <h4>3. Why some perspectives do not appear as nodes</h4>
+                            <span class="accordion-icon"></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="accordion-body-inner">
+                                <p><em>Quick rule:</em> If a theory does not define both a coordination mechanism and a final goal, it works better here as complementary reading than as a school placed on the plane.</p>
+                                <p>That is why <strong>complexity</strong>, <strong>systems dynamics</strong>, or the <strong>biophysical approach</strong> do not compete with the schools in the map. They help interpret the borders, constraints, and stability zones of those schools.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="principle-card accordion-card">
+                        <button class="accordion-trigger" aria-expanded="false" tabindex="0">
+                            <h4>4. Suggested readings to broaden the frame</h4>
+                            <span class="accordion-icon"></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="accordion-body-inner">
+                                <p><strong>Donella Meadows</strong> helps readers think about delays, accumulations, and unintended effects in complex systems.</p>
+                                <p><strong>Brian Arthur</strong> and <strong>Doyne Farmer</strong> show how networks, uncertainty, and path dependence reshape the reading of economic development.</p>
+                                <p><strong>Charles Hall</strong> reminds us that energy availability also constrains what an economy can sustain over time.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             `,
             applications: `
@@ -423,8 +481,13 @@ export const translations = {
                     Learn how to apply different economic schools to real situations in three key areas:
                     public policy, business strategy, and citizenship.
                 </p>
+                <div class="tabs-container">
+                    <button class="tab-btn active" data-tab="app-publicas" tabindex="0">Public Policy</button>
+                    <button class="tab-btn" data-tab="app-organizativas" tabindex="0">Organizational Strategy</button>
+                    <button class="tab-btn" data-tab="app-ciudadania" tabindex="0">Civic Action</button>
+                </div>
                 <div class="applications-grid">
-                    <div class="application-category">
+                    <div class="application-category" id="app-publicas">
                         <h3>Public Policy and Governance</h3>
                         <div class="application-items">
                             <div class="application-item"><h4>Fiscal Policy</h4><p><strong>Keynesian:</strong> Increase spending during recessions</p><p><strong>Austrian:</strong> Cut taxes and public spending</p><p><strong>Neoclassical:</strong> Maintain budget balance</p></div>
@@ -432,7 +495,7 @@ export const translations = {
                             <div class="application-item"><h4>International Trade</h4><p><strong>Classical:</strong> Free trade and comparative advantage</p><p><strong>Developmentalist:</strong> Infant industry protection</p><p><strong>Institutionalist:</strong> Agreements with labor and social standards</p></div>
                         </div>
                     </div>
-                    <div class="application-category">
+                    <div class="application-category" id="app-organizativas" style="display: none;">
                         <h3>Organizational and Corporate Strategy</h3>
                         <div class="application-items">
                             <div class="application-item"><h4>Corporate Strategy</h4><p><strong>Schumpeterian:</strong> Disruptive innovation</p><p><strong>Behavioral:</strong> Nudging and bounded decisions</p><p><strong>Institutionalist:</strong> Corporate social responsibility</p></div>
@@ -440,7 +503,7 @@ export const translations = {
                             <div class="application-item"><h4>Corporate Finance</h4><p><strong>Neoclassical:</strong> Maximize shareholder value</p><p><strong>Keynesian:</strong> Preference for liquidity</p><p><strong>Austrian:</strong> Economic calculation and capital markets</p></div>
                         </div>
                     </div>
-                    <div class="application-category">
+                    <div class="application-category" id="app-ciudadania" style="display: none;">
                         <h3>Civic Action and Consumption Choices</h3>
                         <div class="application-items">
                             <div class="application-item"><h4>Consumption Decisions</h4><p><strong>Neoclassical:</strong> Utility maximization</p><p><strong>Behavioral:</strong> Cognitive biases and heuristics</p><p><strong>Institutionalist:</strong> Habits and social norms</p></div>
@@ -466,10 +529,50 @@ export const translations = {
                 </div>
                 <h3>Foundational Principles for Rigorous Study</h3>
                 <div class="principles-grid">
-                    <div class="principle-card"><h4>1. Intellectual Humility</h4><p><em>"The only true wisdom is in knowing you know nothing"</em> - Socrates</p><p>Recognize that no school has every answer. Stay open to new ideas and be willing to revise your views when evidence demands it.</p></div>
-                    <div class="principle-card"><h4>2. Analytical Rigor</h4><p><em>"Doubt everything at least once, even that two plus two makes four"</em> - Georg Lichtenberg</p><p>Examine each school's assumptions critically. Ask what evidence supports it, where it works best, and what its limits are.</p></div>
-                    <div class="principle-card"><h4>3. Contextual Thinking</h4><p><em>"There is nothing so practical as a good theory"</em> - Kurt Lewin</p><p>Economic theories do not exist in a vacuum. Consider historical, institutional, and cultural context when applying ideas from different schools.</p></div>
-                    <div class="principle-card"><h4>4. Creative Synthesis</h4><p><em>"Truth is a pathless land"</em> - Jiddu Krishnamurti</p><p>Do not limit yourself to choosing one school. Learn to combine insights from multiple traditions to build a more nuanced understanding of the economy.</p></div>
+                    <div class="principle-card accordion-card">
+                        <button class="accordion-trigger" aria-expanded="false" tabindex="0">
+                            <h4>1. Intellectual Humility</h4>
+                            <span class="accordion-icon"></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="accordion-body-inner">
+                                <p><em>"The only true wisdom is in knowing you know nothing"</em> - Socrates</p><p>Recognize that no school has every answer. Stay open to new ideas and be willing to revise your views when evidence demands it.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="principle-card accordion-card">
+                        <button class="accordion-trigger" aria-expanded="false" tabindex="0">
+                            <h4>2. Analytical Rigor</h4>
+                            <span class="accordion-icon"></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="accordion-body-inner">
+                                <p><em>"Doubt everything at least once, even that two plus two makes four"</em> - Georg Lichtenberg</p><p>Examine each school's assumptions critically. Ask what evidence supports it, where it works best, and what its limits are.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="principle-card accordion-card">
+                        <button class="accordion-trigger" aria-expanded="false" tabindex="0">
+                            <h4>3. Contextual Thinking</h4>
+                            <span class="accordion-icon"></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="accordion-body-inner">
+                                <p><em>"There is nothing so practical as a good theory"</em> - Kurt Lewin</p><p>Economic theories do not exist in a vacuum. Consider historical, institutional, and cultural context when applying ideas from different schools.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="principle-card accordion-card">
+                        <button class="accordion-trigger" aria-expanded="false" tabindex="0">
+                            <h4>4. Creative Synthesis</h4>
+                            <span class="accordion-icon"></span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="accordion-body-inner">
+                                <p><em>"Truth is a pathless land"</em> - Jiddu Krishnamurti</p><p>Do not limit yourself to choosing one school. Learn to combine insights from multiple traditions to build a more nuanced understanding of the economy.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="final-message">
                     <h3>Your Research Trajectory</h3>
