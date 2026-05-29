@@ -362,15 +362,13 @@ export const translations = {
                     <div class="cocktail-card" data-category="sociedad"><div class="cocktail-number">12</div><h4>Care economy and gender inequality</h4><p class="cocktail-schools"><strong>Schools:</strong> Feminist, Marxist, Keynesian, Behavioral</p></div>
                     <div class="cocktail-card" data-category="sostenibilidad"><div class="cocktail-number">13</div><h4>Sustainability and planetary boundaries</h4><p class="cocktail-schools"><strong>Schools:</strong> Ecological, Developmentalist, Keynesian, Institutionalist</p></div>
                 </div>
-                
-                <!-- Interactive callout to the Cocktails Bar -->
-                <div class="cocktails-bar-callout reveal">
-                    <div class="callout-icon" aria-hidden="true">🍸</div>
-                    <div class="callout-content">
-                        <h3>Ready to play bartender?</h3>
-                        <p>Put this theory into practice in our <strong>Economic Schools Bar</strong>. An interactive simulator where you can mix ideological spirits in your own virtual shaker, analyze the intensity of your "systemic intoxication", and take your conceptual <strong>Sobriety Test</strong>.</p>
-                        <a href="https://willkwolf.github.io/economic-bar/" class="btn btn-callout" target="_blank" rel="noopener">Go to the Cocktails Bar ➔</a>
-                    </div>
+            `,
+            barCalloutBanner: `
+                <div class="callout-icon" aria-hidden="true"></div>
+                <div class="callout-content">
+                    <h3>Ready to play bartender?</h3>
+                    <p>Put this theory into practice in our <strong>Economic Schools Bar</strong>. An interactive simulator where you can mix ideological spirits in your own virtual shaker, analyze the intensity of your "systemic intoxication", and take your conceptual <strong>Sobriety Test</strong>.</p>
+                    <a href="https://willkwolf.github.io/economic-bar/" class="btn btn-callout" target="_blank" rel="noopener">Go to the Cocktails Bar ➔</a>
                 </div>
             `,
             timeline: `
