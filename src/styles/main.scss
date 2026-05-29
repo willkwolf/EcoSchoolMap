@@ -1095,15 +1095,9 @@ p {
     }
 
     .applications-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 2rem;
+        display: block;
         margin-top: 2rem;
-
-        @media (max-width: $tablet) {
-            grid-template-columns: 1fr;
-            gap: 2rem;
-        }
+        width: 100%;
     }
 
     .application-category {
@@ -1111,18 +1105,25 @@ p {
         border-radius: 12px;
         padding: 2rem;
         border: 1px solid $border-color;
+        width: 100%;
 
         h3 {
             color: $primary-color;
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
             text-align: center;
-            font-size: 1.3rem;
+            font-size: 1.4rem;
+            font-family: $font-display;
         }
 
         .application-items {
-            display: flex;
-            flex-direction: column;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
             gap: 1.5rem;
+
+            @media (max-width: $tablet) {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
         }
 
         .application-item {
