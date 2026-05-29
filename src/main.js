@@ -12,6 +12,7 @@ import { saveSvgAsPng } from 'save-svg-as-png';
 import { D3MapRenderer } from './components/D3MapRenderer.js';
 import { ScrollController } from './scrollytelling/ScrollController.js';
 import { loadVariantData } from './data/loader.js';
+import { InteractiveUIManager } from './components/InteractiveUIManager.js';
 import {
     applyLocalizedContent,
     getCurrentLocale,
@@ -52,6 +53,9 @@ async function init() {
         scrollController = new ScrollController(getSections(), {
             navAriaLabel: t('scroll.navAriaLabel')
         });
+
+        // Initialize UI manager for interactive tabs and accordions
+        new InteractiveUIManager();
 
         console.log('✅ App initialized successfully');
     } catch (error) {

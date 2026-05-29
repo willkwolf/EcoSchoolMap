@@ -650,7 +650,10 @@ export class D3MapRenderer {
         nodeElements.each((d, i, nodes) => {
             const nodeGroup = d3.select(nodes[i]);
             const color = this.colorMap.get(d.id);
-            const size = getNodeSize(d.tipo);
+            // Adapt symbol size and label offsets dynamically based on container width
+            const containerWidth = this.container.node() ? this.container.node().getBoundingClientRect().width : 1200;
+            const sizeMultiplier = containerWidth > 1200 ? 1.35 : (containerWidth < 480 ? 0.85 : 1.05);
+            const size = getNodeSize(d.tipo) * sizeMultiplier;
             const symbolGenerator = getNodeSymbol(d.tipo, size);
             const borderStyle = getNodeBorderStyle(d.tipo);
 
@@ -666,7 +669,7 @@ export class D3MapRenderer {
                 .on('mouseleave', () => this.onNodeLeave());
 
             // Draw label
-            const labelOffset = getLabelOffset(d.tipo);
+            const labelOffset = getLabelOffset(d.tipo) * (sizeMultiplier > 1.2 ? 1.25 : (sizeMultiplier < 0.9 ? 0.85 : 1.0));
             nodeGroup.append('text')
                 .attr('class', 'node-label')
                 .attr('y', labelOffset)
