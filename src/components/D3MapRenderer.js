@@ -423,10 +423,10 @@ export class D3MapRenderer {
      */
     renderQuadrants() {
         const quadrants = [
-            { x: -1.1, y: 0, width: 1.1, height: 1.1, fill: 'rgba(0,255,0,0.05)', name: 'Q1' },
-            { x: 0, y: 0, width: 1.1, height: 1.1, fill: 'rgba(0,0,255,0.05)', name: 'Q2' },
-            { x: -1.1, y: -1.1, width: 1.1, height: 1.1, fill: 'rgba(255,165,0,0.05)', name: 'Q3' },
-            { x: 0, y: -1.1, width: 1.1, height: 1.1, fill: 'rgba(128,0,128,0.05)', name: 'Q4' }
+            { x: -1.1, y: 0, width: 1.1, height: 1.1, fill: '#f2f5f1', name: 'Q1' },
+            { x: 0, y: 0, width: 1.1, height: 1.1, fill: '#f0f3f6', name: 'Q2' },
+            { x: -1.1, y: -1.1, width: 1.1, height: 1.1, fill: '#f6f4f0', name: 'Q3' },
+            { x: 0, y: -1.1, width: 1.1, height: 1.1, fill: '#f5f0ed', name: 'Q4' }
         ];
 
         const quadrantGroup = this.zoomGroup.append('g').attr('class', 'quadrants');
@@ -515,8 +515,9 @@ export class D3MapRenderer {
             .attr('y1', this.yScale(-1.1))
             .attr('x2', this.xScale(0))
             .attr('y2', this.yScale(1.1))
-            .attr('stroke', 'gray')
-            .attr('stroke-width', 2);
+            .attr('stroke', '#64748b')
+            .attr('stroke-width', 1)
+            .attr('stroke-dasharray', '4,4');
 
         // Y axis (horizontal line at y=0)
         axesGroup.append('line')
@@ -525,8 +526,9 @@ export class D3MapRenderer {
             .attr('y1', this.yScale(0))
             .attr('x2', this.xScale(1.1))
             .attr('y2', this.yScale(0))
-            .attr('stroke', 'gray')
-            .attr('stroke-width', 2);
+            .attr('stroke', '#64748b')
+            .attr('stroke-width', 1)
+            .attr('stroke-dasharray', '4,4');
 
         // Desktop axis labels (hidden on mobile)
         axesGroup.append('text')
@@ -672,6 +674,9 @@ export class D3MapRenderer {
                 .attr('font-size', '12px')
                 .attr('font-weight', 'bold')
                 .attr('fill', '#2c3e50')
+                .style('paint-order', 'stroke')
+                .style('stroke', '#faf8f5')
+                .style('stroke-width', '3px')
                 .text(getNodeDisplayName(d));
         });
     }

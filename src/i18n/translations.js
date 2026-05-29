@@ -12,12 +12,12 @@ export const translations = {
             hero: 'Introducción',
             guide: 'Guía de Lectura',
             visualization: 'Mapa Interactivo',
-            cocktails: 'Cocteles Temáticos',
+            cocktails: 'Sinergias Metodológicas',
             timeline: 'Línea de Tiempo',
-            'learning-path': 'Ruta de Aprendizaje',
-            'map-reading-guide': 'Lectura Complementaria',
-            applications: 'Aplicaciones Prácticas',
-            'pedagogical-legend': 'Reflexión Final'
+            'learning-path': 'Secuencia Pedagógica',
+            'map-reading-guide': 'Guía de Interpretación',
+            applications: 'Ámbitos de Aplicación',
+            'pedagogical-legend': 'Epílogo Epistemológico'
         },
         ui: {
             localeLabel: 'Idioma',
@@ -84,12 +84,12 @@ export const translations = {
             hero: 'Introduction',
             guide: 'Reading Guide',
             visualization: 'Interactive Map',
-            cocktails: 'Thematic Cocktails',
+            cocktails: 'Methodological Synergies',
             timeline: 'Timeline',
-            'learning-path': 'Learning Path',
-            'map-reading-guide': 'Complementary Reading',
-            applications: 'Practical Applications',
-            'pedagogical-legend': 'Final Reflection'
+            'learning-path': 'Pedagogical Sequence',
+            'map-reading-guide': 'Interpretation Guide',
+            applications: 'Spheres of Application',
+            'pedagogical-legend': 'Epistemological Epilogue'
         },
         ui: {
             localeLabel: 'Language',
@@ -174,7 +174,7 @@ export const translations = {
                 <h2>Reading Guide</h2>
                 <div class="guide-grid">
                     <div class="guide-card">
-                        <h3>📐 Map Axes</h3>
+                        <h3>Map Axes</h3>
                         <p><strong>Horizontal Axis (X):</strong> Economic Architecture</p>
                         <ul>
                             <li>← Left: Limited State (Market Economy)</li>
@@ -187,7 +187,7 @@ export const translations = {
                         </ul>
                     </div>
                     <div class="guide-card">
-                        <h3>🎯 Quadrants</h3>
+                        <h3>Quadrants of Analysis</h3>
                         <p>The map is organized into 4 main quadrants:</p>
                         <ul>
                             <li><strong>Q1:</strong> Weak State + Equity and Sustainability</li>
@@ -197,7 +197,7 @@ export const translations = {
                         </ul>
                     </div>
                     <div class="guide-card">
-                        <h3>🔄 Transitions</h3>
+                        <h3>Historical Transitions</h3>
                         <p>The arrows represent historical shifts between schools:</p>
                         <ul>
                             <li><strong>Solid line:</strong> High historical confidence</li>
@@ -207,7 +207,7 @@ export const translations = {
                         <p>Each transition includes its trigger event and year.</p>
                     </div>
                     <div class="guide-card">
-                        <h3>🎨 Weight Variants</h3>
+                        <h3>Weighting Variants</h3>
                         <p>Different perspectives shift the positions of the schools:</p>
                         <ul>
                             <li><strong>Base:</strong> Balanced and neutral</li>
@@ -219,7 +219,7 @@ export const translations = {
                         </ul>
                     </div>
                     <div class="guide-card">
-                        <h3>📚 Visualization Method</h3>
+                        <h3>Methodological Foundation</h3>
                         <p>Based on Chapter 4 of <strong>Economics: The User's Guide</strong> by <strong>Ha-Joon Chang</strong> (2015):</p>
                         <ul>
                             <li>Multidimensional analysis of economic schools</li>
@@ -229,8 +229,8 @@ export const translations = {
                         </ul>
                     </div>
                     <div class="guide-card">
-                        <h3>⚠️ Caution</h3>
-                        <p style="color: #c62828; font-weight: bold;">
+                        <h3>Methodological Warnings</h3>
+                        <p class="caution-highlight">
                             Relying on only one school to study a topic creates a risk of:
                         </p>
                         <ul>
@@ -300,9 +300,19 @@ export const translations = {
                             </label>
                         </div>
                     </div>
-                    <div class="control-group">
-                        <button id="reset-zoom-btn" class="control-btn" title="Return to the initial map view">↺ Reset Zoom</button>
-                        <button id="download-png-btn" class="control-btn" title="Download the map as a PNG image">⬇ Download PNG</button>
+                    <div class="control-group button-group">
+                        <button id="reset-zoom-btn" class="control-btn" title="Return to the initial map view">
+                            <svg class="btn-icon" viewBox="0 0 24 24" width="16" height="16">
+                                <path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z" fill="currentColor"/>
+                            </svg>
+                            <span>Reset View</span>
+                        </button>
+                        <button id="download-png-btn" class="control-btn" title="Download the map as a PNG image">
+                            <svg class="btn-icon" viewBox="0 0 24 24" width="16" height="16">
+                                <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" fill="currentColor"/>
+                            </svg>
+                            <span>Export Image</span>
+                        </button>
                     </div>
                 </div>
                 <div id="map-container" class="map-container">
@@ -314,7 +324,7 @@ export const translations = {
                 <div id="legend-container" class="legend-container"></div>
             `,
             cocktails: `
-                <h2>🍸 A good cocktail or every bottle on the shelf?</h2>
+                <h2>Methodological Synergies: Integrated Analytical Frameworks</h2>
                 <div class="intro-text">
                     <p>
                         There are good reasons to learn the differences between economic schools,
@@ -323,14 +333,14 @@ export const translations = {
                         Even curious learners may feel that nine is too much.
                     </p>
                     <p>
-                        That is why the thematic guide below proposes "cocktails": combinations of two
+                        That is why the thematic guide below proposes "cocktails" or synergies: combinations of two
                         to four schools applied to concrete topics. The hope is that after tasting a few
                         of these cocktails, you will want to explore the whole shelf. And even if you do not,
                         trying one or two flavors is enough to show that there are many ways to think about,
                         practice, and approach economics.
                     </p>
                 </div>
-                <h3>Thematic Guide: Recommended Cocktails</h3>
+                <h3>Analytical Configurations: Recommended Thematic Groupings</h3>
                 <div class="cocktails-grid">
                     <div class="cocktail-card"><div class="cocktail-number">1</div><h4>Vitality and visibility of capitalism</h4><p class="cocktail-schools"><strong>Schools:</strong> Classical, Marxist, Schumpeterian, Institutionalist</p></div>
                     <div class="cocktail-card"><div class="cocktail-number">2</div><h4>Defense of the free market</h4><p class="cocktail-schools"><strong>Schools:</strong> Classical, Austrian, Neoclassical</p></div>
@@ -373,7 +383,7 @@ export const translations = {
                 </div>
             `,
             learningPath: `
-                <h2>🎓 Learning Path</h2>
+                <h2>Pedagogical Analysis Sequence</h2>
                 <p class="intro-text">
                     Follow these 4 steps to master the economic schools map and apply its concepts
                     to real-world situations.
@@ -386,7 +396,7 @@ export const translations = {
                 </div>
             `,
             mapReadingGuide: `
-                <h2>🧩 Complementary Reading: How to Read This Map</h2>
+                <h2>Analytical Interpretation Guide: Limits, Layers, and Trajectories</h2>
                 <div class="intro-text">
                     <p>
                         This map places economic schools on two axes so that very different ideas can be compared.
@@ -399,7 +409,7 @@ export const translations = {
                         that shape the space represented by the map.
                     </p>
                 </div>
-                <h3>📚 Pedagogical keys for going deeper</h3>
+                <h3>Pedagogical Keys for Deepening Analysis</h3>
                 <div class="principles-grid">
                     <div class="principle-card"><h4>1. Distinguish nodes, layers, and trajectories</h4><p><em>Key idea:</em> <strong>Nodes</strong> are schools that propose both a way to organize the economy and a main goal.</p><p><strong>Layers</strong> cut across the whole map and condition it, while <strong>trajectories</strong> remind us that ideas change over time and that movement between positions is never automatic.</p></div>
                     <div class="principle-card"><h4>2. Not every part of the plane is equally feasible</h4><p><em>Feasible region:</em> The map shows conceptual possibilities, but real economies are also constrained by resources, energy, institutions, and ecological limits.</p><p>Readings such as <strong>Kate Raworth</strong>, <strong>Nicholas Georgescu-Roegen</strong>, and <strong>Herman Daly</strong> help explain that every proposal operates between a social floor and a biophysical ceiling.</p></div>
@@ -408,14 +418,14 @@ export const translations = {
                 </div>
             `,
             applications: `
-                <h2>🎯 Practical Applications</h2>
+                <h2>Spheres of Practical Application</h2>
                 <p class="intro-text">
                     Learn how to apply different economic schools to real situations in three key areas:
                     public policy, business strategy, and citizenship.
                 </p>
                 <div class="applications-grid">
                     <div class="application-category">
-                        <h3>🏛️ Public Policy</h3>
+                        <h3>Public Policy and Governance</h3>
                         <div class="application-items">
                             <div class="application-item"><h4>Fiscal Policy</h4><p><strong>Keynesian:</strong> Increase spending during recessions</p><p><strong>Austrian:</strong> Cut taxes and public spending</p><p><strong>Neoclassical:</strong> Maintain budget balance</p></div>
                             <div class="application-item"><h4>Monetary Policy</h4><p><strong>Keynesian:</strong> Use interest rates to stabilize activity</p><p><strong>Monetarist:</strong> Follow money growth rules</p><p><strong>Developmentalist:</strong> Direct credit toward strategic sectors</p></div>
@@ -423,7 +433,7 @@ export const translations = {
                         </div>
                     </div>
                     <div class="application-category">
-                        <h3>🏢 Firms</h3>
+                        <h3>Organizational and Corporate Strategy</h3>
                         <div class="application-items">
                             <div class="application-item"><h4>Corporate Strategy</h4><p><strong>Schumpeterian:</strong> Disruptive innovation</p><p><strong>Behavioral:</strong> Nudging and bounded decisions</p><p><strong>Institutionalist:</strong> Corporate social responsibility</p></div>
                             <div class="application-item"><h4>Human Resource Management</h4><p><strong>Neoclassical:</strong> Wages from marginal productivity</p><p><strong>Marxist:</strong> Exploitation and surplus value</p><p><strong>Feminist:</strong> Care economy and gender pay gaps</p></div>
@@ -431,7 +441,7 @@ export const translations = {
                         </div>
                     </div>
                     <div class="application-category">
-                        <h3>👥 Citizenship</h3>
+                        <h3>Civic Action and Consumption Choices</h3>
                         <div class="application-items">
                             <div class="application-item"><h4>Consumption Decisions</h4><p><strong>Neoclassical:</strong> Utility maximization</p><p><strong>Behavioral:</strong> Cognitive biases and heuristics</p><p><strong>Institutionalist:</strong> Habits and social norms</p></div>
                             <div class="application-item"><h4>Political Participation</h4><p><strong>Classical:</strong> Rational voting through cost-benefit reasoning</p><p><strong>Marxist:</strong> Class consciousness and activism</p><p><strong>Feminist:</strong> Care-centered political economy</p></div>
@@ -441,7 +451,7 @@ export const translations = {
                 </div>
             `,
             pedagogicalLegend: `
-                <h2>💭 Final Reflection: Economic Pluralism</h2>
+                <h2>Epistemological Epilogue: The Value of Methodological Pluralism</h2>
                 <div class="intro-text">
                     <p>
                         The real value of this map does not lie in memorizing the position of each school,
@@ -454,7 +464,7 @@ export const translations = {
                         multiple perspectives, not when we cling dogmatically to one school.
                     </p>
                 </div>
-                <h3>🧭 Principles for Rigorous Study</h3>
+                <h3>Foundational Principles for Rigorous Study</h3>
                 <div class="principles-grid">
                     <div class="principle-card"><h4>1. Intellectual Humility</h4><p><em>"The only true wisdom is in knowing you know nothing"</em> - Socrates</p><p>Recognize that no school has every answer. Stay open to new ideas and be willing to revise your views when evidence demands it.</p></div>
                     <div class="principle-card"><h4>2. Analytical Rigor</h4><p><em>"Doubt everything at least once, even that two plus two makes four"</em> - Georg Lichtenberg</p><p>Examine each school's assumptions critically. Ask what evidence supports it, where it works best, and what its limits are.</p></div>
@@ -462,7 +472,7 @@ export const translations = {
                     <div class="principle-card"><h4>4. Creative Synthesis</h4><p><em>"Truth is a pathless land"</em> - Jiddu Krishnamurti</p><p>Do not limit yourself to choosing one school. Learn to combine insights from multiple traditions to build a more nuanced understanding of the economy.</p></div>
                 </div>
                 <div class="final-message">
-                    <h3>🌟 Your Learning Journey</h3>
+                    <h3>Your Research Trajectory</h3>
                     <p>This map is only the beginning. You are invited to:</p>
                     <ul>
                         <li><strong>Explore</strong> the original sources of each school</li>
@@ -471,7 +481,7 @@ export const translations = {
                         <li><strong>Apply</strong> multiple perspectives to real problems</li>
                         <li><strong>Contribute</strong> to economic debate with rigor and openness</li>
                     </ul>
-                    <p style="margin-top: 1.5rem; font-style: italic; color: #555;">
+                    <p class="final-quote">
                         "The purpose of education is to replace an empty mind with an open one" - Malcolm Forbes
                     </p>
                 </div>
@@ -484,17 +494,17 @@ export const translations = {
                     <em>Economics: The User's Guide</em> (2015), Chapter 4 •
                     12 economic schools
                 </p>
-                <p style="margin-top: 10px; font-size: 0.85em;">
+                <p class="footer-meta">
                     Project: Political Economy Schools Map • November 2025 • Version 3.2
                 </p>
-                <p style="margin-top: 10px; font-size: 0.85em;">
+                <p class="footer-meta">
                     <strong>Author:</strong> William Camilo Artunduaga Viana
                 </p>
-                <p style="margin-top: 5px; font-size: 0.85em;">
-                    📜 License: <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener" style="color: #ffffff; text-decoration: underline;">Creative Commons BY-SA 4.0</a>
+                <p class="footer-license">
+                    License: <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">Creative Commons BY-SA 4.0</a>
                     • Open source for community improvement
                 </p>
-                <div class="footer-links" style="margin-top: 15px;">
+                <div class="footer-links">
                     <a href="https://github.com/willkwolf/EcoSchoolMap" target="_blank" rel="noopener">GitHub</a>
                     <a href="https://github.com/willkwolf/EcoSchoolMap/issues" target="_blank" rel="noopener">Report Issue</a>
                     <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0 License</a>
