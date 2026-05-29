@@ -6,8 +6,8 @@
     <meta name="description" content="Mapa interactivo de escuelas políticas económicas con D3.js y scrollytelling">
     <title>Mapa de Escuelas Económicas | Visualización Interactiva</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-  <script type="module" crossorigin src="./assets/main-CFTY0mIO.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/main-DIg3OzR9.css">
+  <script type="module" crossorigin src="./assets/main-BFTtXFlY.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/main-6cGm6Oxy.css">
 </head>
 <body>
     <!-- Hero Section -->
@@ -47,7 +47,7 @@
             <h2>Guía de Lectura</h2>
             <div class="guide-grid">
                 <div class="guide-card">
-                    <h3>📐 Ejes del Mapa</h3>
+                    <h3>Ejes del Mapa</h3>
                     <p><strong>Eje Horizontal (X):</strong> Arquitectura Económica</p>
                     <ul>
                         <li>← Izquierda: Estado Limitado (Economía de Mercado)</li>
@@ -60,7 +60,7 @@
                     </ul>
                 </div>
                 <div class="guide-card">
-                    <h3>🎯 Cuadrantes</h3>
+                    <h3>Cuadrantes de Análisis</h3>
                     <p>El mapa se divide en 4 cuadrantes principales:</p>
                     <ul>
                         <li><strong>Q1:</strong> Estado Débil + Equidad y Sostenibilidad</li>
@@ -70,7 +70,7 @@
                     </ul>
                 </div>
                 <div class="guide-card">
-                    <h3>🔄 Transiciones</h3>
+                    <h3>Transiciones Históricas</h3>
                     <p>Las flechas representan cambios históricos entre escuelas:</p>
                     <ul>
                         <li><strong>Línea sólida:</strong> Alta confianza histórica</li>
@@ -80,7 +80,7 @@
                     <p>Cada transición incluye el evento disparador y el año.</p>
                 </div>
                 <div class="guide-card">
-                    <h3>🎨 Variantes de Peso</h3>
+                    <h3>Variantes de Ponderación</h3>
                     <p>Diferentes perspectivas cambian las posiciones:</p>
                     <ul>
                         <li><strong>Base:</strong> Balanceada y neutral</li>
@@ -92,7 +92,7 @@
                     </ul>
                 </div>
                 <div class="guide-card">
-                    <h3>📚 Metodología de Visualización</h3>
+                    <h3>Fundamento Metodológico</h3>
                     <p>Basado en el Capítulo 4 de <strong>Economics: The User's Guide</strong>, de <strong>Ha-Joon Chang</strong> (2015):</p>
                     <ul>
                         <li>Análisis multidimensional de escuelas económicas</li>
@@ -102,8 +102,8 @@
                     </ul>
                 </div>
                 <div class="guide-card">
-                    <h3>⚠️ Advertencia</h3>
-                    <p style="color: #c62828; font-weight: bold;">
+                    <h3>Restricciones de Enfoque</h3>
+                    <p class="caution-highlight">
                         Basarse sólo en una escuela para explorar un tema tiene riesgo de:
                     </p>
                     <ul>
@@ -179,9 +179,19 @@
                         </label>
                     </div>
                 </div>
-                <div class="control-group">
-                    <button id="reset-zoom-btn" class="control-btn" title="Vuelve a la vista inicial del mapa">↺ Restablecer Zoom</button>
-                    <button id="download-png-btn" class="control-btn" title="Descarga el mapa como imagen PNG">⬇ Descargar PNG</button>
+                <div class="control-group button-group">
+                    <button id="reset-zoom-btn" class="control-btn" title="Vuelve a la vista inicial del mapa">
+                        <svg class="btn-icon" viewBox="0 0 24 24" width="16" height="16">
+                            <path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z" fill="currentColor"/>
+                        </svg>
+                        <span>Restablecer Vista</span>
+                    </button>
+                    <button id="download-png-btn" class="control-btn" title="Descarga el mapa como imagen PNG">
+                        <svg class="btn-icon" viewBox="0 0 24 24" width="16" height="16">
+                            <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" fill="currentColor"/>
+                        </svg>
+                        <span>Exportar Imagen</span>
+                    </button>
                 </div>
             </div>
 
@@ -204,7 +214,7 @@
     <!-- Cocktails Section -->
     <section id="cocktails" class="cocktails-section">
         <div class="cocktails-container">
-            <h2>🍸 ¿Un buen coctel o todas las botellas de la estantería?</h2>
+            <h2>Sinergias Metodológicas: Perspectivas Integradas de Análisis</h2>
 
             <div class="intro-text">
                 <p>
@@ -215,7 +225,7 @@
                     nueve son demasiados.
                 </p>
                 <p>
-                    Por eso, en la guía temática que sigue se proponen "cocteles": combinaciones de dos
+                    Por eso, en la guía temática que sigue se proponen "cocteles" o sinergias: combinaciones de dos
                     a cuatro escuelas aplicadas a temas concretos. La esperanza es que, tras degustar un
                     par de estos cocteles, surja el deseo de recorrer todas las botellas de la estantería.
                     Y si no quieres probarlas todas, incluso uno o dos sabores bastan para mostrar que
@@ -223,7 +233,7 @@
                 </p>
             </div>
 
-            <h3>Guía Temática: Cocteles Recomendados</h3>
+            <h3>Configuraciones de Análisis: Grupos Temáticos Recomendados</h3>
             <div class="cocktails-grid">
                 <div class="cocktail-card">
                     <div class="cocktail-number">1</div>
@@ -390,7 +400,7 @@
     <!-- Learning Path Section -->
     <section id="learning-path" class="learning-path-section">
         <div class="learning-path-container">
-            <h2>🎓 Ruta de Aprendizaje</h2>
+            <h2>Secuencia Pedagógica de Análisis</h2>
             <p class="intro-text">
                 Sigue estos 4 pasos para dominar el mapa de escuelas económicas y aplicar sus conceptos
                 a situaciones reales.
@@ -423,7 +433,7 @@
     <!-- Complementary Reading Section -->
     <section id="map-reading-guide" class="pedagogical-section">
         <div class="pedagogical-legend">
-            <h2>🧩 Lectura Complementaria: Cómo Leer Este Mapa</h2>
+            <h2>Guía de Interpretación Analítica: Límites, Capas y Trayectorias</h2>
 
             <div class="intro-text">
                 <p>
@@ -438,7 +448,7 @@
                 </p>
             </div>
 
-            <h3>📚 Claves pedagógicas para profundizar</h3>
+            <h3>Claves Pedagógicas para Profundizar</h3>
             <div class="principles-grid">
                 <div class="principle-card">
                     <h4>1. Distingue entre nodos, capas y trayectorias</h4>
@@ -500,14 +510,14 @@
     <!-- Practical Applications Section -->
     <section id="applications" class="applications-section">
         <div class="applications-container">
-            <h2>🎯 Aplicaciones Prácticas</h2>
+            <h2>Ámbitos de Aplicación Práctica</h2>
             <p class="intro-text">
                 Aprende a aplicar las diferentes escuelas económicas a situaciones reales en tres ámbitos clave:
                 políticas públicas, empresariales y ciudadanas.
             </p>
             <div class="applications-grid">
                 <div class="application-category">
-                    <h3>🏛️ Políticas Públicas</h3>
+                    <h3>Políticas Públicas y Gobernanza</h3>
                     <div class="application-items">
                         <div class="application-item">
                             <h4>Política Fiscal</h4>
@@ -530,7 +540,7 @@
                     </div>
                 </div>
                 <div class="application-category">
-                    <h3>🏢 Empresas</h3>
+                    <h3>Estrategia Organizacional y Corporativa</h3>
                     <div class="application-items">
                         <div class="application-item">
                             <h4>Estrategia Corporativa</h4>
@@ -553,7 +563,7 @@
                     </div>
                 </div>
                 <div class="application-category">
-                    <h3>👥 Ciudadanía</h3>
+                    <h3>Acción Ciudadana y Decisiones de Consumo</h3>
                     <div class="application-items">
                         <div class="application-item">
                             <h4>Decisiones de Consumo</h4>
@@ -582,7 +592,7 @@
     <!-- Pedagogical Legend Section -->
     <section id="pedagogical-legend" class="pedagogical-section">
         <div class="pedagogical-legend">
-            <h2>💭 Reflexión Final: El Pluralismo Económico</h2>
+            <h2>Epílogo Epistemológico: El Valor del Pluralismo Metodológico</h2>
             
             <div class="intro-text">
                 <p>
@@ -598,7 +608,7 @@
                 </p>
             </div>
 
-            <h3>🧭 Principios para el Estudio Riguroso</h3>
+            <h3>Principios Fundacionales para el Estudio Riguroso</h3>
             <div class="principles-grid">
                 <div class="principle-card">
                     <h4>1. Humildad Intelectual</h4>
@@ -643,7 +653,7 @@
             </div>
 
             <div class="final-message">
-                <h3>🌟 Tu Camino de Aprendizaje</h3>
+                <h3>Tu Trayecto de Investigación</h3>
                 <p>
                     Este mapa es solo el comienzo. Te invitamos a:
                 </p>
@@ -654,7 +664,7 @@
                     <li><strong>Aplicar</strong> múltiples perspectivas a problemas reales</li>
                     <li><strong>Contribuir</strong> al debate económico con rigor y apertura mental</li>
                 </ul>
-                <p style="margin-top: 1.5rem; font-style: italic; color: #555;">
+                <p class="final-quote">
                     "El objetivo de la educación es reemplazar una mente vacía con una mente abierta" - Malcolm Forbes
                 </p>
             </div>
@@ -671,17 +681,17 @@
                 <em>Economics: The User's Guide</em> (2015), Capítulo 4 •
                 12 escuelas económicas
             </p>
-            <p style="margin-top: 10px; font-size: 0.85em;">
+            <p class="footer-meta">
                 Proyecto: Mapa de Escuelas Políticas Económicas • Noviembre 2025 • Versión 3.2
             </p>
-            <p style="margin-top: 10px; font-size: 0.85em;">
+            <p class="footer-meta">
                 <strong>Autor:</strong> William Camilo Artunduaga Viana (Propio de Autor)
             </p>
-            <p style="margin-top: 5px; font-size: 0.85em;">
-                📜 Licencia: <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener" style="color: #ffffff; text-decoration: underline;">Creative Commons BY-SA 4.0</a>
+            <p class="footer-license">
+                Licencia: <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">Creative Commons BY-SA 4.0</a>
                 • Código abierto para mejoras comunitarias
             </p>
-            <div class="footer-links" style="margin-top: 15px;">
+            <div class="footer-links">
                 <a href="https://github.com/willkwolf/EcoSchoolMap" target="_blank" rel="noopener">GitHub</a>
                 <a href="https://github.com/willkwolf/EcoSchoolMap/issues" target="_blank" rel="noopener">Reportar Issue</a>
                 <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">Licencia CC BY-SA 4.0</a>

@@ -1,3 +1,285 @@
-El siguiente paso es generar
-de Gemini el markdown de la metodologui
-agregarla y refeernciarla
+Tu elección de ejes es útil como primer orden pedagógico. No la cambiaría. El problema no es el plano, sino qué proyectas dentro: estás metiendo marcos con restricciones distintas en un espacio que no las representa. La solución es ubicar bien, no rediseñar.
+
+Ajuste conceptual mínimo (sin cambiar ejes):
+Trata algunas corrientes como capas transversales (condicionan el mapa) y no como puntos. Otras sí son “escuelas” ubicables.
+
+1) Qué va como punto (escuelas “decisionales”)
+
+Estas sí eligen arquitectura (X) y objetivo (Y):
+
+Keynesiana, Institucionalista, Neoclásica, Austriaca, Marxista, Desarrollista, Estado Emprendedor.
+Raworth (como marco de política) se puede ubicar en cuadrante superior (equidad+sostenibilidad) con ligera inclinación a derecha moderada (requiere coordinación pública relevante).
+2) Qué NO es un punto (capas que debes superponer)
+
+Estas no “eligen” X/Y; restringen o modifican a todas:
+
+Nicholas Georgescu-Roegen / Herman Daly
+→ Capa biofísica: límites de escala, entropía, throughput.
+Efecto: comprimen el mapa por arriba; hacen imposible cierto crecimiento en cualquier cuadrante.
+Donella Meadows
+→ Capa de dinámica de sistemas (stocks/flows, retardos).
+Efecto: revela que trayectorias importan; no todo punto es alcanzable.
+Complejidad (CAS): Brian Arthur, Doyne Farmer
+→ Capa de no linealidad y redes.
+Efecto: introduce path dependence, múltiples equilibrios, colas gruesas.
+Energía (EROI): Charles Hall
+→ Subcapa biofísica crítica.
+Efecto: fija techos prácticos al crecimiento en todos los cuadrantes.
+
+Estas capas puedes dibujarlas como bandas/contornos que atraviesan todo el plano (no nuevos ejes).
+
+3) Si insistes en ubicar “CAS” como una sola escuela
+
+Hazlo, pero con esta lectura: no es una ideología, es un régimen operativo.
+
+Posición sugerida: cerca del centro en X (coordinación híbrida/policéntrica) y alto en Y (prioriza resiliencia, no solo crecimiento).
+Advertencia: su posición es inestable; CAS puede implementarse con sesgo más de mercado (izquierda) o más de Estado (derecha). El punto representa una zona, no un punto fijo.
+4) Reubicación rápida de lo que ya tienes
+Raworth: arriba-centro/derecha moderada (como ya lo tienes).
+Georgescu-Roegen/Daly: no como punto; dibújalos como techo duro que corta la parte superior del mapa.
+Complejidad (CAS): punto/zona en centro-alto.
+Minsky (finanzas) si lo agregas: punto cercano a Keynesiana, pero con flechas de inestabilidad que cruzan cuadrantes.
+5) Regla de consistencia
+
+Si una “escuela”:
+
+no define un mecanismo de coordinación claro (X), y
+no fija un objetivo final (Y),
+entonces no es un punto, es una capa.
+
+Conclusión: mantén tus ejes. Integra a Georgescu-Roegen/Daly como restricciones transversales y usa CAS como zona operativa en el centro-alto. Esto preserva la pedagogía y evita forzar marcos incompatibles dentro de un mismo tipo de objeto.
+
+Ya te entendí. El mapa tiene dos ejes -1,1 el caso y las capas realmente serían sus límites y regiones operativas de cada escuela.
+
+Correcto. Formalízalo así para evitar ambigüedad:
+
+1) Espacio base
+
+𝑥
+∈
+[
+−
+1
+,
+1
+]
+x∈[−1,1]: arquitectura (mercado → dirigido).
+
+𝑦
+∈
+[
+−
+1
+,
+1
+]
+y∈[−1,1]: objetivo (crecimiento → equidad/sostenibilidad).
+Cada “escuela” no es un punto, es una región factible 
+𝑅
+𝑖
+⊆
+[
+−
+1
+,
+1
+]
+2
+R
+i
+	​
+
+⊆[−1,1]
+2
+.
+
+2) Capas = restricciones y deformaciones del espacio
+No añaden ejes; recortan o distorsionan regiones.
+
+Capa biofísica (Nicholas Georgescu-Roegen, Herman Daly):
+define una frontera superior 
+𝑦
+≤
+𝑓
+bio
+(
+𝑥
+,
+𝑡
+)
+y≤f
+bio
+	​
+
+(x,t).
+Interpretable como límite de throughput/stock y umbrales.
+Sistema Tierra (Johan Rockstrom):
+introduce zonas prohibidas (no convexas) y puntos de quiebre.
+Dinámica de sistemas (Donella Meadows):
+agrega trayectorias 
+(
+𝑥
+𝑡
+,
+𝑦
+𝑡
+)
+(x
+t
+	​
+
+,y
+t
+	​
+
+) con retardos; no todo 
+𝑅
+𝑖
+R
+i
+	​
+
+ es alcanzable desde cualquier estado.
+Complejidad (CAS) (Brian Arthur, Doyne Farmer):
+convierte 
+𝑅
+𝑖
+R
+i
+	​
+
+ en múltiples cuencas de atracción; hay dependencia de trayectoria y equilibrios múltiples.
+Energía (EROI) (Charles Hall):
+contrae 
+𝑓
+bio
+f
+bio
+	​
+
+ en el tiempo si cae el EROI; reduce el área factible global.
+
+3) Lectura operativa
+
+Una escuela es válida si su región 
+𝑅
+𝑖
+R
+i
+	​
+
+ interseca el dominio permitido por las capas.
+Políticas son campos de control que mueven la trayectoria dentro de 
+𝑅
+𝑖
+R
+i
+	​
+
+ sin cruzar fronteras.
+Crisis = la trayectoria intenta salir del dominio permitido (violación de capas) o salta de cuenca (CAS).
+
+4) Ubicaciones sin forzar
+
+Kate Raworth: región alta en 
+𝑦
+y; su “donut” coincide con la intersección entre suelo social y techo biofísico.
+Georgescu-Roegen/Daly: no región; son la frontera 
+𝑓
+bio
+f
+bio
+	​
+
+.
+CAS: no es punto; es la topología del campo (cuencas/atractores) sobre todo el plano.
+
+Con esto mantienes los ejes y haces explícito lo que antes estaba implícito: factibilidad, trayectorias y no linealidad.
+
+Lo qué me pone a pensar que lo que necesito es una sección explicativa adicional cómo lectura complementaria no agregar más nodos:
+
+
+https://willkwolf.github.io/EcoSchoolMap/#visualization
+
+Sí. Esa es la solución correcta para no romper la simplicidad del modelo.
+
+Tu mapa ya funciona como proyección 2D de algo que es de mayor dimensión. Intentar meter todo como nodos es lo que lo degrada. La sección explicativa cumple otra función: reintroducir la dimensión perdida sin sobrecargar la visualización.
+
+Lo que estás construyendo, sin nombrarlo así, es equivalente a un embedding: reduces un espacio complejo a 2 dimensiones para hacerlo navegable, pero sacrificas estructura interna .
+
+Qué debe hacer esa sección (no narrativa, sino operacional)
+
+No expliques “escuelas”. Explica cómo leer el mapa.
+
+1) Diferenciar tipos de objetos
+
+Define explícitamente:
+
+Puntos / regiones → escuelas (deciden X, Y)
+Capas → restricciones (recortan el espacio)
+Trayectorias → evolución (cómo se mueven en el tiempo)
+
+Si no haces esto, el usuario mezcla ontologías.
+
+2) Introducir el concepto clave: región factible
+
+No todo el plano es real.
+
+Explica que el mapa visible es:
+
+espacio conceptual, no espacio realizable
+
+Y que el espacio real es:
+
+intersección entre el plano y las capas (biofísica, energía, complejidad)
+
+Esto corrige la lectura sin añadir nada visual.
+
+3) Explicar por qué algunas “escuelas” no son puntos
+
+Aquí introduces el insight central sin tecnicismo:
+
+Georgescu-Roegen / Daly → no compiten, delimitan
+Complejidad (CAS) → no elige posición, define dinámica
+
+Esto evita que alguien te diga “faltan escuelas”.
+
+4) Añadir una regla de lectura (muy concreta)
+
+Algo tipo:
+
+“Si una teoría no define simultáneamente un mecanismo de coordinación (X) y un objetivo (Y), no aparece como nodo en el mapa.”
+
+Esto es suficiente para cerrar el sistema.
+
+5) Opcional pero potente: “errores comunes de interpretación”
+
+Tres bastan:
+
+Confundir posición con viabilidad
+Pensar que todas las regiones son alcanzables
+Leer el mapa como estático (cuando hay trayectorias)
+Sobre tu intuición de Complejidad
+
+No la conviertas aún en “escuela”. Eso es prematuro.
+
+Primero defínela como:
+
+Marco de lectura del mapa
+
+Si luego quieres elevarla a escuela, necesitarás:
+
+función objetivo clara (Y)
+arquitectura preferente (X)
+
+Sin eso, sigue siendo metateoría, no escuela.
+
+Conclusión operativa
+
+Sí, necesitas esa sección.
+No como explicación, sino como:
+
+manual de interpretación del espacio reducido
+
+Tu mapa ya está bien diseñado.
+Lo que falta no es contenido, es epistemología explícita del propio mapa.

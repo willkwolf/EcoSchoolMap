@@ -1,24 +1,29 @@
 /**
  * Main Styles - Mapa de Escuelas Económicas
  * Mobile-first approach with D3.js
+ * Sophisticated Editorial Theme
  */
 
 // ============================================================
-// Variables
+// Google Fonts & Variables
 // ============================================================
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Outfit:wght@300;400;500;600;700&display=swap');
 
-$primary-color: #2c3e50;
-$secondary-color: #3498db;
-$accent-color: #e74c3c;
-$text-color: #2c3e50;
-$bg-color: #f8f9fa;
-$border-color: #e0e0e0;
-$section-divider-color: rgba($primary-color, 0.08);
+$primary-color: #1a2332;       // Slate 900 - Deep academic navy/slate
+$secondary-color: #475569;     // Slate 600 - Subdued academic gray
+$accent-color: #c2410c;        // Burnt Orange - Sophisticated warm accent
+$text-color: #334155;          // Slate 700 - Highly readable soft dark text
+$bg-color: #faf8f5;            // Warm paper cream background
+$border-color: #e5dec9;        // Subtle warm sand border color
+$section-divider-color: rgba($primary-color, 0.06);
 
-$font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-$section-padding-desktop: 4.5rem 2rem;
-$section-padding-tablet: 3.5rem 1.5rem;
-$section-padding-mobile: 2.75rem 1rem;
+$font-display: 'Lora', Georgia, serif;
+$font-body: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+$font-family: $font-body;
+
+$section-padding-desktop: 5rem 2.5rem;
+$section-padding-tablet: 4rem 2rem;
+$section-padding-mobile: 3rem 1.25rem;
 
 // Breakpoints
 $mobile: 480px;
@@ -66,14 +71,17 @@ $desktop: 1024px;
 
 html {
     scroll-behavior: smooth;
+    background-color: $bg-color;
 }
 
 body {
-    font-family: $font-family;
+    font-family: $font-body;
     font-size: 16px;
-    line-height: 1.6;
+    line-height: 1.75; // Highly readable line height
     color: $text-color;
     background-color: $bg-color;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -86,35 +94,64 @@ body {
 // Typography
 // ============================================================
 
-h1 {
-    font-size: 3rem;
+h1, h2, h3, h4 {
+    font-family: $font-display;
+    color: $primary-color;
     font-weight: 700;
-    margin-bottom: 1rem;
+    line-height: 1.25;
+}
 
-    @media (max-width: $mobile) {
-        font-size: 2rem;
-    }
+h1 {
+    font-size: clamp(2.5rem, 5vw, 4.25rem); // Fluid typography
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.02em;
+    font-weight: 800;
 }
 
 h2 {
-    font-size: 2rem;
-    font-weight: 600;
-    margin-bottom: 1.5rem;
-    color: $primary-color;
+    font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+    margin-bottom: 2rem;
+    position: relative;
+    padding-bottom: 0.75rem;
 
-    @media (max-width: $mobile) {
-        font-size: 1.5rem;
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 60px;
+        height: 2px;
+        background-color: $accent-color;
+    }
+
+    // Center header override if needed
+    &.text-center {
+        text-align: center;
+        &::after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
     }
 }
 
 h3 {
-    font-size: 1.25rem;
+    font-size: clamp(1.2rem, 2vw, 1.5rem);
+    margin-bottom: 1rem;
     font-weight: 600;
-    margin-bottom: 0.75rem;
+}
+
+h4 {
+    font-size: 1.15rem;
+    font-weight: 600;
+}
+
+p {
+    margin-bottom: 1.25rem;
+    color: $text-color;
 }
 
 // ============================================================
-// Hero Section
+// Hero Section - Luxury Editorial Paper Layout
 // ============================================================
 
 .hero-section {
@@ -123,81 +160,114 @@ h3 {
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 2rem;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
+    padding: 3rem 1.5rem;
+    background-color: #f6f3ea; // Warm paper cream background
+    background-image: 
+        radial-gradient(rgba($primary-color, 0.03) 1px, transparent 0),
+        radial-gradient(rgba($primary-color, 0.03) 1px, transparent 0);
+    background-size: 24px 24px;
+    background-position: 0 0, 12px 12px;
+    border-bottom: 1px solid $border-color;
+    position: relative;
+    overflow: hidden;
+
+    // Elegant thin border framing
+    &::before {
+        content: '';
+        position: absolute;
+        top: 20px;
+        bottom: 20px;
+        left: 20px;
+        right: 20px;
+        border: 1px solid rgba($primary-color, 0.05);
+        pointer-events: none;
+        z-index: 1;
+    }
 
     .hero-content {
-        max-width: 800px;
+        max-width: 850px;
         width: 100%;
+        position: relative;
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
     .hero-topbar {
         display: flex;
-        justify-content: flex-end;
-        margin-bottom: 1.5rem;
-
-        @media (max-width: $mobile) {
-            justify-content: center;
-        }
+        justify-content: center;
+        margin-bottom: 3.5rem;
+        width: 100%;
     }
 
     .language-switcher {
         display: inline-flex;
         align-items: center;
         gap: 0.75rem;
-        padding: 0.65rem 0.9rem;
-        background: rgba(255, 255, 255, 0.14);
-        border: 1px solid rgba(255, 255, 255, 0.28);
-        border-radius: 999px;
-        backdrop-filter: blur(10px);
+        padding: 0.5rem 1rem;
+        background: #ffffff;
+        border: 1px solid $border-color;
+        border-radius: 4px; // Technical blocky edges
+        box-shadow: 0 2px 6px rgba($primary-color, 0.03);
 
         label {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 600;
-            color: white;
+            color: $secondary-color;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
 
         select {
-            border: 1px solid rgba(255, 255, 255, 0.35);
-            border-radius: 999px;
-            background: rgba(255, 255, 255, 0.18);
-            color: white;
-            padding: 0.45rem 0.85rem;
-            min-height: 40px;
+            border: 1px solid $border-color;
+            border-radius: 2px;
+            background: #faf8f5;
+            color: $primary-color;
+            padding: 0.25rem 0.5rem;
+            font-family: $font-body;
+            font-size: 0.85rem;
+            min-height: 32px;
             cursor: pointer;
+            outline: none;
+            transition: border-color 0.2s ease;
 
-            option {
-                color: $primary-color;
+            &:focus {
+                border-color: $accent-color;
             }
         }
     }
 
-    .hero-subtitle {
-        font-size: 1.5rem;
-        margin-bottom: 1rem;
-        opacity: 0.9;
+    h1 {
+        color: $primary-color;
+        font-weight: 800;
+        margin-bottom: 1.5rem;
+    }
 
-        @media (max-width: $mobile) {
-            font-size: 1.2rem;
-        }
+    .hero-subtitle {
+        font-family: $font-display;
+        font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+        font-style: italic;
+        color: $secondary-color;
+        margin-bottom: 2rem;
+        max-width: 60ch;
+        line-height: 1.5;
     }
 
     .hero-description {
-        font-size: 1.1rem;
-        margin-bottom: 2rem;
-        opacity: 0.85;
-
-        @media (max-width: $mobile) {
-            font-size: 1rem;
-        }
+        font-size: clamp(1rem, 1.8vw, 1.15rem);
+        color: $text-color;
+        max-width: 70ch;
+        margin-bottom: 2.5rem;
+        line-height: 1.75;
     }
 
     .hero-actions {
         display: flex;
-        gap: 1rem;
+        gap: 1.25rem;
         justify-content: center;
-        margin-bottom: 3rem;
+        width: 100%;
+        margin-bottom: 2.5rem;
 
         @media (max-width: $mobile) {
             flex-direction: column;
@@ -207,66 +277,45 @@ h3 {
 
     .btn {
         padding: 0.75rem 2rem;
-        border-radius: 50px;
+        border-radius: 4px; // rectilinear edges
         text-decoration: none;
         font-weight: 600;
-        transition: all 0.3s ease;
-        min-height: 44px; // Touch-friendly
+        font-size: 0.95rem;
+        letter-spacing: 0.02em;
+        transition: all 0.2s ease;
+        min-height: 44px;
         display: inline-flex;
         align-items: center;
         justify-content: center;
 
         @media (max-width: $mobile) {
-            padding: 1rem 2rem;
             width: 100%;
             max-width: 280px;
         }
 
         &.btn-primary {
-            background-color: white;
-            color: #667eea;
+            background-color: $primary-color;
+            color: white;
+            border: 1px solid $primary-color;
 
             &:hover {
-                transform: translateY(-2px);
-                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+                background-color: lighten($primary-color, 10%);
+                border-color: lighten($primary-color, 10%);
+                transform: translateY(-1px);
             }
         }
 
         &.btn-secondary {
             background-color: transparent;
-            color: white;
-            border: 2px solid white;
+            color: $primary-color;
+            border: 1px solid $border-color;
 
             &:hover {
-                background-color: white;
-                color: #667eea;
+                background-color: rgba($primary-color, 0.03);
+                border-color: $primary-color;
+                transform: translateY(-1px);
             }
         }
-    }
-
-    .scroll-indicator {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 0.5rem;
-        opacity: 0.7;
-        animation: bounce 2s infinite;
-
-        svg {
-            opacity: 0.8;
-        }
-    }
-}
-
-@keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {
-        transform: translateY(0);
-    }
-    40% {
-        transform: translateY(-10px);
-    }
-    60% {
-        transform: translateY(-5px);
     }
 }
 
@@ -295,49 +344,93 @@ h3 {
         @media (max-width: $mobile) {
             grid-template-columns: 1fr;
         }
-    }
 
-    .guide-card {
-        padding: 1.5rem;
-        border: 1px solid $border-color;
-        border-radius: 12px;
-        background-color: #f8f9fa;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        .guide-card {
+            padding: 1.75rem;
+            border: 1px solid $border-color;
+            border-radius: 4px;
+            background-color: #faf8f5; // Warm crema card background
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            transition: border-color 0.2s ease, transform 0.2s ease;
 
-        &:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
+            &:hover {
+                border-color: rgba($accent-color, 0.4);
+                transform: translateY(-2px);
+            }
 
-        h3 {
-            color: $primary-color;
-            margin-bottom: 1rem;
-        }
+            h3 {
+                font-family: $font-display;
+                color: $primary-color;
+                margin-bottom: 0.5rem;
+                font-size: 1.25rem;
+                position: relative;
+                padding-bottom: 0.5rem;
 
-        p {
-            font-size: 0.95rem;
-            color: #666;
-            margin-bottom: 0.75rem;
-        }
+                &::after {
+                    content: '';
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    width: 30px;
+                    height: 1px;
+                    background-color: $accent-color;
+                }
+            }
 
-        ul {
-            list-style: none;
-            padding-left: 0;
-            margin-top: 0.5rem;
-
-            li {
-                padding: 0.4rem 0;
-                color: #555;
-                font-size: 0.9rem;
+            p {
+                font-size: 0.95rem;
+                color: $text-color;
+                margin-bottom: 0.25rem;
+                line-height: 1.6;
 
                 strong {
                     color: $primary-color;
                 }
             }
+
+            ul {
+                list-style: none;
+                padding-left: 0;
+                display: flex;
+                flex-direction: column;
+                gap: 0.5rem;
+
+                li {
+                    padding-left: 1.25rem;
+                    position: relative;
+                    color: $text-color;
+                    font-size: 0.9rem;
+                    line-height: 1.5;
+
+                    &::before {
+                        content: '—';
+                        position: absolute;
+                        left: 0;
+                        color: $accent-color;
+                        font-weight: bold;
+                    }
+
+                    strong {
+                        color: $primary-color;
+                    }
+                }
+            }
+
+            .caution-highlight {
+                background-color: #fff1f2; // Soft light red
+                border-left: 3px solid #b91c1c; // Deep WCAG compliant red
+                padding: 0.75rem 1rem;
+                margin: 0.5rem 0;
+                font-size: 0.9rem;
+                font-weight: 500;
+                color: #b91c1c;
+                line-height: 1.5;
+            }
         }
     }
 }
-
 // ============================================================
 // Cocktails Section
 // ============================================================
@@ -391,9 +484,10 @@ h3 {
             padding: 0.75rem 1rem;
             background-color: white;
             border: 1px solid $border-color;
-            border-radius: 8px;
+            border-radius: 4px;
             text-align: center;
             font-size: 0.95rem;
+
 
             strong {
                 color: $secondary-color;
@@ -419,16 +513,13 @@ h3 {
     }
 
     .cocktail-card {
-        background-color: white;
-        border: 1px solid $border-color;
-        border-radius: 12px;
         padding: 1.5rem;
         position: relative;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        transition: transform 0.2s ease, border-color 0.2s ease;
 
         &:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+            transform: translateY(-2px);
+            border-color: rgba($accent-color, 0.4);
         }
 
         .cocktail-number {
@@ -436,23 +527,24 @@ h3 {
             top: -15px;
             left: 50%;
             transform: translateX(-50%);
-            width: 36px;
-            height: 36px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            width: 32px;
+            height: 32px;
+            background-color: $primary-color;
             color: white;
-            border-radius: 50%;
+            border-radius: 2px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: bold;
-            font-size: 1rem;
-            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.4);
+            font-size: 0.9rem;
+            box-shadow: none;
         }
 
         h4 {
             margin-top: 0.75rem;
             margin-bottom: 1rem;
             color: $primary-color;
+            font-family: $font-display;
             font-size: 1.1rem;
             line-height: 1.4;
             min-height: 2.8rem;
@@ -460,19 +552,17 @@ h3 {
 
         .cocktail-schools {
             font-size: 0.9rem;
-            color: #666;
+            color: $secondary-color;
             margin: 0;
             padding-top: 0.75rem;
-            border-top: 1px solid #f0f0f0;
+            border-top: 1px solid $border-color;
 
             strong {
-                color: $secondary-color;
+                color: $primary-color;
             }
         }
     }
 }
-
-// ============================================================
 // Visualization Section
 // ============================================================
 
