@@ -19,6 +19,7 @@ $section-divider-color: rgba($primary-color, 0.06);
 
 $font-display: 'Lora', Georgia, serif;
 $font-body: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+$font-mono: 'JetBrains Mono', Courier New, monospace;
 $font-family: $font-body;
 
 $section-padding-desktop: 5rem 2.5rem;
@@ -559,6 +560,86 @@ p {
 
             strong {
                 color: $primary-color;
+            }
+        }
+    }
+
+    .cocktails-bar-callout {
+        margin-top: 3rem;
+        background: linear-gradient(135deg, rgba($primary-color, 0.03) 0%, rgba($accent-color, 0.05) 100%);
+        border: 1px solid rgba($accent-color, 0.2);
+        border-radius: 12px;
+        padding: 2rem;
+        display: flex;
+        gap: 2rem;
+        align-items: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        text-align: left;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+
+        @media (max-width: $mobile) {
+            flex-direction: column;
+            gap: 1rem;
+            text-align: center;
+            padding: 1.5rem;
+        }
+
+        &:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            border-color: rgba($accent-color, 0.4);
+        }
+
+        .callout-icon {
+            font-size: 3rem;
+            background: linear-gradient(135deg, #ffd700 0%, #d4af37 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1;
+
+            @media (max-width: $mobile) {
+                font-size: 2.5rem;
+            }
+        }
+
+        .callout-content {
+            flex: 1;
+
+            h3 {
+                color: $primary-color;
+                margin-top: 0;
+                margin-bottom: 0.5rem;
+                font-size: 1.4rem;
+                text-align: left;
+
+                @media (max-width: $mobile) {
+                    text-align: center;
+                }
+            }
+
+            p {
+                margin: 0 0 1.25rem;
+                color: $secondary-color;
+                font-size: 0.98rem;
+                line-height: 1.6;
+            }
+
+            .btn-callout {
+                display: inline-block;
+                background-color: $accent-color;
+                color: white;
+                font-weight: 600;
+                padding: 0.75rem 1.5rem;
+                border-radius: 6px;
+                text-decoration: none;
+                transition: all 0.2s ease;
+                box-shadow: 0 2px 8px rgba($accent-color, 0.2);
+
+                &:hover {
+                    background-color: darken($accent-color, 8%);
+                    transform: translateY(-1px);
+                    box-shadow: 0 4px 12px rgba($accent-color, 0.35);
+                }
             }
         }
     }
@@ -1266,34 +1347,252 @@ p {
 // ============================================================
 
 .footer {
-    background-color: $primary-color;
+    background-color: darken($primary-color, 3%);
     color: white;
-    padding: 2rem;
+    padding: 3.5rem 2rem 2.5rem;
     text-align: center;
+    border-top: 1px solid rgba(white, 0.08);
 
     .footer-content {
         max-width: 1200px;
         margin: 0 auto;
         width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 2.5rem;
+    }
 
-        p {
+    // Stepper del Ecosistema
+    .ecosystem-stepper-section {
+        text-align: center;
+        width: 100%;
+
+        h3 {
+            color: #ffffff;
+            font-family: $font-display;
+            font-size: 1.4rem;
+            margin-top: 0;
             margin-bottom: 0.5rem;
+            letter-spacing: 0.02em;
+        }
+
+        .stepper-subtitle {
+            color: rgba(white, 0.5);
+            font-size: 0.95rem;
+            margin-top: 0;
+            margin-bottom: 2rem;
+        }
+    }
+
+    .ecosystem-stepper {
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+        width: 100%;
+        margin: 0 auto;
+        position: relative;
+        z-index: 1;
+
+        @media (max-width: $tablet) {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.25rem;
+            max-width: 500px;
+        }
+
+        // Stepper connector line (Desktop only)
+        &::after {
+            content: '';
+            position: absolute;
+            top: 24px;
+            left: 5%;
+            right: 5%;
+            height: 2px;
+            background: rgba(white, 0.1);
+            z-index: -1;
+
+            @media (max-width: $tablet) {
+                display: none;
+            }
+        }
+
+        .step-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+            position: relative;
+            background: rgba(white, 0.02);
+            border: 1px solid rgba(white, 0.05);
+            border-radius: 8px;
+            padding: 1.25rem 0.75rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+
+            @media (max-width: $tablet) {
+                flex-direction: row;
+                gap: 1.25rem;
+                padding: 1rem;
+                text-align: left;
+                align-items: center;
+            }
+
+            &:hover:not(.active) {
+                background: rgba(white, 0.06);
+                border-color: rgba($accent-color, 0.3);
+                transform: translateY(-2px);
+
+                .step-badge {
+                    background-color: rgba($accent-color, 0.2);
+                    border-color: $accent-color;
+                    color: white;
+                }
+            }
+
+            &.active {
+                background: rgba($primary-color, 0.6);
+                border-color: $accent-color;
+                box-shadow: 0 0 15px rgba($accent-color, 0.3);
+
+                .step-badge {
+                    background: linear-gradient(135deg, $accent-color 0%, darken($accent-color, 12%) 100%);
+                    border-color: $accent-color;
+                    color: white;
+                    box-shadow: 0 0 10px rgba($accent-color, 0.4);
+                }
+
+                .step-meta .step-status {
+                    color: $accent-color;
+                    font-weight: bold;
+                }
+            }
+        }
+
+        .step-badge {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            border: 2px solid rgba(white, 0.2);
+            background-color: darken($primary-color, 6%);
+            color: rgba(white, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+
+            @media (max-width: $tablet) {
+                margin-bottom: 0;
+            }
+        }
+
+        .step-meta {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+
+            @media (max-width: $tablet) {
+                align-items: flex-start;
+                text-align: left;
+            }
+
+            .step-title {
+                font-family: $font-mono;
+                font-size: 0.75rem;
+                text-transform: uppercase;
+                letter-spacing: 0.05em;
+                color: rgba(white, 0.4);
+                margin-bottom: 0.25rem;
+            }
+
+            .step-project {
+                font-size: 0.95rem;
+                font-weight: 600;
+                color: white;
+                margin-bottom: 0.25rem;
+            }
+
+            .step-status {
+                font-size: 0.8rem;
+                color: rgba(white, 0.5);
+            }
+        }
+    }
+
+    .footer-divider {
+        border: none;
+        height: 1px;
+        background: rgba(white, 0.08);
+        margin: 1rem 0 0.5rem;
+    }
+
+    // Bottom Grid
+    .footer-bottom-grid {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 2rem;
+        text-align: left;
+        width: 100%;
+
+        @media (max-width: $tablet) {
+            flex-direction: column;
+            text-align: center;
+            gap: 1.25rem;
+        }
+
+        .footer-info {
+            flex: 1;
+
+            p {
+                margin: 0 0 0.5rem;
+                font-size: 0.95rem;
+                color: rgba(white, 0.75);
+                line-height: 1.6;
+
+                strong {
+                    color: white;
+                }
+            }
+
+            .footer-meta {
+                font-size: 0.85rem;
+                color: rgba(white, 0.45);
+                margin: 0;
+            }
+        }
+
+        .footer-links-column {
+            display: flex;
+            justify-content: flex-end;
+
+            @media (max-width: $tablet) {
+                justify-content: center;
+            }
         }
     }
 
     .footer-links {
-        margin-top: 1rem;
         display: flex;
-        gap: 2rem;
-        justify-content: center;
+        gap: 1.5rem;
+        flex-wrap: wrap;
 
         a {
-            color: white;
+            color: rgba(white, 0.6);
             text-decoration: none;
-            transition: opacity 0.3s ease;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid transparent;
 
             &:hover {
-                opacity: 0.7;
+                color: white;
+                border-bottom-color: rgba(white, 0.6);
             }
         }
     }

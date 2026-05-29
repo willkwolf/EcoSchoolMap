@@ -362,6 +362,16 @@ export const translations = {
                     <div class="cocktail-card" data-category="sociedad"><div class="cocktail-number">12</div><h4>Care economy and gender inequality</h4><p class="cocktail-schools"><strong>Schools:</strong> Feminist, Marxist, Keynesian, Behavioral</p></div>
                     <div class="cocktail-card" data-category="sostenibilidad"><div class="cocktail-number">13</div><h4>Sustainability and planetary boundaries</h4><p class="cocktail-schools"><strong>Schools:</strong> Ecological, Developmentalist, Keynesian, Institutionalist</p></div>
                 </div>
+                
+                <!-- Interactive callout to the Cocktails Bar -->
+                <div class="cocktails-bar-callout reveal">
+                    <div class="callout-icon" aria-hidden="true">🍸</div>
+                    <div class="callout-content">
+                        <h3>Ready to play bartender?</h3>
+                        <p>Put this theory into practice in our <strong>Economic Schools Bar</strong>. An interactive simulator where you can mix ideological spirits in your own virtual shaker, analyze the intensity of your "systemic intoxication", and take your conceptual <strong>Sobriety Test</strong>.</p>
+                        <a href="https://willkwolf.github.io/economic-bar/" class="btn btn-callout" target="_blank" rel="noopener">Go to the Cocktails Bar ➔</a>
+                    </div>
+                </div>
             `,
             timeline: `
                 <h2>Historical Timeline</h2>
@@ -589,27 +599,72 @@ export const translations = {
                 </div>
             `,
             footer: `
-                <p>
-                    Built with <a href="https://d3js.org/" target="_blank" rel="noopener">D3.js v7</a> +
-                    <a href="https://vitejs.dev/" target="_blank" rel="noopener">Vite</a>
-                    • Visualization inspired by <strong>Ha-Joon Chang</strong>'s research and his book
-                    <em>Economics: The User's Guide</em> (2015), Chapter 4 •
-                    12 economic schools
-                </p>
-                <p class="footer-meta">
-                    Project: Political Economy Schools Map • November 2025 • Version 3.2
-                </p>
-                <p class="footer-meta">
-                    <strong>Author:</strong> William Camilo Artunduaga Viana
-                </p>
-                <p class="footer-license">
-                    License: <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">Creative Commons BY-SA 4.0</a>
-                    • Open source for community improvement
-                </p>
-                <div class="footer-links">
-                    <a href="https://github.com/willkwolf/EcoSchoolMap" target="_blank" rel="noopener">GitHub</a>
-                    <a href="https://github.com/willkwolf/EcoSchoolMap/issues" target="_blank" rel="noopener">Report Issue</a>
-                    <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0 License</a>
+                <!-- Ecosystem Stepper -->
+                <div class="ecosystem-stepper-section">
+                    <h3>Critical Thought Path</h3>
+                    <p class="stepper-subtitle">A network of interactive visualizations to explore economics and society</p>
+                    <div class="ecosystem-stepper">
+                        <div class="step-item active">
+                            <div class="step-badge">1</div>
+                            <div class="step-meta">
+                                <span class="step-title">Understand</span>
+                                <span class="step-project">Schools Map</span>
+                                <span class="step-status">You are here</span>
+                            </div>
+                        </div>
+                        <a href="https://willkwolf.github.io/economic-bar/" class="step-item" target="_blank" rel="noopener">
+                            <div class="step-badge">2</div>
+                            <div class="step-meta">
+                                <span class="step-title">Mix</span>
+                                <span class="step-project">The Cocktails Bar</span>
+                                <span class="step-status">Explore ➔</span>
+                            </div>
+                        </a>
+                        <a href="https://willkwolf.github.io/isaiah-berlin-liberty-infographic/" class="step-item" target="_blank" rel="noopener">
+                            <div class="step-badge">3</div>
+                            <div class="step-meta">
+                                <span class="step-title">Contrast</span>
+                                <span class="step-project">Liberty Philosophy</span>
+                                <span class="step-status">Explore ➔</span>
+                            </div>
+                        </a>
+                        <a href="https://willkwolf.github.io/global-inequality-21Century/Escala-visual-de-riqueza-mundial.html" class="step-item" target="_blank" rel="noopener">
+                            <div class="step-badge">4</div>
+                            <div class="step-meta">
+                                <span class="step-title">Scale</span>
+                                <span class="step-project">Global Wealth Gap</span>
+                                <span class="step-status">Explore ➔</span>
+                            </div>
+                        </a>
+                        <a href="https://willkwolf.github.io/colombia-palma-desigualdad/" class="step-item" target="_blank" rel="noopener">
+                            <div class="step-badge">5</div>
+                            <div class="step-meta">
+                                <span class="step-title">Land</span>
+                                <span class="step-project">Inequality in Colombia</span>
+                                <span class="step-status">Explore ➔</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <hr class="footer-divider">
+
+                <div class="footer-bottom-grid">
+                    <div class="footer-info">
+                        <p>
+                            Inspired by <strong>Ha-Joon Chang</strong>'s research, from his book <em>Economics: The User's Guide</em> (2015), Chapter 4.
+                        </p>
+                        <p class="footer-meta">
+                            Project: Political Economy Schools Map • Version 3.3 • Author: William Camilo Artunduaga Viana
+                        </p>
+                    </div>
+                    <div class="footer-links-column">
+                        <div class="footer-links">
+                            <a href="https://github.com/willkwolf/EcoSchoolMap" target="_blank" rel="noopener">GitHub</a>
+                            <a href="https://github.com/willkwolf/EcoSchoolMap/issues" target="_blank" rel="noopener">Report Issue</a>
+                            <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>
+                        </div>
+                    </div>
                 </div>
             `
         }
