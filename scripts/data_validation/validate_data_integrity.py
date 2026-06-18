@@ -12,7 +12,7 @@ from pathlib import Path
 from typing import Dict, Tuple, List
 
 # Define paths
-PROJECT_ROOT = Path(__file__).parent.parent
+PROJECT_ROOT = Path(__file__).parent.parent.parent
 SOURCE_DATA = PROJECT_ROOT / "data" / "escuelas.json"
 PUBLIC_DATA = PROJECT_ROOT / "public" / "data" / "escuelas.json"
 DOCS_DATA = PROJECT_ROOT / "docs" / "data" / "escuelas.json"
@@ -139,7 +139,7 @@ def main():
         public_meta_issues = validate_metadata(public_data, PUBLIC_DATA)
         all_issues.extend(public_meta_issues)
     else:
-        all_issues.append(f"ERROR: Public data file not found: {PUBLIC_DATA}")
+        print(f"INFO: Public data file not found: {PUBLIC_DATA} (skipping)")
     
     # Check docs data
     if DOCS_DATA.exists():

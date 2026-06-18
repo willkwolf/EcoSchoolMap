@@ -6,7 +6,7 @@
     <meta name="description" content="Mapa interactivo de escuelas políticas económicas con D3.js y scrollytelling">
     <title>Mapa de Escuelas Económicas | Visualización Interactiva</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-  <script type="module" crossorigin src="./assets/main-Cd9DZM2j.js"></script>
+  <script type="module" crossorigin src="./assets/main-B2-y8mFI.js"></script>
   <link rel="stylesheet" crossorigin href="./assets/main-BzgAKd9E.css">
 </head>
 <body>
@@ -25,8 +25,7 @@
             <h1>Mapa de Escuelas Económicas</h1>
             <p class="hero-subtitle">Una visualización interactiva del pensamiento económico</p>
             <p class="hero-description">
-                Explora las 12 principales escuelas de pensamiento económico en un espacio bidimensional
-                que representa el rol del Estado y los objetivos socioeconómicos.
+                Explora las 12 principales escuelas de economía en un mapa de dos dimensiones que te muestra cómo se organiza la economía (el rol del Estado frente al libre mercado) y qué objetivos prioriza la sociedad (el crecimiento frente a la equidad y el planeta).
             </p>
             <div class="hero-actions">
                 <a href="#visualization" class="btn btn-primary">Explorar el Mapa</a>
@@ -44,73 +43,74 @@
     <!-- Guide Section -->
     <section id="guide" class="guide-section">
         <div class="guide-container">
-            <h2>Guía de Lectura</h2>
+            <h2>Guía de Lectura: ¿Cómo interpretar el mapa?</h2>
             <div class="guide-grid">
                 <div class="guide-card">
                     <h3>Ejes del Mapa</h3>
-                    <p><strong>Eje Horizontal (X):</strong> Arquitectura Económica</p>
+                    <p><strong>¿Cómo se organiza? (Eje Horizontal X):</strong></p>
                     <ul>
-                        <li>← Izquierda: Estado Limitado (Economía de Mercado)</li>
-                        <li>→ Derecha: Estado Fuerte (Economía Dirigida)</li>
+                        <li>← Izquierda: Estado Limitado (Confianza en el Libre Mercado)</li>
+                        <li>→ Derecha: Estado Fuerte (Planificación y Control del Estado)</li>
                     </ul>
-                    <p><strong>Eje Vertical (Y):</strong> Objetivo Socioeconómico</p>
+                    <p><strong>¿Qué se prioriza? (Eje Vertical Y):</strong></p>
                     <ul>
-                        <li>↑ Arriba: Equidad y Sostenibilidad</li>
-                        <li>↓ Abajo: Productividad y Crecimiento</li>
+                        <li>↑ Arriba: Equidad y Sostenibilidad (repartir mejor y cuidar la naturaleza)</li>
+                        <li>↓ Abajo: Crecimiento y Productividad (producir más y acumular capital)</li>
                     </ul>
+                    <p class="axis-subtext">La balanza de Okun: El equilibrio entre producir más (eficiencia) y repartir mejor (equidad)</p>
                 </div>
                 <div class="guide-card">
-                    <h3>Cuadrantes de Análisis</h3>
-                    <p>El mapa se divide en 4 cuadrantes principales:</p>
+                    <h3>Zonas del Mapa (Cuadrantes)</h3>
+                    <p>El mapa se organiza en 4 zonas o cuadrantes:</p>
                     <ul>
-                        <li><strong>Q1:</strong> Estado Débil + Equidad y Sostenibilidad</li>
-                        <li><strong>Q2:</strong> Estado Fuerte + Equidad y Sostenibilidad</li>
-                        <li><strong>Q3:</strong> Estado Débil + Crecimiento y Productividad</li>
-                        <li><strong>Q4:</strong> Estado Fuerte + Crecimiento y Productividad</li>
+                        <li><strong>Q1 (Mercado + Equidad):</strong> El mercado funciona libremente, pero se busca la justicia social y el cuidado ecológico.</li>
+                        <li><strong>Q2 (Estado + Equidad):</strong> El gobierno dirige la economía buscando la igualdad y proteger el planeta.</li>
+                        <li><strong>Q3 (Mercado + Crecimiento):</strong> El mercado opera sin trabas enfocándose en producir más riqueza.</li>
+                        <li><strong>Q4 (Estado + Crecimiento):</strong> El gobierno interviene para acelerar la industrialización y la producción nacional.</li>
                     </ul>
                 </div>
                 <div class="guide-card">
                     <h3>Transiciones Históricas</h3>
-                    <p>Las flechas representan cambios históricos entre escuelas:</p>
+                    <p>Las flechas representan cambios históricos y saltos en la teoría:</p>
                     <ul>
-                        <li><strong>Línea sólida:</strong> Alta confianza histórica</li>
-                        <li><strong>Línea punteada:</strong> Confianza media</li>
-                        <li><strong>Línea discontinua:</strong> Baja confianza</li>
+                        <li><strong>Línea sólida:</strong> Alta certeza histórica (fuentes muy claras)</li>
+                        <li><strong>Línea punteada:</strong> Certeza media</li>
+                        <li><strong>Línea discontinua:</strong> Certeza baja</li>
                     </ul>
-                    <p>Cada transición incluye el evento disparador y el año.</p>
+                    <p>Cada camino incluye su evento disparador y el año.</p>
                 </div>
                 <div class="guide-card">
-                    <h3>Variantes de Ponderación</h3>
-                    <p>Diferentes perspectivas cambian las posiciones:</p>
+                    <h3>Lentes de Análisis (Presets)</h3>
+                    <p>Diferentes perspectivas cambian las posiciones de las escuelas en el mapa:</p>
                     <ul>
-                        <li><strong>Base:</strong> Balanceada y neutral</li>
-                        <li><strong>State Emphasis:</strong> Énfasis en rol del Estado</li>
-                        <li><strong>Equity Emphasis:</strong> Énfasis en equidad</li>
-                        <li><strong>Market Emphasis:</strong> Énfasis en mercado libre</li>
-                        <li><strong>Growth Emphasis:</strong> Énfasis en crecimiento</li>
-                        <li><strong>Historical Emphasis:</strong> Énfasis en evolución histórica</li>
+                        <li><strong>Base:</strong> Equilibrada (Académica)</li>
+                        <li><strong>State Emphasis:</strong> Énfasis en el Estado (prioriza el rol del gobierno)</li>
+                        <li><strong>Equity Emphasis:</strong> Énfasis en la Equidad (prioriza el reparto justo)</li>
+                        <li><strong>Market Emphasis:</strong> Énfasis en el Mercado (prioriza el intercambio libre)</li>
+                        <li><strong>Growth Emphasis:</strong> Énfasis en el Crecimiento (prioriza la producción)</li>
+                        <li><strong>Historical Emphasis:</strong> Énfasis Histórico (prioriza la evolución temporal)</li>
                     </ul>
                 </div>
                 <div class="guide-card">
-                    <h3>Fundamento Metodológico</h3>
-                    <p>Basado en el Capítulo 4 de <strong>Economics: The User's Guide</strong>, de <strong>Ha-Joon Chang</strong> (2015):</p>
+                    <h3>Fundamento Científico</h3>
+                    <p>Inspirado en el Capítulo 4 de <strong>Economía: Guía del Usuario</strong>, de <strong>Ha-Joon Chang</strong> (2015):</p>
                     <ul>
-                        <li>Análisis multidimensional de escuelas económicas</li>
-                        <li>Posicionamiento cualitativo cuantificado</li>
-                        <li>Normalización mediante percentiles</li>
+                        <li>Análisis de múltiples dimensiones de cada escuela</li>
+                        <li>Posicionamiento basada en descriptores cualitativos cuantificados</li>
+                        <li>Normalización estadística y por percentiles</li>
                         <li>Visualización pedagógica interactiva</li>
                     </ul>
                 </div>
                 <div class="guide-card">
-                    <h3>Restricciones de Enfoque</h3>
+                    <h3>El riesgo de ver el mundo con una sola lente</h3>
                     <p class="caution-highlight">
-                        Basarse sólo en una escuela para explorar un tema tiene riesgo de:
+                        Mapear problemas usando una sola escuela económica puede causar:
                     </p>
                     <ul>
-                        <li>Polarización ideológica</li>
-                        <li>Visión de túnel</li>
-                        <li>Arrogancia intelectual</li>
-                        <li>Análisis incompleto</li>
+                        <li><strong>Polarización:</strong> Creer que la economía es un debate de buenos contra malos.</li>
+                        <li><strong>Visión de túnel:</strong> Ver solo una parte del problema e ignorar el resto.</li>
+                        <li><strong>Arrogancia intelectual:</strong> Pensar que tu escuela tiene la única respuesta correcta.</li>
+                        <li><strong>Respuestas incompletas:</strong> Diseñar soluciones que fallan por ignorar otros factores.</li>
                     </ul>
                 </div>
             </div>
@@ -125,24 +125,24 @@
             <!-- Controls -->
             <div class="controls">
                 <div class="control-group">
-                    <label for="preset-dropdown" title="Las perspectivas de peso alteran las posiciones de las escuelas para mostrar diferentes enfoques económicos">Perspectiva de Peso:</label>
+                    <label for="preset-dropdown" title="Las lentes de análisis alteran las posiciones de las escuelas para mostrar diferentes enfoques económicos">Lentes de Análisis (Presets):</label>
                     <select id="preset-dropdown">
-                        <option value="base" selected>Base (Original)</option>
-                        <option value="state-emphasis">Enfoque Estado</option>
-                        <option value="equity-emphasis">Enfoque Equidad</option>
-                        <option value="market-emphasis">Enfoque Mercado</option>
-                        <option value="growth-emphasis">Enfoque Crecimiento</option>
-                        <option value="historical-emphasis">Enfoque Historico</option>
-                        <option value="pragmatic-emphasis">Enfoque Pragmatico</option>
+                        <option value="base" selected>Equilibrada (Académica)</option>
+                        <option value="state-emphasis">Énfasis en el Estado</option>
+                        <option value="equity-emphasis">Énfasis en la Equidad</option>
+                        <option value="market-emphasis">Énfasis en el Mercado</option>
+                        <option value="growth-emphasis">Énfasis en el Crecimiento</option>
+                        <option value="historical-emphasis">Énfasis Histórico</option>
+                        <option value="pragmatic-emphasis">Énfasis Práctico</option>
                     </select>
                 </div>
                 <div class="control-group">
-                    <label for="normalization-dropdown" title="Los métodos de normalización cambian cómo se representan los valores en el mapa">Método de Normalización:</label>
+                    <label for="normalization-dropdown" title="Los métodos de escala cambian cómo se distribuyen los valores en el espacio del mapa">Escala de Visualización:</label>
                     <select id="normalization-dropdown">
-                        <option value="percentile" selected>Percentil (Distribución Uniforme)</option>
-                        <option value="zscore">Puntaje-Z (Centrado Estadístico)</option>
-                        <option value="minmax">Min-Max (Rango Completo)</option>
-                        <option value="none">Crudo (Sin Normalización)</option>
+                        <option value="percentile" selected>Percentil (Escuelas bien distribuidas)</option>
+                        <option value="zscore">Puntaje-Z (Centrado en el promedio)</option>
+                        <option value="minmax">Min-Max (Estirar al mapa completo)</option>
+                        <option value="none">Sin normalizar (Posición pura)</option>
                     </select>
                 </div>
                 <div class="control-group">
@@ -212,22 +212,14 @@
     <!-- Cocktails Section -->
     <section id="cocktails" class="cocktails-section">
         <div class="cocktails-container">
-            <h2>Sinergias Metodológicas: Perspectivas Integradas de Análisis</h2>
+            <h2>Cócteles de ideas: Combinar escuelas para resolver problemas reales (Sinergias)</h2>
 
             <div class="intro-text">
                 <p>
-                    Aunque existen buenas razones para conocer las diferencias entre escuelas económicas,
-                    es comprensible que la propuesta de explorar nueve enfoques distintos pueda sentirse
-                    abrumadora. Es como si te ofrecieran probar nueve sabores de helado cuando creías
-                    que solo existía la vainilla. Incluso quienes tienen curiosidad pueden pensar que
-                    nueve son demasiados.
+                    Aunque es bueno conocer las diferencias entre las 12 escuelas de economía, explorar tantos enfoques puede parecer abrumador al principio. Es como entrar a una heladería con 12 sabores cuando pensabas que solo existía la vainilla. Es normal sentir que son demasiados.
                 </p>
                 <p>
-                    Por eso, en la guía temática que sigue se proponen "cocteles" o sinergias: combinaciones de dos
-                    a cuatro escuelas aplicadas a temas concretos. La esperanza es que, tras degustar un
-                    par de estos cocteles, surja el deseo de recorrer todas las botellas de la estantería.
-                    Y si no quieres probarlas todas, incluso uno o dos sabores bastan para mostrar que
-                    existen muchas maneras de pensar, hacer y aproximarse a la economía.
+                    Por eso, te proponemos "cócteles de ideas": combinaciones de 2 a 4 escuelas aplicadas a temas reales del mundo. Al probar estas mezclas, verás lo útil que es usar diferentes herramientas teóricas para distintos problemas. Incluso probar uno o dos cócteles es suficiente para descubrir que hay muchas formas válidas de entender y hacer economía.
                 </p>
             </div>
 
@@ -459,18 +451,14 @@
     <!-- Complementary Reading Section -->
     <section id="map-reading-guide" class="pedagogical-section">
         <div class="pedagogical-legend">
-            <h2>Guía de Interpretación Analítica: Límites, Capas y Trayectorias</h2>
+            <h2>Guía para leer el mapa: Límites, Capas y Caminos (Interpretación)</h2>
 
             <div class="intro-text">
                 <p>
-                    Este mapa organiza escuelas económicas en dos ejes para volver comparables ideas muy distintas.
-                    Esa simplificación es útil para aprender, pero también significa que resume en una sola imagen
-                    debates mucho más amplios.
+                    Este mapa organiza escuelas de economía en dos ejes para comparar ideas muy distintas. Esa simplificación ayuda a aprender, pero también comprime debates muy amplios en una sola imagen.
                 </p>
                 <p>
-                    Por eso conviene sumar una lectura complementaria: algunas corrientes no necesitan un nodo nuevo,
-                    sino una explicación adicional que ayude a entender <strong>límites, capas y trayectorias</strong>
-                    del espacio que el mapa representa.
+                    Por eso conviene sumar esta guía de interpretación: algunas teorías importantes no necesitan un punto nuevo en el mapa, sino una explicación que nos ayude a entender los <strong>límites, capas y caminos (trayectorias)</strong> del espacio económico.
                 </p>
             </div>
 
@@ -478,81 +466,52 @@
             <div class="principles-grid">
                 <div class="principle-card accordion-card">
                     <button class="accordion-trigger" aria-expanded="false" tabindex="0">
-                        <h4>1. Distingue entre nodos, capas y trayectorias</h4>
+                        <h4>1. No te quedes solo en los puntos: el mapa tiene capas y caminos</h4>
                         <span class="accordion-icon"></span>
                     </button>
                     <div class="accordion-content">
                         <div class="accordion-body-inner">
                             <p>
-                                <em>Idea clave:</em>
-                                Los <strong>nodos</strong> son escuelas que sí proponen una forma de organizar la economía y un objetivo principal.
-                            </p>
-                            <p>
-                                Las <strong>capas</strong> atraviesan todo el mapa y lo condicionan, mientras que las
-                                <strong>trayectorias</strong> recuerdan que las ideas cambian con el tiempo y que las
-                                transiciones entre posiciones nunca son automáticas.
+                                <em>Idea clave:</em> Las escuelas son los <strong>puntos (nodos)</strong> principales. Pero hay <strong>capas</strong> (temas que cruzan todo el mapa, como el género o la complejidad) y <strong>caminos (trayectorias)</strong> que muestran cómo evolucionan y se influyen las ideas históricamente.
                             </p>
                         </div>
                     </div>
                 </div>
                 <div class="principle-card accordion-card">
                     <button class="accordion-trigger" aria-expanded="false" tabindex="0">
-                        <h4>2. No todo el plano es igualmente realizable</h4>
+                        <h4>2. El mapa frente a la realidad (¿Qué es factible?)</h4>
                         <span class="accordion-icon"></span>
                     </button>
                     <div class="accordion-content">
                         <div class="accordion-body-inner">
                             <p>
-                                <em>Región factible:</em>
-                                El mapa muestra posibilidades conceptuales, pero la realidad también depende de recursos,
-                                energía, instituciones y límites ecológicos.
-                            </p>
-                            <p>
-                                Lecturas como <strong>Kate Raworth</strong>, <strong>Nicholas Georgescu-Roegen</strong> y
-                                <strong>Herman Daly</strong> ayudan a entender que toda propuesta económica opera entre un
-                                suelo social y un techo biofísico.
+                                <em>Límites físicos:</em> El mapa muestra ideas sobre papel, pero en el mundo real toda economía depende de recursos reales como la energía, el agua y el clima. Autores como <strong>Kate Raworth</strong> explican que debemos operar dentro de un <strong>suelo social</strong> (bienestar básico) y bajo un <strong>techo ecológico</strong> (no agotar el planeta).
                             </p>
                         </div>
                     </div>
                 </div>
                 <div class="principle-card accordion-card">
                     <button class="accordion-trigger" aria-expanded="false" tabindex="0">
-                        <h4>3. Por qué algunas perspectivas no aparecen como nodos</h4>
+                        <h4>3. ¿Por qué algunas ideas no tienen su propio punto?</h4>
                         <span class="accordion-icon"></span>
                     </button>
                     <div class="accordion-content">
                         <div class="accordion-body-inner">
                             <p>
-                                <em>Regla rápida:</em>
-                                Si una teoría no define al mismo tiempo una forma clara de coordinación y un objetivo final,
-                                aquí funciona mejor como lectura complementaria que como escuela ubicada en el plano.
-                            </p>
-                            <p>
-                                Por eso la <strong>complejidad</strong>, la <strong>dinámica de sistemas</strong> o el
-                                <strong>enfoque biofísico</strong> no compiten con las escuelas del mapa: más bien ayudan a
-                                interpretar sus bordes, sus restricciones y sus zonas de estabilidad.
+                                <em>Regla de juego:</em> Para que una teoría tenga su propio punto en este mapa, debe responder a dos preguntas: ¿cómo se organiza la economía? y ¿cuál es su meta? Teorías como el <strong>enfoque biofísico</strong> o la <strong>teoría de la complejidad</strong> no compiten con las escuelas, sino que nos ayudan a entender los límites físicos y las reglas del mapa.
                             </p>
                         </div>
                     </div>
                 </div>
                 <div class="principle-card accordion-card">
                     <button class="accordion-trigger" aria-expanded="false" tabindex="0">
-                        <h4>4. Lecturas sugeridas para ampliar la mirada</h4>
+                        <h4>4. Lecturas sugeridas para ampliar tu mirada</h4>
                         <span class="accordion-icon"></span>
                     </button>
                     <div class="accordion-content">
                         <div class="accordion-body-inner">
                             <p>
-                                <strong>Donella Meadows</strong> ayuda a pensar retardos, acumulaciones y efectos no previstos
-                                en sistemas complejos.
-                            </p>
-                            <p>
-                                <strong>Brian Arthur</strong> y <strong>Doyne Farmer</strong> muestran cómo las redes, la
-                                incertidumbre y la dependencia de trayectoria cambian la lectura del desarrollo económico.
-                            </p>
-                            <p>
-                                <strong>Charles Hall</strong> recuerda que la disponibilidad energética también condiciona lo
-                                que una economía puede sostener en el tiempo.
+                                <strong>Donella Meadows</strong> te enseñará a ver cómo funcionan los sistemas complejos y por qué las cosas tardan en reaccionar. <strong>Brian Arthur</strong> explica cómo las redes y la incertidumbre cambian el rumbo del desarrollo. <strong>Charles Hall</strong> te recordará que sin energía neta utilizable, ninguna propuesta económica puede sostenerse en el tiempo.
                             </p>
                         </div>
                     </div>
@@ -653,88 +612,79 @@
     <!-- Pedagogical Legend Section -->
     <section id="pedagogical-legend" class="pedagogical-section">
         <div class="pedagogical-legend">
-            <h2>Epílogo Epistemológico: El Valor del Pluralismo Metodológico</h2>
+            <h2>Conclusión: ¿Por qué usar diferentes lentes? (Pluralismo Metodológico)</h2>
             
             <div class="intro-text">
                 <p>
-                    El verdadero valor de este mapa no radica en memorizar las posiciones de cada escuela,
-                    sino en comprender que <strong>no existe una única verdad económica</strong>. Cada escuela
-                    ofrece una lente diferente para analizar la realidad, y todas tienen algo valioso que aportar.
+                    El verdadero valor de este mapa no radica en memorizar de memoria las posiciones de cada escuela, sino en comprender que <strong>no existe una única verdad absoluta en economía</strong>. Cada escuela te ofrece una lente diferente para analizar la realidad, y todas tienen herramientas valiosas que aportar.
                 </p>
                 <p>
-                    Como dijo el filósofo <strong>John Stuart Mill</strong>: <em>"Quien solo conoce su propio lado
-                    del caso, sabe poco de eso"</em>. En economía, esto es especialmente cierto. Las mejores
-                    políticas y decisiones surgen cuando consideramos múltiples perspectivas, no cuando nos
-                    aferramos dogmáticamente a una sola escuela.
+                    Como dijo el filósofo <strong>John Stuart Mill</strong>: <em>"Quien solo conoce su propia postura de un tema, sabe muy poco de ella"</em>. En la vida real, las mejores decisiones y políticas públicas surgen cuando consideramos múltiples puntos de vista, y no cuando nos encerramos dogmáticamente en una sola escuela de pensamiento.
                 </p>
             </div>
 
-            <h3>Principios Fundacionales para el Estudio Riguroso</h3>
+            <h3>Principios para Pensar con Claridad</h3>
             <div class="principles-grid">
                 <div class="principle-card accordion-card">
                     <button class="accordion-trigger" aria-expanded="false" tabindex="0">
-                        <h4>1. Humildad Intelectual</h4>
+                        <h4>1. Mente Abierta (Humildad Intelectual)</h4>
                         <span class="accordion-icon"></span>
                     </button>
                     <div class="accordion-content">
                         <div class="accordion-body-inner">
                             <p>
-                                <em>"La verdadera sabiduría viene de saber que no sabes"</em> - Sócrates
+                                <em>"La verdadera sabiduría viene de reconocer la propia ignorancia"</em> - Sócrates
                             </p>
                             <p>
-                                Reconoce que ninguna escuela tiene todas las respuestas. Mantén la mente abierta
-                                a nuevas ideas y dispuesto a revisar tus creencias cuando la evidencia lo requiera.
+                                Ninguna escuela de economía tiene todas las respuestas para todos los países o épocas. Mantén la curiosidad y la disposición a aprender de otros enfoques.
                             </p>
                         </div>
                     </div>
                 </div>
                 <div class="principle-card accordion-card">
                     <button class="accordion-trigger" aria-expanded="false" tabindex="0">
-                        <h4>2. Rigor Analítico</h4>
+                        <h4>2. Pensar con Pruebas (Rigor Analítico)</h4>
                         <span class="accordion-icon"></span>
                     </button>
                     <div class="accordion-content">
                         <div class="accordion-body-inner">
                             <p>
-                                <em>"Duda de todo al menos una vez, incluso de que dos más dos sean cuatro"</em> - Georg Lichtenberg
+                                <em>"Duda de todo al menos una vez, incluso de si dos más dos son cuatro"</em> - Georg Lichtenberg
                             </p>
                             <p>
-                                Examina críticamente los supuestos de cada escuela. Pregunta: ¿Qué evidencia respalda
-                                esta teoría? ¿En qué contextos funciona mejor? ¿Cuáles son sus limitaciones?
+                                Examina con cuidado los supuestos detrás de cada idea. Pregúntate: ¿en qué contexto funciona mejor esta teoría?, ¿qué datos la respaldan? y ¿dónde falla?
                             </p>
                         </div>
                     </div>
                 </div>
                 <div class="principle-card accordion-card">
                     <button class="accordion-trigger" aria-expanded="false" tabindex="0">
-                        <h4>3. Pensamiento Contextual</h4>
+                        <h4>3. Mirar el Entorno (Pensamiento Contextual)</h4>
                         <span class="accordion-icon"></span>
                     </button>
                     <div class="accordion-content">
                         <div class="accordion-body-inner">
                             <p>
-                                <em>"No hay nada más práctico que una buena teoría"</em> - Kurt Lewin
+                                <em>"No hay nada tan práctico como una buena teoría"</em> - Kurt Lewin
                             </p>
                             <p>
-                                Las teorías económicas no existen en el vacío. Considera el contexto histórico,
-                                institucional y cultural al aplicar ideas de diferentes escuelas.
+                                Las ideas económicas no flotan en el aire; nacen en momentos históricos específicos. Ten en cuenta las costumbres y la historia de un lugar antes de aplicarle una fórmula rígida.
                             </p>
                         </div>
                     </div>
                 </div>
                 <div class="principle-card accordion-card">
                     <button class="accordion-trigger" aria-expanded="false" tabindex="0">
-                        <h4>4. Síntesis Creativa</h4>
+                        <h4>4. Crear Nuevas Ideas (Síntesis Creativa)</h4>
                         <span class="accordion-icon"></span>
                     </button>
                     <div class="accordion-content">
                         <div class="accordion-body-inner">
                             <p>
-                                <em>"La verdad es una tierra sin caminos"</em> - Jiddu Krishnamurti
+                                <em>"La verdad es un territorio sin caminos trazados"</em> - Jiddu Krishnamurti
                             </p>
                             <p>
-                                No te limites a elegir una escuela. Aprende a combinar insights de múltiples
-                                perspectivas para desarrollar tu propio entendimiento matizado de la economía.
+                                No te obligues a elegir un solo bando. Aprende a tomar lo mejor de cada escuela de pensamiento para construir respuestas más completas y útiles.
                             </p>
                         </div>
                     </div>

@@ -180,74 +180,74 @@ export const dataTranslations = {
         },
         nodes: {
             marxista: {
-                description: 'Analysis of historical capitalism, accumulation, and the labor theory of value.'
+                description: 'Studies how capitalism works historically, how wealth accumulates, and how human labor creates value.'
             },
             feminista: {
-                description: 'Makes unpaid reproductive labor visible as a foundation of the productive system.'
+                description: 'Reveals unpaid care and domestic work as the necessary foundation for the entire economy to function.'
             },
             ecologica: {
-                description: 'The economy as a subsystem embedded within planetary boundaries and social foundations.'
+                description: 'Views the economy as a part of nature, arguing that we must live within planetary boundaries without neglecting basic human needs.'
             },
             tradicion_desarrollista: {
-                description: 'Promotion of national industrial capabilities and protection of infant industries.'
+                description: 'Argues that countries develop by helping local industries grow and learn before competing with global powers.'
             },
             keynesiana: {
-                description: 'Management of economic volatility through fiscal intervention in aggregate demand.'
+                description: 'Argues that during crises, the state should spend money to create jobs and boost people\'s consumption.'
             },
             institucionalista: {
-                description: 'Analysis of rules, norms, and property rights as determinants of economic performance.'
+                description: 'Explains that the economy depends on the rules of the game: the laws, customs, and agreements that organize society.'
             },
             estado_emprendedor: {
-                description: 'The public sector as a creator of markets and a bearer of early technological risk.'
+                description: 'Argues that the government should not just fix market failures, but take risks to invest in new technologies before private firms do.'
             },
             conductista: {
-                description: 'Challenges perfect rationality through the study of cognitive biases.'
+                description: 'Studies how real people make daily decisions, showing that we are often guided by emotions, habits, or mental biases.'
             },
             clasica: {
-                description: 'Study of growth, division of labor, and value based on production costs.'
+                description: 'Studies how the division of labor and free trade help nations prosper and grow their wealth.'
             },
             neoclasica: {
-                description: 'Mathematical modeling of supply and demand based on utility maximization.'
+                description: 'Explains the economy using mathematical models where individuals and firms try to get the most benefit out of their resources.'
             },
             austriaca: {
-                description: 'Emphasis on dispersed knowledge, spontaneous order, and the impossibility of central calculation.'
+                description: 'Argues that information is too dispersed among people for a government to plan the entire economy, relying instead on free markets.'
             },
             schumpeteriana: {
-                description: 'The economic cycle driven by innovation and the entrepreneur’s creative destruction.'
+                description: 'Explains that the economy progresses through innovation, where new inventions and firms replace old ones (creative destruction).'
             }
         },
         transitions: {
             crisis_2008: {
                 event: '2008 financial crisis',
-                description: 'From laissez-faire to regulation and state-backed rescues.'
+                description: 'Free markets failed and governments had to step in with regulation and bailouts to save banks.'
             },
             crisis_climatica: {
                 event: 'Climate crisis and sustainability',
-                description: 'Planetary boundaries become part of the economic model.'
+                description: 'Planetary boundaries and nature\'s limits are integrated into the economic model of production and consumption.'
             },
             crisis_desigualdad: {
                 event: 'Inequality and precarity crisis',
-                description: 'Nudges prove insufficient and stronger redistribution is demanded.'
+                description: 'Soft behavioral incentives (nudges) prove insufficient, sparking demands for stronger wealth redistribution.'
             },
             pandemia_covid: {
                 event: 'COVID-19 pandemic',
-                description: 'Urgent need for accelerated innovation in vaccines and technology.'
+                description: 'The emergency demanded rapid, coordinated public investment to develop vaccines and health technologies.'
             },
             inflacion_2022: {
                 event: 'Post-pandemic inflation crisis',
-                description: 'Return to monetarist orthodoxy and fiscal adjustment.'
+                description: 'Return to higher interest rates and public spending controls to curb rising prices.'
             },
             post_guerra_fria: {
                 event: 'End of the Cold War and neoliberal expansion',
-                description: 'Transition from state-led development policies to liberalization and global opening.'
+                description: 'The collapse of the Soviet bloc accelerated the shift from state-protected economies to free markets and global trade.'
             },
             reaccion_posglobalizacion: {
                 event: 'Governance crisis and institutional weakness under globalization',
-                description: 'Renewed emphasis on stronger rules and better governance after global market failures.'
+                description: 'Problems in global trade demonstrated the urgent need to build stronger international rules, agreements, and institutions.'
             },
             emergencia_feminista: {
                 event: 'Feminist mobilization and the incorporation of gender into economic policy',
-                description: 'Marxist thought expands to include gender perspective and the care economy.'
+                description: 'Economic theory expands to value reproductive and care work as an indispensable foundation of the system.'
             }
         }
     }
