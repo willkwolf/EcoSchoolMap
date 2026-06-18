@@ -2,7 +2,7 @@ export const translations = {
     es: {
         meta: {
             title: 'Mapa de Escuelas Económicas | Visualización Interactiva',
-            description: 'Mapa interactivo de escuelas políticas económicas con D3.js y scrollytelling'
+            description: 'Mapa interactivo de escuelas políticas económicas con D3.js y narrativa interactiva'
         },
         scroll: {
             navAriaLabel: 'Navegación de secciones',

@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Mapa interactivo de escuelas políticas económicas con D3.js y scrollytelling">
+    <meta name="description" content="Mapa interactivo de escuelas políticas económicas con D3.js y narrativa interactiva">
     <title>Mapa de Escuelas Económicas | Visualización Interactiva</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-  <script type="module" crossorigin src="./assets/main-B2-y8mFI.js"></script>
+  <script type="module" crossorigin src="./assets/main-Dw4XzoVk.js"></script>
   <link rel="stylesheet" crossorigin href="./assets/main-BzgAKd9E.css">
 </head>
 <body>
@@ -32,7 +32,7 @@
                 <a href="https://github.com/willkwolf/EcoSchoolMap" class="btn btn-secondary" target="_blank" rel="noopener">Ver en GitHub</a>
             </div>
             <div class="scroll-indicator">
-                <span>Scroll para explorar</span>
+                <span>Desliza para explorar</span>
                 <svg width="20" height="20" viewBox="0 0 20 20">
                     <polyline points="5,7 10,12 15,7" stroke="currentColor" fill="none" stroke-width="2"/>
                 </svg>
@@ -80,15 +80,16 @@
                     <p>Cada camino incluye su evento disparador y el año.</p>
                 </div>
                 <div class="guide-card">
-                    <h3>Lentes de Análisis (Presets)</h3>
+                    <h3>Lentes de Análisis</h3>
                     <p>Diferentes perspectivas cambian las posiciones de las escuelas en el mapa:</p>
                     <ul>
-                        <li><strong>Base:</strong> Equilibrada (Académica)</li>
-                        <li><strong>State Emphasis:</strong> Énfasis en el Estado (prioriza el rol del gobierno)</li>
-                        <li><strong>Equity Emphasis:</strong> Énfasis en la Equidad (prioriza el reparto justo)</li>
-                        <li><strong>Market Emphasis:</strong> Énfasis en el Mercado (prioriza el intercambio libre)</li>
-                        <li><strong>Growth Emphasis:</strong> Énfasis en el Crecimiento (prioriza la producción)</li>
-                        <li><strong>Historical Emphasis:</strong> Énfasis Histórico (prioriza la evolución temporal)</li>
+                        <li><strong>Equilibrada (Académica):</strong> Lente de análisis base que no altera las posiciones.</li>
+                        <li><strong>Énfasis en el Estado:</strong> Prioriza el rol del gobierno en la economía.</li>
+                        <li><strong>Énfasis en la Equidad:</strong> Prioriza el reparto justo de los recursos.</li>
+                        <li><strong>Énfasis en el Mercado:</strong> Prioriza el intercambio libre e individual.</li>
+                        <li><strong>Énfasis en el Crecimiento:</strong> Prioriza la producción y la acumulación.</li>
+                        <li><strong>Énfasis Histórico:</strong> Prioriza la evolución temporal de las teorías.</li>
+                        <li><strong>Énfasis Práctico:</strong> Prioriza la aplicación de ideas frente a abstracciones.</li>
                     </ul>
                 </div>
                 <div class="guide-card">
@@ -125,7 +126,7 @@
             <!-- Controls -->
             <div class="controls">
                 <div class="control-group">
-                    <label for="preset-dropdown" title="Las lentes de análisis alteran las posiciones de las escuelas para mostrar diferentes enfoques económicos">Lentes de Análisis (Presets):</label>
+                    <label for="preset-dropdown" title="Las lentes de análisis alteran las posiciones de las escuelas para mostrar diferentes enfoques económicos">Lentes de Análisis:</label>
                     <select id="preset-dropdown">
                         <option value="base" selected>Equilibrada (Académica)</option>
                         <option value="state-emphasis">Énfasis en el Estado</option>
@@ -140,8 +141,8 @@
                     <label for="normalization-dropdown" title="Los métodos de escala cambian cómo se distribuyen los valores en el espacio del mapa">Escala de Visualización:</label>
                     <select id="normalization-dropdown">
                         <option value="percentile" selected>Percentil (Escuelas bien distribuidas)</option>
-                        <option value="zscore">Puntaje-Z (Centrado en el promedio)</option>
-                        <option value="minmax">Min-Max (Estirar al mapa completo)</option>
+                        <option value="zscore">Puntaje Z (Centrado en el promedio)</option>
+                        <option value="minmax">Mínimo-Máximo (Estirar al mapa completo)</option>
                         <option value="none">Sin normalizar (Posición pura)</option>
                     </select>
                 </div>
@@ -379,7 +380,7 @@
                 <div class="timeline-item" data-category="era-contemporanea">
                     <div class="timeline-year">1979</div>
                     <h4>Kahneman y Tversky - Economía Conductista</h4>
-                    <p>Prospect Theory - Sesgos cognitivos y racionalidad limitada</p>
+                    <p>Teoría de las Perspectivas (Prospect Theory) - Sesgos cognitivos y racionalidad limitada</p>
                 </div>
                 <div class="timeline-item" data-category="era-contemporanea">
                     <div class="timeline-year">1980s</div>
@@ -427,7 +428,7 @@
                 <div class="path-step">
                     <div class="step-number">1</div>
                     <h4>Explora el Mapa</h4>
-                    <p>Comienza familiarizándote con las 12 escuelas y sus posiciones relativas. Usa el zoom y explora cada nodo.</p>
+                    <p>Comienza familiarizándote con las 12 escuelas y sus posiciones relativas. Usa el acercamiento y explora cada nodo.</p>
                 </div>
                 <div class="path-step">
                     <div class="step-number">2</div>
@@ -775,7 +776,7 @@
                 <div class="footer-links-column">
                     <div class="footer-links">
                         <a href="https://github.com/willkwolf/EcoSchoolMap" target="_blank" rel="noopener">GitHub</a>
-                        <a href="https://github.com/willkwolf/EcoSchoolMap/issues" target="_blank" rel="noopener">Reportar Issue</a>
+                        <a href="https://github.com/willkwolf/EcoSchoolMap/issues" target="_blank" rel="noopener">Reportar Problema</a>
                         <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>
                     </div>
                 </div>
