@@ -12,12 +12,12 @@ export const translations = {
             hero: 'Introducción',
             guide: 'Guía de Lectura',
             visualization: 'Mapa Interactivo',
-            cocktails: 'Sinergias Metodológicas',
+            cocktails: 'Cócteles de ideas',
             timeline: 'Línea de Tiempo',
-            'learning-path': 'Secuencia Pedagógica',
-            'map-reading-guide': 'Guía de Interpretación',
-            applications: 'Ámbitos de Aplicación',
-            'pedagogical-legend': 'Epílogo Epistemológico'
+            'learning-path': 'Guía de 4 pasos',
+            'map-reading-guide': 'Guía para leer el mapa',
+            applications: 'Aplicación Práctica',
+            'pedagogical-legend': 'Conclusión (Gafas de Análisis)'
         },
         ui: {
             localeLabel: 'Idioma',
@@ -30,9 +30,9 @@ export const translations = {
         },
         visualization: {
             axes: {
-                xDesktop: 'Arquitectura Económica: ← Economía de Mercado (Estado Débil) | Economía Dirigida (Estado Fuerte) →',
-                yDesktop: 'Objetivo Socioeconómico: Productividad y Crecimiento ↓ | Equidad y Sostenibilidad ↑',
-                xMobile: '← Estado Débil | Estado Fuerte →',
+                xDesktop: 'Organización de la Economía: ← Libre Mercado (Estado Limitado) | Economía Dirigida (Estado Fuerte) →',
+                yDesktop: 'Prioridad de la Sociedad: Crecimiento y Productividad ↓ | Equidad y Sostenibilidad ↑ (La balanza de Okun)',
+                xMobile: '← Mercado | Estado →',
                 yMobile: 'Crecimiento ↓ | Equidad ↑'
             }
         },
@@ -84,12 +84,12 @@ export const translations = {
             hero: 'Introduction',
             guide: 'Reading Guide',
             visualization: 'Interactive Map',
-            cocktails: 'Methodological Synergies',
+            cocktails: 'Idea Cocktails',
             timeline: 'Timeline',
-            'learning-path': 'Pedagogical Sequence',
-            'map-reading-guide': 'Interpretation Guide',
-            applications: 'Spheres of Application',
-            'pedagogical-legend': 'Epistemological Epilogue'
+            'learning-path': '4-Step Guide',
+            'map-reading-guide': 'Map Reading Guide',
+            applications: 'Practical Application',
+            'pedagogical-legend': 'Conclusion (Different Lenses)'
         },
         ui: {
             localeLabel: 'Language',
@@ -102,9 +102,9 @@ export const translations = {
         },
         visualization: {
             axes: {
-                xDesktop: 'Economic Architecture: ← Market Economy (Limited State) | Directed Economy (Strong State) →',
-                yDesktop: 'Socioeconomic Goal: Productivity and Growth ↓ | Equity and Sustainability ↑',
-                xMobile: '← Limited State | Strong State →',
+                xDesktop: 'Economic Organization: ← Free Market (Limited State) | Directed Economy (Strong State) →',
+                yDesktop: 'Societal Priority: Productivity and Growth ↓ | Equity and Sustainability ↑ (Okun\'s Balance)',
+                xMobile: '← Market | State →',
                 yMobile: 'Growth ↓ | Equity ↑'
             }
         },
@@ -156,8 +156,7 @@ export const translations = {
                 <h1>Economic Schools Map</h1>
                 <p class="hero-subtitle">An interactive visualization of economic thought</p>
                 <p class="hero-description">
-                    Explore the 12 major schools of economic thought in a two-dimensional space
-                    that represents the role of the state and socioeconomic goals.
+                    Explore the 12 major schools of economics in a two-dimensional map that shows how the economy is organized (the role of the state vs. the free market) and what goals society prioritizes (growth vs. equity and the planet).
                 </p>
                 <div class="hero-actions">
                     <a href="#visualization" class="btn btn-primary">Explore the Map</a>
@@ -171,73 +170,74 @@ export const translations = {
                 </div>
             `,
             guide: `
-                <h2>Reading Guide</h2>
+                <h2>Reading Guide: How to Interpret the Map</h2>
                 <div class="guide-grid">
                     <div class="guide-card">
                         <h3>Map Axes</h3>
-                        <p><strong>Horizontal Axis (X):</strong> Economic Architecture</p>
+                        <p><strong>How is it organized? (Horizontal Axis X):</strong></p>
                         <ul>
-                            <li>← Left: Limited State (Market Economy)</li>
-                            <li>→ Right: Strong State (Directed Economy)</li>
+                            <li>← Left: Limited State (Trust in the Free Market)</li>
+                            <li>→ Right: Strong State (Planning and State Control)</li>
                         </ul>
-                        <p><strong>Vertical Axis (Y):</strong> Socioeconomic Goal</p>
+                        <p><strong>What is prioritized? (Vertical Axis Y):</strong></p>
                         <ul>
-                            <li>↑ Top: Equity and Sustainability</li>
-                            <li>↓ Bottom: Productivity and Growth</li>
+                            <li>↑ Top: Equity and Sustainability (better distribution and nature protection)</li>
+                            <li>↓ Bottom: Growth and Productivity (producing more and accumulating capital)</li>
                         </ul>
+                        <p class="axis-subtext">Okun's Balance: The trade-off between producing more (efficiency) and sharing better (equity)</p>
                     </div>
                     <div class="guide-card">
-                        <h3>Quadrants of Analysis</h3>
-                        <p>The map is organized into 4 main quadrants:</p>
+                        <h3>Map Zones (Quadrants)</h3>
+                        <p>The map is divided into 4 main zones or quadrants:</p>
                         <ul>
-                            <li><strong>Q1:</strong> Weak State + Equity and Sustainability</li>
-                            <li><strong>Q2:</strong> Strong State + Equity and Sustainability</li>
-                            <li><strong>Q3:</strong> Weak State + Growth and Productivity</li>
-                            <li><strong>Q4:</strong> Strong State + Growth and Productivity</li>
+                            <li><strong>Q1 (Market + Equity):</strong> The market operates freely, but with a focus on social justice and ecological care.</li>
+                            <li><strong>Q2 (State + Equity):</strong> The government directs the economy seeking equality and protecting the planet.</li>
+                            <li><strong>Q3 (Market + Growth):</strong> The market operates without barriers, focusing on producing more wealth.</li>
+                            <li><strong>Q4 (State + Growth):</strong> The government intervenes to accelerate industrialization and national production.</li>
                         </ul>
                     </div>
                     <div class="guide-card">
                         <h3>Historical Transitions</h3>
-                        <p>The arrows represent historical shifts between schools:</p>
+                        <p>The arrows represent historical shifts and jumps in theory:</p>
                         <ul>
-                            <li><strong>Solid line:</strong> High historical confidence</li>
-                            <li><strong>Dotted line:</strong> Medium confidence</li>
-                            <li><strong>Dashed line:</strong> Low confidence</li>
+                            <li><strong>Solid line:</strong> High historical certainty (very clear sources)</li>
+                            <li><strong>Dotted line:</strong> Medium certainty</li>
+                            <li><strong>Dashed line:</strong> Low certainty</li>
                         </ul>
-                        <p>Each transition includes its trigger event and year.</p>
+                        <p>Each path includes its trigger event and year.</p>
                     </div>
                     <div class="guide-card">
-                        <h3>Weighting Variants</h3>
-                        <p>Different perspectives shift the positions of the schools:</p>
+                        <h3>Lenses of Analysis (Presets)</h3>
+                        <p>Different perspectives shift the positions of the schools on the map:</p>
                         <ul>
-                            <li><strong>Base:</strong> Balanced and neutral</li>
-                            <li><strong>State Emphasis:</strong> Focus on the role of the state</li>
-                            <li><strong>Equity Emphasis:</strong> Focus on equity</li>
-                            <li><strong>Market Emphasis:</strong> Focus on free markets</li>
-                            <li><strong>Growth Emphasis:</strong> Focus on growth</li>
-                            <li><strong>Historical Emphasis:</strong> Focus on historical evolution</li>
+                            <li><strong>Base:</strong> Balanced (Academic)</li>
+                            <li><strong>State Emphasis:</strong> State Emphasis (prioritizes the role of government)</li>
+                            <li><strong>Equity Emphasis:</strong> Equity Emphasis (prioritizes fair sharing)</li>
+                            <li><strong>Market Emphasis:</strong> Market Emphasis (prioritizes free exchange)</li>
+                            <li><strong>Growth Emphasis:</strong> Growth Emphasis (prioritizes production)</li>
+                            <li><strong>Historical Emphasis:</strong> Historical Emphasis (prioritizes time evolution)</li>
                         </ul>
                     </div>
                     <div class="guide-card">
-                        <h3>Methodological Foundation</h3>
+                        <h3>Scientific Foundation</h3>
                         <p>Based on Chapter 4 of <strong>Economics: The User's Guide</strong> by <strong>Ha-Joon Chang</strong> (2015):</p>
                         <ul>
                             <li>Multidimensional analysis of economic schools</li>
                             <li>Qualitative positioning translated into comparable values</li>
-                            <li>Percentile-based normalization</li>
+                            <li>Percentile and statistical normalization</li>
                             <li>Interactive pedagogical visualization</li>
                         </ul>
                     </div>
                     <div class="guide-card">
-                        <h3>Methodological Warnings</h3>
+                        <h3>The danger of using a single lens</h3>
                         <p class="caution-highlight">
-                            Relying on only one school to study a topic creates a risk of:
+                            Mapping problems using only one school of economics can cause:
                         </p>
                         <ul>
-                            <li>Ideological polarization</li>
-                            <li>Tunnel vision</li>
-                            <li>Intellectual arrogance</li>
-                            <li>Incomplete analysis</li>
+                            <li><strong>Polarization:</strong> Believing economics is a debate of good vs. bad.</li>
+                            <li><strong>Tunnel vision:</strong> Seeing only one part of the problem and ignoring the rest.</li>
+                            <li><strong>Intellectual arrogance:</strong> Thinking your school has the only right answer.</li>
+                            <li><strong>Incomplete answers:</strong> Designing solutions that fail because they ignore other factors.</li>
                         </ul>
                     </div>
                 </div>
@@ -246,9 +246,9 @@ export const translations = {
                 <h2>Interactive Map</h2>
                 <div class="controls">
                     <div class="control-group">
-                        <label for="preset-dropdown" title="Weight presets alter school positions to show different economic perspectives">Weight Preset:</label>
+                        <label for="preset-dropdown" title="Lenses of analysis alter school positions to show different economic perspectives">Lenses of Analysis (Presets):</label>
                         <select id="preset-dropdown">
-                            <option value="base" selected>Base (Original)</option>
+                            <option value="base" selected>Balanced (Academic)</option>
                             <option value="state-emphasis">State Emphasis</option>
                             <option value="equity-emphasis">Equity Emphasis</option>
                             <option value="market-emphasis">Market Emphasis</option>
@@ -258,12 +258,12 @@ export const translations = {
                         </select>
                     </div>
                     <div class="control-group">
-                        <label for="normalization-dropdown" title="Normalization methods change how values are represented on the map">Normalization Method:</label>
+                        <label for="normalization-dropdown" title="Normalization methods change how values are represented on the map">Scale of Visualization:</label>
                         <select id="normalization-dropdown">
-                            <option value="percentile" selected>Percentile (Uniform Distribution)</option>
-                            <option value="zscore">Z-Score (Statistical Centering)</option>
+                            <option value="percentile" selected>Percentile (Well-distributed schools)</option>
+                            <option value="zscore">Z-Score (Centered on average)</option>
                             <option value="minmax">Min-Max (Full Range)</option>
-                            <option value="none">Raw (No Normalization)</option>
+                            <option value="none">Unnormalized (Raw position)</option>
                         </select>
                     </div>
                     <div class="control-group">
@@ -272,17 +272,17 @@ export const translations = {
                             <label class="checkbox-label">
                                 <input type="checkbox" id="transition-muy_alta" checked>
                                 <span class="checkmark"></span>
-                                Very High Confidence
+                                Very High Certainty
                             </label>
                             <label class="checkbox-label">
                                 <input type="checkbox" id="transition-alta" checked>
                                 <span class="checkmark"></span>
-                                High Confidence
+                                High Certainty
                             </label>
                             <label class="checkbox-label">
                                 <input type="checkbox" id="transition-media" checked>
                                 <span class="checkmark"></span>
-                                Medium Confidence
+                                Medium Certainty
                             </label>
                             <div class="checkbox-actions">
                                 <button type="button" id="select-all-transitions" class="checkbox-btn">Select All</button>
@@ -306,40 +306,33 @@ export const translations = {
                                 <path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z" fill="currentColor"/>
                             </svg>
                             <span>Reset View</span>
-                        </button>
-                        <button id="download-png-btn" class="control-btn" title="Download the map as a PNG image">
-                            <svg class="btn-icon" viewBox="0 0 24 24" width="16" height="16">
-                                <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" fill="currentColor"/>
-                            </svg>
-                            <span>Export Image</span>
-                        </button>
-                    </div>
-                </div>
-                <div id="map-container" class="map-container">
-                    <div id="loading-indicator" class="loading-indicator" style="display: none;">
-                        <div class="spinner"></div>
-                        <p>Loading variant...</p>
-                    </div>
-                </div>
-            `,
+                          </button>
+                          <button id="download-png-btn" class="control-btn" title="Download the map as a PNG image">
+                              <svg class="btn-icon" viewBox="0 0 24 24" width="16" height="16">
+                                  <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" fill="currentColor"/>
+                              </svg>
+                              <span>Export Image</span>
+                          </button>
+                      </div>
+                  </div>
+                  <div id="map-container" class="map-container">
+                      <div id="loading-indicator" class="loading-indicator" style="display: none;">
+                          <div class="spinner"></div>
+                          <p>Loading variant...</p>
+                      </div>
+                  </div>
+              `,
             cocktails: `
-                <h2>Methodological Synergies: Integrated Analytical Frameworks</h2>
+                <h2>Idea Cocktails: Combining Schools to Solve Real Problems (Synergies)</h2>
                 <div class="intro-text">
                     <p>
-                        There are good reasons to learn the differences between economic schools,
-                        but the idea of exploring nine distinct approaches can still feel overwhelming.
-                        It is like being offered nine ice cream flavors when you thought vanilla was the only one.
-                        Even curious learners may feel that nine is too much.
+                        Although it is good to know the differences between the 12 economic schools, exploring so many approaches can feel overwhelming at first. It is like walking into an ice cream shop with 12 flavors when you thought vanilla was the only one. It is normal to feel that 12 is too many.
                     </p>
                     <p>
-                        That is why the thematic guide below proposes "cocktails" or synergies: combinations of two
-                        to four schools applied to concrete topics. The hope is that after tasting a few
-                        of these cocktails, you will want to explore the whole shelf. And even if you do not,
-                        trying one or two flavors is enough to show that there are many ways to think about,
-                        practice, and approach economics.
+                        That is why we propose "idea cocktails": combinations of 2 to 4 schools applied to real-world topics. By tasting these mixes, you will see how useful it is to use different theoretical tools for different problems. Even trying one or two cocktails is enough to show that there are many valid ways to think about, practice, and approach economics.
                     </p>
                 </div>
-                <h3>Analytical Configurations: Recommended Thematic Groupings</h3>
+                <h3>Recommended Analysis Configurations</h3>
                 <div class="tabs-container">
                     <button class="tab-btn active" data-tab="all" tabindex="0">Show All</button>
                     <button class="tab-btn" data-tab="gobernanza" tabindex="0">Governance and State</button>
@@ -416,72 +409,63 @@ export const translations = {
                 </div>
             `,
             mapReadingGuide: `
-                <h2>Analytical Interpretation Guide: Limits, Layers, and Trajectories</h2>
+                <h2>Map Reading Guide: Limits, Layers, and Paths (Interpretation)</h2>
                 <div class="intro-text">
                     <p>
-                        This map places economic schools on two axes so that very different ideas can be compared.
-                        That simplification is useful for learning, but it also means the visualization compresses
-                        much broader debates into a single image.
+                        This map places economic schools on two axes so that very different ideas can be compared. That simplification is useful for learning, but it also compresses much broader debates into a single image.
                     </p>
                     <p>
-                        That is why a complementary reading helps: some frameworks do not need a new node.
-                        They need an explicit explanation of the <strong>limits, layers, and trajectories</strong>
-                        that shape the space represented by the map.
+                        That is why a complementary guide helps: some important theories do not need a new point on the map, but rather an explanation of the <strong>limits, layers, and paths (trajectories)</strong> that shape the economic space.
                     </p>
                 </div>
                 <h3>Pedagogical Keys for Deepening Analysis</h3>
                 <div class="principles-grid">
                     <div class="principle-card accordion-card">
                         <button class="accordion-trigger" aria-expanded="false" tabindex="0">
-                            <h4>1. Distinguish nodes, layers, and trajectories</h4>
+                            <h4>1. Beyond points: the map has layers and paths</h4>
                             <span class="accordion-icon"></span>
                         </button>
                         <div class="accordion-content">
                             <div class="accordion-body-inner">
-                                <p><em>Key idea:</em> <strong>Nodes</strong> are schools that propose both a way to organize the economy and a main goal.</p>
-                                <p><strong>Layers</strong> cut across the whole map and condition it, while <strong>trajectories</strong> remind us that ideas change over time and that movement between positions is never automatic.</p>
+                                <p><em>Key idea:</em> The schools are the main <strong>points (nodes)</strong>. But there are also <strong>layers</strong> (topics that cross the entire map, like gender or complexity) and <strong>paths (trajectories)</strong> that show how ideas change over time and influence each other.</p>
                             </div>
                         </div>
                     </div>
                     <div class="principle-card accordion-card">
                         <button class="accordion-trigger" aria-expanded="false" tabindex="0">
-                            <h4>2. Not every part of the plane is equally feasible</h4>
+                            <h4>2. The map vs. reality (What is feasible?)</h4>
                             <span class="accordion-icon"></span>
                         </button>
                         <div class="accordion-content">
                             <div class="accordion-body-inner">
-                                <p><em>Feasible region:</em> The map shows conceptual possibilities, but real economies are also constrained by resources, energy, institutions, and ecological limits.</p>
-                                <p>Readings such as <strong>Kate Raworth</strong>, <strong>Nicholas Georgescu-Roegen</strong>, and <strong>Herman Daly</strong> help explain that every proposal operates between a social floor and a biophysical ceiling.</p>
+                                <p><em>Physical limits:</em> The map shows ideas on paper, but in the real world every economy is constrained by resources, energy, water, and climate. Authors like <strong>Kate Raworth</strong> explain that all proposals must operate between a <strong>social floor</strong> (basic well-being) and a <strong>planetary ceiling</strong> (not exhausting the Earth).</p>
                             </div>
                         </div>
                     </div>
                     <div class="principle-card accordion-card">
                         <button class="accordion-trigger" aria-expanded="false" tabindex="0">
-                            <h4>3. Why some perspectives do not appear as nodes</h4>
-                            <span class="accordion-icon"></span>
-                        </button>
-                        <div class="accordion-content">
-                            <div class="accordion-body-inner">
-                                <p><em>Quick rule:</em> If a theory does not define both a coordination mechanism and a final goal, it works better here as complementary reading than as a school placed on the plane.</p>
-                                <p>That is why <strong>complexity</strong>, <strong>systems dynamics</strong>, or the <strong>biophysical approach</strong> do not compete with the schools in the map. They help interpret the borders, constraints, and stability zones of those schools.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="principle-card accordion-card">
-                        <button class="accordion-trigger" aria-expanded="false" tabindex="0">
-                            <h4>4. Suggested readings to broaden the frame</h4>
-                            <span class="accordion-icon"></span>
-                        </button>
-                        <div class="accordion-content">
-                            <div class="accordion-body-inner">
-                                <p><strong>Donella Meadows</strong> helps readers think about delays, accumulations, and unintended effects in complex systems.</p>
-                                <p><strong>Brian Arthur</strong> and <strong>Doyne Farmer</strong> show how networks, uncertainty, and path dependence reshape the reading of economic development.</p>
-                                <p><strong>Charles Hall</strong> reminds us that energy availability also constrains what an economy can sustain over time.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `,
+                            <h4>3. Why some perspectives do not have their own point</h4>
+                              <span class="accordion-icon"></span>
+                          </button>
+                          <div class="accordion-content">
+                              <div class="accordion-body-inner">
+                                  <p><em>Rule of thumb:</em> To have a point on this map, a theory must answer two questions: how is the economy organized? and what is its goal? Frameworks like <strong>complexity theory</strong> or the <strong>biophysical approach</strong> do not compete with the schools, but help us understand the boundaries and rules of the map.</p>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="principle-card accordion-card">
+                          <button class="accordion-trigger" aria-expanded="false" tabindex="0">
+                              <h4>4. Suggested readings to broaden your frame</h4>
+                              <span class="accordion-icon"></span>
+                          </button>
+                          <div class="accordion-content">
+                              <div class="accordion-body-inner">
+                                  <p><strong>Donella Meadows</strong> will teach you how complex systems work and why responses can be delayed. <strong>Brian Arthur</strong> explains how networks and uncertainty shape development. <strong>Charles Hall</strong> reminds us that without net energy, no economic system can sustain itself over time.</p>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              `,
             applications: `
                 <h2>Spheres of Practical Application</h2>
                 <p class="intro-text">
@@ -521,62 +505,58 @@ export const translations = {
                 </div>
             `,
             pedagogicalLegend: `
-                <h2>Epistemological Epilogue: The Value of Methodological Pluralism</h2>
+                <h2>Conclusion: Why Use Different Lenses? (Methodological Pluralism)</h2>
                 <div class="intro-text">
                     <p>
-                        The real value of this map does not lie in memorizing the position of each school,
-                        but in understanding that <strong>there is no single economic truth</strong>. Each school
-                        offers a different lens for reading reality, and each contributes something valuable.
+                        The true value of this map does not lie in memorizing the position of each school, but in understanding that <strong>there is no single absolute truth in economics</strong>. Each school offers a different lens to look at reality, and each contributes valuable tools.
                     </p>
                     <p>
-                        As philosopher <strong>John Stuart Mill</strong> wrote: <em>"He who knows only his own side of the case knows little of that"</em>.
-                        In economics this is especially true. Better policies and decisions emerge when we consider
-                        multiple perspectives, not when we cling dogmatically to one school.
+                        As philosopher <strong>John Stuart Mill</strong> wrote: <em>"He who knows only his own side of the case knows little of that"</em>. In economics, this is especially true. Better decisions and policies emerge when we consider multiple perspectives, rather than clinging dogmatically to one single school.
                     </p>
                 </div>
-                <h3>Foundational Principles for Rigorous Study</h3>
+                <h3>Principles for Clear Thinking</h3>
                 <div class="principles-grid">
                     <div class="principle-card accordion-card">
                         <button class="accordion-trigger" aria-expanded="false" tabindex="0">
-                            <h4>1. Intellectual Humility</h4>
+                            <h4>1. Open Mind (Intellectual Humility)</h4>
                             <span class="accordion-icon"></span>
                         </button>
                         <div class="accordion-content">
                             <div class="accordion-body-inner">
-                                <p><em>"The only true wisdom is in knowing you know nothing"</em> - Socrates</p><p>Recognize that no school has every answer. Stay open to new ideas and be willing to revise your views when evidence demands it.</p>
+                                <p><em>"True wisdom is in recognizing one's own ignorance"</em> - Socrates</p><p>No school of economics has all the answers for every country or era. Stay curious and be willing to learn from different approaches.</p>
                             </div>
                         </div>
                     </div>
                     <div class="principle-card accordion-card">
                         <button class="accordion-trigger" aria-expanded="false" tabindex="0">
-                            <h4>2. Analytical Rigor</h4>
+                            <h4>2. Think with Evidence (Analytical Rigor)</h4>
                             <span class="accordion-icon"></span>
                         </button>
                         <div class="accordion-content">
                             <div class="accordion-body-inner">
-                                <p><em>"Doubt everything at least once, even that two plus two makes four"</em> - Georg Lichtenberg</p><p>Examine each school's assumptions critically. Ask what evidence supports it, where it works best, and what its limits are.</p>
+                                <p><em>"Doubt everything at least once, even whether two plus two makes four"</em> - Georg Lichtenberg</p><p>Examine the assumptions of each school critically. Ask: under what conditions does this theory work best? what data supports it? and where does it fail?</p>
                             </div>
                         </div>
                     </div>
                     <div class="principle-card accordion-card">
                         <button class="accordion-trigger" aria-expanded="false" tabindex="0">
-                            <h4>3. Contextual Thinking</h4>
+                            <h4>3. Look at the Setting (Contextual Thinking)</h4>
                             <span class="accordion-icon"></span>
                         </button>
                         <div class="accordion-content">
                             <div class="accordion-body-inner">
-                                <p><em>"There is nothing so practical as a good theory"</em> - Kurt Lewin</p><p>Economic theories do not exist in a vacuum. Consider historical, institutional, and cultural context when applying ideas from different schools.</p>
+                                <p><em>"There is nothing so practical as a good theory"</em> - Kurt Lewin</p><p>Economic theories do not float in a vacuum; they are born in specific historical moments. Consider the customs and history of a place before applying a rigid formula.</p>
                             </div>
                         </div>
                     </div>
                     <div class="principle-card accordion-card">
                         <button class="accordion-trigger" aria-expanded="false" tabindex="0">
-                            <h4>4. Creative Synthesis</h4>
+                            <h4>4. Create New Ideas (Creative Synthesis)</h4>
                             <span class="accordion-icon"></span>
                         </button>
                         <div class="accordion-content">
                             <div class="accordion-body-inner">
-                                <p><em>"Truth is a pathless land"</em> - Jiddu Krishnamurti</p><p>Do not limit yourself to choosing one school. Learn to combine insights from multiple traditions to build a more nuanced understanding of the economy.</p>
+                                <p><em>"Truth is a pathless land"</em> - Jiddu Krishnamurti</p><p>Do not force yourself to pick a single side. Learn to take the best insights from multiple schools to build more complete and useful answers.</p>
                             </div>
                         </div>
                     </div>

@@ -9,7 +9,7 @@
       "id": "marxista",
       "nombre": "Marxista",
       "categoria": "critica_economia_politica",
-      "descripcion": "Análisis del capitalismo histórico, la acumulación y la teoría del valor-trabajo.",
+      "descripcion": "Estudia cómo funciona el capitalismo a lo largo de la historia, cómo se acumula la riqueza y cómo el trabajo humano crea el valor.",
       "autores": [
         "Karl Marx",
         "Friedrich Engels"
@@ -35,7 +35,7 @@
       "id": "feminista",
       "nombre": "Feminista",
       "categoria": "economia_genero_cuidados",
-      "descripcion": "Visibilización del trabajo reproductivo no remunerado como base del sistema productivo.",
+      "descripcion": "Hace visible el trabajo de cuidados y del hogar que no se paga, pero que es la base necesaria para que la economía funcione.",
       "autores": [
         "Silvia Federici",
         "Diane Elson"
@@ -62,7 +62,7 @@
       "id": "ecologica",
       "nombre": "Ecológica (Raworth)",
       "categoria": "sostenibilidad_sistemica",
-      "descripcion": "La economía como subsistema incrustado en límites planetarios y bases sociales.",
+      "descripcion": "Mira la economía como una parte de la naturaleza. Sostiene que debemos vivir dentro de los límites del planeta sin descuidar el bienestar de las personas.",
       "autores": [
         "Kate Raworth"
       ],
@@ -88,7 +88,7 @@
       "id": "tradicion_desarrollista",
       "nombre": "Tradición Desarrollista",
       "categoria": "estructuralismo_productivo",
-      "descripcion": "Fomento de capacidades industriales nacionales y protección de industrias nacientes.",
+      "descripcion": "Sostiene que los países progresan ayudando a sus industrias locales a crecer y aprender antes de competir con potencias extranjeras.",
       "autores": [
         "Ha-Joon Chang",
         "Friedrich List"
@@ -118,7 +118,7 @@
       "id": "keynesiana",
       "nombre": "Keynesiana",
       "categoria": "macroeconomia_demanda",
-      "descripcion": "Gestión de la volatilidad económica mediante intervención fiscal en la demanda agregada.",
+      "descripcion": "Sostiene que en tiempos de crisis el Estado debe gastar dinero para crear empleo y reactivar el consumo de la gente.",
       "autores": [
         "John Maynard Keynes"
       ],
@@ -144,7 +144,7 @@
       "id": "institucionalista",
       "nombre": "Institucionalista",
       "categoria": "economia_institucional",
-      "descripcion": "Análisis de reglas, normas y derechos de propiedad como determinantes del desempeño.",
+      "descripcion": "Explica que la economía depende de las reglas del juego: las leyes, las costumbres y los acuerdos que organizan la sociedad.",
       "autores": [
         "Douglass North",
         "Elinor Ostrom"
@@ -171,7 +171,7 @@
       "id": "estado_emprendedor",
       "nombre": "Estado Emprendedor",
       "categoria": "innovacion_misiones",
-      "descripcion": "El sector público como creador de mercados y asuntor de riesgos tecnológicos iniciales.",
+      "descripcion": "Sostiene que el gobierno no solo debe arreglar problemas, sino arriesgarse a invertir en nuevas tecnologías antes que las empresas privadas.",
       "autores": [
         "Mariana Mazzucato"
       ],
@@ -197,7 +197,7 @@
       "id": "conductista",
       "nombre": "Conductista",
       "categoria": "psicologia_economica",
-      "descripcion": "Cuestionamiento de la racionalidad perfecta mediante el estudio de sesgos cognitivos.",
+      "descripcion": "Estudia cómo las personas toman decisiones reales en su día a día, demostrando que a veces actuamos por emociones, impulsos o sesgos.",
       "autores": [
         "Richard Thaler",
         "Daniel Kahneman"
@@ -224,7 +224,7 @@
       "id": "clasica",
       "nombre": "Clásica",
       "categoria": "economia_politica_clasica",
-      "descripcion": "Estudio del crecimiento, la división del trabajo y el valor basado en costos de producción.",
+      "descripcion": "Estudia cómo la división del trabajo y el libre comercio ayudan a que las naciones prosperen y aumenten su riqueza.",
       "autores": [
         "Adam Smith",
         "David Ricardo"
@@ -251,7 +251,7 @@
       "id": "neoclasica",
       "nombre": "Neoclásica",
       "categoria": "marginalismo_equilibrio",
-      "descripcion": "Modelado matemático de la oferta y demanda basado en la maximización de utilidad.",
+      "descripcion": "Explica la economía usando modelos matemáticos donde las personas y empresas intentan obtener el máximo beneficio de sus recursos.",
       "autores": [
         "Léon Walras",
         "Alfred Marshall"
@@ -278,7 +278,7 @@
       "id": "austriaca",
       "nombre": "Austríaca",
       "categoria": "subjetivismo_metodologico",
-      "descripcion": "Énfasis en el conocimiento disperso, el orden espontáneo y la imposibilidad del cálculo central.",
+      "descripcion": "Sostiene que la información está tan repartida entre las personas que es imposible que un gobierno planee toda la economía; por eso confía en el mercado libre.",
       "autores": [
         "Ludwig von Mises",
         "Friedrich Hayek"
@@ -305,7 +305,7 @@
       "id": "schumpeteriana",
       "nombre": "Schumpeteriana",
       "categoria": "dinamica_evolutiva",
-      "descripcion": "El ciclo económico impulsado por la innovación y la destrucción creativa del emprendedor.",
+      "descripcion": "Explica que la economía avanza gracias a la innovación, donde los nuevos inventos y empresas reemplazan a los antiguos (destrucción creativa).",
       "autores": [
         "Joseph Schumpeter"
       ],
@@ -334,7 +334,7 @@
       "desde_nodo": "neoclasica",
       "hacia_nodo": "keynesiana",
       "evento_disparador": "Crisis financiera 2008",
-      "descripcion": "Del laissez-faire a regulación y rescates estatales",
+      "descripcion": "El mercado libre falló y los gobiernos tuvieron que intervenir con regulación y rescates para salvar bancos",
       "año": 2008,
       "confianza": "muy_alta",
       "referencia": {
@@ -347,7 +347,7 @@
       "desde_nodo": "keynesiana",
       "hacia_nodo": "ecologica",
       "evento_disparador": "Crisis climática y sostenibilidad",
-      "descripcion": "Incorporación de límites planetarios al modelo económico",
+      "descripcion": "Se integran los límites de la naturaleza y del planeta al modelo de consumo y producción",
       "año": 2015,
       "confianza": "alta",
       "referencia": {
@@ -360,7 +360,7 @@
       "desde_nodo": "conductista",
       "hacia_nodo": "marxista",
       "evento_disparador": "Crisis de desigualdad y precarización",
-      "descripcion": "Los nudges resultan insuficientes, se demanda redistribución radical",
+      "descripcion": "Los incentivos suaves de comportamiento (nudges) resultan insuficientes y se exige una mayor redistribución de la riqueza",
       "año": 2020,
       "confianza": "media",
       "referencia": {
@@ -373,7 +373,7 @@
       "desde_nodo": "austriaca",
       "hacia_nodo": "estado_emprendedor",
       "evento_disparador": "Pandemia COVID-19",
-      "descripcion": "Necesidad de innovación acelerada en vacunas y tecnología",
+      "descripcion": "La emergencia exigió una inversión pública acelerada y coordinada para crear vacunas y tecnología médica",
       "año": 2020,
       "confianza": "muy_alta",
       "referencia": {
@@ -386,7 +386,7 @@
       "desde_nodo": "keynesiana",
       "hacia_nodo": "neoclasica",
       "evento_disparador": "Crisis inflacionaria post-pandemia",
-      "descripcion": "Retorno a ortodoxia monetarista y ajuste fiscal",
+      "descripcion": "Retorno a la subida de tasas de interés y al control del gasto público para frenar el aumento de precios",
       "año": 2022,
       "confianza": "alta",
       "referencia": {
@@ -399,7 +399,7 @@
       "desde_nodo": "tradicion_desarrollista",
       "hacia_nodo": "neoclasica",
       "evento_disparador": "Fin de la Guerra Fría y expansión neoliberal",
-      "descripcion": "Transición desde políticas de desarrollo estatal a liberalización y apertura global",
+      "descripcion": "El colapso del bloque soviético aceleró el paso de economías protegidas por el Estado hacia mercados libres y comercio global",
       "año": 1991,
       "confianza": "alta",
       "referencia": {
@@ -412,7 +412,7 @@
       "desde_nodo": "neoclasica",
       "hacia_nodo": "institucionalista",
       "evento_disparador": "Crisis de gobernanza y debilidad institucional ante globalización",
-      "descripcion": "Énfasis en fortalecimiento de reglas y buen gobierno tras fallas de mercado global",
+      "descripcion": "Los problemas del comercio global demostraron la necesidad de crear leyes, acuerdos e instituciones internacionales más fuertes",
       "año": 2001,
       "confianza": "alta",
       "referencia": {
@@ -425,7 +425,7 @@
       "desde_nodo": "marxista",
       "hacia_nodo": "feminista",
       "evento_disparador": "Movilización social feminista e integración de género en políticas económicas",
-      "descripcion": "El pensamiento marxista se amplía para incluir perspectiva de género y economía del cuidado",
+      "descripcion": "La teoría económica se expande para valorar el trabajo reproductivo y de cuidado como base indispensable del sistema",
       "año": 1990,
       "confianza": "alta",
       "referencia": {
