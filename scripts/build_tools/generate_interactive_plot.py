@@ -909,13 +909,13 @@ class InteractivePlotGenerator:
                 </div>
 
                 <div class="guide-card">
-                    <h3>🎨 Variantes de Peso</h3>
+                    <h3>🎨 Lentes de Análisis</h3>
                     <p>Diferentes perspectivas cambian las posiciones:</p>
                     <ul>
-                        <li><strong>Base:</strong> Balanceada y neutral</li>
-                        <li><strong>State Emphasis:</strong> Énfasis en rol del Estado</li>
-                        <li><strong>Equity Emphasis:</strong> Énfasis en equidad</li>
-                        <li><strong>Market Emphasis:</strong> Énfasis en mercado libre</li>
+                        <li><strong>Equilibrada:</strong> Perspectiva base, balanceada y neutral</li>
+                        <li><strong>Énfasis en el Estado:</strong> Prioriza el rol del gobierno</li>
+                        <li><strong>Énfasis en la Equidad:</strong> Prioriza la justicia social y el reparto justo</li>
+                        <li><strong>Énfasis en el Mercado:</strong> Prioriza el intercambio libre</li>
                     </ul>
                 </div>
 
