@@ -1346,147 +1346,213 @@ p {
     }
 
     .pedagogical-legend {
-        .principles-grid {
+        max-width: 1200px;
+        margin: 0 auto;
+
+        .split-layout {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
-            margin: 2rem 0;
+            grid-template-columns: 1fr 1.35fr;
+            gap: 4rem;
+            align-items: start;
 
             @media (max-width: $tablet) {
                 grid-template-columns: 1fr;
-                gap: 1.5rem;
+                gap: 2.5rem;
             }
         }
 
-        .principle-card {
-            background-color: white;
-            border: 1px solid $border-color;
-            border-radius: 12px;
-            padding: 1.75rem;
-            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            display: flex;
-            flex-direction: column;
-            gap: 0.85rem;
+        .split-sidebar {
+            position: sticky;
+            top: 2rem;
 
-            &:hover {
-                transform: translateY(-4px);
-                border-color: rgba($accent-color, 0.4);
-                box-shadow: 0 10px 25px rgba($primary-color, 0.08);
+            @media (max-width: $tablet) {
+                position: static;
             }
 
-            .card-header {
-                display: flex;
-                align-items: center;
-                gap: 0.75rem;
-                margin-bottom: 0.25rem;
-
-                .card-number {
-                    font-family: $font-mono;
-                    font-size: 0.8rem;
-                    font-weight: 700;
-                    color: $accent-color;
-                    background-color: rgba($accent-color, 0.08);
-                    padding: 0.2rem 0.5rem;
-                    border-radius: 4px;
-                    text-transform: uppercase;
-                    letter-spacing: 0.05em;
-                    line-height: 1;
-                }
-
-                h4 {
-                    margin: 0;
-                    font-family: $font-display;
-                    color: $primary-color;
-                    font-size: 1.15rem;
-                    line-height: 1.3;
-                    font-weight: 700;
-                }
+            h2 {
+                font-family: $font-display;
+                font-size: clamp(1.8rem, 2.2vw, 2.25rem);
+                color: $primary-color;
+                margin-top: 0;
+                margin-bottom: 1rem;
+                line-height: 1.25;
+                font-weight: 700;
             }
 
-            .card-body {
-                font-size: clamp(0.92rem, 0.1vw + 0.9rem, 1.02rem);
-                line-height: 1.7;
+            .intro-text {
+                font-size: clamp(0.95rem, 0.1vw + 0.95rem, 1.05rem);
+                line-height: 1.65;
                 color: $text-color;
+                margin-bottom: 0;
 
                 p {
-                    margin: 0 0 0.75rem 0;
+                    margin-bottom: 0.75rem;
                     &:last-child {
                         margin-bottom: 0;
                     }
                 }
+            }
 
-                blockquote {
+            .sidebar-line {
+                width: 45px;
+                height: 3px;
+                background-color: $accent-color;
+                margin-bottom: 1.5rem;
+                border-radius: 2px;
+            }
+
+            .final-message {
+                background-color: rgba($primary-color, 0.02);
+                border: 1px solid rgba($border-color, 0.8);
+                border-left: 3px solid $accent-color;
+                padding: 1.25rem 1.5rem;
+                border-radius: 8px;
+                margin-top: 1.75rem;
+                text-align: left;
+
+                h3 {
+                    color: $primary-color;
+                    margin-top: 0;
+                    margin-bottom: 0.75rem;
+                    font-family: $font-display;
+                    font-size: 1.15rem;
+                    font-weight: 700;
+                }
+
+                ul {
+                    text-align: left;
+                    margin: 0 0 1rem 0;
+                    padding-left: 0;
+                    list-style: none;
+
+                    li {
+                        padding: 0.35rem 0;
+                        padding-left: 1.25rem;
+                        position: relative;
+                        font-size: 0.9rem;
+                        line-height: 1.45;
+                        color: $text-color;
+
+                        &:before {
+                            content: "→";
+                            position: absolute;
+                            left: 0;
+                            color: $accent-color;
+                            font-weight: bold;
+                        }
+
+                        strong {
+                            color: $primary-color;
+                            font-weight: 600;
+                        }
+                    }
+                }
+
+                .final-quote {
+                    margin: 0;
                     font-family: $font-display;
                     font-style: italic;
-                    color: $secondary-color;
-                    border-left: 2px solid $border-color;
-                    padding-left: 0.75rem;
-                    margin: 0 0 0.75rem 0;
-                    font-size: 0.95rem;
+                    font-size: 0.85rem;
                     line-height: 1.5;
-
-                    cite {
-                        display: block;
-                        font-family: $font-body;
-                        font-style: normal;
-                        font-size: 0.78rem;
-                        font-weight: 600;
-                        color: $secondary-color;
-                        margin-top: 0.25rem;
-                        text-transform: uppercase;
-                        letter-spacing: 0.03em;
-                    }
+                    color: $secondary-color;
+                    border-top: 1px dashed rgba($border-color, 0.8);
+                    padding-top: 0.75rem;
                 }
             }
         }
 
-        .final-message {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 2.5rem;
-            border-radius: 12px;
-            margin-top: 2.5rem;
-            text-align: center;
+        .split-content {
+            .principles-grid {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.25rem;
+                margin: 0;
 
-            h3 {
-                color: white;
-                margin-bottom: 1.5rem;
-            }
-
-            ul {
-                text-align: left;
-                max-width: 600px;
-                margin: 1.5rem auto;
-                list-style: none;
-                padding: 0;
-
-                li {
-                    padding: 0.5rem 0;
-                    padding-left: 1.5rem;
-                    position: relative;
-
-                    &:before {
-                        content: "→";
-                        position: absolute;
-                        left: 0;
-                        font-weight: bold;
-                    }
-
-                    strong {
-                        color: #ffd700;
-                    }
+                @media (max-width: $mobile) {
+                    grid-template-columns: 1fr;
+                    gap: 1rem;
                 }
             }
 
-            p {
-                margin: 1rem 0;
-                line-height: 1.8;
+            .principle-card {
+                background-color: white;
+                border: 1px solid $border-color;
+                border-radius: 12px;
+                padding: 1.5rem;
+                transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+                display: flex;
+                flex-direction: column;
+                gap: 0.75rem;
 
-                &:last-child {
-                    font-size: 1.1rem;
-                    margin-top: 2rem;
-                    padding-top: 1.5rem;
-                    border-top: 1px solid rgba(255, 255, 255, 0.3);
+                &:hover {
+                    transform: translateY(-4px);
+                    border-color: rgba($accent-color, 0.4);
+                    box-shadow: 0 10px 25px rgba($primary-color, 0.08);
+                }
+
+                .card-header {
+                    display: flex;
+                    align-items: center;
+                    gap: 0.75rem;
+                    margin-bottom: 0.15rem;
+
+                    .card-number {
+                        font-family: $font-mono;
+                        font-size: 0.75rem;
+                        font-weight: 700;
+                        color: $accent-color;
+                        background-color: rgba($accent-color, 0.08);
+                        padding: 0.15rem 0.45rem;
+                        border-radius: 4px;
+                        text-transform: uppercase;
+                        letter-spacing: 0.05em;
+                        line-height: 1;
+                    }
+
+                    h4 {
+                        margin: 0;
+                        font-family: $font-display;
+                        color: $primary-color;
+                        font-size: 1.1rem;
+                        line-height: 1.3;
+                        font-weight: 700;
+                    }
+                }
+
+                .card-body {
+                    font-size: clamp(0.9rem, 0.1vw + 0.88rem, 0.98rem);
+                    line-height: 1.6;
+                    color: $text-color;
+
+                    p {
+                        margin: 0 0 0.6rem 0;
+                        &:last-child {
+                            margin-bottom: 0;
+                        }
+                    }
+
+                    blockquote {
+                        font-family: $font-display;
+                        font-style: italic;
+                        color: $secondary-color;
+                        border-left: 2px solid $border-color;
+                        padding-left: 0.75rem;
+                        margin: 0 0 0.6rem 0;
+                        font-size: 0.9rem;
+                        line-height: 1.45;
+
+                        cite {
+                            display: block;
+                            font-family: $font-body;
+                            font-style: normal;
+                            font-size: 0.75rem;
+                            font-weight: 600;
+                            color: $secondary-color;
+                            margin-top: 0.2rem;
+                            text-transform: uppercase;
+                            letter-spacing: 0.03em;
+                        }
+                    }
                 }
             }
         }
