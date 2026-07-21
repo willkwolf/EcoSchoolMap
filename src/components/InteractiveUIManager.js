@@ -9,7 +9,6 @@ export class InteractiveUIManager {
 
     init() {
         this.initTabs();
-        this.initAccordions();
         console.log('✅ InteractiveUIManager initialized');
     }
 
@@ -106,37 +105,5 @@ export class InteractiveUIManager {
         });
     }
 
-    /**
-     * Initialize collapsible accordion grids/cards
-     */
-    initAccordions() {
-        const accordions = document.querySelectorAll('.accordion-card');
-
-        accordions.forEach(card => {
-            const trigger = card.querySelector('.accordion-trigger');
-            
-            if (!trigger) return;
-
-            trigger.addEventListener('click', () => {
-                const isActive = card.classList.contains('active');
-
-                // Toggle current card
-                if (isActive) {
-                    card.classList.remove('active');
-                    trigger.setAttribute('aria-expanded', 'false');
-                } else {
-                    card.classList.add('active');
-                    trigger.setAttribute('aria-expanded', 'true');
-                }
-            });
-
-            // Accessibility trigger keyboard support
-            trigger.addEventListener('keydown', (event) => {
-                if (event.key === 'Enter' || event.key === ' ') {
-                    event.preventDefault();
-                    trigger.click();
-                }
-            });
-        });
-    }
 }
+
