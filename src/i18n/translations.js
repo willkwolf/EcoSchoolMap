@@ -59,7 +59,7 @@ export const translations = {
         nodes: {
             marxista: 'Marxista',
             feminista: 'Feminista',
-            ecologica: 'Ecológica (Raworth)',
+            ecologica: 'Ecológica',
             tradicion_desarrollista: 'Tradición Desarrollista',
             keynesiana: 'Keynesiana',
             institucionalista: 'Institucionalista',
@@ -131,7 +131,7 @@ export const translations = {
         nodes: {
             marxista: 'Marxist',
             feminista: 'Feminist',
-            ecologica: 'Ecological (Raworth)',
+            ecologica: 'Ecological',
             tradicion_desarrollista: 'Developmentalist Tradition',
             keynesiana: 'Keynesian',
             institucionalista: 'Institutionalist',
@@ -386,11 +386,13 @@ export const translations = {
                     <div class="timeline-item" data-category="era-consolidacion"><div class="timeline-year">1940s</div><h4>The Austrian School in America</h4><p>Exile of Austrian economists and the spread of their ideas</p></div>
                     <div class="timeline-item" data-category="era-contemporanea"><div class="timeline-year">1950s</div><h4>Development Theory</h4><p>Rise of development economics and structuralism</p></div>
                     <div class="timeline-item" data-category="era-contemporanea"><div class="timeline-year">1970s</div><h4>Critiques of Keynesianism</h4><p>Stagflation and the revival of free-market ideas</p></div>
+                    <div class="timeline-item" data-category="era-contemporanea"><div class="timeline-year">1971</div><h4>Nicholas Georgescu-Roegen and Biophysical Foundations</h4><p>Publication of "The Entropy Law and the Economic Process", the conceptual "Big Bang" introducing thermodynamics to economics.</p></div>
                     <div class="timeline-item" data-category="era-contemporanea"><div class="timeline-year">1979</div><h4>Kahneman and Tversky: Behavioral Economics</h4><p>Prospect Theory, cognitive biases, and bounded rationality</p></div>
                     <div class="timeline-item" data-category="era-contemporanea"><div class="timeline-year">1980s</div><h4>The Neoliberal Revolution</h4><p>Consolidation of market-centered thought under Reagan and Thatcher</p></div>
                     <div class="timeline-item" data-category="era-contemporanea"><div class="timeline-year">1980s</div><h4>Feminist Economics</h4><p>Integration of gender into economic analysis</p></div>
+                    <div class="timeline-item" data-category="era-contemporanea"><div class="timeline-year">1989</div><h4>Herman Daly and Robert Costanza: Institutionalization</h4><p>Co-founding of the ISEE and development of concepts like the Steady-State economy and valuation of ecosystem services.</p></div>
                     <div class="timeline-item" data-category="era-contemporanea"><div class="timeline-year">1990s</div><h4>Renewed Focus on Institutions</h4><p>Recognition of the importance of institutions in development</p></div>
-                    <div class="timeline-item" data-category="era-contemporanea"><div class="timeline-year">2011</div><h4>Kate Raworth and Ecological Economics</h4><p>Doughnut Economics, planetary boundaries, and social floors</p></div>
+                    <div class="timeline-item" data-category="era-contemporanea"><div class="timeline-year">2011</div><h4>Kate Raworth: Modern Popularization</h4><p>Doughnut Economics: bridging planetary boundaries with social floors for sustainable human development.</p></div>
                     <div class="timeline-item" data-category="era-contemporanea"><div class="timeline-year">2013</div><h4>Mariana Mazzucato and the Entrepreneurial State</h4><p>The state as a creator of markets and innovation</p></div>
                     <div class="timeline-item" data-category="era-contemporanea"><div class="timeline-year">2013</div><h4>Feminist Economics</h4><p>Consolidation as a recognized school of thought</p></div>
                 </div>
@@ -438,7 +440,7 @@ export const translations = {
                         </button>
                         <div class="accordion-content">
                             <div class="accordion-body-inner">
-                                <p><em>Physical limits:</em> The map shows ideas on paper, but in the real world every economy is constrained by resources, energy, water, and climate. Authors like <strong>Kate Raworth</strong> explain that all proposals must operate between a <strong>social floor</strong> (basic well-being) and a <strong>planetary ceiling</strong> (not exhausting the Earth).</p>
+                                <p><em>Physical limits:</em> The map shows ideas on paper, but in the real world every economy is constrained by biophysical resources like energy, water, and ecosystems. <strong>Ecological Economics</strong>, conceptually founded on <strong>Nicholas Georgescu-Roegen's</strong> entropy law, institutionalized by <strong>Herman Daly</strong> (Steady-State economy) and <strong>Robert Costanza</strong> (ecosystem services valuation), and modernized by <strong>Kate Raworth's Doughnut Economics</strong>, explains that human activity must operate within a safe space between a <strong>social floor</strong> of well-being and a <strong>planetary ceiling</strong>.</p>
                             </div>
                         </div>
                     </div>

@@ -186,7 +186,7 @@ export const dataTranslations = {
                 description: 'Reveals unpaid care and domestic work as the necessary foundation for the entire economy to function.'
             },
             ecologica: {
-                description: 'Views the economy as a part of nature, arguing that we must live within planetary boundaries without neglecting basic human needs.'
+                description: 'Studies the economy as a subsystem of the biosphere, governed by physical laws (entropy) and ecological limits. Theoretically founded by Georgescu-Roegen (1971), institutionalized by Daly and Costanza (1989), and popularized by Raworth (Doughnut).'
             },
             tradicion_desarrollista: {
                 description: 'Argues that countries develop by helping local industries grow and learn before competing with global powers.'
