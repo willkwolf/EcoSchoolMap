@@ -60,13 +60,16 @@
     },
     {
       "id": "ecologica",
-      "nombre": "Ecológica (Raworth)",
+      "nombre": "Ecológica",
       "categoria": "sostenibilidad_sistemica",
-      "descripcion": "Mira la economía como una parte de la naturaleza. Sostiene que debemos vivir dentro de los límites del planeta sin descuidar el bienestar de las personas.",
+      "descripcion": "Estudia la economía como un subsistema de la biosfera, gobernado por leyes físicas (entropía) y límites ecológicos. Fundada teóricamente por Georgescu-Roegen (1971), institucionalizada por Daly y Costanza (1989), y popularizada por Raworth (Donut).",
       "autores": [
+        "Nicholas Georgescu-Roegen",
+        "Herman Daly",
+        "Robert Costanza",
         "Kate Raworth"
       ],
-      "año_origen": 2012,
+      "año_origen": 1971,
       "tipo": "nuevo_paradigma",
       "descriptores": {
         "concepcion_economia": "subsistema_biosfera",
