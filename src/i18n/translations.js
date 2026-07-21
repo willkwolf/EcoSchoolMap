@@ -422,52 +422,44 @@ export const translations = {
                 </div>
                 <h3>Pedagogical Keys for Deepening Analysis</h3>
                 <div class="principles-grid">
-                    <div class="principle-card accordion-card">
-                        <button class="accordion-trigger" aria-expanded="false" tabindex="0">
-                            <h4>1. Beyond points: the map has layers and paths</h4>
-                            <span class="accordion-icon"></span>
-                        </button>
-                        <div class="accordion-content">
-                            <div class="accordion-body-inner">
-                                <p><em>Key idea:</em> The schools are the main <strong>points (nodes)</strong>. But there are also <strong>layers</strong> (topics that cross the entire map, like gender or complexity) and <strong>paths (trajectories)</strong> that show how ideas change over time and influence each other.</p>
-                            </div>
+                    <div class="principle-card">
+                        <div class="card-header">
+                            <span class="card-number">01</span>
+                            <h4>Beyond points: the map has layers and paths</h4>
+                        </div>
+                        <div class="card-body">
+                            <p><em>Key idea:</em> The schools are the main <strong>points (nodes)</strong>. But there are also <strong>layers</strong> (topics that cross the entire map, like gender or complexity) and <strong>paths (trajectories)</strong> that show how ideas change over time and influence each other.</p>
                         </div>
                     </div>
-                    <div class="principle-card accordion-card">
-                        <button class="accordion-trigger" aria-expanded="false" tabindex="0">
-                            <h4>2. The map vs. reality (What is feasible?)</h4>
-                            <span class="accordion-icon"></span>
-                        </button>
-                        <div class="accordion-content">
-                            <div class="accordion-body-inner">
-                                <p><em>Physical limits:</em> The map shows ideas on paper, but in the real world every economy is constrained by biophysical resources like energy, water, and ecosystems. <strong>Ecological Economics</strong>, conceptually founded on <strong>Nicholas Georgescu-Roegen's</strong> entropy law, institutionalized by <strong>Herman Daly</strong> (Steady-State economy) and <strong>Robert Costanza</strong> (ecosystem services valuation), and modernized by <strong>Kate Raworth's Doughnut Economics</strong>, explains that human activity must operate within a safe space between a <strong>social floor</strong> of well-being and a <strong>planetary ceiling</strong>.</p>
-                            </div>
+                    <div class="principle-card">
+                        <div class="card-header">
+                            <span class="card-number">02</span>
+                            <h4>The map vs. reality (What is feasible?)</h4>
+                        </div>
+                        <div class="card-body">
+                            <p><em>Physical limits:</em> The map shows ideas on paper, but in the real world every economy is constrained by biophysical resources like energy, water, and ecosystems. <strong>Ecological Economics</strong>, conceptually founded on <strong>Nicholas Georgescu-Roegen\'s</strong> entropy law, institutionalized by <strong>Herman Daly</strong> (Steady-State economy) and <strong>Robert Costanza</strong> (ecosystem services valuation), and modernized by <strong>Kate Raworth\'s Doughnut Economics</strong>, explains that human activity must operate within a safe space between a <strong>social floor</strong> of well-being and a <strong>planetary ceiling</strong>.</p>
                         </div>
                     </div>
-                    <div class="principle-card accordion-card">
-                        <button class="accordion-trigger" aria-expanded="false" tabindex="0">
-                            <h4>3. Why some perspectives do not have their own point</h4>
-                              <span class="accordion-icon"></span>
-                          </button>
-                          <div class="accordion-content">
-                              <div class="accordion-body-inner">
-                                  <p><em>Rule of thumb:</em> To have a point on this map, a theory must answer two questions: how is the economy organized? and what is its goal? Frameworks like <strong>complexity theory</strong> or the <strong>biophysical approach</strong> do not compete with the schools, but help us understand the boundaries and rules of the map.</p>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="principle-card accordion-card">
-                          <button class="accordion-trigger" aria-expanded="false" tabindex="0">
-                              <h4>4. Suggested readings to broaden your frame</h4>
-                              <span class="accordion-icon"></span>
-                          </button>
-                          <div class="accordion-content">
-                              <div class="accordion-body-inner">
-                                  <p><strong>Donella Meadows</strong> will teach you how complex systems work and why responses can be delayed. <strong>Brian Arthur</strong> explains how networks and uncertainty shape development. <strong>Charles Hall</strong> reminds us that without net energy, no economic system can sustain itself over time.</p>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              `,
+                    <div class="principle-card">
+                        <div class="card-header">
+                            <span class="card-number">03</span>
+                            <h4>Why some perspectives do not have their own point</h4>
+                        </div>
+                        <div class="card-body">
+                            <p><em>Rule of thumb:</em> To have a point on this map, a theory must answer two questions: how is the economy organized? and what is its goal? Frameworks like <strong>complexity theory</strong> or the <strong>biophysical approach</strong> do not compete with the schools, but help us understand the boundaries and rules of the map.</p>
+                        </div>
+                    </div>
+                    <div class="principle-card">
+                        <div class="card-header">
+                            <span class="card-number">04</span>
+                            <h4>Suggested readings to broaden your frame</h4>
+                        </div>
+                        <div class="card-body">
+                            <p><strong>Donella Meadows</strong> will teach you how complex systems work and why responses can be delayed. <strong>Brian Arthur</strong> explains how networks and uncertainty shape development. <strong>Charles Hall</strong> reminds us that without net energy, no economic system can sustain itself over time.</p>
+                        </div>
+                    </div>
+                </div>
+            `,
             applications: `
                 <h2>Spheres of Practical Application</h2>
                 <p class="intro-text">
@@ -518,48 +510,44 @@ export const translations = {
                 </div>
                 <h3>Principles for Clear Thinking</h3>
                 <div class="principles-grid">
-                    <div class="principle-card accordion-card">
-                        <button class="accordion-trigger" aria-expanded="false" tabindex="0">
-                            <h4>1. Open Mind (Intellectual Humility)</h4>
-                            <span class="accordion-icon"></span>
-                        </button>
-                        <div class="accordion-content">
-                            <div class="accordion-body-inner">
-                                <p><em>"True wisdom is in recognizing one's own ignorance"</em> - Socrates</p><p>No school of economics has all the answers for every country or era. Stay curious and be willing to learn from different approaches.</p>
-                            </div>
+                    <div class="principle-card">
+                        <div class="card-header">
+                            <span class="card-number">01</span>
+                            <h4>Open Mind (Intellectual Humility)</h4>
+                        </div>
+                        <div class="card-body">
+                            <blockquote>"True wisdom is in recognizing one's own ignorance" <cite>— Socrates</cite></blockquote>
+                            <p>No school of economics has all the answers for every country or era. Stay curious and be willing to learn from different approaches.</p>
                         </div>
                     </div>
-                    <div class="principle-card accordion-card">
-                        <button class="accordion-trigger" aria-expanded="false" tabindex="0">
-                            <h4>2. Think with Evidence (Analytical Rigor)</h4>
-                            <span class="accordion-icon"></span>
-                        </button>
-                        <div class="accordion-content">
-                            <div class="accordion-body-inner">
-                                <p><em>"Doubt everything at least once, even whether two plus two makes four"</em> - Georg Lichtenberg</p><p>Examine the assumptions of each school critically. Ask: under what conditions does this theory work best? what data supports it? and where does it fail?</p>
-                            </div>
+                    <div class="principle-card">
+                        <div class="card-header">
+                            <span class="card-number">02</span>
+                            <h4>Think with Evidence (Analytical Rigor)</h4>
+                        </div>
+                        <div class="card-body">
+                            <blockquote>"Doubt everything at least once, even whether two plus two makes four" <cite>— Georg Lichtenberg</cite></blockquote>
+                            <p>Examine the assumptions of each school critically. Ask: under what conditions does this theory work best? what data supports it? and where does it fail?</p>
                         </div>
                     </div>
-                    <div class="principle-card accordion-card">
-                        <button class="accordion-trigger" aria-expanded="false" tabindex="0">
-                            <h4>3. Look at the Setting (Contextual Thinking)</h4>
-                            <span class="accordion-icon"></span>
-                        </button>
-                        <div class="accordion-content">
-                            <div class="accordion-body-inner">
-                                <p><em>"There is nothing so practical as a good theory"</em> - Kurt Lewin</p><p>Economic theories do not float in a vacuum; they are born in specific historical moments. Consider the customs and history of a place before applying a rigid formula.</p>
-                            </div>
+                    <div class="principle-card">
+                        <div class="card-header">
+                            <span class="card-number">03</span>
+                            <h4>Look at the Setting (Contextual Thinking)</h4>
+                        </div>
+                        <div class="card-body">
+                            <blockquote>"There is nothing so practical as a good theory" <cite>— Kurt Lewin</cite></blockquote>
+                            <p>Economic theories do not float in a vacuum; they are born in specific historical moments. Consider the customs and history of a place before applying a rigid formula.</p>
                         </div>
                     </div>
-                    <div class="principle-card accordion-card">
-                        <button class="accordion-trigger" aria-expanded="false" tabindex="0">
-                            <h4>4. Create New Ideas (Creative Synthesis)</h4>
-                            <span class="accordion-icon"></span>
-                        </button>
-                        <div class="accordion-content">
-                            <div class="accordion-body-inner">
-                                <p><em>"Truth is a pathless land"</em> - Jiddu Krishnamurti</p><p>Do not force yourself to pick a single side. Learn to take the best insights from multiple schools to build more complete and useful answers.</p>
-                            </div>
+                    <div class="principle-card">
+                        <div class="card-header">
+                            <span class="card-number">04</span>
+                            <h4>Create New Ideas (Creative Synthesis)</h4>
+                        </div>
+                        <div class="card-body">
+                            <blockquote>"Truth is a pathless land" <cite>— Jiddu Krishnamurti</cite></blockquote>
+                            <p>Do not force yourself to pick a single side. Learn to take the best insights from multiple schools to build more complete and useful answers.</p>
                         </div>
                     </div>
                 </div>
