@@ -411,51 +411,55 @@ export const translations = {
                 </div>
             `,
             mapReadingGuide: `
-                <h2>Map Reading Guide: Limits, Layers, and Paths (Interpretation)</h2>
-                <div class="intro-text">
-                    <p>
-                        This map places economic schools on two axes so that very different ideas can be compared. That simplification is useful for learning, but it also compresses much broader debates into a single image.
-                    </p>
-                    <p>
-                        That is why a complementary guide helps: some important theories do not need a new point on the map, but rather an explanation of the <strong>limits, layers, and paths (trajectories)</strong> that shape the economic space.
-                    </p>
-                </div>
-                <h3>Pedagogical Keys for Deepening Analysis</h3>
-                <div class="principles-grid">
-                    <div class="principle-card">
-                        <div class="card-header">
-                            <span class="card-number">01</span>
-                            <h4>Beyond points: the map has layers and paths</h4>
-                        </div>
-                        <div class="card-body">
-                            <p><em>Key idea:</em> The schools are the main <strong>points (nodes)</strong>. But there are also <strong>layers</strong> (topics that cross the entire map, like gender or complexity) and <strong>paths (trajectories)</strong> that show how ideas change over time and influence each other.</p>
+                <div class="split-layout">
+                    <div class="split-sidebar">
+                        <h2>Reading Guide</h2>
+                        <div class="sidebar-line"></div>
+                        <div class="intro-text">
+                            <p>
+                                This map compares economic schools along two axes. While every simplification compresses deep debates, this guide highlights the limits, layers, and paths (trajectories) that shape the economic space.
+                            </p>
                         </div>
                     </div>
-                    <div class="principle-card">
-                        <div class="card-header">
-                            <span class="card-number">02</span>
-                            <h4>The map vs. reality (What is feasible?)</h4>
-                        </div>
-                        <div class="card-body">
-                            <p><em>Physical limits:</em> The map shows ideas on paper, but in the real world every economy is constrained by biophysical resources like energy, water, and ecosystems. <strong>Ecological Economics</strong>, conceptually founded on <strong>Nicholas Georgescu-Roegen\'s</strong> entropy law, institutionalized by <strong>Herman Daly</strong> (Steady-State economy) and <strong>Robert Costanza</strong> (ecosystem services valuation), and modernized by <strong>Kate Raworth\'s Doughnut Economics</strong>, explains that human activity must operate within a safe space between a <strong>social floor</strong> of well-being and a <strong>planetary ceiling</strong>.</p>
-                        </div>
-                    </div>
-                    <div class="principle-card">
-                        <div class="card-header">
-                            <span class="card-number">03</span>
-                            <h4>Why some perspectives do not have their own point</h4>
-                        </div>
-                        <div class="card-body">
-                            <p><em>Rule of thumb:</em> To have a point on this map, a theory must answer two questions: how is the economy organized? and what is its goal? Frameworks like <strong>complexity theory</strong> or the <strong>biophysical approach</strong> do not compete with the schools, but help us understand the boundaries and rules of the map.</p>
-                        </div>
-                    </div>
-                    <div class="principle-card">
-                        <div class="card-header">
-                            <span class="card-number">04</span>
-                            <h4>Suggested readings to broaden your frame</h4>
-                        </div>
-                        <div class="card-body">
-                            <p><strong>Donella Meadows</strong> will teach you how complex systems work and why responses can be delayed. <strong>Brian Arthur</strong> explains how networks and uncertainty shape development. <strong>Charles Hall</strong> reminds us that without net energy, no economic system can sustain itself over time.</p>
+                    
+                    <div class="split-content">
+                        <div class="principles-grid">
+                            <div class="principle-card">
+                                <div class="card-header">
+                                    <span class="card-number">01</span>
+                                    <h4>Layers & Paths</h4>
+                                </div>
+                                <div class="card-body">
+                                    <p>Schools are the starting points. However, transverse <strong>layers</strong> (like gender or complexity) and <strong>paths</strong> (historical trajectories) reveal how these ideas interact and evolve.</p>
+                                </div>
+                            </div>
+                            <div class="principle-card">
+                                <div class="card-header">
+                                    <span class="card-number">02</span>
+                                    <h4>Biophysical Limits</h4>
+                                </div>
+                                <div class="card-body">
+                                    <p>Theory is limitless, but nature is not. <strong>Ecological Economics</strong> (Georgescu-Roegen, Daly, Costanza, Raworth) establishes that all human economies must operate above a <strong>social floor</strong> and beneath a <strong>planetary ceiling</strong>.</p>
+                                </div>
+                            </div>
+                            <div class="principle-card">
+                                <div class="card-header">
+                                    <span class="card-number">03</span>
+                                    <h4>Rules of Inclusion</h4>
+                                </div>
+                                <div class="card-body">
+                                    <p>To earn a node, a school must answer: <em>how is production organized?</em> and <em>what is its goal?</em> Frameworks like complexity or biophysical flows are analytical lenses, not separate schools.</p>
+                                </div>
+                            </div>
+                            <div class="principle-card">
+                                <div class="card-header">
+                                    <span class="card-number">04</span>
+                                    <h4>Suggested Readings</h4>
+                                </div>
+                                <div class="card-body">
+                                    <p><strong>Donella Meadows</strong> (system feedback), <strong>Brian Arthur</strong> (network path-dependency), and <strong>Charles Hall</strong> (energy return on investment) provide the biophysical grounding missing in standard models.</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -499,71 +503,73 @@ export const translations = {
                 </div>
             `,
             pedagogicalLegend: `
-                <h2>Conclusion: Why Use Different Lenses? (Methodological Pluralism)</h2>
-                <div class="intro-text">
-                    <p>
-                        The true value of this map does not lie in memorizing the position of each school, but in understanding that <strong>there is no single absolute truth in economics</strong>. Each school offers a different lens to look at reality, and each contributes valuable tools.
-                    </p>
-                    <p>
-                        As philosopher <strong>John Stuart Mill</strong> wrote: <em>"He who knows only his own side of the case knows little of that"</em>. In economics, this is especially true. Better decisions and policies emerge when we consider multiple perspectives, rather than clinging dogmatically to one single school.
-                    </p>
-                </div>
-                <h3>Principles for Clear Thinking</h3>
-                <div class="principles-grid">
-                    <div class="principle-card">
-                        <div class="card-header">
-                            <span class="card-number">01</span>
-                            <h4>Open Mind (Intellectual Humility)</h4>
+                <div class="split-layout">
+                    <div class="split-sidebar">
+                        <h2>Think with Pluralism</h2>
+                        <div class="sidebar-line"></div>
+                        <div class="intro-text">
+                            <p>
+                                The value of this map is not memorizing locations, but fostering pluralism: realizing that no single economic truth exists, and that every school offers vital analytical tools.
+                            </p>
                         </div>
-                        <div class="card-body">
-                            <blockquote>"True wisdom is in recognizing one's own ignorance" <cite>— Socrates</cite></blockquote>
-                            <p>No school of economics has all the answers for every country or era. Stay curious and be willing to learn from different approaches.</p>
-                        </div>
-                    </div>
-                    <div class="principle-card">
-                        <div class="card-header">
-                            <span class="card-number">02</span>
-                            <h4>Think with Evidence (Analytical Rigor)</h4>
-                        </div>
-                        <div class="card-body">
-                            <blockquote>"Doubt everything at least once, even whether two plus two makes four" <cite>— Georg Lichtenberg</cite></blockquote>
-                            <p>Examine the assumptions of each school critically. Ask: under what conditions does this theory work best? what data supports it? and where does it fail?</p>
+                        <div class="final-message">
+                            <h3>Learning Route</h3>
+                            <ul>
+                                <li><strong>Explore</strong> primary sources from each school</li>
+                                <li><strong>Question</strong> your own assumptions and biases</li>
+                                <li><strong>Engage</strong> in dialogue with dissenting views</li>
+                                <li><strong>Apply</strong> multiple frameworks to concrete issues</li>
+                            </ul>
+                            <p class="final-quote">
+                                "The purpose of education is to replace an empty mind with an open one."
+                            </p>
                         </div>
                     </div>
-                    <div class="principle-card">
-                        <div class="card-header">
-                            <span class="card-number">03</span>
-                            <h4>Look at the Setting (Contextual Thinking)</h4>
-                        </div>
-                        <div class="card-body">
-                            <blockquote>"There is nothing so practical as a good theory" <cite>— Kurt Lewin</cite></blockquote>
-                            <p>Economic theories do not float in a vacuum; they are born in specific historical moments. Consider the customs and history of a place before applying a rigid formula.</p>
+                    
+                    <div class="split-content">
+                        <div class="principles-grid">
+                            <div class="principle-card">
+                                <div class="card-header">
+                                    <span class="card-number">01</span>
+                                    <h4>Open Mind</h4>
+                                </div>
+                                <div class="card-body">
+                                    <blockquote>"True wisdom is in recognizing one's own ignorance." <cite>— Socrates</cite></blockquote>
+                                    <p>No single model explains the entire economy. Stay curious and open to insights from other frameworks.</p>
+                                </div>
+                            </div>
+                            <div class="principle-card">
+                                <div class="card-header">
+                                    <span class="card-number">02</span>
+                                    <h4>Analytical Rigor</h4>
+                                </div>
+                                <div class="card-body">
+                                    <blockquote>"Doubt everything at least once, even whether two plus two makes four." <cite>— G. Lichtenberg</cite></blockquote>
+                                    <p>Examine the underlying assumptions of each claim. Ask under what conditions a theory works and what evidence supports it.</p>
+                                </div>
+                            </div>
+                            <div class="principle-card">
+                                <div class="card-header">
+                                    <span class="card-number">03</span>
+                                    <h4>Contextual Thinking</h4>
+                                </div>
+                                <div class="card-body">
+                                    <blockquote>"There is nothing so practical as a good theory." <cite>— Kurt Lewin</cite></blockquote>
+                                    <p>Economic ideas are products of their time and space. Avoid applying generic formulas without understanding local history.</p>
+                                </div>
+                            </div>
+                            <div class="principle-card">
+                                <div class="card-header">
+                                    <span class="card-number">04</span>
+                                    <h4>Creative Synthesis</h4>
+                                </div>
+                                <div class="card-body">
+                                    <blockquote>"Truth is a pathless land." <cite>— J. Krishnamurti</cite></blockquote>
+                                    <p>Don't get locked into a single camp. Integrate the best features of different schools to design better solutions.</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="principle-card">
-                        <div class="card-header">
-                            <span class="card-number">04</span>
-                            <h4>Create New Ideas (Creative Synthesis)</h4>
-                        </div>
-                        <div class="card-body">
-                            <blockquote>"Truth is a pathless land" <cite>— Jiddu Krishnamurti</cite></blockquote>
-                            <p>Do not force yourself to pick a single side. Learn to take the best insights from multiple schools to build more complete and useful answers.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="final-message">
-                    <h3>Your Research Trajectory</h3>
-                    <p>This map is only the beginning. You are invited to:</p>
-                    <ul>
-                        <li><strong>Explore</strong> the original sources of each school</li>
-                        <li><strong>Question</strong> your own assumptions and biases</li>
-                        <li><strong>Engage</strong> with people who think differently</li>
-                        <li><strong>Apply</strong> multiple perspectives to real problems</li>
-                        <li><strong>Contribute</strong> to economic debate with rigor and openness</li>
-                    </ul>
-                    <p class="final-quote">
-                        "The purpose of education is to replace an empty mind with an open one" - Malcolm Forbes
-                    </p>
                 </div>
             `,
             footer: `
