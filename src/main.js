@@ -57,6 +57,7 @@ async function init() {
         setupViewToggle();
         setupGuidedTour();
         setupGlossaryPopovers();
+        setupHeroScrollButton();
 
         // Initialize scrollytelling
         scrollController = new ScrollController(getSections(), {
@@ -459,4 +460,21 @@ function restoreFromUrlParams() {
     } catch (e) {
         return { preset: 'base', normalization: 'percentile' };
     }
+}
+
+function setupHeroScrollButton() {
+    const heroScrollBtn = document.getElementById('hero-scroll-btn');
+    if (!heroScrollBtn) return;
+
+    heroScrollBtn.addEventListener('click', (event) => {
+        event.preventDefault();
+        if (scrollController) {
+            scrollController.scrollToSection('guide');
+        } else {
+            const guideElement = document.getElementById('guide');
+            if (guideElement) {
+                guideElement.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+    });
 }
