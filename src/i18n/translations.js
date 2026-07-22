@@ -26,7 +26,27 @@ export const translations = {
             collisionEnabled: 'Permitir Colisiones',
             collisionDisabled: 'No Permitir Colisiones',
             downloadFilenamePrefix: 'mapa-escuelas',
+            toggleControlsShow: 'Personalizar Vista (Filtros)',
+            toggleControlsHide: 'Ocultar Filtros ✖',
+            viewMap: '🗺️ Vista Mapa',
+            viewTable: '📊 Vista Tabla',
+            startTour: '✨ Tour Guiado (60s)',
+            tourRunning: '▶️ En Tour Guiado...',
+            exploredProgress: 'Descubiertas: {count} / 12 escuelas',
+            tableHeaders: {
+                school: 'Escuela Económica',
+                quadrant: 'Cuadrante',
+                stateMarket: 'Estado vs. Mercado (Eje X)',
+                equityGrowth: 'Equidad vs. Crecimiento (Eje Y)',
+                type: 'Enfoque Metodológico'
+            },
             notAvailable: 'N/D'
+        },
+        glossary: {
+            okun: 'La balanza de Okun: Dilema clásico entre la eficiencia productiva (crecimiento) y la distribución equitativa de la riqueza.',
+            marginalism: 'Marginalismo: Enfoque neoclásico que explica el valor y los precios según la utilidad adicional que genera la última unidad consumida.',
+            boundedRationality: 'Racionalidad Limitada: Concepto de Herbert Simon (Conductismo) que reconoce que los humanos deciden con sesgos y capacidad de información limitada.',
+            creativeDestruction: 'Destrucción Creativa: Concepto de Schumpeter donde la innovación continua destruye modelos de negocio antiguos para crear nuevo valor.'
         },
         visualization: {
             axes: {
@@ -98,7 +118,27 @@ export const translations = {
             collisionEnabled: 'Allow Collisions',
             collisionDisabled: 'Prevent Collisions',
             downloadFilenamePrefix: 'economic-schools-map',
+            toggleControlsShow: 'Customize View (Filters)',
+            toggleControlsHide: 'Hide Filters ✖',
+            viewMap: '🗺️ Map View',
+            viewTable: '📊 Table View',
+            startTour: '✨ Guided Tour (60s)',
+            tourRunning: '▶️ Guided Tour Active...',
+            exploredProgress: 'Discovered: {count} / 12 schools',
+            tableHeaders: {
+                school: 'Economic School',
+                quadrant: 'Quadrant',
+                stateMarket: 'State vs. Market (X-Axis)',
+                equityGrowth: 'Equity vs. Growth (Y-Axis)',
+                type: 'Methodological Approach'
+            },
             notAvailable: 'N/A'
+        },
+        glossary: {
+            okun: 'Okun\'s Balance: The classic trade-off between productive efficiency (growth) and equitable wealth distribution.',
+            marginalism: 'Marginalism: Neoclassical framework explaining value and prices based on the additional utility from the last unit consumed.',
+            boundedRationality: 'Bounded Rationality: Herbert Simon\'s behavioral concept acknowledging humans decide with cognitive biases and limited information.',
+            creativeDestruction: 'Creative Destruction: Schumpeter\'s concept where continuous innovation destroys outdated business models to unlock new value.'
         },
         visualization: {
             axes: {

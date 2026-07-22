@@ -36,8 +36,11 @@ async function init() {
     console.log('Initializing app...');
 
     try {
-        // Load initial variant data (base-percentile) with calculated positions
-        baseData = await loadVariantData('base', 'percentile');
+        // Read URL params if available (Deep Linking)
+        const { preset, normalization } = restoreFromUrlParams();
+
+        // Load initial variant data with calculated positions
+        baseData = await loadVariantData(preset, normalization);
         console.log('Initial data loaded:', baseData);
 
         // Initialize D3 renderer
@@ -45,9 +48,15 @@ async function init() {
             locale: getCurrentLocale()
         });
         mapRenderer.render();
+        mapRenderer.updateExplorationCounterUI();
 
-        // Setup variant selectors
+        // Setup variant selectors & deep linking
         setupVariantControls();
+
+        // Setup Phase 2 & 3 Interactive Features
+        setupViewToggle();
+        setupGuidedTour();
+        setupGlossaryPopovers();
 
         // Initialize scrollytelling
         scrollController = new ScrollController(getSections(), {
@@ -57,7 +66,7 @@ async function init() {
         // Initialize UI manager for interactive tabs and accordions
         new InteractiveUIManager();
 
-        console.log('✅ App initialized successfully');
+        console.log('✅ App initialized successfully with Phase 2 & 3 features');
     } catch (error) {
         console.error('❌ Error initializing app:', error);
     }
@@ -70,6 +79,21 @@ function setupVariantControls() {
     const resetZoomBtn = document.getElementById('reset-zoom-btn');
     const downloadPngBtn = document.getElementById('download-png-btn');
     const loadingIndicator = document.getElementById('loading-indicator');
+    const toggleControlsBtn = document.getElementById('toggle-controls-btn');
+    const controlsContainer = document.getElementById('map-controls');
+
+    // Mobile Controls Drawer Toggle
+    if (toggleControlsBtn && controlsContainer) {
+        toggleControlsBtn.addEventListener('click', () => {
+            const isOpen = controlsContainer.classList.toggle('is-open');
+            toggleControlsBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+
+            const toggleText = toggleControlsBtn.querySelector('.toggle-text');
+            if (toggleText) {
+                toggleText.textContent = isOpen ? t('ui.toggleControlsHide') : t('ui.toggleControlsShow');
+            }
+        });
+    }
 
     // Transition checkboxes
     const transitionCheckboxes = [
@@ -111,6 +135,14 @@ function setupVariantControls() {
 
             // Update map (triggers 800ms D3 transition)
             mapRenderer.updateVariant(mergedData);
+
+            // Sync URL search params for deep linking & sharing
+            syncUrlParams(preset, normalization);
+
+            // If table view is active, update table content
+            if (document.getElementById('btn-view-table')?.classList.contains('active')) {
+                mapRenderer.renderDataTable('#map-table-container');
+            }
 
             // Wait for D3 transition to complete (800ms)
             await new Promise(resolve => setTimeout(resolve, 850));
@@ -279,4 +311,152 @@ if (document.readyState === 'loading') {
     initializeLocale();
     registerLocaleListener();
     bootstrapApp();
+}
+
+// ============================================================
+// Phase 2 & 3 Helper Functions (View Toggle, Tour, Glossary, URL Sync)
+// ============================================================
+
+function setupViewToggle() {
+    const btnMap = document.getElementById('btn-view-map');
+    const btnTable = document.getElementById('btn-view-table');
+    const mapContainer = document.getElementById('map-container');
+    const tableContainer = document.getElementById('map-table-container');
+
+    if (!btnMap || !btnTable || !mapContainer || !tableContainer) return;
+
+    btnMap.addEventListener('click', () => {
+        btnMap.classList.add('active');
+        btnMap.setAttribute('aria-selected', 'true');
+        btnTable.classList.remove('active');
+        btnTable.setAttribute('aria-selected', 'false');
+
+        mapContainer.style.display = 'block';
+        tableContainer.style.display = 'none';
+    });
+
+    btnTable.addEventListener('click', () => {
+        btnTable.classList.add('active');
+        btnTable.setAttribute('aria-selected', 'true');
+        btnMap.classList.remove('active');
+        btnMap.setAttribute('aria-selected', 'false');
+
+        mapContainer.style.display = 'none';
+        tableContainer.style.display = 'block';
+        if (mapRenderer) {
+            mapRenderer.renderDataTable('#map-table-container');
+        }
+    });
+}
+
+let tourTimer = null;
+function setupGuidedTour() {
+    const startTourBtn = document.getElementById('start-guided-tour-btn');
+    if (!startTourBtn) return;
+
+    const tourSchools = ['clasica', 'marxista', 'keynesiana', 'neoclasica', 'ecologica', 'schumpeteriana'];
+
+    startTourBtn.addEventListener('click', () => {
+        if (!mapRenderer) return;
+
+        if (startTourBtn.classList.contains('is-touring')) {
+            clearTimeout(tourTimer);
+            startTourBtn.classList.remove('is-touring');
+            startTourBtn.querySelector('span').textContent = t('ui.startTour');
+            mapRenderer.resetZoom();
+            return;
+        }
+
+        startTourBtn.classList.add('is-touring');
+        startTourBtn.querySelector('span').textContent = t('ui.tourRunning');
+
+        let step = 0;
+        const runStep = () => {
+            if (step >= tourSchools.length) {
+                startTourBtn.classList.remove('is-touring');
+                startTourBtn.querySelector('span').textContent = t('ui.startTour');
+                mapRenderer.resetZoom();
+                return;
+            }
+
+            const schoolId = tourSchools[step];
+            mapRenderer.focusSchoolNode(schoolId);
+
+            const nodeData = mapRenderer.data.nodos.find(n => n.id === schoolId);
+            if (nodeData && mapRenderer.tooltipManager) {
+                mapRenderer.recordVisitedSchool(schoolId);
+            }
+
+            step++;
+            tourTimer = setTimeout(runStep, 3200);
+        };
+
+        runStep();
+    });
+}
+
+function setupGlossaryPopovers() {
+    const terms = document.querySelectorAll('.glossary-term');
+    let popover = null;
+
+    terms.forEach(el => {
+        const termKey = el.dataset.term;
+        const text = t(`glossary.${termKey}`);
+        if (!text) return;
+
+        const show = (event) => {
+            if (popover) popover.remove();
+            popover = document.createElement('div');
+            popover.className = 'glossary-popover';
+            popover.innerHTML = `<strong>${el.textContent}</strong>${text}`;
+            document.body.appendChild(popover);
+
+            const rect = el.getBoundingClientRect();
+            popover.style.top = `${window.scrollY + rect.bottom + 8}px`;
+            popover.style.left = `${Math.max(10, Math.min(rect.left, window.innerWidth - 330))}px`;
+        };
+
+        const hide = () => {
+            if (popover) {
+                popover.remove();
+                popover = null;
+            }
+        };
+
+        el.addEventListener('mouseenter', show);
+        el.addEventListener('mouseleave', hide);
+        el.addEventListener('focus', show);
+        el.addEventListener('blur', hide);
+    });
+}
+
+function syncUrlParams(preset, normalization) {
+    try {
+        const url = new URL(window.location);
+        url.searchParams.set('preset', preset);
+        url.searchParams.set('norm', normalization);
+        window.history.replaceState({}, '', url);
+    } catch (e) {
+        console.warn('Could not sync URL params:', e);
+    }
+}
+
+function restoreFromUrlParams() {
+    try {
+        const params = new URLSearchParams(window.location.search);
+        const preset = params.get('preset');
+        const norm = params.get('norm');
+
+        if (preset) {
+            const dropdown = document.getElementById('preset-dropdown');
+            if (dropdown) dropdown.value = preset;
+        }
+        if (norm) {
+            const dropdown = document.getElementById('normalization-dropdown');
+            if (dropdown) dropdown.value = norm;
+        }
+        return { preset: preset || 'base', normalization: norm || 'percentile' };
+    } catch (e) {
+        return { preset: 'base', normalization: 'percentile' };
+    }
 }

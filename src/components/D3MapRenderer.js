@@ -650,12 +650,25 @@ export class D3MapRenderer {
         nodeElements.each((d, i, nodes) => {
             const nodeGroup = d3.select(nodes[i]);
             const color = this.colorMap.get(d.id);
+            const displayName = getNodeDisplayName(d);
             // Adapt symbol size and label offsets dynamically based on container width
             const containerWidth = this.container.node() ? this.container.node().getBoundingClientRect().width : 1200;
             const sizeMultiplier = containerWidth > 1200 ? 1.35 : (containerWidth < 480 ? 0.85 : 1.05);
             const size = getNodeSize(d.tipo) * sizeMultiplier;
             const symbolGenerator = getNodeSymbol(d.tipo, size);
             const borderStyle = getNodeBorderStyle(d.tipo);
+
+            // Make SVG node group accessible for screen readers & keyboard navigation
+            nodeGroup
+                .attr('tabindex', '0')
+                .attr('role', 'button')
+                .attr('aria-label', `${displayName} - Escuela Económica. Coordenadas X: ${d.posicion.x.toFixed(2)}, Y: ${d.posicion.y.toFixed(2)}`)
+                .on('keydown', (event) => {
+                    if (event.key === 'Enter' || event.key === ' ') {
+                        event.preventDefault();
+                        this.onNodeHover(event, d);
+                    }
+                });
 
             // Draw symbol
             nodeGroup.append('path')
@@ -680,7 +693,7 @@ export class D3MapRenderer {
                 .style('paint-order', 'stroke')
                 .style('stroke', '#faf8f5')
                 .style('stroke-width', '3px')
-                .text(getNodeDisplayName(d));
+                .text(displayName);
         });
     }
 
@@ -689,6 +702,7 @@ export class D3MapRenderer {
      */
     onNodeHover(event, node) {
         this.tooltipManager.showNodeTooltip(event, node);
+        this.recordVisitedSchool(node.id);
     }
 
     /**
@@ -696,6 +710,113 @@ export class D3MapRenderer {
      */
     onNodeLeave() {
         this.tooltipManager.hide();
+    }
+
+    /**
+     * Store visited school ID in localStorage to track exploration progress (Retention metric)
+     */
+    recordVisitedSchool(schoolId) {
+        if (!schoolId) return;
+        try {
+            const visited = JSON.parse(localStorage.getItem('ecoschoolmap_visited_schools') || '[]');
+            if (!visited.includes(schoolId)) {
+                visited.push(schoolId);
+                localStorage.setItem('ecoschoolmap_visited_schools', JSON.stringify(visited));
+            }
+            this.updateExplorationCounterUI(visited.length);
+        } catch (e) {
+            console.warn('Could not record visited school to localStorage:', e);
+        }
+    }
+
+    /**
+     * Update exploration counter badge UI
+     */
+    updateExplorationCounterUI(count = null) {
+        if (count === null) {
+            try {
+                const visited = JSON.parse(localStorage.getItem('ecoschoolmap_visited_schools') || '[]');
+                count = visited.length;
+            } catch (e) {
+                count = 0;
+            }
+        }
+        const textElement = document.getElementById('exploration-counter-text');
+        if (textElement) {
+            textElement.textContent = `${t('ui.exploredProgress').replace('{count}', count)}`;
+        }
+    }
+
+    /**
+     * Smoothly focus/zoom onto a specific school node (Guided Tour feature)
+     */
+    focusSchoolNode(schoolId) {
+        const node = this.simulation.nodes().find(n => n.id === schoolId);
+        if (!node) return;
+
+        const scale = 1.8;
+        const x = -node.x * scale + this.options.width / 2;
+        const y = -node.y * scale + this.options.height / 2;
+
+        const transform = d3.zoomIdentity.translate(x, y).scale(scale);
+        this.svg.transition().duration(850).call(this.zoom.transform, transform);
+    }
+
+    /**
+     * Render an accessible HTML table representation of the schools map
+     */
+    renderDataTable(containerSelector = '#map-table-container') {
+        const container = document.querySelector(containerSelector);
+        if (!container) return;
+
+        if (!this.data || !this.data.nodos) {
+            container.innerHTML = '<p>Sin datos disponibles.</p>';
+            return;
+        }
+
+        const getQuadrantName = (x, y) => {
+            if (x < 0 && y >= 0) return 'Q1 (Mercado + Equidad)';
+            if (x >= 0 && y >= 0) return 'Q2 (Estado + Equidad)';
+            if (x < 0 && y < 0) return 'Q3 (Mercado + Crecimiento)';
+            return 'Q4 (Estado + Crecimiento)';
+        };
+
+        const rowsHtml = this.data.nodos.map(node => {
+            const color = this.colorMap ? this.colorMap.get(node.id) : '#333';
+            const displayName = getNodeDisplayName(node);
+            const quadrant = getQuadrantName(node.posicion.x, node.posicion.y);
+            return `
+                <tr>
+                    <td>
+                        <div class="school-badge">
+                            <span class="badge-dot" style="background-color: ${color};"></span>
+                            <span>${displayName}</span>
+                        </div>
+                    </td>
+                    <td>${quadrant}</td>
+                    <td class="coord-val">${node.posicion.x >= 0 ? '+' : ''}${node.posicion.x.toFixed(2)}</td>
+                    <td class="coord-val">${node.posicion.y >= 0 ? '+' : ''}${node.posicion.y.toFixed(2)}</td>
+                    <td>${node.tipo || 'Escuela Principal'}</td>
+                </tr>
+            `;
+        }).join('');
+
+        container.innerHTML = `
+            <table class="data-table" aria-label="Tabla accesible de escuelas económicas">
+                <thead>
+                    <tr>
+                        <th>${t('ui.tableHeaders.school')}</th>
+                        <th>${t('ui.tableHeaders.quadrant')}</th>
+                        <th>${t('ui.tableHeaders.stateMarket')}</th>
+                        <th>${t('ui.tableHeaders.equityGrowth')}</th>
+                        <th>${t('ui.tableHeaders.type')}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${rowsHtml}
+                </tbody>
+            </table>
+        `;
     }
 
     /**

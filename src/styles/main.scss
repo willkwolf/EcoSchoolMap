@@ -7,7 +7,7 @@
 // ============================================================
 // Google Fonts & Variables
 // ============================================================
-@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Outfit:wght@300;400;500;600;700&display=swap');
+// Google Fonts loaded via preconnect in index.html for high performance
 
 $primary-color: #1a2332;       // Slate 900 - Deep academic navy/slate
 $secondary-color: #475569;     // Slate 600 - Subdued academic gray
@@ -83,6 +83,40 @@ body {
     background-color: $bg-color;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+// Reading Progress Bar (Fixed Top)
+.reading-progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 4px;
+    background: linear-gradient(90deg, $accent-color, #ea580c);
+    z-index: 99999;
+    transition: width 0.1s ease-out;
+    box-shadow: 0 1px 4px rgba($accent-color, 0.4);
+}
+
+// Skip link for keyboard accessibility
+.skip-to-map-link {
+    position: absolute;
+    top: -100px;
+    left: 20px;
+    background: $primary-color;
+    color: white;
+    padding: 0.75rem 1.25rem;
+    border-radius: 8px;
+    z-index: 10000;
+    text-decoration: none;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    transition: top 0.2s ease;
+
+    &:focus {
+        top: 15px;
+        outline: 3px solid $accent-color;
+    }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -749,6 +783,17 @@ p {
     50% { transform: translateY(-12px) rotate(4deg); }
     100% { transform: translateY(0px) rotate(0deg); }
 }
+
+@keyframes slideDownControls {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 // Visualization Section
 // ============================================================
 
@@ -761,15 +806,162 @@ p {
         width: 100%;
     }
 
+    .vis-header-toolbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+
+        h2 {
+            margin-bottom: 0;
+        }
+
+        .vis-toolbar-actions {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.875rem;
+
+            @media (max-width: $mobile) {
+                width: 100%;
+                justify-content: space-between;
+            }
+        }
+    }
+
+    // Badge de exploración retenida
+    .exploration-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 1rem;
+        background: rgba($primary-color, 0.05);
+        border: 1px solid rgba($primary-color, 0.12);
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: $primary-color;
+        transition: all 0.3s ease;
+
+        .badge-icon {
+            font-size: 1.1rem;
+        }
+    }
+
+    // Botón Tour Guiado 60s
+    .tour-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 1.1rem;
+        background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+        color: white;
+        border: none;
+        border-radius: 20px;
+        font-family: $font-body;
+        font-weight: 600;
+        font-size: 0.9rem;
+        cursor: pointer;
+        box-shadow: 0 2px 8px rgba(3, 105, 161, 0.25);
+        transition: all 0.25s ease;
+
+        &:hover, &:focus {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 14px rgba(3, 105, 161, 0.35);
+        }
+
+        &.is-touring {
+            background: linear-gradient(135deg, $accent-color 0%, #c2410c 100%);
+        }
+    }
+
+    // Selector de vista (Mapa vs Tabla)
+    .view-toggle-container {
+        display: inline-flex;
+        background: rgba($primary-color, 0.06);
+        padding: 4px;
+        border-radius: 20px;
+        gap: 4px;
+
+        .view-toggle-btn {
+            border: none;
+            background: transparent;
+            padding: 0.4rem 1rem;
+            border-radius: 16px;
+            font-family: $font-body;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: $secondary-color;
+            cursor: pointer;
+            transition: all 0.2s ease;
+
+            &.active {
+                background: white;
+                color: $primary-color;
+                box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+            }
+
+            &:focus-visible {
+                outline: 2px solid $accent-color;
+            }
+        }
+    }
+
+    .controls-toggle-btn {
+        display: none;
+        width: 100%;
+        padding: 0.875rem 1.25rem;
+        margin-bottom: 1rem;
+        background-color: white;
+        border: 1.5px solid $border-color;
+        border-radius: 10px;
+        font-family: $font-body;
+        font-weight: 600;
+        font-size: 1rem;
+        color: $primary-color;
+        cursor: pointer;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        transition: all 0.25s ease;
+
+        &:hover, &:focus {
+            border-color: $secondary-color;
+            background-color: #fcfbfa;
+        }
+
+        .btn-icon {
+            transition: transform 0.3s ease;
+        }
+
+        @media (max-width: $tablet) {
+            display: flex;
+        }
+    }
+
     .controls {
         display: flex;
         gap: 2rem;
         margin-bottom: 2rem;
         flex-wrap: wrap;
 
-        @media (max-width: $mobile) {
+        @media (max-width: $tablet) {
+            display: none; // Collapsed on tablet/mobile by default to show map immediately
             flex-direction: column;
-            gap: 1rem;
+            gap: 1.25rem;
+            background: white;
+            padding: 1.25rem;
+            border-radius: 12px;
+            border: 1px solid $border-color;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+
+            &.is-open {
+                display: flex;
+                animation: slideDownControls 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            }
         }
 
         .control-group {
@@ -1005,6 +1197,61 @@ p {
             width: 100%;
             height: auto;
             max-width: 100%;
+        }
+    }
+
+    // Accessible Data Table Container
+    .map-table-container {
+        background-color: white;
+        border: 1px solid $border-color;
+        border-radius: 12px;
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+        overflow-x: auto;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.03);
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.95rem;
+
+            th, td {
+                padding: 0.875rem 1rem;
+                border-bottom: 1px solid rgba($primary-color, 0.08);
+            }
+
+            th {
+                background-color: #f8fafc;
+                color: $primary-color;
+                font-weight: 700;
+                position: sticky;
+                top: 0;
+            }
+
+            tr:hover {
+                background-color: #f1f5f9;
+            }
+
+            .school-badge {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.5rem;
+                font-weight: 700;
+            }
+
+            .badge-dot {
+                width: 12px;
+                height: 12px;
+                border-radius: 50%;
+                display: inline-block;
+            }
+
+            .coord-val {
+                font-family: $font-mono;
+                font-size: 0.9rem;
+                font-weight: 600;
+            }
         }
     }
 
@@ -2276,5 +2523,62 @@ section + section {
     opacity: 0;
     transform: translateY(8px);
     transition: opacity 0.2s cubic-bezier(0.4, 0, 1, 1), transform 0.2s cubic-bezier(0.4, 0, 1, 1);
+}
+
+// ============================================================
+// Interactive Glossary Terms & Glassmorphism Popups
+// ============================================================
+
+.glossary-term {
+    border-bottom: 2px dashed $accent-color;
+    cursor: help;
+    font-weight: 600;
+    color: $primary-color;
+    position: relative;
+    transition: all 0.2s ease;
+
+    &:hover, &:focus {
+        color: $accent-color;
+        border-bottom-style: solid;
+        background-color: rgba($accent-color, 0.08);
+        border-radius: 3px;
+        outline: none;
+    }
+}
+
+.glossary-popover {
+    position: absolute;
+    z-index: 100000;
+    max-width: 320px;
+    padding: 1rem 1.25rem;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(229, 222, 201, 0.8);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12), 0 1px 3px rgba(0, 0, 0, 0.05);
+    font-size: 0.9rem;
+    line-height: 1.55;
+    color: $primary-color;
+    pointer-events: none;
+    animation: popupFade 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+
+    strong {
+        display: block;
+        margin-bottom: 0.35rem;
+        color: $accent-color;
+        font-family: $font-display;
+    }
+}
+
+@keyframes popupFade {
+    from {
+        opacity: 0;
+        transform: translateY(6px) scale(0.96);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
 }
 
