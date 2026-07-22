@@ -99,6 +99,8 @@ export class ScrollController {
      * Schedule one active-section update per animation frame.
      */
     handleViewportChange() {
+        this.updateReadingProgress();
+
         if (this.animationFrameId !== null) {
             return;
         }
@@ -107,6 +109,21 @@ export class ScrollController {
             this.animationFrameId = null;
             this.updateActiveSection();
         });
+    }
+
+    /**
+     * Update fixed reading progress bar width and ARIA attributes
+     */
+    updateReadingProgress() {
+        const progressBar = document.getElementById('reading-progress-bar');
+        if (!progressBar) return;
+
+        const scrollTop = window.scrollY || document.documentElement.scrollTop;
+        const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const progress = scrollHeight > 0 ? Math.min(Math.max((scrollTop / scrollHeight) * 100, 0), 100) : 0;
+
+        progressBar.style.width = `${progress}%`;
+        progressBar.setAttribute('aria-valuenow', Math.round(progress));
     }
 
     /**
