@@ -23,7 +23,8 @@ Thumbs.db
 .ipynb_checkpoints/
 
 .venv/
-.claude
+.claude/
+.gitclaude/
 node_modules/
 dist/
 .txt

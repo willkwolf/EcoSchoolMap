@@ -1,0 +1,135 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "EscuelasEconomicasDataContract",
+  "description": "Contrato de gobernanza de datos para el Mapa de Escuelas Políticas y Económicas",
+  "type": "object",
+  "required": ["metadata", "ejes", "nodos"],
+  "properties": {
+    "metadata": {
+      "type": "object",
+      "required": ["version", "titulo", "autor", "licencia"],
+      "properties": {
+        "version": { "type": "string" },
+        "titulo": { "type": "string" },
+        "autor": { "type": "string" },
+        "licencia": { "type": "string" },
+        "descripcion": { "type": "string" },
+        "referencia_principal": { "type": "string" }
+      }
+    },
+    "ejes": {
+      "type": "object",
+      "required": ["x", "y"],
+      "properties": {
+        "x": {
+          "type": "object",
+          "required": ["nombre", "min", "max", "descripcion_min", "descripcion_max"],
+          "properties": {
+            "nombre": { "type": "string" },
+            "min": { "type": "number", "minimum": -1.0, "maximum": -1.0 },
+            "max": { "type": "number", "minimum": 1.0, "maximum": 1.0 },
+            "descripcion_min": { "type": "string" },
+            "descripcion_max": { "type": "string" }
+          }
+        },
+        "y": {
+          "type": "object",
+          "required": ["nombre", "min", "max", "descripcion_min", "descripcion_max"],
+          "properties": {
+            "nombre": { "type": "string" },
+            "min": { "type": "number", "minimum": -1.0, "maximum": -1.0 },
+            "max": { "type": "number", "minimum": 1.0, "maximum": 1.0 },
+            "descripcion_min": { "type": "string" },
+            "descripcion_max": { "type": "string" }
+          }
+        }
+      }
+    },
+    "nodos": {
+      "type": "array",
+      "minItems": 12,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "nombre",
+          "tipo",
+          "ano_fundacion",
+          "autores",
+          "descripcion",
+          "descripcion_corta",
+          "color",
+          "posicion",
+          "descriptores"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9_-]+$"
+          },
+          "nombre": { "type": "string" },
+          "tipo": {
+            "type": "string",
+            "enum": ["tradicional", "heterodoxa", "contemporanea", "emergente"]
+          },
+          "ano_fundacion": { "type": "integer" },
+          "autores": { "type": "string" },
+          "descripcion": { "type": "string" },
+          "descripcion_corta": { "type": "string" },
+          "color": {
+            "type": "string",
+            "pattern": "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$"
+          },
+          "posicion": {
+            "type": "object",
+            "required": ["x", "y"],
+            "properties": {
+              "x": { "type": "number", "minimum": -1.0, "maximum": 1.0 },
+              "y": { "type": "number", "minimum": -1.0, "maximum": 1.0 }
+            }
+          },
+          "descriptores": {
+            "type": "object",
+            "required": [
+              "concepcion_economia",
+              "concepcion_humano",
+              "naturaleza_mundo",
+              "ambito_economico",
+              "motor_cambio",
+              "politicas_preferidas"
+            ],
+            "properties": {
+              "concepcion_economia": { "type": "number", "minimum": 0.0, "maximum": 1.0 },
+              "concepcion_humano": { "type": "number", "minimum": 0.0, "maximum": 1.0 },
+              "naturaleza_mundo": { "type": "number", "minimum": 0.0, "maximum": 1.0 },
+              "ambito_economico": { "type": "number", "minimum": 0.0, "maximum": 1.0 },
+              "motor_cambio": { "type": "number", "minimum": 0.0, "maximum": 1.0 },
+              "politicas_preferidas": { "type": "number", "minimum": 0.0, "maximum": 1.0 }
+            }
+          },
+          "caracteristicas": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "transiciones": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["origen", "destino", "tipo", "confianza", "label"],
+        "properties": {
+          "origen": { "type": "string" },
+          "destino": { "type": "string" },
+          "tipo": { "type": "string" },
+          "confianza": {
+            "type": "string",
+            "enum": ["alta", "media-alta", "media", "baja"]
+          },
+          "label": { "type": "string" },
+          "bibliografia": { "type": "string" }
+        }
+      }
+    }
+  }
+}
