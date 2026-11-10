@@ -17,6 +17,20 @@ $bg-color: #faf8f5;            // Warm paper cream background
 $border-color: #e5dec9;        // Subtle warm sand border color
 $section-divider-color: rgba($primary-color, 0.06);
 
+// Color shades (replacing deprecated Sass color functions)
+$accent-dark: #a3360a;
+$accent-light: #d94a0e;
+$accent-deep: #842c08;
+$primary-dark: #141b27;
+$primary-deep: #0e131c;
+
+// Standardized UI Design Tokens
+$border-hairline: 1px solid $border-color;
+$border-subtle: 1px solid rgba($primary-color, 0.08);
+$card-radius-sm: 4px;
+$card-radius-md: 8px;
+$card-radius-lg: 12px;
+
 $font-display: 'Lora', Georgia, serif;
 $font-body: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 $font-mono: 'JetBrains Mono', Courier New, monospace;
@@ -202,11 +216,10 @@ p {
         radial-gradient(rgba($primary-color, 0.03) 1px, transparent 0);
     background-size: 24px 24px;
     background-position: 0 0, 12px 12px;
-    border-bottom: 1px solid $border-color;
     position: relative;
     overflow: hidden;
 
-    // Elegant thin border framing
+    // Elegant thin border framing (desktop only to prevent mobile cramping)
     &::before {
         content: '';
         position: absolute;
@@ -217,6 +230,10 @@ p {
         border: 1px solid rgba($primary-color, 0.05);
         pointer-events: none;
         z-index: 1;
+
+        @media (max-width: $tablet) {
+            display: none;
+        }
     }
 
     .hero-content {
@@ -416,30 +433,29 @@ p {
 
     .guide-grid {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 2rem;
-
-        @media (max-width: $tablet) {
-            grid-template-columns: repeat(2, 1fr);
-        }
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 1.75rem;
 
         @media (max-width: $mobile) {
             grid-template-columns: 1fr;
+            gap: 1.25rem;
         }
 
         .guide-card {
             padding: 1.75rem;
             border: 1px solid $border-color;
-            border-radius: 4px;
+            border-radius: $card-radius-md;
             background-color: #faf8f5; // Warm crema card background
             display: flex;
             flex-direction: column;
             gap: 1rem;
-            transition: border-color 0.2s ease, transform 0.2s ease;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+            transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 
             &:hover {
-                border-color: rgba($accent-color, 0.4);
+                border-color: rgba($accent-color, 0.45);
                 transform: translateY(-2px);
+                box-shadow: 0 6px 16px rgba($primary-color, 0.05);
             }
 
             h3 {
@@ -580,56 +596,94 @@ p {
 
     .cocktails-grid {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
         gap: 1.5rem;
         margin-top: 2rem;
 
-        @media (max-width: $tablet) {
-            grid-template-columns: repeat(2, 1fr);
-        }
-
         @media (max-width: $mobile) {
             grid-template-columns: 1fr;
-            gap: 1rem;
+            gap: 1.25rem;
         }
     }
 
     .cocktail-card {
-        padding: 1.5rem;
+        background-color: white;
+        border: 1px solid $border-color;
+        border-radius: $card-radius-md;
+        padding: 1.75rem 1.5rem 1.5rem;
         position: relative;
-        transition: transform 0.2s ease, border-color 0.2s ease;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+        transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
 
         &:hover {
             transform: translateY(-2px);
-            border-color: rgba($accent-color, 0.4);
+            border-color: rgba($accent-color, 0.45);
+            box-shadow: 0 6px 18px rgba($primary-color, 0.06);
         }
 
         .cocktail-number {
             position: absolute;
-            top: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 32px;
-            height: 32px;
+            top: -14px;
+            left: 1.5rem;
+            width: 28px;
+            height: 28px;
             background-color: $primary-color;
             color: white;
-            border-radius: 2px;
+            border-radius: 4px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: bold;
-            font-size: 0.9rem;
-            box-shadow: none;
+            font-weight: 700;
+            font-size: 0.85rem;
+            box-shadow: 0 2px 6px rgba($primary-color, 0.25);
         }
 
         h4 {
-            margin-top: 0.75rem;
-            margin-bottom: 1rem;
+            margin-top: 0.25rem;
+            margin-bottom: 0.75rem;
             color: $primary-color;
             font-family: $font-display;
-            font-size: 1.1rem;
-            line-height: 1.4;
+            font-size: 1.15rem;
+            line-height: 1.35;
             min-height: 2.8rem;
+        }
+
+        .cocktail-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-top: 0.75rem;
+            padding-top: 0.75rem;
+            border-top: 1px solid rgba($border-color, 0.8);
+        }
+
+        .school-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            padding: 0.2rem 0.6rem;
+            background-color: #faf8f5;
+            border: 1px solid rgba($border-color, 0.9);
+            border-radius: 14px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: $primary-color;
+            transition: transform 0.15s ease, border-color 0.15s ease;
+
+            &:hover {
+                transform: translateY(-1px);
+                border-color: rgba($primary-color, 0.3);
+            }
+
+            .pill-dot {
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+                flex-shrink: 0;
+            }
         }
 
         .cocktail-schools {
@@ -794,7 +848,7 @@ p {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, $accent-color 0%, darken($accent-color, 6%) 100%);
+            background: linear-gradient(135deg, $accent-color 0%, $accent-dark 100%);
             color: white;
             font-weight: 700;
             font-size: 1rem;
@@ -807,7 +861,7 @@ p {
             min-height: 48px;
 
             &:hover {
-                background: linear-gradient(135deg, lighten($accent-color, 5%) 0%, $accent-color 100%);
+                background: linear-gradient(135deg, $accent-light 0%, $accent-color 100%);
                 transform: translateY(-2px);
                 box-shadow: 0 8px 28px rgba($accent-color, 0.65), 0 0 0 4px rgba($accent-color, 0.2);
             }
@@ -991,9 +1045,10 @@ p {
 
     .controls {
         display: flex;
-        gap: 2rem;
+        flex-direction: column;
+        gap: 0;
         margin-bottom: 2rem;
-        flex-wrap: wrap;
+        width: 100%;
 
         @media (max-width: $tablet) {
             display: none; // Collapsed on tablet/mobile by default to show map immediately
@@ -1011,15 +1066,121 @@ p {
             }
         }
 
+        .controls-primary-bar {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            background: white;
+            padding: 1rem 1.25rem;
+            border: 1px solid $border-color;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+            width: 100%;
+
+            .preset-group {
+                flex: 1;
+                min-width: 260px;
+            }
+
+            .primary-controls-actions {
+                display: flex;
+                align-items: center;
+                gap: 0.75rem;
+
+                @media (max-width: $mobile) {
+                    width: 100%;
+                }
+            }
+        }
+
+        .advanced-toggle-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.65rem 1.2rem;
+            background: #faf8f5;
+            border: 1px solid $border-color;
+            border-radius: 8px;
+            color: $primary-color;
+            font-family: $font-body;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            min-height: 44px;
+
+            @media (max-width: $mobile) {
+                width: 100%;
+            }
+
+            &:hover {
+                background: #f4ede1;
+                border-color: rgba($accent-color, 0.4);
+            }
+
+            .btn-icon {
+                color: $secondary-color;
+            }
+
+            .btn-chevron {
+                color: $secondary-color;
+                transition: transform 0.25s ease;
+            }
+
+            &.active {
+                background: #f1ebd9;
+                border-color: $accent-color;
+
+                .btn-chevron {
+                    transform: rotate(180deg);
+                }
+            }
+        }
+
+        .advanced-controls-panel {
+            display: none;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            background: #fcfbfa;
+            padding: 1.5rem;
+            border: 1px solid $border-color;
+            border-top: none;
+            border-radius: 0 0 10px 10px;
+            margin-top: -1px;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.03);
+
+            &.is-open {
+                display: grid;
+                animation: slideDownControls 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            }
+
+            @media (max-width: $tablet) {
+                border-top: 1px solid $border-color;
+                border-radius: 8px;
+                margin-top: 0;
+                padding: 1rem;
+            }
+        }
+
         .control-group {
             flex: 1;
-            min-width: 250px;
+            min-width: 220px;
 
             label {
-                display: block;
+                display: flex;
+                align-items: center;
+                gap: 0.35rem;
                 margin-bottom: 0.5rem;
                 font-weight: 600;
                 color: $primary-color;
+                font-size: 0.92rem;
+
+                .label-icon {
+                    font-size: 1rem;
+                }
             }
 
             select {
@@ -1226,7 +1387,7 @@ p {
         min-height: 600px;
         position: relative;
         overflow: hidden; // Prevent SVG overflow
-        touch-action: pan-x pan-y; // Enable touch scrolling/panning
+        touch-action: pan-y; // Allows vertical page scroll on touch, 2-finger pinch for map
 
         @media (max-width: $mobile) {
             padding: 0.5rem;
@@ -1244,6 +1405,32 @@ p {
             width: 100%;
             height: auto;
             max-width: 100%;
+        }
+
+        .touch-scroll-hint {
+            position: absolute;
+            bottom: 1rem;
+            left: 50%;
+            transform: translateX(-50%) translateY(8px);
+            background: rgba($primary-color, 0.88);
+            color: white;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            padding: 0.45rem 1rem;
+            border-radius: 20px;
+            font-size: 0.82rem;
+            font-weight: 500;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.25s ease, transform 0.25s ease;
+            z-index: 10;
+            white-space: nowrap;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+
+            &.is-visible {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
         }
     }
 
@@ -1429,15 +1616,18 @@ p {
     }
 
     .timeline-item {
-        background-color: $bg-color;
+        background-color: white;
+        border: 1px solid rgba($border-color, 0.9);
         border-left: 4px solid $secondary-color;
         padding: 1.5rem;
-        border-radius: 8px;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border-radius: $card-radius-md;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+        transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 
         &:hover {
             transform: translateX(4px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-color: rgba($secondary-color, 0.4);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
         }
 
         .timeline-year {
@@ -1493,6 +1683,22 @@ p {
         grid-template-columns: repeat(4, 1fr);
         gap: 2rem;
         margin-top: 2rem;
+        position: relative;
+
+        &::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 12%;
+            right: 12%;
+            height: 2px;
+            border-top: 2px dashed rgba($primary-color, 0.2);
+            z-index: 0;
+
+            @media (max-width: $tablet) {
+                display: none;
+            }
+        }
 
         @media (max-width: $tablet) {
             grid-template-columns: repeat(2, 1fr);
@@ -1507,10 +1713,11 @@ p {
     .path-step {
         background-color: white;
         border: 1px solid $border-color;
-        border-radius: 12px;
+        border-radius: $card-radius-md;
         padding: 2rem 1.5rem;
         text-align: center;
         position: relative;
+        z-index: 1;
         transition: transform 0.3s ease, box-shadow 0.3s ease;
 
         &:hover {
@@ -1609,12 +1816,14 @@ p {
         .application-item {
             background-color: white;
             padding: 1.25rem;
-            border-radius: 8px;
-            border: 1px solid #e0e0e0;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-radius: $card-radius-sm;
+            border: 1px solid $border-color;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 
             &:hover {
                 transform: translateY(-2px);
+                border-color: rgba($primary-color, 0.25);
                 box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
             }
 
@@ -1858,7 +2067,7 @@ p {
 // ============================================================
 
 .footer {
-    background-color: darken($primary-color, 3%);
+    background-color: $primary-dark;
     color: white;
     padding: 3.5rem 2rem 2.5rem;
     text-align: center;
@@ -1909,6 +2118,18 @@ p {
             grid-template-columns: 1fr;
             gap: 1.25rem;
             max-width: 500px;
+            position: relative;
+
+            &::before {
+                content: '';
+                position: absolute;
+                top: 24px;
+                bottom: 24px;
+                left: 31px;
+                width: 2px;
+                background: rgba(white, 0.12);
+                z-index: 0;
+            }
         }
 
         // Stepper connector line (Desktop only)
@@ -1920,7 +2141,7 @@ p {
             right: 5%;
             height: 2px;
             background: rgba(white, 0.1);
-            z-index: -1;
+            z-index: 0;
 
             @media (max-width: $tablet) {
                 display: none;
@@ -1936,6 +2157,7 @@ p {
             color: inherit;
             transition: all 0.3s ease;
             position: relative;
+            z-index: 1;
             background: rgba(white, 0.02);
             border: 1px solid rgba(white, 0.05);
             border-radius: 8px;
@@ -1968,7 +2190,7 @@ p {
                 box-shadow: 0 0 15px rgba($accent-color, 0.3);
 
                 .step-badge {
-                    background: linear-gradient(135deg, $accent-color 0%, darken($accent-color, 12%) 100%);
+                    background: linear-gradient(135deg, $accent-color 0%, $accent-deep 100%);
                     border-color: $accent-color;
                     color: white;
                     box-shadow: 0 0 10px rgba($accent-color, 0.4);
@@ -1986,7 +2208,7 @@ p {
             height: 42px;
             border-radius: 50%;
             border: 2px solid rgba(white, 0.2);
-            background-color: darken($primary-color, 6%);
+            background-color: $primary-deep;
             color: rgba(white, 0.6);
             display: flex;
             align-items: center;
@@ -2130,6 +2352,7 @@ p {
     will-change: transform, left, top;
 
     @media (max-width: $mobile) {
+        pointer-events: auto;
         max-width: calc(100vw - 2rem);
         font-size: 0.85rem;
         padding: 0.75rem;
@@ -2142,6 +2365,10 @@ p {
     }
 
     .tooltip-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 0.75rem;
         border-bottom: 1px solid $border-color;
         padding-bottom: 0.5rem;
         margin-bottom: 0.5rem;
@@ -2155,6 +2382,24 @@ p {
             font-size: 0.85rem;
             color: #666;
             font-style: italic;
+        }
+
+        .tooltip-close-btn {
+            background: none;
+            border: none;
+            color: $secondary-color;
+            font-size: 1.1rem;
+            line-height: 1;
+            cursor: pointer;
+            padding: 2px 5px;
+            border-radius: 4px;
+            transition: color 0.2s ease, background-color 0.2s ease;
+            pointer-events: auto;
+
+            &:hover, &:focus {
+                color: $primary-color;
+                background-color: rgba($primary-color, 0.08);
+            }
         }
     }
 
@@ -2385,6 +2630,15 @@ section + section {
     @media (max-width: $mobile) {
         gap: 0.5rem;
         margin: 1.25rem auto 2rem;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        justify-content: flex-start;
+        padding: 0.25rem 0.5rem;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        &::-webkit-scrollbar {
+            display: none;
+        }
     }
 }
 
@@ -2408,8 +2662,9 @@ section + section {
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
 
     @media (max-width: $mobile) {
-        flex: 1 1 calc(50% - 0.5rem); // 2 buttons per row on small devices
-        padding: 0.5rem 0.8rem;
+        flex: 0 0 auto; // Clean horizontal swipe
+        white-space: nowrap;
+        padding: 0.5rem 0.9rem;
         font-size: 0.8rem;
         min-height: 44px;
     }

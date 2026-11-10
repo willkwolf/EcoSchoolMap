@@ -15,7 +15,7 @@ export const translations = {
             cocktails: 'Cócteles de ideas',
             timeline: 'Línea de Tiempo',
             'learning-path': 'Guía de 4 pasos',
-            'map-reading-guide': 'Guía para leer el mapa',
+            'map-reading-guide': 'Marco Epistemológico',
             applications: 'Aplicación Práctica',
             'pedagogical-legend': 'Conclusión (Gafas de Análisis)'
         },
@@ -28,6 +28,9 @@ export const translations = {
             downloadFilenamePrefix: 'mapa-escuelas',
             toggleControlsShow: 'Personalizar Vista (Filtros)',
             toggleControlsHide: 'Ocultar Filtros ✖',
+            advancedControlsShow: 'Capas y Ajustes',
+            advancedControlsHide: 'Ocultar Ajustes ✖',
+            touchScrollHint: '💡 Usa 2 dedos para mover el mapa',
             viewMap: '🗺️ Vista Mapa',
             viewTable: '📊 Vista Tabla',
             startTour: '✨ Tour Guiado (60s)',
@@ -107,7 +110,7 @@ export const translations = {
             cocktails: 'Idea Cocktails',
             timeline: 'Timeline',
             'learning-path': '4-Step Guide',
-            'map-reading-guide': 'Map Reading Guide',
+            'map-reading-guide': 'Epistemological Framework',
             applications: 'Practical Application',
             'pedagogical-legend': 'Conclusion (Different Lenses)'
         },
@@ -120,6 +123,9 @@ export const translations = {
             downloadFilenamePrefix: 'economic-schools-map',
             toggleControlsShow: 'Customize View (Filters)',
             toggleControlsHide: 'Hide Filters ✖',
+            advancedControlsShow: 'Layers & Settings',
+            advancedControlsHide: 'Hide Settings ✖',
+            touchScrollHint: '💡 Use 2 fingers to pan/zoom map',
             viewMap: '🗺️ Map View',
             viewTable: '📊 Table View',
             startTour: '✨ Guided Tour (60s)',
@@ -283,85 +289,130 @@ export const translations = {
                 </div>
             `,
             visualization: `
-                <h2>Interactive Map</h2>
-                <div class="controls">
-                    <div class="control-group">
-                        <label for="preset-dropdown" title="Lenses of analysis alter school positions to show different economic perspectives">Lenses of Analysis (Presets):</label>
-                        <select id="preset-dropdown">
-                            <option value="base" selected>Balanced (Academic)</option>
-                            <option value="state-emphasis">State Emphasis</option>
-                            <option value="equity-emphasis">Equity Emphasis</option>
-                            <option value="market-emphasis">Market Emphasis</option>
-                            <option value="growth-emphasis">Growth Emphasis</option>
-                            <option value="historical-emphasis">Historical Emphasis</option>
-                            <option value="pragmatic-emphasis">Pragmatic Emphasis</option>
-                        </select>
+                <div class="vis-header-toolbar">
+                    <h2>Interactive Map</h2>
+                    <div class="vis-toolbar-actions">
+                        <div id="exploration-counter" class="exploration-badge" title="Exploration progress">
+                            <span class="badge-icon">🎓</span>
+                            <span id="exploration-counter-text" class="badge-text">Discovered: 0 / 12 schools</span>
+                        </div>
+                        <button type="button" id="start-guided-tour-btn" class="tour-btn" title="Start animated tour through major schools">
+                            <span>✨ Guided Tour (60s)</span>
+                        </button>
+                        <div class="view-toggle-container" role="tablist" aria-label="Toggle visualization view">
+                            <button type="button" id="btn-view-map" class="view-toggle-btn active" role="tab" aria-selected="true">🗺️ Map View</button>
+                            <button type="button" id="btn-view-table" class="view-toggle-btn" role="tab" aria-selected="false">📊 Table View</button>
+                        </div>
                     </div>
-                    <div class="control-group">
-                        <label for="normalization-dropdown" title="Normalization methods change how values are represented on the map">Scale of Visualization:</label>
-                        <select id="normalization-dropdown">
-                            <option value="percentile" selected>Percentile (Well-distributed schools)</option>
-                            <option value="zscore">Z-Score (Centered on average)</option>
-                            <option value="minmax">Min-Max (Full Range)</option>
-                            <option value="none">Unnormalized (Raw position)</option>
-                        </select>
+                </div>
+
+                <!-- Mobile Controls Toggle Button -->
+                <button type="button" id="toggle-controls-btn" class="controls-toggle-btn" aria-expanded="false" aria-controls="map-controls">
+                    <svg class="btn-icon" viewBox="0 0 24 24" width="18" height="18">
+                        <path d="M3 17v2h6v-2H3zM3 5v2h10V5H3zm10 16v-2h8v-2h-8v-2h-2v6h2zM7 9v2H3v2h4v2h2V9H7zm14 4v-2H11v2h10zm-6-4h2V7h4V5h-4V3h-2v6z" fill="currentColor"/>
+                    </svg>
+                    <span class="toggle-text">Customize View (Filters)</span>
+                </button>
+
+                <!-- Controls -->
+                <div id="map-controls" class="controls">
+                    <div class="controls-primary-bar">
+                        <div class="control-group preset-group">
+                            <label for="preset-dropdown" title="Lenses of analysis alter school positions to show different economic perspectives">
+                                <span class="label-icon">🔍</span> Lenses of Analysis (Presets):
+                            </label>
+                            <select id="preset-dropdown">
+                                <option value="base" selected>Balanced (Academic)</option>
+                                <option value="state-emphasis">State Emphasis</option>
+                                <option value="equity-emphasis">Equity Emphasis</option>
+                                <option value="market-emphasis">Market Emphasis</option>
+                                <option value="growth-emphasis">Growth Emphasis</option>
+                                <option value="historical-emphasis">Historical Emphasis</option>
+                                <option value="pragmatic-emphasis">Pragmatic Emphasis</option>
+                            </select>
+                        </div>
+                        <div class="primary-controls-actions">
+                            <button type="button" id="toggle-advanced-controls-btn" class="advanced-toggle-btn" aria-expanded="false" aria-controls="advanced-controls-panel">
+                                <svg class="btn-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+                                    <path d="M3 17v2h6v-2H3zM3 5v2h10V5H3zm10 16v-2h8v-2h-8v-2h-2v6h2zM7 9v2H3v2h4v2h2V9H7zm14 4v-2H11v2h10zm-6-4h2V7h4V5h-4V3h-2v6z" fill="currentColor"/>
+                                </svg>
+                                <span class="btn-text">Layers & Settings</span>
+                                <svg class="btn-chevron" viewBox="0 0 20 20" width="14" height="14" aria-hidden="true">
+                                    <polyline points="5,7 10,12 15,7" stroke="currentColor" fill="none" stroke-width="2"/>
+                                </svg>
+                            </button>
+                        </div>
                     </div>
-                    <div class="control-group">
-                        <label title="Controls the visibility of historical transitions between schools">Historical Transitions:</label>
-                        <div class="checkbox-group">
-                            <label class="checkbox-label">
-                                <input type="checkbox" id="transition-muy_alta" checked>
-                                <span class="checkmark"></span>
-                                Very High Certainty
-                            </label>
-                            <label class="checkbox-label">
-                                <input type="checkbox" id="transition-alta" checked>
-                                <span class="checkmark"></span>
-                                High Certainty
-                            </label>
-                            <label class="checkbox-label">
-                                <input type="checkbox" id="transition-media" checked>
-                                <span class="checkmark"></span>
-                                Medium Certainty
-                            </label>
-                            <div class="checkbox-actions">
-                                <button type="button" id="select-all-transitions" class="checkbox-btn">Select All</button>
-                                <button type="button" id="deselect-all-transitions" class="checkbox-btn">Clear All</button>
+
+                    <!-- Secondary Controls Panel (Ajustes Avanzados) -->
+                    <div id="advanced-controls-panel" class="advanced-controls-panel">
+                        <div class="control-group">
+                            <label for="normalization-dropdown" title="Normalization methods change how values are represented on the map">Scale of Visualization:</label>
+                            <select id="normalization-dropdown">
+                                <option value="percentile" selected>Percentile (Well-distributed schools)</option>
+                                <option value="zscore">Z-Score (Centered on average)</option>
+                                <option value="minmax">Min-Max (Full Range)</option>
+                                <option value="none">Unnormalized (Raw position)</option>
+                            </select>
+                        </div>
+                        <div class="control-group">
+                            <label title="Controls the visibility of historical transitions between schools">Historical Transitions:</label>
+                            <div class="checkbox-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="transition-muy_alta" checked>
+                                    <span class="checkmark"></span>
+                                    Very High Certainty
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="transition-alta" checked>
+                                    <span class="checkmark"></span>
+                                    High Certainty
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="transition-media" checked>
+                                    <span class="checkmark"></span>
+                                    Medium Certainty
+                                </label>
+                                <div class="checkbox-actions">
+                                    <button type="button" id="select-all-transitions" class="checkbox-btn">Select All</button>
+                                    <button type="button" id="deselect-all-transitions" class="checkbox-btn">Clear All</button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="control-group">
-                        <label title="Controls whether node collisions are allowed. When enabled, light simulation forces reduce visual overlap.">Simulation Forces:</label>
-                        <div class="checkbox-group">
-                            <label class="checkbox-label">
-                                <input type="checkbox" id="collision-toggle">
-                                <span class="checkmark"></span>
-                                <span class="checkbox-label-text">Prevent Collisions</span>
-                            </label>
+                        <div class="control-group">
+                            <label title="Controls whether node collisions are allowed. When enabled, light simulation forces reduce visual overlap.">Simulation Forces:</label>
+                            <div class="checkbox-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="collision-toggle">
+                                    <span class="checkmark"></span>
+                                    <span class="checkbox-label-text">Prevent Collisions</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="control-group button-group">
+                            <button id="reset-zoom-btn" class="control-btn" title="Return to the initial map view">
+                                <svg class="btn-icon" viewBox="0 0 24 24" width="16" height="16">
+                                    <path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z" fill="currentColor"/>
+                                </svg>
+                                <span>Reset View</span>
+                            </button>
+                            <button id="download-png-btn" class="control-btn" title="Download the map as a PNG image">
+                                <svg class="btn-icon" viewBox="0 0 24 24" width="16" height="16">
+                                    <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" fill="currentColor"/>
+                                </svg>
+                                <span>Export Image</span>
+                            </button>
                         </div>
                     </div>
-                    <div class="control-group button-group">
-                        <button id="reset-zoom-btn" class="control-btn" title="Return to the initial map view">
-                            <svg class="btn-icon" viewBox="0 0 24 24" width="16" height="16">
-                                <path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z" fill="currentColor"/>
-                            </svg>
-                            <span>Reset View</span>
-                          </button>
-                          <button id="download-png-btn" class="control-btn" title="Download the map as a PNG image">
-                              <svg class="btn-icon" viewBox="0 0 24 24" width="16" height="16">
-                                  <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" fill="currentColor"/>
-                              </svg>
-                              <span>Export Image</span>
-                          </button>
-                      </div>
-                  </div>
-                  <div id="map-container" class="map-container">
-                      <div id="loading-indicator" class="loading-indicator" style="display: none;">
-                          <div class="spinner"></div>
-                          <p>Loading variant...</p>
-                      </div>
-                  </div>
-              `,
+                </div>
+                <div id="map-container" class="map-container">
+                    <div id="loading-indicator" class="loading-indicator" style="display: none;">
+                        <div class="spinner"></div>
+                        <p>Loading variant...</p>
+                    </div>
+                </div>
+                <div id="map-table-container" class="map-table-container" style="display: none;"></div>
+            `,
             cocktails: `
                 <h2>Idea Cocktails: Combining Schools to Solve Real Problems (Synergies)</h2>
                 <div class="intro-text">
@@ -381,19 +432,129 @@ export const translations = {
                     <button class="tab-btn" data-tab="sostenibilidad" tabindex="0">Sustainability and Limits</button>
                 </div>
                 <div class="cocktails-grid">
-                    <div class="cocktail-card" data-category="capitalismo"><div class="cocktail-number">1</div><h4>Vitality and visibility of capitalism</h4><p class="cocktail-schools"><strong>Schools:</strong> Classical, Marxist, Schumpeterian, Institutionalist</p></div>
-                    <div class="cocktail-card" data-category="gobernanza"><div class="cocktail-number">2</div><h4>Defense of the free market</h4><p class="cocktail-schools"><strong>Schools:</strong> Classical, Austrian, Neoclassical</p></div>
-                    <div class="cocktail-card" data-category="sociedad"><div class="cocktail-number">3</div><h4>Conceptualizing the individual</h4><p class="cocktail-schools"><strong>Schools:</strong> Neoclassical, Austrian, Behavioral</p></div>
-                    <div class="cocktail-card" data-category="gobernanza"><div class="cocktail-number">4</div><h4>The need for state intervention</h4><p class="cocktail-schools"><strong>Schools:</strong> Neoclassical, Developmentalist, Keynesian</p></div>
-                    <div class="cocktail-card" data-category="sociedad"><div class="cocktail-number">5</div><h4>Theories of groups and classes</h4><p class="cocktail-schools"><strong>Schools:</strong> Classical, Marxist, Keynesian, Institutionalist</p></div>
-                    <div class="cocktail-card" data-category="sostenibilidad"><div class="cocktail-number">6</div><h4>Economy beyond markets</h4><p class="cocktail-schools"><strong>Schools:</strong> Marxist, Institutionalist, Behavioral</p></div>
-                    <div class="cocktail-card" data-category="capitalismo"><div class="cocktail-number">7</div><h4>Complete economic systems</h4><p class="cocktail-schools"><strong>Schools:</strong> Marxist, Developmentalist, Keynesian, Institutionalist</p></div>
-                    <div class="cocktail-card" data-category="capitalismo"><div class="cocktail-number">8</div><h4>Technological development and productivity</h4><p class="cocktail-schools"><strong>Schools:</strong> Classical, Marxist, Developmentalist, Schumpeterian</p></div>
-                    <div class="cocktail-card" data-category="sociedad"><div class="cocktail-number">9</div><h4>Interaction between individuals and society</h4><p class="cocktail-schools"><strong>Schools:</strong> Austrian, Neoclassical, Institutionalist, Behavioral</p></div>
-                    <div class="cocktail-card" data-category="capitalismo"><div class="cocktail-number">10</div><h4>Corporations and how they work</h4><p class="cocktail-schools"><strong>Schools:</strong> Schumpeterian, Institutionalist, Behavioral</p></div>
-                    <div class="cocktail-card" data-category="gobernanza"><div class="cocktail-number">11</div><h4>Unemployment and recession</h4><p class="cocktail-schools"><strong>Schools:</strong> Classical, Keynesian</p></div>
-                    <div class="cocktail-card" data-category="sociedad"><div class="cocktail-number">12</div><h4>Care economy and gender inequality</h4><p class="cocktail-schools"><strong>Schools:</strong> Feminist, Marxist, Keynesian, Behavioral</p></div>
-                    <div class="cocktail-card" data-category="sostenibilidad"><div class="cocktail-number">13</div><h4>Sustainability and planetary boundaries</h4><p class="cocktail-schools"><strong>Schools:</strong> Ecological, Developmentalist, Keynesian, Institutionalist</p></div>
+                    <div class="cocktail-card" data-category="capitalismo">
+                        <div class="cocktail-number">1</div>
+                        <h4>Vitality and visibility of capitalism</h4>
+                        <div class="cocktail-pills" aria-label="Combined schools">
+                            <span class="school-pill" style="--pill-color: #E69F00;"><span class="pill-dot" style="background-color: #E69F00;"></span>Classical</span>
+                            <span class="school-pill" style="--pill-color: #D55E00;"><span class="pill-dot" style="background-color: #D55E00;"></span>Marxist</span>
+                            <span class="school-pill" style="--pill-color: #882255;"><span class="pill-dot" style="background-color: #882255;"></span>Schumpeterian</span>
+                            <span class="school-pill" style="--pill-color: #0072B2;"><span class="pill-dot" style="background-color: #0072B2;"></span>Institutionalist</span>
+                        </div>
+                    </div>
+                    <div class="cocktail-card" data-category="gobernanza">
+                        <div class="cocktail-number">2</div>
+                        <h4>Defense of the free market</h4>
+                        <div class="cocktail-pills" aria-label="Combined schools">
+                            <span class="school-pill" style="--pill-color: #E69F00;"><span class="pill-dot" style="background-color: #E69F00;"></span>Classical</span>
+                            <span class="school-pill" style="--pill-color: #009E73;"><span class="pill-dot" style="background-color: #009E73;"></span>Austrian</span>
+                            <span class="school-pill" style="--pill-color: #56B4E9;"><span class="pill-dot" style="background-color: #56B4E9;"></span>Neoclassical</span>
+                        </div>
+                    </div>
+                    <div class="cocktail-card" data-category="sociedad">
+                        <div class="cocktail-number">3</div>
+                        <h4>Conceptualizing the individual</h4>
+                        <div class="cocktail-pills" aria-label="Combined schools">
+                            <span class="school-pill" style="--pill-color: #56B4E9;"><span class="pill-dot" style="background-color: #56B4E9;"></span>Neoclassical</span>
+                            <span class="school-pill" style="--pill-color: #009E73;"><span class="pill-dot" style="background-color: #009E73;"></span>Austrian</span>
+                            <span class="school-pill" style="--pill-color: #44AA99;"><span class="pill-dot" style="background-color: #44AA99;"></span>Behavioral</span>
+                        </div>
+                    </div>
+                    <div class="cocktail-card" data-category="gobernanza">
+                        <div class="cocktail-number">4</div>
+                        <h4>The need for state intervention</h4>
+                        <div class="cocktail-pills" aria-label="Combined schools">
+                            <span class="school-pill" style="--pill-color: #56B4E9;"><span class="pill-dot" style="background-color: #56B4E9;"></span>Neoclassical</span>
+                            <span class="school-pill" style="--pill-color: #CC79A7;"><span class="pill-dot" style="background-color: #CC79A7;"></span>Developmentalist</span>
+                            <span class="school-pill" style="--pill-color: #D4AC0D;"><span class="pill-dot" style="background-color: #D4AC0D;"></span>Keynesian</span>
+                        </div>
+                    </div>
+                    <div class="cocktail-card" data-category="sociedad">
+                        <div class="cocktail-number">5</div>
+                        <h4>Theories of groups and classes</h4>
+                        <div class="cocktail-pills" aria-label="Combined schools">
+                            <span class="school-pill" style="--pill-color: #E69F00;"><span class="pill-dot" style="background-color: #E69F00;"></span>Classical</span>
+                            <span class="school-pill" style="--pill-color: #D55E00;"><span class="pill-dot" style="background-color: #D55E00;"></span>Marxist</span>
+                            <span class="school-pill" style="--pill-color: #D4AC0D;"><span class="pill-dot" style="background-color: #D4AC0D;"></span>Keynesian</span>
+                            <span class="school-pill" style="--pill-color: #0072B2;"><span class="pill-dot" style="background-color: #0072B2;"></span>Institutionalist</span>
+                        </div>
+                    </div>
+                    <div class="cocktail-card" data-category="sostenibilidad">
+                        <div class="cocktail-number">6</div>
+                        <h4>Economy beyond markets</h4>
+                        <div class="cocktail-pills" aria-label="Combined schools">
+                            <span class="school-pill" style="--pill-color: #D55E00;"><span class="pill-dot" style="background-color: #D55E00;"></span>Marxist</span>
+                            <span class="school-pill" style="--pill-color: #0072B2;"><span class="pill-dot" style="background-color: #0072B2;"></span>Institutionalist</span>
+                            <span class="school-pill" style="--pill-color: #44AA99;"><span class="pill-dot" style="background-color: #44AA99;"></span>Behavioral</span>
+                        </div>
+                    </div>
+                    <div class="cocktail-card" data-category="capitalismo">
+                        <div class="cocktail-number">7</div>
+                        <h4>Complete economic systems</h4>
+                        <div class="cocktail-pills" aria-label="Combined schools">
+                            <span class="school-pill" style="--pill-color: #D55E00;"><span class="pill-dot" style="background-color: #D55E00;"></span>Marxist</span>
+                            <span class="school-pill" style="--pill-color: #CC79A7;"><span class="pill-dot" style="background-color: #CC79A7;"></span>Developmentalist</span>
+                            <span class="school-pill" style="--pill-color: #D4AC0D;"><span class="pill-dot" style="background-color: #D4AC0D;"></span>Keynesian</span>
+                            <span class="school-pill" style="--pill-color: #0072B2;"><span class="pill-dot" style="background-color: #0072B2;"></span>Institutionalist</span>
+                        </div>
+                    </div>
+                    <div class="cocktail-card" data-category="capitalismo">
+                        <div class="cocktail-number">8</div>
+                        <h4>Technological development and productivity</h4>
+                        <div class="cocktail-pills" aria-label="Combined schools">
+                            <span class="school-pill" style="--pill-color: #E69F00;"><span class="pill-dot" style="background-color: #E69F00;"></span>Classical</span>
+                            <span class="school-pill" style="--pill-color: #D55E00;"><span class="pill-dot" style="background-color: #D55E00;"></span>Marxist</span>
+                            <span class="school-pill" style="--pill-color: #CC79A7;"><span class="pill-dot" style="background-color: #CC79A7;"></span>Developmentalist</span>
+                            <span class="school-pill" style="--pill-color: #882255;"><span class="pill-dot" style="background-color: #882255;"></span>Schumpeterian</span>
+                        </div>
+                    </div>
+                    <div class="cocktail-card" data-category="sociedad">
+                        <div class="cocktail-number">9</div>
+                        <h4>Interaction between individuals and society</h4>
+                        <div class="cocktail-pills" aria-label="Combined schools">
+                            <span class="school-pill" style="--pill-color: #009E73;"><span class="pill-dot" style="background-color: #009E73;"></span>Austrian</span>
+                            <span class="school-pill" style="--pill-color: #56B4E9;"><span class="pill-dot" style="background-color: #56B4E9;"></span>Neoclassical</span>
+                            <span class="school-pill" style="--pill-color: #0072B2;"><span class="pill-dot" style="background-color: #0072B2;"></span>Institutionalist</span>
+                            <span class="school-pill" style="--pill-color: #44AA99;"><span class="pill-dot" style="background-color: #44AA99;"></span>Behavioral</span>
+                        </div>
+                    </div>
+                    <div class="cocktail-card" data-category="capitalismo">
+                        <div class="cocktail-number">10</div>
+                        <h4>Corporations and how they work</h4>
+                        <div class="cocktail-pills" aria-label="Combined schools">
+                            <span class="school-pill" style="--pill-color: #882255;"><span class="pill-dot" style="background-color: #882255;"></span>Schumpeterian</span>
+                            <span class="school-pill" style="--pill-color: #0072B2;"><span class="pill-dot" style="background-color: #0072B2;"></span>Institutionalist</span>
+                            <span class="school-pill" style="--pill-color: #44AA99;"><span class="pill-dot" style="background-color: #44AA99;"></span>Behavioral</span>
+                        </div>
+                    </div>
+                    <div class="cocktail-card" data-category="gobernanza">
+                        <div class="cocktail-number">11</div>
+                        <h4>Unemployment and recession</h4>
+                        <div class="cocktail-pills" aria-label="Combined schools">
+                            <span class="school-pill" style="--pill-color: #E69F00;"><span class="pill-dot" style="background-color: #E69F00;"></span>Classical</span>
+                            <span class="school-pill" style="--pill-color: #D4AC0D;"><span class="pill-dot" style="background-color: #D4AC0D;"></span>Keynesian</span>
+                        </div>
+                    </div>
+                    <div class="cocktail-card" data-category="sociedad">
+                        <div class="cocktail-number">12</div>
+                        <h4>Care economy and gender inequality</h4>
+                        <div class="cocktail-pills" aria-label="Combined schools">
+                            <span class="school-pill" style="--pill-color: #AA4499;"><span class="pill-dot" style="background-color: #AA4499;"></span>Feminist</span>
+                            <span class="school-pill" style="--pill-color: #D55E00;"><span class="pill-dot" style="background-color: #D55E00;"></span>Marxist</span>
+                            <span class="school-pill" style="--pill-color: #D4AC0D;"><span class="pill-dot" style="background-color: #D4AC0D;"></span>Keynesian</span>
+                            <span class="school-pill" style="--pill-color: #44AA99;"><span class="pill-dot" style="background-color: #44AA99;"></span>Behavioral</span>
+                        </div>
+                    </div>
+                    <div class="cocktail-card" data-category="sostenibilidad">
+                        <div class="cocktail-number">13</div>
+                        <h4>Sustainability and planetary boundaries</h4>
+                        <div class="cocktail-pills" aria-label="Combined schools">
+                            <span class="school-pill" style="--pill-color: #117733;"><span class="pill-dot" style="background-color: #117733;"></span>Ecological</span>
+                            <span class="school-pill" style="--pill-color: #CC79A7;"><span class="pill-dot" style="background-color: #CC79A7;"></span>Developmentalist</span>
+                            <span class="school-pill" style="--pill-color: #D4AC0D;"><span class="pill-dot" style="background-color: #D4AC0D;"></span>Keynesian</span>
+                            <span class="school-pill" style="--pill-color: #0072B2;"><span class="pill-dot" style="background-color: #0072B2;"></span>Institutionalist</span>
+                        </div>
+                    </div>
                 </div>
             `,
             barCalloutBanner: `
@@ -453,7 +614,7 @@ export const translations = {
             mapReadingGuide: `
                 <div class="split-layout">
                     <div class="split-sidebar">
-                        <h2>Reading Guide</h2>
+                        <h2>Epistemological Framework</h2>
                         <div class="sidebar-line"></div>
                         <div class="intro-text">
                             <p>

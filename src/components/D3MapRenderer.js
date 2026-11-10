@@ -83,13 +83,23 @@ export class D3MapRenderer {
         // Create zoom group (all content will be rendered here)
         this.zoomGroup = this.svg.append('g').attr('class', 'zoom-group');
 
-        // Setup zoom behavior
+        // Setup zoom behavior with mobile touch-scroll preservation
         this.zoom = d3.zoom()
             .scaleExtent([0.5, 4]) // Min and max zoom
             .filter((event) => {
-                // Allow touch events and prevent default browser gestures from interfering
-                // Prevent zoom on double-click (better for mobile)
-                return !event.button && event.type !== 'dblclick';
+                // Prevent zoom on double-click
+                if (event.type === 'dblclick') return false;
+
+                // On touch devices: only allow zoom/pan if 2 or more touches (pinch/two-finger pan)
+                // Single touch is ignored so page scrolling remains 100% fluid
+                if (event.type.startsWith('touch')) {
+                    if (event.touches && event.touches.length < 2) {
+                        return false;
+                    }
+                }
+
+                // Desktop: only left mouse button
+                return !event.button;
             })
             .on('zoom', (event) => {
                 this.zoomGroup.attr('transform', event.transform);
@@ -97,6 +107,24 @@ export class D3MapRenderer {
 
         this.svg.call(this.zoom)
             .on('dblclick.zoom', null); // Disable double-click zoom for better mobile UX
+
+        // Touch guidance hint for single-finger touch
+        let touchHintTimer = null;
+        this.container.on('touchstart', (event) => {
+            if (event.touches && event.touches.length === 1) {
+                let hint = this.container.select('.touch-scroll-hint');
+                if (hint.empty()) {
+                    hint = this.container.append('div')
+                        .attr('class', 'touch-scroll-hint')
+                        .text(t('ui.touchScrollHint') || '💡 Usa 2 dedos para mover el mapa');
+                }
+                hint.classed('is-visible', true);
+                clearTimeout(touchHintTimer);
+                touchHintTimer = setTimeout(() => {
+                    hint.classed('is-visible', false);
+                }, 1800);
+            }
+        });
 
         // Create scales
         const scales = createScales(this.options.width, this.options.height, {

@@ -96,6 +96,23 @@ function setupVariantControls() {
         });
     }
 
+    // Advanced Controls Panel Toggle (Desktop & Mobile Tier 2)
+    const toggleAdvancedBtn = document.getElementById('toggle-advanced-controls-btn');
+    const advancedPanel = document.getElementById('advanced-controls-panel');
+
+    if (toggleAdvancedBtn && advancedPanel) {
+        toggleAdvancedBtn.addEventListener('click', () => {
+            const isOpen = advancedPanel.classList.toggle('is-open');
+            toggleAdvancedBtn.classList.toggle('active', isOpen);
+            toggleAdvancedBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+
+            const btnText = toggleAdvancedBtn.querySelector('.btn-text');
+            if (btnText) {
+                btnText.textContent = isOpen ? t('ui.advancedControlsHide') : t('ui.advancedControlsShow');
+            }
+        });
+    }
+
     // Transition checkboxes
     const transitionCheckboxes = [
         document.getElementById('transition-muy_alta'),

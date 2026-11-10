@@ -34,8 +34,17 @@ export class TooltipManager {
             .style('opacity', 0)
             .style('display', 'none')
             .style('position', 'absolute')
-            .style('pointer-events', 'none')
             .style('z-index', '100000');
+
+        // Dismiss tooltip on tap outside (Mobile ergonomics)
+        this.touchOutsideHandler = (e) => {
+            if (!this.tooltip || this.tooltip.style('display') === 'none') return;
+            const target = e.target;
+            if (!target.closest('.node') && !target.closest('.transition-arrow') && !target.closest('.custom-tooltip')) {
+                this.hide();
+            }
+        };
+        document.addEventListener('touchstart', this.touchOutsideHandler, { passive: true });
 
         console.log('✅ TooltipManager initialized');
     }
@@ -110,6 +119,15 @@ export class TooltipManager {
             .style('display', 'block')
             .style('opacity', 0);
 
+        const closeBtn = this.tooltip.select('.tooltip-close-btn');
+        if (!closeBtn.empty()) {
+            closeBtn.on('click', () => this.hide());
+            closeBtn.on('touchend', (e) => {
+                e.preventDefault();
+                this.hide();
+            });
+        }
+
         this.positionTooltip(event);
 
         this.tooltip
@@ -130,6 +148,15 @@ export class TooltipManager {
             .html(html)
             .style('display', 'block')
             .style('opacity', 0);
+
+        const closeBtn = this.tooltip.select('.tooltip-close-btn');
+        if (!closeBtn.empty()) {
+            closeBtn.on('click', () => this.hide());
+            closeBtn.on('touchend', (e) => {
+                e.preventDefault();
+                this.hide();
+            });
+        }
 
         this.positionTooltip(event);
 
@@ -183,8 +210,11 @@ export class TooltipManager {
 
         return `
             <div class="tooltip-header">
-                <h3>${getNodeDisplayName(node)}</h3>
-                <span class="categoria">${getCategoryLabel(node.categoria)}</span>
+                <div class="tooltip-title-area">
+                    <h3>${getNodeDisplayName(node)}</h3>
+                    <span class="categoria">${getCategoryLabel(node.categoria)}</span>
+                </div>
+                <button type="button" class="tooltip-close-btn" aria-label="Cerrar">✕</button>
             </div>
             <div class="tooltip-body">
                 <p><strong>${t('tooltip.year')}:</strong> ${node.año_origen || t('ui.notAvailable')}</p>
@@ -213,8 +243,11 @@ export class TooltipManager {
 
         return `
             <div class="tooltip-header">
-                <h3>${getTransitionEvent(transition)}</h3>
-                <span class="categoria">${t('tooltip.year')}: ${transition.año}</span>
+                <div class="tooltip-title-area">
+                    <h3>${getTransitionEvent(transition)}</h3>
+                    <span class="categoria">${t('tooltip.year')}: ${transition.año}</span>
+                </div>
+                <button type="button" class="tooltip-close-btn" aria-label="Cerrar">✕</button>
             </div>
             <div class="tooltip-body">
                 <p>${getTransitionDescription(transition)}</p>
@@ -256,6 +289,10 @@ export class TooltipManager {
      * Destroy tooltip (cleanup)
      */
     destroy() {
+        if (this.touchOutsideHandler) {
+            document.removeEventListener('touchstart', this.touchOutsideHandler);
+            this.touchOutsideHandler = null;
+        }
         if (this.tooltip) {
             this.tooltip.remove();
             this.tooltip = null;
