@@ -1,9 +1,25 @@
 # 🎓 Cartografía Dinámica de la Economía Política: Un Ensayo Interactivo sobre la Taxonomía Pluralista de Ha-Joon Chang
 
 > **Tipo de Documento:** Ensayo Académico y Memoria Metodológica  
+> **Identificador:** POL-ED-ART-001  
 > **Autor:** William Camilo Artunduaga Viana (`@willkwolf`)  
-> **Versión del Ensayo:** 2.0.0  
+> **Versión:** 2.0.0  
+> **Licencia:** [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)  
 > **Cita Sugerida (APA 7):** Artunduaga Viana, W. C. (2025). *Cartografía Dinámica de la Economía Política: Un Ensayo Interactivo sobre la Taxonomía Pluralista de Ha-Joon Chang*. EcoSchoolMap Research Repository. https://willkwolf.github.io/EcoSchoolMap/
+
+---
+
+## Tabla de Contenidos
+
+- [Resumen / Abstract](#resumen--abstract)
+- [1. Introducción: Monismo Hegemónico y la Urgencia del Pluralismo](#1-introducción-monismo-hegemónico-y-la-urgencia-del-pluralismo)
+- [2. Marco Metodológico: La Reducción Dimensional de la Weltanschauung](#2-marco-metodológico-la-reducción-dimensional-de-la-weltanschauung)
+- [3. Las Tensiones Estructurales del Plano Cartesiano](#3-las-tensiones-estructurales-del-plano-cartesiano)
+- [4. Ontología de la Realizabilidad: Espacio Conceptual vs. Espacio Factible](#4-ontología-de-la-realizabilidad-espacio-conceptual-vs-espacio-factible)
+- [5. De Plotly a D3.js: La Retórica Procedural en la Educación Económica](#5-de-plotly-a-d3js-la-retórica-procedural-en-la-educación-económica)
+- [6. Criterios de Gobernanza y Validación Empírica](#6-criterios-de-gobernanza-y-validación-empírica)
+- [7. Conclusiones y Rutas de Investigación Futuras](#7-conclusiones-y-rutas-de-investigación-futuras)
+- [8. Referencias Bibliográficas y Bloque de Citación](#8-referencias-bibliográficas-y-bloque-de-citación)
 
 ---
 
@@ -37,6 +53,37 @@ Cada tradición del pensamiento económico posee una *Weltanschauung* (cosmovisi
 4. **Ámbito Económico Principal:** De la oferta y producción al intercambio de mercado o la redistribución.
 5. **Motor del Cambio:** De la acumulación ciega de capital a la innovación tecnológica, las instituciones o la lucha social.
 6. **Políticas Preferidas:** Del *laissez-faire* a la planificación estatal deliberada.
+
+```mermaid
+flowchart TD
+    subgraph D6["Espacio Cualitativo Multidimensional (D^6)"]
+        D1["Concepción Economía"]
+        D2["Concepción Humano"]
+        D3["Naturaleza Mundo"]
+        D4["Ámbito Económico"]
+        D5["Motor de Cambio"]
+        D6_node["Políticas Preferidas"]
+    end
+
+    subgraph W["Matriz de Ponderación (Presets)"]
+        W1["Balanced / State / Equity / Growth"]
+    end
+
+    subgraph Reduccion["Proyección Cartesiana Continua"]
+        F_X["Posición X = f(Políticas, Motor, Economía) ∈ [-1, 1]"]
+        F_Y["Posición Y = f(Ámbito, Humano, Mundo) ∈ [-1, 1]"]
+    end
+
+    subgraph Factibilidad["Espacio Factible Real (F)"]
+        Bio["Frontera Biofísica (Georgescu-Roegen / Daly)"]
+        CAS["Topología No Lineal CAS (Brian Arthur)"]
+        Raworth["Donut Seguro y Justo (Kate Raworth)"]
+    end
+
+    D6 --> Reduccion
+    W --> Reduccion
+    Reduccion --> Factibilidad
+```
 
 La proyección en dos dimensiones opera como un **algoritmo de reducción dimensional supervisado**:
 
@@ -83,7 +130,23 @@ Al interactuar con el mapa:
 
 ---
 
-## 6. Conclusiones y Rutas de Investigación Futuras
+## 6. Criterios de Gobernanza y Validación Empírica
+
+Para preservar el rigor falibilista del artefacto, se establecen criterios observables bajo sintaxis *Given-When-Then*:
+
+* **Caso 1: Demarcación Nodo vs. Capa Transversal**
+  * **Given:** Un marco analítico o corriente económica candidata a ingresar al mapa.
+  * **When:** Se evalúa si prescribe simultáneamente un mecanismo institucional de coordinación (Eje X) y una función objetivo socioeconómica (Eje Y).
+  * **Then:** Si define ambos, se incorpora como nodo $R_i$; si actúa como restricción de escala biofísica o regla dinámica global, se cataloga como capa transversal y no se grafica como punto cartesiano estático.
+
+* **Caso 2: Invariante de Reducción Dimensional**
+  * **Given:** Los 6 descriptores normalizados en $[0.0, 1.0]$ de una escuela $i$.
+  * **When:** Se ejecuta el motor de scoring para cualquier preset de pesos $W$.
+  * **Then:** La posición resultante $(X, Y)$ debe estar estrictamente acotada en $[-1.0, 1.0]^2$ y reproducir fielmente la orientación ontológica de la escuela sin colapso a coordenadas nulas degeneradas.
+
+---
+
+## 7. Conclusiones y Rutas de Investigación Futuras
 
 `EcoSchoolMap` demuestra que la visualización de datos moderna puede actuar como un puente riguroso entre la epistemología de la economía política y la pedagogía digital pública. Al estructurar la base de datos bajo contratos formales de gobierno y esquemas JSON inmutables, el artefacto queda preparado para evolucionar hacia:
 
@@ -93,7 +156,9 @@ Al interactuar con el mapa:
 
 ---
 
-## 7. Referencias Bibliográficas (APA 7)
+## 8. Referencias Bibliográficas y Bloque de Citación
+
+### 8.1 Referencias Académicas (APA 7)
 
 * Arthur, W. B. (2014). *Complexity and the Economy*. Oxford University Press.
 * Bogost, I. (2007). *Persuasive Games: The Expressive Power of Videogames*. MIT Press.
@@ -105,5 +170,21 @@ Al interactuar con el mapa:
 * Keynes, J. M. (1936). *The General Theory of Employment, Interest and Money*. Macmillan.
 * Meadows, D. H. (2008). *Thinking in Systems: A Primer*. Chelsea Green Publishing.
 * Raworth, K. (2017). *Doughnut Economics: Seven Ways to Think Like a 21st-Century Economist*. Chelsea Green Publishing.
-* Rockström, J., et al. (2009). Planetary Boundaries: Exploring the Safe Operating Space for Humanity. *Ecology and Society*, 14(2), 32.
+* Rockström, J., Steffen, W., Noone, K., Persson, Å., Chapin, F. S., Lambin, E. F., ... & Foley, J. A. (2009). Planetary Boundaries: Exploring the Safe Operating Space for Humanity. *Ecology and Society*, 14(2), 32.
 * Veblen, T. (1899). *The Theory of the Leisure Class*. Macmillan.
+
+### 8.2 Bloque de Citación Interoperable (BibTeX)
+
+```bibtex
+@article{Artunduaga_EcoSchoolMap_Essay_2025,
+  author    = {Artunduaga Viana, William Camilo},
+  title     = {{Cartografía Dinámica de la Economía Política: Un Ensayo Interactivo sobre la Taxonomía Pluralista de Ha-Joon Chang}},
+  journal   = {EcoSchoolMap Research Monograph},
+  year      = {2025},
+  volume    = {2},
+  number    = {1},
+  pages     = {1--12},
+  publisher = {GitHub Open Access},
+  url       = {https://willkwolf.github.io/EcoSchoolMap/docs/conceptual/04_ensayo_academico.md}
+}
+```
