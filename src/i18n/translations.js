@@ -191,6 +191,10 @@ export const translations = {
         html: {
             hero: `
                 <div class="hero-topbar">
+                    <div class="hero-badge">
+                        <span class="badge-dot"></span>
+                        <span class="badge-text">Ha-Joon Chang • Heterodox Taxonomy (2015)</span>
+                    </div>
                     <div class="language-switcher">
                         <label for="language-selector">Language</label>
                         <select id="language-selector" aria-label="Select language">
@@ -205,86 +209,181 @@ export const translations = {
                     Explore the 12 major schools of economics in a two-dimensional map that shows how the economy is organized (the role of the state vs. the free market) and what goals society prioritizes (growth vs. equity and the planet).
                 </p>
                 <div class="hero-actions">
-                    <a href="#visualization" class="btn btn-primary">Explore the Map</a>
-                    <a href="https://github.com/willkwolf/EcoSchoolMap" class="btn btn-secondary" target="_blank" rel="noopener">View on GitHub</a>
+                    <a href="#visualization" class="btn btn-primary">
+                        <svg class="btn-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polygon points="12 8 8 12 12 16 12 8"/></svg>
+                        Explore the Map
+                    </a>
+                    <a href="https://github.com/willkwolf/EcoSchoolMap" class="btn btn-secondary" target="_blank" rel="noopener">
+                        <svg class="btn-icon" viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                        View on GitHub
+                    </a>
                 </div>
-                <div class="scroll-indicator">
+
+                <!-- Modern Metric Bento Strip -->
+                <div class="hero-stats-strip">
+                    <div class="stat-item">
+                        <span class="stat-number">12</span>
+                        <span class="stat-label">Schools Analyzed</span>
+                    </div>
+                    <div class="stat-divider" aria-hidden="true"></div>
+                    <div class="stat-item">
+                        <span class="stat-number">2D</span>
+                        <span class="stat-label">Epistemic Plane</span>
+                    </div>
+                    <div class="stat-divider" aria-hidden="true"></div>
+                    <div class="stat-item">
+                        <span class="stat-number">13</span>
+                        <span class="stat-label">Idea Cocktails</span>
+                    </div>
+                    <div class="stat-divider" aria-hidden="true"></div>
+                    <div class="stat-item">
+                        <span class="stat-number">32</span>
+                        <span class="stat-label">Weight Variants</span>
+                    </div>
+                </div>
+
+                <a href="#guide" id="hero-scroll-btn" class="hero-scroll-indicator" aria-label="Scroll to explore the reading guide">
                     <span>Scroll to explore</span>
-                    <svg width="20" height="20" viewBox="0 0 20 20">
-                        <polyline points="5,7 10,12 15,7" stroke="currentColor" fill="none" stroke-width="2"></polyline>
+                    <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true">
+                        <polyline points="5,7 10,12 15,7" stroke="currentColor" fill="none" stroke-width="2"/>
                     </svg>
-                </div>
+                </a>
             `,
             guide: `
-                <h2>Reading Guide: How to Interpret the Map</h2>
-                <div class="guide-grid">
-                    <div class="guide-card">
+                <div class="section-heading-centered">
+                    <span class="section-eyebrow">Theoretical Foundations</span>
+                    <h2>Reading Guide: How to Interpret the Map</h2>
+                    <p class="section-subheadline">Learn to decode the two epistemological axes, the four quadrants, and historical dynamics structuring economic paradigms.</p>
+                </div>
+                <div class="guide-grid bento-guide-grid">
+                    <!-- Card 1: Axes -->
+                    <div class="guide-card bento-card">
+                        <div class="card-top-meta">
+                            <span class="card-eyebrow">Coordinate Axes</span>
+                            <span class="card-icon-badge" aria-hidden="true">🧭</span>
+                        </div>
                         <h3>Map Axes</h3>
-                        <p><strong>How is it organized? (Horizontal Axis X):</strong></p>
-                        <ul>
-                            <li>← Left: Limited State (Trust in the Free Market)</li>
-                            <li>→ Right: Strong State (Planning and State Control)</li>
-                        </ul>
-                        <p><strong>What is prioritized? (Vertical Axis Y):</strong></p>
-                        <ul>
-                            <li>↑ Top: Equity and Sustainability (better distribution and nature protection)</li>
-                            <li>↓ Bottom: Growth and Productivity (producing more and accumulating capital)</li>
-                        </ul>
-                        <p class="axis-subtext">Okun's Balance: The trade-off between producing more (efficiency) and sharing better (equity)</p>
+                        <div class="axis-guide-block">
+                            <div class="axis-block-label">How is it organized? (Horizontal Axis X)</div>
+                            <div class="direction-chips">
+                                <span class="dir-chip dir-left">← Free Market (Limited State)</span>
+                                <span class="dir-chip dir-right">Strong State (Planning) →</span>
+                            </div>
+                        </div>
+                        <div class="axis-guide-block">
+                            <div class="axis-block-label">What is prioritized? (Vertical Axis Y)</div>
+                            <div class="direction-chips">
+                                <span class="dir-chip dir-up">↑ Equity & Sustainability (Sharing & Nature)</span>
+                                <span class="dir-chip dir-down">↓ Growth & Productivity (Capital)</span>
+                            </div>
+                        </div>
+                        <p class="axis-subtext">Okun's Balance: The classic trade-off between producing more (efficiency) and sharing better (equity).</p>
                     </div>
-                    <div class="guide-card">
+
+                    <!-- Card 2: Quadrants -->
+                    <div class="guide-card bento-card">
+                        <div class="card-top-meta">
+                            <span class="card-eyebrow">2D Cartography</span>
+                            <span class="card-icon-badge" aria-hidden="true">🗺️</span>
+                        </div>
                         <h3>Map Zones (Quadrants)</h3>
-                        <p>The map is divided into 4 main zones or quadrants:</p>
-                        <ul>
-                            <li><strong>Q1 (Market + Equity):</strong> The market operates freely, but with a focus on social justice and ecological care.</li>
-                            <li><strong>Q2 (State + Equity):</strong> The government directs the economy seeking equality and protecting the planet.</li>
-                            <li><strong>Q3 (Market + Growth):</strong> The market operates without barriers, focusing on producing more wealth.</li>
-                            <li><strong>Q4 (State + Growth):</strong> The government intervenes to accelerate industrialization and national production.</li>
-                        </ul>
+                        <div class="mini-quadrant-matrix">
+                            <div class="mini-q mini-q2">
+                                <span class="mini-q-badge">Q2</span>
+                                <div class="mini-q-title">State + Equity</div>
+                                <div class="mini-q-desc">Social planning and ecology</div>
+                            </div>
+                            <div class="mini-q mini-q1">
+                                <span class="mini-q-badge">Q1</span>
+                                <div class="mini-q-title">Market + Equity</div>
+                                <div class="mini-q-desc">Liberty with distributive justice</div>
+                            </div>
+                            <div class="mini-q mini-q4">
+                                <span class="mini-q-badge">Q4</span>
+                                <div class="mini-q-title">State + Growth</div>
+                                <div class="mini-q-desc">Industrialization & national development</div>
+                            </div>
+                            <div class="mini-q mini-q3">
+                                <span class="mini-q-badge">Q3</span>
+                                <div class="mini-q-title">Market + Growth</div>
+                                <div class="mini-q-desc">Accumulation & market efficiency</div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="guide-card">
+
+                    <!-- Card 3: Transitions -->
+                    <div class="guide-card bento-card">
+                        <div class="card-top-meta">
+                            <span class="card-eyebrow">Temporal Dynamics</span>
+                            <span class="card-icon-badge" aria-hidden="true">⏳</span>
+                        </div>
                         <h3>Historical Transitions</h3>
-                        <p>The arrows represent historical shifts and jumps in theory:</p>
-                        <ul>
-                            <li><strong>Solid line:</strong> High historical certainty (very clear sources)</li>
-                            <li><strong>Dotted line:</strong> Medium certainty</li>
-                            <li><strong>Dashed line:</strong> Low certainty</li>
-                        </ul>
-                        <p>Each path includes its trigger event and year.</p>
+                        <p>The arrows map paradigm shifts and intellectual disputes across modern history:</p>
+                        <div class="transition-legend-list">
+                            <div class="legend-row">
+                                <span class="line-sample line-solid"></span>
+                                <div class="legend-label"><strong>Solid Line:</strong> High documentary historical certainty</div>
+                            </div>
+                            <div class="legend-row">
+                                <span class="line-sample line-dotted"></span>
+                                <div class="legend-label"><strong>Dotted Line:</strong> Medium certainty with historiographic debate</div>
+                            </div>
+                            <div class="legend-row">
+                                <span class="line-sample line-dashed"></span>
+                                <div class="legend-label"><strong>Dashed Line:</strong> Exploratory / heterodox connection</div>
+                            </div>
+                        </div>
+                        <p class="card-footnote">Clicking any transition arrow reveals its historical catalyst event and year.</p>
                     </div>
-                    <div class="guide-card">
+
+                    <!-- Card 4: Presets -->
+                    <div class="guide-card bento-card">
+                        <div class="card-top-meta">
+                            <span class="card-eyebrow">Theoretical Perspectives</span>
+                            <span class="card-icon-badge" aria-hidden="true">🔍</span>
+                        </div>
                         <h3>Lenses of Analysis (Presets)</h3>
-                        <p>Different perspectives shift the positions of the schools on the map:</p>
-                        <ul>
-                            <li><strong>Base:</strong> Balanced (Academic)</li>
-                            <li><strong>State Emphasis:</strong> State Emphasis (prioritizes the role of government)</li>
-                            <li><strong>Equity Emphasis:</strong> Equity Emphasis (prioritizes fair sharing)</li>
-                            <li><strong>Market Emphasis:</strong> Market Emphasis (prioritizes free exchange)</li>
-                            <li><strong>Growth Emphasis:</strong> Growth Emphasis (prioritizes production)</li>
-                            <li><strong>Historical Emphasis:</strong> Historical Emphasis (prioritizes time evolution)</li>
-                        </ul>
+                        <p>No single school holds the monopoly on truth. Select presets to shift analytical weights:</p>
+                        <div class="preset-chips-preview">
+                            <span class="preset-chip">⚖️ Balanced (Base)</span>
+                            <span class="preset-chip">🏛️ State Emphasis</span>
+                            <span class="preset-chip">🤝 Equity Emphasis</span>
+                            <span class="preset-chip">📈 Market Emphasis</span>
+                            <span class="preset-chip">🏭 Growth Emphasis</span>
+                            <span class="preset-chip">📜 Historical Emphasis</span>
+                            <span class="preset-chip">🛠️ Pragmatic Emphasis</span>
+                        </div>
                     </div>
-                    <div class="guide-card">
+
+                    <!-- Card 5: Methodology -->
+                    <div class="guide-card bento-card">
+                        <div class="card-top-meta">
+                            <span class="card-eyebrow">Academic Rigor</span>
+                            <span class="card-icon-badge" aria-hidden="true">📚</span>
+                        </div>
                         <h3>Scientific Foundation</h3>
-                        <p>Based on Chapter 4 of <strong>Economics: The User's Guide</strong> by <strong>Ha-Joon Chang</strong> (2015):</p>
-                        <ul>
-                            <li>Multidimensional analysis of economic schools</li>
-                            <li>Qualitative positioning translated into comparable values</li>
-                            <li>Percentile and statistical normalization</li>
-                            <li>Interactive pedagogical visualization</li>
+                        <p>Based on the multidimensional taxonomy by <strong>Ha-Joon Chang</strong> (<em>Economics: The User's Guide</em>, Ch. 4):</p>
+                        <ul class="clean-checklist">
+                            <li><strong>6 Qualitative Descriptiors:</strong> Human view, economic view, scope, world nature, engine, and preferred policies.</li>
+                            <li><strong>Transparent Scoring:</strong> Percentile-normalized coordinates to prevent artificial crowding.</li>
+                            <li><strong>Heterodox Inclusion:</strong> Includes historically neglected traditions (Feminist, Ecological, Developmentalist).</li>
                         </ul>
                     </div>
-                    <div class="guide-card">
-                        <h3>The danger of using a single lens</h3>
-                        <p class="caution-highlight">
-                            Mapping problems using only one school of economics can cause:
-                        </p>
-                        <ul>
-                            <li><strong>Polarization:</strong> Believing economics is a debate of good vs. bad.</li>
-                            <li><strong>Tunnel vision:</strong> Seeing only one part of the problem and ignoring the rest.</li>
-                            <li><strong>Intellectual arrogance:</strong> Thinking your school has the only right answer.</li>
-                            <li><strong>Incomplete answers:</strong> Designing solutions that fail because they ignore other factors.</li>
-                        </ul>
+
+                    <!-- Card 6: Danger -->
+                    <div class="guide-card bento-card caution-bento-card">
+                        <div class="card-top-meta">
+                            <span class="card-eyebrow alert-eyebrow">Epistemic Caution</span>
+                            <span class="card-icon-badge" aria-hidden="true">⚠️</span>
+                        </div>
+                        <h3>The danger of dogmatic reductionism</h3>
+                        <p class="caution-lead">Viewing socio-economic dilemmas through a single ideological prism creates cognitive distortions:</p>
+                        <div class="risk-pills-grid">
+                            <div class="risk-pill"><strong>Polarization:</strong> Treating economic debate as a binary moral crusade.</div>
+                            <div class="risk-pill"><strong>Tunnel Vision:</strong> Blindness towards ecological boundaries and unpaid care work.</div>
+                            <div class="risk-pill"><strong>Intellectual Hubris:</strong> Assuming one abstract model explains human complexity.</div>
+                            <div class="risk-pill"><strong>Policy Failures:</strong> Implementing blueprints that shatter against institutional realities.</div>
+                        </div>
                     </div>
                 </div>
             `,

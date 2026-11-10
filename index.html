@@ -21,6 +21,10 @@
     <section id="hero" class="hero-section">
         <div class="hero-content">
             <div class="hero-topbar">
+                <div class="hero-badge">
+                    <span class="badge-dot"></span>
+                    <span class="badge-text">Ha-Joon Chang • Taxonomía Heterodoxa (2015)</span>
+                </div>
                 <div class="language-switcher">
                     <label for="language-selector">Idioma</label>
                     <select id="language-selector" aria-label="Seleccionar idioma">
@@ -35,9 +39,39 @@
                 Explora las 12 principales escuelas de economía en un mapa de dos dimensiones que te muestra cómo se organiza la economía (el rol del Estado frente al libre mercado) y qué objetivos prioriza la sociedad (el crecimiento frente a la equidad y el planeta).
             </p>
             <div class="hero-actions">
-                <a href="#visualization" class="btn btn-primary">Explorar el Mapa</a>
-                <a href="https://github.com/willkwolf/EcoSchoolMap" class="btn btn-secondary" target="_blank" rel="noopener">Ver en GitHub</a>
+                <a href="#visualization" class="btn btn-primary">
+                    <svg class="btn-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polygon points="12 8 8 12 12 16 12 8"/></svg>
+                    Explorar el Mapa
+                </a>
+                <a href="https://github.com/willkwolf/EcoSchoolMap" class="btn btn-secondary" target="_blank" rel="noopener">
+                    <svg class="btn-icon" viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                    Ver en GitHub
+                </a>
             </div>
+
+            <!-- Modern Metric Bento Strip -->
+            <div class="hero-stats-strip">
+                <div class="stat-item">
+                    <span class="stat-number">12</span>
+                    <span class="stat-label">Escuelas Analizadas</span>
+                </div>
+                <div class="stat-divider" aria-hidden="true"></div>
+                <div class="stat-item">
+                    <span class="stat-number">2D</span>
+                    <span class="stat-label">Espacio Epistémico</span>
+                </div>
+                <div class="stat-divider" aria-hidden="true"></div>
+                <div class="stat-item">
+                    <span class="stat-number">13</span>
+                    <span class="stat-label">Síntesis / Cócteles</span>
+                </div>
+                <div class="stat-divider" aria-hidden="true"></div>
+                <div class="stat-item">
+                    <span class="stat-number">32</span>
+                    <span class="stat-label">Ponderaciones</span>
+                </div>
+            </div>
+
             <a href="#guide" id="hero-scroll-btn" class="hero-scroll-indicator" aria-label="Deslizar para explorar la guía de lectura">
                 <span>Desliza para explorar</span>
                 <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true">
@@ -50,76 +84,140 @@
     <!-- Guide Section -->
     <section id="guide" class="guide-section">
         <div class="guide-container">
-            <h2>Guía de Lectura: ¿Cómo interpretar el mapa?</h2>
-            <div class="guide-grid">
-                <div class="guide-card">
+            <div class="section-heading-centered">
+                <span class="section-eyebrow">Fundamentos Teóricos</span>
+                <h2>Guía de Lectura: ¿Cómo interpretar el mapa?</h2>
+                <p class="section-subheadline">Aprende a decodificar las dos dimensiones epistemológicas, los cuatro cuadrantes y las dinámicas históricas que estructuran el pensamiento económico.</p>
+            </div>
+            <div class="guide-grid bento-guide-grid">
+                <!-- Card 1: Ejes -->
+                <div class="guide-card bento-card">
+                    <div class="card-top-meta">
+                        <span class="card-eyebrow">Ejes Coordenados</span>
+                        <span class="card-icon-badge" aria-hidden="true">🧭</span>
+                    </div>
                     <h3>Ejes del Mapa</h3>
-                    <p><strong>¿Cómo se organiza? (Eje Horizontal X):</strong></p>
-                    <ul>
-                        <li>← Izquierda: Estado Limitado (Confianza en el Libre Mercado)</li>
-                        <li>→ Derecha: Estado Fuerte (Planificación y Control del Estado)</li>
-                    </ul>
-                    <p><strong>¿Qué se prioriza? (Eje Vertical Y):</strong></p>
-                    <ul>
-                        <li>↑ Arriba: Equidad y Sostenibilidad (repartir mejor y cuidar la naturaleza)</li>
-                        <li>↓ Abajo: Crecimiento y Productividad (producir más y acumular capital)</li>
-                    </ul>
-                    <p class="axis-subtext"><span class="glossary-term" data-term="okun" tabindex="0">La balanza de Okun 💡</span>: El equilibrio entre producir más (eficiencia) y repartir mejor (equidad)</p>
+                    <div class="axis-guide-block">
+                        <div class="axis-block-label">¿Cómo se organiza? (Eje Horizontal X)</div>
+                        <div class="direction-chips">
+                            <span class="dir-chip dir-left">← Libre Mercado (Estado Limitado)</span>
+                            <span class="dir-chip dir-right">Estado Fuerte (Planificación) →</span>
+                        </div>
+                    </div>
+                    <div class="axis-guide-block">
+                        <div class="axis-block-label">¿Qué se prioriza? (Eje Vertical Y)</div>
+                        <div class="direction-chips">
+                            <span class="dir-chip dir-up">↑ Equidad y Sostenibilidad (Reparto & Planeta)</span>
+                            <span class="dir-chip dir-down">↓ Crecimiento y Productividad (Acumulación)</span>
+                        </div>
+                    </div>
+                    <p class="axis-subtext"><span class="glossary-term" data-term="okun" tabindex="0">La balanza de Okun 💡</span>: El equilibrio clásico entre producir más (eficiencia) y repartir mejor (equidad).</p>
                 </div>
-                <div class="guide-card">
+
+                <!-- Card 2: Cuadrantes Visuales -->
+                <div class="guide-card bento-card">
+                    <div class="card-top-meta">
+                        <span class="card-eyebrow">Cartografía 2D</span>
+                        <span class="card-icon-badge" aria-hidden="true">🗺️</span>
+                    </div>
                     <h3>Zonas del Mapa (Cuadrantes)</h3>
-                    <p>El mapa se organiza en 4 zonas o cuadrantes:</p>
-                    <ul>
-                        <li><strong>Q1 (Mercado + Equidad):</strong> El mercado funciona libremente, pero se busca la justicia social y el cuidado ecológico.</li>
-                        <li><strong>Q2 (Estado + Equidad):</strong> El gobierno dirige la economía buscando la igualdad y proteger el planeta.</li>
-                        <li><strong>Q3 (Mercado + Crecimiento):</strong> El mercado opera sin trabas enfocándose en producir más riqueza.</li>
-                        <li><strong>Q4 (Estado + Crecimiento):</strong> El gobierno interviene para acelerar la industrialización y la producción nacional.</li>
-                    </ul>
+                    <div class="mini-quadrant-matrix">
+                        <div class="mini-q mini-q2">
+                            <span class="mini-q-badge">Q2</span>
+                            <div class="mini-q-title">Estado + Equidad</div>
+                            <div class="mini-q-desc">Planificación social y ecología</div>
+                        </div>
+                        <div class="mini-q mini-q1">
+                            <span class="mini-q-badge">Q1</span>
+                            <div class="mini-q-title">Mercado + Equidad</div>
+                            <div class="mini-q-desc">Libertad con justicia distributiva</div>
+                        </div>
+                        <div class="mini-q mini-q4">
+                            <span class="mini-q-badge">Q4</span>
+                            <div class="mini-q-title">Estado + Crecimiento</div>
+                            <div class="mini-q-desc">Industrialización y desarrollo nacional</div>
+                        </div>
+                        <div class="mini-q mini-q3">
+                            <span class="mini-q-badge">Q3</span>
+                            <div class="mini-q-title">Mercado + Crecimiento</div>
+                            <div class="mini-q-desc">Acumulación y máxima eficiencia</div>
+                        </div>
+                    </div>
                 </div>
-                <div class="guide-card">
+
+                <!-- Card 3: Transiciones -->
+                <div class="guide-card bento-card">
+                    <div class="card-top-meta">
+                        <span class="card-eyebrow">Dinámica Temporal</span>
+                        <span class="card-icon-badge" aria-hidden="true">⏳</span>
+                    </div>
                     <h3>Transiciones Históricas</h3>
-                    <p>Las flechas representan cambios históricos y saltos en la teoría:</p>
-                    <ul>
-                        <li><strong>Línea sólida:</strong> Alta certeza histórica (fuentes muy claras)</li>
-                        <li><strong>Línea punteada:</strong> Certeza media</li>
-                        <li><strong>Línea discontinua:</strong> Certeza baja</li>
-                    </ul>
-                    <p>Cada camino incluye su evento disparador y el año.</p>
+                    <p>Las flechas cartografían giros paradigmáticos y debates intelectuales a través del tiempo:</p>
+                    <div class="transition-legend-list">
+                        <div class="legend-row">
+                            <span class="line-sample line-solid"></span>
+                            <div class="legend-label"><strong>Línea Sólida:</strong> Alta certeza histórica documental</div>
+                        </div>
+                        <div class="legend-row">
+                            <span class="line-sample line-dotted"></span>
+                            <div class="legend-label"><strong>Línea Punteada:</strong> Certeza media con debate historiográfico</div>
+                        </div>
+                        <div class="legend-row">
+                            <span class="line-sample line-dashed"></span>
+                            <div class="legend-label"><strong>Línea Discontinua:</strong> Vínculo exploratorio / heterodoxo</div>
+                        </div>
+                    </div>
+                    <p class="card-footnote">Al hacer clic en cualquier flecha, se despliega el evento histórico detonante y su año.</p>
                 </div>
-                <div class="guide-card">
-                    <h3>Lentes de Análisis</h3>
-                    <p>Diferentes perspectivas cambian las posiciones de las escuelas en el mapa:</p>
-                    <ul>
-                        <li><strong>Equilibrada (Académica):</strong> Lente de análisis base que no altera las posiciones.</li>
-                        <li><strong>Énfasis en el Estado:</strong> Prioriza el rol del gobierno en la economía.</li>
-                        <li><strong>Énfasis en la Equidad:</strong> Prioriza el reparto justo de los recursos.</li>
-                        <li><strong>Énfasis en el Mercado:</strong> Prioriza el intercambio libre e individual.</li>
-                        <li><strong>Énfasis en el Crecimiento:</strong> Prioriza la producción y la acumulación.</li>
-                        <li><strong>Énfasis Histórico:</strong> Prioriza la evolución temporal de las teorías.</li>
-                        <li><strong>Énfasis Práctico:</strong> Prioriza la aplicación de ideas frente a abstracciones.</li>
-                    </ul>
+
+                <!-- Card 4: Lentes -->
+                <div class="guide-card bento-card">
+                    <div class="card-top-meta">
+                        <span class="card-eyebrow">Perspectivas Teóricas</span>
+                        <span class="card-icon-badge" aria-hidden="true">🔍</span>
+                    </div>
+                    <h3>Lentes de Análisis (Presets)</h3>
+                    <p>Ninguna escuela posee el monopolio de la verdad. Activa presets para redistribuir los pesos analíticos:</p>
+                    <div class="preset-chips-preview">
+                        <span class="preset-chip">⚖️ Equilibrada (Base)</span>
+                        <span class="preset-chip">🏛️ Énfasis en el Estado</span>
+                        <span class="preset-chip">🤝 Énfasis en la Equidad</span>
+                        <span class="preset-chip">📈 Énfasis en el Mercado</span>
+                        <span class="preset-chip">🏭 Énfasis en el Crecimiento</span>
+                        <span class="preset-chip">📜 Énfasis Histórico</span>
+                        <span class="preset-chip">🛠️ Énfasis Práctico</span>
+                    </div>
                 </div>
-                <div class="guide-card">
+
+                <!-- Card 5: Metodología -->
+                <div class="guide-card bento-card">
+                    <div class="card-top-meta">
+                        <span class="card-eyebrow">Rigor Académico</span>
+                        <span class="card-icon-badge" aria-hidden="true">📚</span>
+                    </div>
                     <h3>Fundamento Científico</h3>
-                    <p>Inspirado en el Capítulo 4 de <strong>Economía: Guía del Usuario</strong>, de <strong>Ha-Joon Chang</strong> (2015):</p>
-                    <ul>
-                        <li>Análisis de múltiples dimensiones de cada escuela</li>
-                        <li>Posicionamiento basada en descriptores cualitativos cuantificados</li>
-                        <li>Normalización estadística y por percentiles</li>
-                        <li>Visualización pedagógica interactiva</li>
+                    <p>Inspirado en la taxonomía multidimensional de <strong>Ha-Joon Chang</strong> (<em>Economía: Guía del Usuario</em>, Cap. 4):</p>
+                    <ul class="clean-checklist">
+                        <li><strong>6 Descriptores Cualitativos:</strong> Concepción humana, concepción económica, ámbito, naturaleza del mundo, motor y políticas.</li>
+                        <li><strong>Scoring Transparente:</strong> Puntuaciones normalizadas por percentil para evitar apiñamiento artificial.</li>
+                        <li><strong>Inclusión Heterodoxa:</strong> Integra escuelas marginadas (Feminista, Ecológica, Desarrollista).</li>
                     </ul>
                 </div>
-                <div class="guide-card">
-                    <h3>El riesgo de ver el mundo con una sola lente</h3>
-                    <p class="caution-highlight">
-                        Mapear problemas usando una sola escuela económica puede causar:
-                    </p>
-                    <ul>
-                        <li><strong>Polarización:</strong> Creer que la economía es un debate de buenos contra malos.</li>
-                        <li><strong>Visión de túnel:</strong> Ver solo una parte del problema e ignorar el resto.</li>
-                        <li><strong>Arrogancia intelectual:</strong> Pensar que tu escuela tiene la única respuesta correcta.</li>
-                        <li><strong>Respuestas incompletas:</strong> Diseñar soluciones que fallan por ignorar otros factores.</li>
-                    </ul>
+
+                <!-- Card 6: Advertencia -->
+                <div class="guide-card bento-card caution-bento-card">
+                    <div class="card-top-meta">
+                        <span class="card-eyebrow alert-eyebrow">Advertencia Epistémica</span>
+                        <span class="card-icon-badge" aria-hidden="true">⚠️</span>
+                    </div>
+                    <h3>El riesgo del reduccionismo teórico</h3>
+                    <p class="caution-lead">Mirar los problemas económicos a través de una sola doctrina engendra patologías cognitivas:</p>
+                    <div class="risk-pills-grid">
+                        <div class="risk-pill"><strong>Polarización:</strong> Tratar el debate como una contienda moral binaria.</div>
+                        <div class="risk-pill"><strong>Visión de Túnel:</strong> Invisibilizar variables ecológicas o de cuidado no mercantilizadas.</div>
+                        <div class="risk-pill"><strong>Arrogancia Intelectual:</strong> Suponer que un solo modelo abarca la complejidad humana.</div>
+                        <div class="risk-pill"><strong>Fallas de Política:</strong> Diseñar reformas que colapsan por ignorar el contexto institucional.</div>
+                    </div>
                 </div>
             </div>
         </div>
