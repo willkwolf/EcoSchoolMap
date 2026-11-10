@@ -29,18 +29,20 @@ $$R_i \cap \mathcal{F}(t) \neq \emptyset$$
     │                                                         │
     │    Techo Biofísico (Georgescu-Roegen / Daly / EROI)      │
     │   ═══════════════════════════════════════════════════   │
-    │   ▼   ZONA PROHIBIDA / COLAPSO TERMODINÁMICO        ▼   │
+    │   ▼   Frontera de Capacidad de Carga Ecosistémica   ▼   │
     │                                                         │
     │   ┌─────────────────────────────────────────────────┐   │
-    │   │ ESPACIO FACTIBLE Y SEGURO (Kate Raworth)        │   │
+    │   │ ESPACIO DE FACTIBILIDAD MATERIAL (Kate Raworth) │   │
     │   │                                                 │   │
-    │   │   • Keynesiana        • Marxista                │   │
-    │   │   • Institucionalista • Desarrollista           │   │
-    │   │   • Neoclásica        • Schumpeteriana          │   │
+    │   │   • 12 Tradiciones Económicas en Diálogo        │   │
+    │   │     (Clásica, Neoclásica, Austríaca, Marxista,  │   │
+    │   │      Keynesiana, Institucionalista, Conductual, │   │
+    │   │      Desarrollista, Schumpeteriana, Feminista,  │   │
+    │   │      Ecológica, Socialdemócrata)                │   │
     │   │                                                 │   │
-    │   │   (Atractores y dinamismo no lineal: CAS)       │   │
+    │   │   (Atractores, fricciones y dinamismo CAS)      │   │
     │   └─────────────────────────────────────────────────┘   │
-    │   ▲   SUELO SOCIAL (Dignidad Material Mínima)       ▲   │
+    │   ▲   Fundamento Social y Necesidades Humanas       ▲   │
     │   ═══════════════════════════════════════════════════   │
     │                                                         │
     └─────────────────────────────────────────────────────────┘

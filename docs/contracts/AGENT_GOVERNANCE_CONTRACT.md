@@ -64,3 +64,21 @@ El repositorio incorpora la herramienta `openwiki` de DeepAgents / LangChain:
 * La base de conocimiento canónica para agentes reside en `openwiki/`.
 * Cualquier cambio sustancial en la arquitectura del software debe reflejarse en `openwiki/architecture.md`.
 * Los contratos de gobernanza deben enlazarse desde `openwiki/contracts.md` y `AGENTS.md`.
+
+---
+
+## 6. Política de Neutralidad Epistémica y Pluralismo Pedagógico (POL-EP-002)
+
+Para garantizar que el mapa sea un espacio de aprendizaje riguroso, sereno y enriquecedor para cualquier lector —independientemente de que profese posturas anarquistas, socialistas, libertarias, socialdemócratas o no tenga ninguna adscripción partidaria—, todo agente y colaborador debe acatar los siguientes principios semánticos:
+
+1. **Descriptivismo vs. Prescriptivismo Moral:**
+   * El artefacto **nunca** debe declarar un cuadrante, escuela o eje como "moralmente superior", "correcto" o "la verdad definitiva".
+   * Las etiquetas deben formularse como **preguntas y prioridades analíticas**, no como juicios de valor.
+2. **Fundamento Investigativo vs. Falsa Certeza Absoluta:**
+   * Sustituir términos dogmáticos como "Fundamento Científico" por **"Fundamento Investigativo"** o **"Marco Metodológico"**, reconociendo que la economía política opera mediante modelos explicativos contrastables y no verdades cerradas.
+3. **Respeto Simétrico a Toda Tradición Intelectual:**
+   * **Corrientes Descentralizadas y Pro-Mercado (Austríaca, Clásica, Anarcocapitalismo, Libertarismo):** Explicar con honestidad académica sus aportes (coordinación descentralizada por precios, cálculo económico, orden espontáneo, libertad individual), sin descalificaciones peyorativas.
+   * **Corrientes Estatales, Comunitarias y Socialistas (Marxismo, Desarrollismo, Anarcosindicalismo):** Describir sus premisas con profundidad (fuerzas productivas, planificación estratégica, derechos laborales, relaciones de poder), sin caricaturas autoritarias.
+   * **Enfoques Pluralistas y de Frontera (Feminista, Ecológica, Conductual, Institucional):** Presentar su trabajo como expansiones metodológicas legítimas (límites de la biosfera, economía del cuidado no remunerada, sesgos cognitivos, reglas formales e informales), sin condescendencia ni etiquetados como "escuelas marginadas".
+4. **Acogida al Lector Independiente y Pensador Crítico:**
+   * La UI y la documentación deben evitar un tono paternalista o admonitorio. El objetivo del mapa es dotar al visitante de herramientas cartográficas para que ejerza su propio juicio crítico con libertad y tranquilidad.

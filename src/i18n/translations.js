@@ -191,10 +191,6 @@ export const translations = {
         html: {
             hero: `
                 <div class="hero-topbar">
-                    <div class="hero-badge">
-                        <span class="badge-dot"></span>
-                        <span class="badge-text">Ha-Joon Chang • Heterodox Taxonomy (2015)</span>
-                    </div>
                     <div class="language-switcher">
                         <label for="language-selector">Language</label>
                         <select id="language-selector" aria-label="Select language">
@@ -358,31 +354,31 @@ export const translations = {
                     <!-- Card 5: Methodology -->
                     <div class="guide-card bento-card">
                         <div class="card-top-meta">
-                            <span class="card-eyebrow">Academic Rigor</span>
-                            <span class="card-icon-badge" aria-hidden="true">📚</span>
+                            <span class="card-eyebrow">Research Framework</span>
+                            <span class="card-icon-badge" aria-hidden="true">📖</span>
                         </div>
-                        <h3>Scientific Foundation</h3>
-                        <p>Based on the multidimensional taxonomy by <strong>Ha-Joon Chang</strong> (<em>Economics: The User's Guide</em>, Ch. 4):</p>
+                        <h3>Research Foundation</h3>
+                        <p>Inspired by the multidimensional taxonomy by <strong>Ha-Joon Chang</strong> (<em>Economics: The User's Guide</em>, Ch. 4):</p>
                         <ul class="clean-checklist">
-                            <li><strong>6 Qualitative Descriptiors:</strong> Human view, economic view, scope, world nature, engine, and preferred policies.</li>
-                            <li><strong>Transparent Scoring:</strong> Percentile-normalized coordinates to prevent artificial crowding.</li>
-                            <li><strong>Heterodox Inclusion:</strong> Includes historically neglected traditions (Feminist, Ecological, Developmentalist).</li>
+                            <li><strong>6 Qualitative Descriptors:</strong> Human view, economic view, scope, world nature, engine, and preferred policies.</li>
+                            <li><strong>Transparent Scoring:</strong> Quantitative normalized scores designed for pedagogical exploration and contrast.</li>
+                            <li><strong>Theoretical Pluralism:</strong> Integrates and connects diverse economic traditions (classical, neoclassical, Marxist, Keynesian, behavioral, feminist, ecological, among others).</li>
                         </ul>
                     </div>
 
-                    <!-- Card 6: Danger -->
-                    <div class="guide-card bento-card caution-bento-card">
+                    <!-- Card 6: Critical Complementarity -->
+                    <div class="guide-card bento-card complementary-bento-card">
                         <div class="card-top-meta">
-                            <span class="card-eyebrow alert-eyebrow">Epistemic Caution</span>
-                            <span class="card-icon-badge" aria-hidden="true">⚠️</span>
+                            <span class="card-eyebrow">Critical Complementarity</span>
+                            <span class="card-icon-badge" aria-hidden="true">💡</span>
                         </div>
-                        <h3>The danger of dogmatic reductionism</h3>
-                        <p class="caution-lead">Viewing socio-economic dilemmas through a single ideological prism creates cognitive distortions:</p>
+                        <h3>The value of contrasting multiple lenses</h3>
+                        <p class="caution-lead">Every economic school starts from legitimate core questions and distinct analytical tools:</p>
                         <div class="risk-pills-grid">
-                            <div class="risk-pill"><strong>Polarization:</strong> Treating economic debate as a binary moral crusade.</div>
-                            <div class="risk-pill"><strong>Tunnel Vision:</strong> Blindness towards ecological boundaries and unpaid care work.</div>
-                            <div class="risk-pill"><strong>Intellectual Hubris:</strong> Assuming one abstract model explains human complexity.</div>
-                            <div class="risk-pill"><strong>Policy Failures:</strong> Implementing blueprints that shatter against institutional realities.</div>
+                            <div class="risk-pill"><strong>Beyond trenches:</strong> Fosters rigorous debate without reducing economic inquiry to a binary conflict.</div>
+                            <div class="risk-pill"><strong>Expanding horizons:</strong> Highlights critical variables that a single lens often assumes away or overlooks.</div>
+                            <div class="risk-pill"><strong>Intellectual humility:</strong> Acknowledges that no single theoretical framework holds definitive answers for all social complexity.</div>
+                            <div class="risk-pill"><strong>Situated solutions:</strong> Encourages diagnostic assessments that respect institutional realities and material boundaries.</div>
                         </div>
                     </div>
                 </div>

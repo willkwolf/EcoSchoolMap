@@ -248,45 +248,14 @@ p {
 
     .hero-topbar {
         display: flex;
-        justify-content: space-between;
+        justify-content: flex-end;
         align-items: center;
         margin-bottom: 2.75rem;
         width: 100%;
-        gap: 1rem;
 
         @media (max-width: $tablet) {
-            flex-direction: column;
-            gap: 1.25rem;
+            justify-content: center;
             margin-bottom: 2rem;
-        }
-    }
-
-    .hero-badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.6rem;
-        padding: 0.4rem 1rem;
-        background: rgba(white, 0.95);
-        border: 1px solid rgba($accent-color, 0.3);
-        border-radius: 9999px;
-        box-shadow: 0 2px 8px rgba($accent-color, 0.08);
-
-        .badge-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background-color: $accent-color;
-            box-shadow: 0 0 0 2px rgba($accent-color, 0.25);
-            animation: pulseDot 2s infinite ease-in-out;
-        }
-
-        .badge-text {
-            font-family: $font-body;
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: $accent-dark;
-            letter-spacing: 0.04em;
-            text-transform: uppercase;
         }
     }
 
@@ -872,23 +841,25 @@ p {
                 }
             }
 
-            // Caution card
+            // Complementary & Pluralism card
+            &.complementary-bento-card,
             &.caution-bento-card {
-                background: linear-gradient(180deg, #ffffff 0%, #fffbfb 100%);
-                border-color: rgba(#dc2626, 0.25);
+                background: linear-gradient(180deg, #ffffff 0%, #faf8f5 100%);
+                border-color: rgba($primary-color, 0.16);
 
                 &:hover {
-                    border-color: rgba(#dc2626, 0.5);
+                    border-color: rgba($accent-color, 0.45);
+                    box-shadow: 0 10px 25px rgba($primary-color, 0.05);
                 }
 
                 h3::after {
-                    background-color: #dc2626;
+                    background-color: $accent-color;
                 }
 
                 .caution-lead {
                     font-size: 0.88rem;
                     font-weight: 600;
-                    color: #991b1b;
+                    color: $primary-color;
                     line-height: 1.5;
                 }
 
@@ -900,14 +871,14 @@ p {
                     .risk-pill {
                         font-size: 0.82rem;
                         line-height: 1.45;
-                        padding: 0.5rem 0.75rem;
-                        background: rgba(#dc2626, 0.04);
-                        border-left: 3px solid #dc2626;
+                        padding: 0.55rem 0.8rem;
+                        background: rgba($primary-color, 0.025);
+                        border-left: 3px solid $accent-color;
                         border-radius: 0 4px 4px 0;
-                        color: #7f1d1d;
+                        color: $text-color;
 
                         strong {
-                            color: #991b1b;
+                            color: $primary-color;
                         }
                     }
                 }

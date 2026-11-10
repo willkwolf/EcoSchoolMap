@@ -19,35 +19,35 @@ Para superar esta limitación, este artefacto adopta un **espacio continuo bidim
 ## 2. Definición Funcional de los Ejes
 
 ```
-                    +1.0 (Y: Equidad y Justicia Social)
+                    +1.0 (Y: Equidad y Sostenibilidad)
                                ▲
                                │
-               Cuadrante II    │    Cuadrante I
-            (Socialdemócrata / │  (Marxista /
-               Keynesiano)     │   Feminista /
-                               │   Desarrollista Social)
+                 Cuadrante I   │    Cuadrante II
+             (Mercado / Comuna │  (Estado + Equidad /
+               + Equidad)      │   Planificación Social)
                                │
 -1.0 ──────────────────────────┼──────────────────────────► +1.0 (X: Estado y Planificación)
-(Mercado / Individuo)          │
-               Cuadrante III   │    Cuadrante IV
-             (Austríaca /      │  (Desarrollismo Puro /
-              Neoclásica pura) │   Capitalismo de Estado)
+(Decisión Descentralizada /    │
+ Libre Asociación)             │
+                Cuadrante III  │    Cuadrante IV
+             (Mercado +        │  (Estado + Crecimiento /
+              Crecimiento)     │   Desarrollismo Industrial)
                                │
                                ▼
                     -1.0 (Y: Crecimiento y Acumulación)
 ```
 
-### 2.1 Eje X: Intensidad de Intervención y Coordinación Institucional
+### 2.1 Eje X: Mecanismo de Coordinación Institucional
 * **Dominio:** $x \in [-1.0, +1.0]$.
 * **Pregunta Operativa:** *¿Quién y mediante qué arquitectura se toman las decisiones de producción, inversión y distribución en la sociedad?*
-* **Extremo Negativo ($-1.0$):** **Mercado Auto-regulado y Decisiones Descentralizadas.** Primacía de los precios de mercado como procesadores de información dispersa (Hayek), propiedad privada irrestricta y ausencia de coerción gubernamental.
-* **Extremo Positivo ($+1.0$):** **Coordinación Colectiva, Planificación Pública y Estado.** Control democrático o estatal sobre los medios estratégicos, política industrial activa, propiedad pública y dirección deliberada de la inversión.
+* **Extremo Negativo ($-1.0$):** **Coordinación Descentralizada y Libre Asociación.** Primacía de decisiones voluntarias, mercados abiertos, precios libres o acuerdos comunitarios autónomos sin coerción estatal (desde el orden espontáneo de Hayek hasta tradiciones libertarias y anarquistas de autogestión).
+* **Extremo Positivo ($+1.0$):** **Coordinación Centralizada y Dirección Pública.** Planificación estratégica, política industrial activa, propiedad pública y dirección deliberada de la inversión colectiva.
 
-### 2.2 Eje Y: Objetivo Socioeconómico Fundamental (El Dilema de Okun)
+### 2.2 Eje Y: Objetivo Socioeconómico Primario (Trade-off de Okun)
 * **Dominio:** $y \in [-1.0, +1.0]$.
-* **Pregunta Operativa:** *¿Qué prioridad ética y material subyace al diseño del sistema económico?*
-* **Extremo Negativo ($-1.0$):** **Eficiencia Productiva, Crecimiento y Acumulación de Capital.** Prioridad a la expansión del excedente, la productividad marginal, el retorno a la inversión y la maximización de la tasa de crecimiento del PIB.
-* **Extremo Positivo ($+1.0$):** **Equidad Distributiva, Bienestar Colectivo y Justicia Social.** Prioridad a la erradicación de la desigualdad, protección del trabajo frente al capital, sostenibilidad distributiva y garantía de pisos sociales universales.
+* **Pregunta Operativa:** *¿Qué prioridad ética y operativa orienta la asignación de recursos y esfuerzos en la sociedad?*
+* **Extremo Negativo ($-1.0$):** **Eficiencia Productiva, Crecimiento y Acumulación de Capital.** Énfasis en expandir el producto social, incentivar la inversión productiva, acelerar la innovación y maximizar la escala de la economía material.
+* **Extremo Positivo ($+1.0$):** **Equidad Distributiva, Bienestar Común y Sostenibilidad.** Énfasis en la distribución justa del excedente, la dignidad material compartida, la preservación de los ciclos biofísicos de la naturaleza y la justicia intergeneracional.
 
 ---
 
