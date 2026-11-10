@@ -1571,23 +1571,42 @@ p {
 
             select {
                 width: 100%;
-                padding: 0.75rem;
+                padding: 0.65rem 2.25rem 0.65rem 0.85rem;
                 border: 1px solid $border-color;
-                border-radius: 8px;
-                font-size: 1rem;
-                background-color: white;
+                border-radius: $card-radius-sm;
+                font-family: $font-body;
+                font-size: 0.95rem;
+                font-weight: 500;
+                color: $primary-color;
+                background-color: #faf8f5;
+                background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='%23475569' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='5 7 10 12 15 7'%3e%3c/polyline%3e%3c/svg%3e");
+                background-repeat: no-repeat;
+                background-position: right 0.75rem center;
+                background-size: 14px;
+                appearance: none;
+                -webkit-appearance: none;
+                -moz-appearance: none;
                 cursor: pointer;
-                transition: all 0.3s ease;
+                transition: border-color 0.2s ease, box-shadow 0.2s ease;
                 min-height: 44px; // Touch-friendly minimum
 
+                @supports (appearance: base-select) {
+                    appearance: base-select;
+                }
+
                 @media (max-width: $mobile) {
-                    font-size: 0.95rem;
-                    padding: 0.875rem; // Ensure 44px min height
+                    font-size: 0.9rem;
+                    padding: 0.75rem 2.25rem 0.75rem 0.85rem;
+                }
+
+                &:hover {
+                    border-color: rgba($accent-color, 0.4);
                 }
 
                 &:focus {
                     outline: none;
-                    border-color: $secondary-color;
+                    border-color: $accent-color;
+                    box-shadow: 0 0 0 3px rgba($accent-color, 0.12);
                 }
 
                 &:disabled {
