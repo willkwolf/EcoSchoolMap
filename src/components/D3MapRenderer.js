@@ -730,7 +730,6 @@ export class D3MapRenderer {
      */
     onNodeHover(event, node) {
         this.tooltipManager.showNodeTooltip(event, node);
-        this.recordVisitedSchool(node.id);
     }
 
     /**
@@ -738,41 +737,6 @@ export class D3MapRenderer {
      */
     onNodeLeave() {
         this.tooltipManager.hide();
-    }
-
-    /**
-     * Store visited school ID in localStorage to track exploration progress (Retention metric)
-     */
-    recordVisitedSchool(schoolId) {
-        if (!schoolId) return;
-        try {
-            const visited = JSON.parse(localStorage.getItem('ecoschoolmap_visited_schools') || '[]');
-            if (!visited.includes(schoolId)) {
-                visited.push(schoolId);
-                localStorage.setItem('ecoschoolmap_visited_schools', JSON.stringify(visited));
-            }
-            this.updateExplorationCounterUI(visited.length);
-        } catch (e) {
-            console.warn('Could not record visited school to localStorage:', e);
-        }
-    }
-
-    /**
-     * Update exploration counter badge UI
-     */
-    updateExplorationCounterUI(count = null) {
-        if (count === null) {
-            try {
-                const visited = JSON.parse(localStorage.getItem('ecoschoolmap_visited_schools') || '[]');
-                count = visited.length;
-            } catch (e) {
-                count = 0;
-            }
-        }
-        const textElement = document.getElementById('exploration-counter-text');
-        if (textElement) {
-            textElement.textContent = `${t('ui.exploredProgress').replace('{count}', count)}`;
-        }
     }
 
     /**

@@ -27,15 +27,14 @@ export const translations = {
             collisionDisabled: 'No Permitir Colisiones',
             downloadFilenamePrefix: 'mapa-escuelas',
             toggleControlsShow: 'Personalizar Vista (Filtros)',
-            toggleControlsHide: 'Ocultar Filtros ✖',
+            toggleControlsHide: 'Ocultar Filtros',
             advancedControlsShow: 'Capas y Ajustes',
-            advancedControlsHide: 'Ocultar Ajustes ✖',
-            touchScrollHint: '💡 Usa 2 dedos para mover el mapa',
-            viewMap: '🗺️ Vista Mapa',
-            viewTable: '📊 Vista Tabla',
-            startTour: '✨ Tour Guiado (60s)',
-            tourRunning: '▶️ En Tour Guiado...',
-            exploredProgress: 'Descubiertas: {count} / 12 escuelas',
+            advancedControlsHide: 'Ocultar Ajustes',
+            touchScrollHint: 'Usa 2 dedos para mover el mapa',
+            viewMap: 'Vista Mapa',
+            viewTable: 'Vista Tabla',
+            startTour: 'Tour Guiado (60s)',
+            tourRunning: 'En Tour Guiado...',
             tableHeaders: {
                 school: 'Escuela Económica',
                 quadrant: 'Cuadrante',
@@ -122,15 +121,14 @@ export const translations = {
             collisionDisabled: 'Prevent Collisions',
             downloadFilenamePrefix: 'economic-schools-map',
             toggleControlsShow: 'Customize View (Filters)',
-            toggleControlsHide: 'Hide Filters ✖',
+            toggleControlsHide: 'Hide Filters',
             advancedControlsShow: 'Layers & Settings',
-            advancedControlsHide: 'Hide Settings ✖',
-            touchScrollHint: '💡 Use 2 fingers to pan/zoom map',
-            viewMap: '🗺️ Map View',
-            viewTable: '📊 Table View',
-            startTour: '✨ Guided Tour (60s)',
-            tourRunning: '▶️ Guided Tour Active...',
-            exploredProgress: 'Discovered: {count} / 12 schools',
+            advancedControlsHide: 'Hide Settings',
+            touchScrollHint: 'Use 2 fingers to pan/zoom map',
+            viewMap: 'Map View',
+            viewTable: 'Table View',
+            startTour: 'Guided Tour (60s)',
+            tourRunning: 'Guided Tour Active...',
             tableHeaders: {
                 school: 'Economic School',
                 quadrant: 'Quadrant',
@@ -256,7 +254,6 @@ export const translations = {
                     <div class="guide-card bento-card">
                         <div class="card-top-meta">
                             <span class="card-eyebrow">Coordinate Axes</span>
-                            <span class="card-icon-badge" aria-hidden="true">🧭</span>
                         </div>
                         <h3>Map Axes</h3>
                         <div class="axis-guide-block">
@@ -280,7 +277,6 @@ export const translations = {
                     <div class="guide-card bento-card">
                         <div class="card-top-meta">
                             <span class="card-eyebrow">2D Cartography</span>
-                            <span class="card-icon-badge" aria-hidden="true">🗺️</span>
                         </div>
                         <h3>Map Zones (Quadrants)</h3>
                         <div class="mini-quadrant-matrix">
@@ -311,7 +307,6 @@ export const translations = {
                     <div class="guide-card bento-card">
                         <div class="card-top-meta">
                             <span class="card-eyebrow">Temporal Dynamics</span>
-                            <span class="card-icon-badge" aria-hidden="true">⏳</span>
                         </div>
                         <h3>Historical Transitions</h3>
                         <p>The arrows map paradigm shifts and intellectual disputes across modern history:</p>
@@ -336,18 +331,17 @@ export const translations = {
                     <div class="guide-card bento-card">
                         <div class="card-top-meta">
                             <span class="card-eyebrow">Theoretical Perspectives</span>
-                            <span class="card-icon-badge" aria-hidden="true">🔍</span>
                         </div>
                         <h3>Lenses of Analysis (Presets)</h3>
                         <p>No single school holds the monopoly on truth. Select presets to shift analytical weights:</p>
                         <div class="preset-chips-preview">
-                            <span class="preset-chip">⚖️ Balanced (Base)</span>
-                            <span class="preset-chip">🏛️ State Emphasis</span>
-                            <span class="preset-chip">🤝 Equity Emphasis</span>
-                            <span class="preset-chip">📈 Market Emphasis</span>
-                            <span class="preset-chip">🏭 Growth Emphasis</span>
-                            <span class="preset-chip">📜 Historical Emphasis</span>
-                            <span class="preset-chip">🛠️ Pragmatic Emphasis</span>
+                            <span class="preset-chip">Balanced (Base)</span>
+                            <span class="preset-chip">State Emphasis</span>
+                            <span class="preset-chip">Equity Emphasis</span>
+                            <span class="preset-chip">Market Emphasis</span>
+                            <span class="preset-chip">Growth Emphasis</span>
+                            <span class="preset-chip">Historical Emphasis</span>
+                            <span class="preset-chip">Pragmatic Emphasis</span>
                         </div>
                     </div>
 
@@ -355,7 +349,6 @@ export const translations = {
                     <div class="guide-card bento-card">
                         <div class="card-top-meta">
                             <span class="card-eyebrow">Research Framework</span>
-                            <span class="card-icon-badge" aria-hidden="true">📖</span>
                         </div>
                         <h3>Research Foundation</h3>
                         <p>Inspired by the multidimensional taxonomy by <strong>Ha-Joon Chang</strong> (<em>Economics: The User's Guide</em>, Ch. 4):</p>
@@ -370,7 +363,6 @@ export const translations = {
                     <div class="guide-card bento-card complementary-bento-card">
                         <div class="card-top-meta">
                             <span class="card-eyebrow">Critical Complementarity</span>
-                            <span class="card-icon-badge" aria-hidden="true">💡</span>
                         </div>
                         <h3>The value of contrasting multiple lenses</h3>
                         <p class="caution-lead">Every economic school starts from legitimate core questions and distinct analytical tools:</p>
@@ -387,16 +379,12 @@ export const translations = {
                 <div class="vis-header-toolbar">
                     <h2>Interactive Map</h2>
                     <div class="vis-toolbar-actions">
-                        <div id="exploration-counter" class="exploration-badge" title="Exploration progress">
-                            <span class="badge-icon">🎓</span>
-                            <span id="exploration-counter-text" class="badge-text">Discovered: 0 / 12 schools</span>
-                        </div>
                         <button type="button" id="start-guided-tour-btn" class="tour-btn" title="Start animated tour through major schools">
-                            <span>✨ Guided Tour (60s)</span>
+                            <span>Guided Tour (60s)</span>
                         </button>
                         <div class="view-toggle-container" role="tablist" aria-label="Toggle visualization view">
-                            <button type="button" id="btn-view-map" class="view-toggle-btn active" role="tab" aria-selected="true">🗺️ Map View</button>
-                            <button type="button" id="btn-view-table" class="view-toggle-btn" role="tab" aria-selected="false">📊 Table View</button>
+                            <button type="button" id="btn-view-map" class="view-toggle-btn active" role="tab" aria-selected="true">Map View</button>
+                            <button type="button" id="btn-view-table" class="view-toggle-btn" role="tab" aria-selected="false">Table View</button>
                         </div>
                     </div>
                 </div>
@@ -414,7 +402,7 @@ export const translations = {
                     <div class="controls-primary-bar">
                         <div class="control-group preset-group">
                             <label for="preset-dropdown" title="Lenses of analysis alter school positions to show different economic perspectives">
-                                <span class="label-icon">🔍</span> Lenses of Analysis (Presets):
+                                Lenses of Analysis (Presets):
                             </label>
                             <select id="preset-dropdown">
                                 <option value="base" selected>Balanced (Academic)</option>

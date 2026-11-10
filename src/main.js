@@ -48,7 +48,6 @@ async function init() {
             locale: getCurrentLocale()
         });
         mapRenderer.render();
-        mapRenderer.updateExplorationCounterUI();
 
         // Setup variant selectors & deep linking
         setupVariantControls();
@@ -402,7 +401,11 @@ function setupGuidedTour() {
 
             const nodeData = mapRenderer.data.nodos.find(n => n.id === schoolId);
             if (nodeData && mapRenderer.tooltipManager) {
-                mapRenderer.recordVisitedSchool(schoolId);
+                const nodeElem = document.querySelector(`.node.${schoolId}`);
+                if (nodeElem) {
+                    const rect = nodeElem.getBoundingClientRect();
+                    mapRenderer.tooltipManager.showNodeTooltip({ clientX: rect.left + rect.width / 2, clientY: rect.top }, nodeData);
+                }
             }
 
             step++;

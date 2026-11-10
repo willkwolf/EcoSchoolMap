@@ -405,8 +405,15 @@ p {
         @media (max-width: $tablet) {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 1.25rem;
-            padding: 1.25rem 1rem;
+            gap: 1rem;
+            padding: 1rem 0.85rem;
+            margin-bottom: 1.5rem;
+        }
+
+        @media (max-width: $mobile) {
+            gap: 0.75rem;
+            padding: 0.85rem 0.75rem;
+            margin-bottom: 1.25rem;
         }
 
         .stat-item {
@@ -422,6 +429,10 @@ p {
             font-weight: 700;
             color: $primary-color;
             line-height: 1.1;
+
+            @media (max-width: $mobile) {
+                font-size: 1.35rem;
+            }
         }
 
         .stat-label {
@@ -430,6 +441,11 @@ p {
             text-transform: uppercase;
             letter-spacing: 0.05em;
             color: $secondary-color;
+
+            @media (max-width: $mobile) {
+                font-size: 0.68rem;
+                letter-spacing: 0.03em;
+            }
         }
 
         .stat-divider {
@@ -580,6 +596,12 @@ p {
             position: relative;
             overflow: hidden;
 
+            @media (max-width: $mobile) {
+                padding: 1.25rem 1.1rem;
+                gap: 0.9rem;
+                border-radius: $card-radius-md;
+            }
+
             &:hover {
                 border-color: rgba($accent-color, 0.45);
                 transform: translateY(-3px);
@@ -602,11 +624,6 @@ p {
                     &.alert-eyebrow {
                         color: #dc2626;
                     }
-                }
-
-                .card-icon-badge {
-                    font-size: 1.15rem;
-                    line-height: 1;
                 }
             }
 
@@ -1280,58 +1297,48 @@ p {
             display: flex;
             align-items: center;
             flex-wrap: wrap;
-            gap: 0.875rem;
+            gap: 0.75rem;
 
             @media (max-width: $mobile) {
                 width: 100%;
-                justify-content: space-between;
+                justify-content: flex-start;
+                gap: 0.5rem;
             }
         }
     }
 
-    // Badge de exploración retenida
-    .exploration-badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-        padding: 0.5rem 1rem;
-        background: rgba($primary-color, 0.05);
-        border: 1px solid rgba($primary-color, 0.12);
-        border-radius: 20px;
-        font-size: 0.9rem;
-        font-weight: 600;
-        color: $primary-color;
-        transition: all 0.3s ease;
-
-        .badge-icon {
-            font-size: 1.1rem;
-        }
-    }
-
-    // Botón Tour Guiado 60s
+    // Botón Tour Guiado 60s (Estilo Editorial Sobrio)
     .tour-btn {
         display: inline-flex;
         align-items: center;
-        gap: 0.5rem;
-        padding: 0.5rem 1.1rem;
-        background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+        gap: 0.4rem;
+        padding: 0.45rem 1rem;
+        background: $primary-color;
         color: white;
-        border: none;
-        border-radius: 20px;
+        border: 1px solid $primary-color;
+        border-radius: $card-radius-md;
         font-family: $font-body;
         font-weight: 600;
-        font-size: 0.9rem;
+        font-size: 0.85rem;
         cursor: pointer;
-        box-shadow: 0 2px 8px rgba(3, 105, 161, 0.25);
-        transition: all 0.25s ease;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+        transition: all 0.2s ease;
 
         &:hover, &:focus {
+            background: #28364d;
+            border-color: #28364d;
             transform: translateY(-1px);
-            box-shadow: 0 4px 14px rgba(3, 105, 161, 0.35);
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
         }
 
         &.is-touring {
-            background: linear-gradient(135deg, $accent-color 0%, #c2410c 100%);
+            background: #991b1b;
+            border-color: #991b1b;
+        }
+
+        @media (max-width: $mobile) {
+            padding: 0.4rem 0.85rem;
+            font-size: 0.8rem;
         }
     }
 
@@ -1339,26 +1346,32 @@ p {
     .view-toggle-container {
         display: inline-flex;
         background: rgba($primary-color, 0.06);
-        padding: 4px;
-        border-radius: 20px;
-        gap: 4px;
+        padding: 3px;
+        border-radius: $card-radius-md;
+        gap: 3px;
+        border: 1px solid rgba($border-color, 0.8);
 
         .view-toggle-btn {
             border: none;
             background: transparent;
-            padding: 0.4rem 1rem;
-            border-radius: 16px;
+            padding: 0.4rem 0.85rem;
+            border-radius: 4px;
             font-family: $font-body;
-            font-size: 0.875rem;
+            font-size: 0.85rem;
             font-weight: 600;
             color: $secondary-color;
             cursor: pointer;
             transition: all 0.2s ease;
 
+            @media (max-width: $mobile) {
+                padding: 0.35rem 0.75rem;
+                font-size: 0.8rem;
+            }
+
             &.active {
                 background: white;
                 color: $primary-color;
-                box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
             }
 
             &:focus-visible {

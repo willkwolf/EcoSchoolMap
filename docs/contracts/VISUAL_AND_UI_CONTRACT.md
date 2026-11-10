@@ -110,3 +110,17 @@ Para evitar la confusión visual generada por colores repetidos en un plano con 
    - Incluye fijación de límites de viewport (*viewport boundary clamping*) para que el tooltip nunca sea truncado fuera de la pantalla.
 3. **Exportación de Alta Resolución:**
    - La funcionalidad de descarga PNG (`saveSvgAsPng`) debe exportar a escala $2\times$ nativa con fondo blanco explícito (`#FFFFFF`) para papers y presentaciones académicas.
+
+---
+
+## 6. Directriz de Estilo Editorial Sobrio (Cero Emojis y Cero Gamificación Frívola)
+
+1. **Estilo Editorial y Rigor Académico:**
+   - El diseño del artefacto se adscribe al estándar tipográfico y estético de publicaciones académicas y periodismo de datos riguroso (*The Economist*, *Stripe Press*, *Our World in Data*).
+   - **Prohibición de Emojis:** Queda terminantemente prohibido el uso de emojis (`🧭`, `🗺️`, `💡`, `🎓`, `✨`, `🔍`, `⚖️`, `🏛️`, `🤝`, `📈`, `🏭`, `📜`, `🛠️`, `📊`, etc.) en cualquier componente de interfaz (botones, badges, tarjetas bento, selectores, tooltips, modales o encabezados). Las distinciones visuales deben realizarse mediante tipografía jerárquica, espaciado proporcional, iconografía vectorial SVG sobria o marcadores de diseño neutros.
+2. **Prohibición de Gamificación Frívola:**
+   - No se permiten contadores de progreso arbitrarios (como "Descubiertas: X / 12 escuelas" o sistemas de puntos/medallas artificiales) que trivialicen el contenido pedagógico.
+   - Cualquier elemento de interacción debe responder a un propósito epistémico concreto (comparar teorías, alterar supuestos mediante presets o explorar relaciones históricas).
+3. **Ergonomía Móvil y Mitigación de Fatiga Cognitiva:**
+   - En viewports móviles ($< 768\text{px}$), la densidad de información debe ser legible sin generar saturación visual ni requerir scroll vertical excesivo.
+   - Los elementos de control deben ser accesibles y compactos, evitando solapamientos o botones sobredimensionados.

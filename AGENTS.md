@@ -25,6 +25,10 @@ Este archivo contiene las directrices primarias para agentes autónomos y asiste
 4. **Git Limpio:**
    - Nunca hagas commit de directorios de herramientas locales (`.claude/`, `.gitclaude/`, `.venv/`, `node_modules/`).
    - Mantén mensajes de commit profesionales bajo el estándar Conventional Commits.
+5. **Estilo Editorial Riguroso (Cero Emojis y Cero Gamificación Frívola):**
+   - El artefacto visual y conceptual es una publicación de divulgación académica y pensamiento crítico de estándar editorial (al nivel de publicaciones como *The Economist*, *Stripe Press* o ensayos universitarios).
+   - **Cero emojis en la interfaz:** Prohibido el uso de emojis decorativos en botones, tarjetas, insignias, selectores o encabezados (`🧭`, `🗺️`, `💡`, `🎓`, `✨`, etc.) que trivializan o merman la seriedad del discurso.
+   - **Cero gamificación frívola:** Prohibidos contadores arbitrarios ("escuelas descubiertas", insignias ficticias o métricas de juego artificiales) sin fundamento pedagógico o metodológico formal. Todo elemento interactivo debe responder estrictamente a un objetivo epistémico o analítico riguroso.
 
 ---
 

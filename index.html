@@ -15,7 +15,7 @@
     <div id="reading-progress-bar" class="reading-progress-bar" role="progressbar" aria-label="Progreso de lectura" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
 
     <!-- Skip Link for Accessibility -->
-    <a href="#visualization" class="skip-to-map-link">Saltar al Mapa Interactivo 🎯</a>
+    <a href="#visualization" class="skip-to-map-link">Saltar al Mapa Interactivo</a>
 
     <!-- Hero Section -->
     <section id="hero" class="hero-section">
@@ -90,7 +90,6 @@
                 <div class="guide-card bento-card">
                     <div class="card-top-meta">
                         <span class="card-eyebrow">Ejes Coordenados</span>
-                        <span class="card-icon-badge" aria-hidden="true">🧭</span>
                     </div>
                     <h3>Ejes del Mapa</h3>
                     <div class="axis-guide-block">
@@ -107,14 +106,13 @@
                             <span class="dir-chip dir-down">↓ Crecimiento y Productividad (Acumulación)</span>
                         </div>
                     </div>
-                    <p class="axis-subtext"><span class="glossary-term" data-term="okun" tabindex="0">La balanza de Okun 💡</span>: El equilibrio clásico entre producir más (eficiencia) y repartir mejor (equidad).</p>
+                    <p class="axis-subtext"><span class="glossary-term" data-term="okun" tabindex="0">La balanza de Okun</span>: El equilibrio clásico entre producir más (eficiencia) y repartir mejor (equidad).</p>
                 </div>
 
                 <!-- Card 2: Cuadrantes Visuales -->
                 <div class="guide-card bento-card">
                     <div class="card-top-meta">
                         <span class="card-eyebrow">Cartografía 2D</span>
-                        <span class="card-icon-badge" aria-hidden="true">🗺️</span>
                     </div>
                     <h3>Zonas del Mapa (Cuadrantes)</h3>
                     <div class="mini-quadrant-matrix">
@@ -145,7 +143,6 @@
                 <div class="guide-card bento-card">
                     <div class="card-top-meta">
                         <span class="card-eyebrow">Dinámica Temporal</span>
-                        <span class="card-icon-badge" aria-hidden="true">⏳</span>
                     </div>
                     <h3>Transiciones Históricas</h3>
                     <p>Las flechas cartografían giros paradigmáticos y debates intelectuales a través del tiempo:</p>
@@ -170,18 +167,17 @@
                 <div class="guide-card bento-card">
                     <div class="card-top-meta">
                         <span class="card-eyebrow">Perspectivas Teóricas</span>
-                        <span class="card-icon-badge" aria-hidden="true">🔍</span>
                     </div>
                     <h3>Lentes de Análisis (Presets)</h3>
                     <p>Ninguna escuela posee el monopolio de la verdad. Activa presets para redistribuir los pesos analíticos:</p>
                     <div class="preset-chips-preview">
-                        <span class="preset-chip">⚖️ Equilibrada (Base)</span>
-                        <span class="preset-chip">🏛️ Énfasis en el Estado</span>
-                        <span class="preset-chip">🤝 Énfasis en la Equidad</span>
-                        <span class="preset-chip">📈 Énfasis en el Mercado</span>
-                        <span class="preset-chip">🏭 Énfasis en el Crecimiento</span>
-                        <span class="preset-chip">📜 Énfasis Histórico</span>
-                        <span class="preset-chip">🛠️ Énfasis Práctico</span>
+                        <span class="preset-chip">Equilibrada (Base)</span>
+                        <span class="preset-chip">Énfasis en el Estado</span>
+                        <span class="preset-chip">Énfasis en la Equidad</span>
+                        <span class="preset-chip">Énfasis en el Mercado</span>
+                        <span class="preset-chip">Énfasis en el Crecimiento</span>
+                        <span class="preset-chip">Énfasis Histórico</span>
+                        <span class="preset-chip">Énfasis Práctico</span>
                     </div>
                 </div>
 
@@ -189,7 +185,6 @@
                 <div class="guide-card bento-card">
                     <div class="card-top-meta">
                         <span class="card-eyebrow">Marco Metodológico</span>
-                        <span class="card-icon-badge" aria-hidden="true">📖</span>
                     </div>
                     <h3>Fundamento Investigativo</h3>
                     <p>Inspirado en la taxonomía multidimensional de <strong>Ha-Joon Chang</strong> (<em>Economía: Guía del Usuario</em>, Cap. 4):</p>
@@ -204,7 +199,6 @@
                 <div class="guide-card bento-card complementary-bento-card">
                     <div class="card-top-meta">
                         <span class="card-eyebrow">Complementariedad Crítica</span>
-                        <span class="card-icon-badge" aria-hidden="true">💡</span>
                     </div>
                     <h3>El valor de contrastar múltiples lentes</h3>
                     <p class="caution-lead">Toda escuela económica parte de preguntas legítimas y herramientas analíticas específicas:</p>
@@ -225,16 +219,12 @@
             <div class="vis-header-toolbar">
                 <h2>Mapa Interactivo</h2>
                 <div class="vis-toolbar-actions">
-                    <div id="exploration-counter" class="exploration-badge" title="Progreso de escuelas exploradas">
-                        <span class="badge-icon">🎓</span>
-                        <span id="exploration-counter-text" class="badge-text">Descubiertas: 0 / 12 escuelas</span>
-                    </div>
                     <button type="button" id="start-guided-tour-btn" class="tour-btn" title="Iniciar recorrido animado por las escuelas principales">
-                        <span>✨ Tour Guiado (60s)</span>
+                        <span>Tour Guiado (60s)</span>
                     </button>
                     <div class="view-toggle-container" role="tablist" aria-label="Cambiar vista de visualización">
-                        <button type="button" id="btn-view-map" class="view-toggle-btn active" role="tab" aria-selected="true">🗺️ Vista Mapa</button>
-                        <button type="button" id="btn-view-table" class="view-toggle-btn" role="tab" aria-selected="false">📊 Vista Tabla</button>
+                        <button type="button" id="btn-view-map" class="view-toggle-btn active" role="tab" aria-selected="true">Vista Mapa</button>
+                        <button type="button" id="btn-view-table" class="view-toggle-btn" role="tab" aria-selected="false">Vista Tabla</button>
                     </div>
                 </div>
             </div>
@@ -252,7 +242,7 @@
                 <div class="controls-primary-bar">
                     <div class="control-group preset-group">
                         <label for="preset-dropdown" title="Las lentes de análisis alteran las posiciones de las escuelas para mostrar diferentes enfoques económicos">
-                            <span class="label-icon">🔍</span> Lentes de Análisis:
+                            Lentes de Análisis:
                         </label>
                         <select id="preset-dropdown">
                             <option value="base" selected>Equilibrada (Académica)</option>
